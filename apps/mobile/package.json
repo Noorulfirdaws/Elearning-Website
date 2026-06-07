@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "@lms/mobile",
   "version": "1.0.0",
   "main": "expo-router/entry",
@@ -56,9 +56,10 @@
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@types/react": "~18.2.79",
-    "@types/react-native": "~0.74.0",
+    "@types/react-native": "^0.73.0",
     "typescript": "~5.3.3",
     "eslint": "^8.57.0",
     "eslint-config-expo": "~8.0.0"
   }
 }
+

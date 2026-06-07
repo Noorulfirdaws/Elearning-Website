@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { BullModule } from '@nestjs/bull';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './modules/auth/auth.module';
@@ -37,7 +38,8 @@ import { SkillsModule } from './modules/skills/skills.module';
 import { IntegrationsModule } from './modules/integrations/integrations.module';
 import { WebinarModule } from './modules/webinar/webinar.module';
 import { MarketplaceModule } from './modules/marketplace/marketplace.module';
-import { PrismaModule } from './config/prisma.module';
+import { BetaModule }        from './modules/beta/beta.module';
+import { PrismaModule }      from './config/prisma.module';
 import appConfig from './config/app.config';
 
 @Module({
@@ -47,16 +49,11 @@ import appConfig from './config/app.config';
       load: [appConfig],
       envFilePath: ['.env.local', '.env'],
     }),
-    ThrottlerModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: () => ({
-        throttlers: [
-          { name: 'short', ttl: 1000, limit: 10 },
-          { name: 'medium', ttl: 10000, limit: 50 },
-          { name: 'long', ttl: 60000, limit: 200 },
-        ],
-      }),
-    }),
+    ThrottlerModule.forRoot([
+      { name: 'short',  ttl: 1000,  limit: 10 },
+      { name: 'medium', ttl: 10000, limit: 50 },
+      { name: 'long',   ttl: 60000, limit: 200 },
+    ]),
     BullModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
@@ -105,6 +102,11 @@ import appConfig from './config/app.config';
     IntegrationsModule,
     WebinarModule,
     MarketplaceModule,
+    BetaModule,
+  ],
+  providers: [
+    // Apply ThrottlerGuard globally via DI — respects @Throttle() and @SkipThrottle() decorators
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
   ],
 })
 export class AppModule {}

@@ -234,8 +234,8 @@ export class XapiService {
     return {
       totalStatements: statements,
       completions: completions.length,
-      passed: completions.filter(c => c.passed).length,
-      failed: completions.filter(c => !c.passed).length,
+      passed: completions.filter(c => c.isPassed).length,
+      failed: completions.filter(c => !c.isPassed).length,
       avgScore: completions.length
         ? completions.reduce((s, c) => s + c.score, 0) / completions.length
         : 0,

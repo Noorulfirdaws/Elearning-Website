@@ -1,10 +1,5 @@
 global:
   resolve_timeout: 5m
-  slack_api_url: '${SLACK_WEBHOOK_URL}'
-  smtp_smarthost: '${SMTP_HOST}:587'
-  smtp_from: 'alerts@lms.internal'
-  smtp_auth_username: '${SMTP_USER}'
-  smtp_auth_password: '${SMTP_PASSWORD}'
 
 # Inhibit lower-severity alerts when a higher one fires for the same scope
 inhibit_rules:
@@ -14,114 +9,34 @@ inhibit_rules:
       severity: warning
     equal: ['job', 'instance']
 
-  # If API is down, suppress all API-specific warnings
   - source_match:
       alertname: APIDown
     target_match_re:
       alertname: '.+'
     equal: ['instance']
 
-# Route tree: critical pages → warning → info
+# Default route — all alerts go to the log receiver until Slack/PD are configured
 route:
-  group_by:       ['alertname', 'team']
-  group_wait:     30s
-  group_interval: 5m
+  group_by:        ['alertname', 'team']
+  group_wait:      30s
+  group_interval:  5m
   repeat_interval: 4h
-  receiver: slack-warnings
+  receiver: log
 
   routes:
-    # Critical + page=true → PagerDuty + Slack
-    - match_re:
-        severity: critical
-      match:
-        page: "true"
-      receiver: pagerduty
-      continue: true   # Also send to Slack
-
-    # All critical → Slack #alerts-critical
     - match:
         severity: critical
-      receiver: slack-critical
-      group_wait: 10s
+      receiver: log
 
-    # Payment team alerts
-    - match:
-        team: payments
-      receiver: slack-payments
-      group_by: ['alertname']
-
-    # Security alerts
-    - match:
-        team: security
-      receiver: slack-security
-      group_wait: 10s
-
-    # Default: warnings go to #alerts-warnings
     - match:
         severity: warning
-      receiver: slack-warnings
+      receiver: log
 
 receivers:
-  # ── PagerDuty (critical + page) ───────────────────────────────────────────
-  - name: pagerduty
-    pagerduty_configs:
-      - routing_key: '${PAGERDUTY_ROUTING_KEY}'
-        description: '{{ .CommonAnnotations.summary }}'
-        details:
-          description: '{{ .CommonAnnotations.description }}'
-          runbook: '{{ .CommonAnnotations.runbook_url }}'
-          firing: '{{ .Alerts.Firing | len }}'
-
-  # ── Slack: #alerts-critical ───────────────────────────────────────────────
-  - name: slack-critical
-    slack_configs:
-      - channel: '#alerts-critical'
-        username: 'LMS Prometheus'
-        icon_emoji: ':fire:'
-        color: '#FF0000'
-        title: '🔴 CRITICAL: {{ .CommonAnnotations.summary }}'
-        text: |
-          {{ .CommonAnnotations.description }}
-          {{ if .CommonAnnotations.runbook_url }}*Runbook:* {{ .CommonAnnotations.runbook_url }}{{ end }}
-          *Alerts:* {{ .Alerts.Firing | len }} firing, {{ .Alerts.Resolved | len }} resolved
-        send_resolved: true
-
-  # ── Slack: #alerts-warnings ───────────────────────────────────────────────
-  - name: slack-warnings
-    slack_configs:
-      - channel: '#alerts-warnings'
-        username: 'LMS Prometheus'
-        icon_emoji: ':warning:'
-        color: '#FFA500'
-        title: '⚠️ WARNING: {{ .CommonAnnotations.summary }}'
-        text: |
-          {{ .CommonAnnotations.description }}
-        send_resolved: true
-
-  # ── Slack: #alerts-payments ───────────────────────────────────────────────
-  - name: slack-payments
-    slack_configs:
-      - channel: '#alerts-payments'
-        username: 'LMS Payments'
-        icon_emoji: ':credit_card:'
-        color: '{{ if eq .Status "firing" }}#FF0000{{ else }}#36a64f{{ end }}'
-        title: '{{ if eq .Status "firing" }}🚨{{ else }}✅{{ end }} {{ .CommonAnnotations.summary }}'
-        text: '{{ .CommonAnnotations.description }}'
-        send_resolved: true
-    email_configs:
-      - to: 'payments-team@lms.internal'
-        subject: '[LMS Payments] {{ .CommonAnnotations.summary }}'
-        body: |
-          {{ .CommonAnnotations.description }}
-          Firing at: {{ .Alerts.Firing | len }} alerts
-
-  # ── Slack: #alerts-security ───────────────────────────────────────────────
-  - name: slack-security
-    slack_configs:
-      - channel: '#alerts-security'
-        username: 'LMS Security'
-        icon_emoji: ':lock:'
-        color: '#FF4500'
-        title: '🔐 SECURITY: {{ .CommonAnnotations.summary }}'
-        text: '{{ .CommonAnnotations.description }}'
-        send_resolved: false  # Don't resolve security alerts silently
+  # ── Fallback: log only (no external dependencies) ─────────────────────────
+  # Replace with slack / pagerduty receivers once you have the webhook URLs.
+  - name: log
+    webhook_configs:
+      - url: 'http://localhost:1/dev-null'
+        send_resolved: false
+        max_alerts: 0

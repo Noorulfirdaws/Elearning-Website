@@ -47,9 +47,7 @@ async function bootstrap() {
     allowedHeaders: ['Authorization', 'Content-Type', 'stripe-signature', 'x-api-key'],
   });
 
-  // Apply global rate-limit guard (ThrottlerModule configured in AppModule)
-  const { HttpAdapterHost } = await import('@nestjs/core');
-  app.useGlobalGuards(new ThrottlerGuard({} as any, {} as any, new Reflector()));
+  // ThrottlerGuard is applied per-controller via @UseGuards(ThrottlerGuard) where needed.
 
   app.useGlobalPipes(
     new ValidationPipe({

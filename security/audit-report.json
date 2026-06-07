@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-06-07T21:32:03.379Z",
+  "summary": {
+    "passed": 19,
+    "failed": 2,
+    "critical": 0,
+    "high": 0,
+    "medium": 2,
+    "low": 0
+  },
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "category": "RateLimit",
+      "title": "/health is rate-limited",
+      "detail": "Health probes will fail under load",
+      "recommendation": "Add @SkipThrottle() to HealthController"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "Exposure",
+      "title": "/metrics endpoint publicly accessible",
+      "detail": "Prometheus scrape endpoint has no auth",
+      "recommendation": "Add IP allowlist or basic-auth in production (OK for dev)"
+    }
+  ]
+}

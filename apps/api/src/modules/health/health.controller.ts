@@ -8,6 +8,7 @@
  */
 import { Controller, Get, Header, Res } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { SkipThrottle } from '@nestjs/throttler';
 import { Response } from 'express';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
@@ -19,6 +20,7 @@ import { VideoService }    from '../video/video.service';
 import { PaymentsService } from '../payments/payments.service';
 import { MetricsService }  from '../../common/metrics/metrics.service';
 
+@SkipThrottle()   // Health + metrics must never be rate-limited
 @ApiTags('health')
 @Controller()
 export class HealthController {

@@ -20,21 +20,20 @@ scrape_configs:
   - job_name: lms-api
     scrape_interval: 10s
     static_configs:
-      - targets: ['lms-api:3001']
-    metrics_path: /metrics
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: instance
+      - targets: ['host.docker.internal:3001']
+        labels:
+          instance: lms-api
+    metrics_path: /api/v1/metrics
 
   # ── PostgreSQL (via postgres_exporter) ───────────────────────────────────
   - job_name: postgresql
     static_configs:
-      - targets: ['postgres-exporter:9187']
+      - targets: ['lms-postgres-exporter:9187']
 
-  # ── Redis (via redis_exporter) ───────────────────────────────────────────
+  # ── Redis (via redis_exporter) ───────────────────────────────���───────────
   - job_name: redis
     static_configs:
-      - targets: ['redis-exporter:9121']
+      - targets: ['lms-redis-exporter:9121']
 
   # ── Node.js API (pm2 / docker stats) ────────────────────────────────────
   - job_name: node-exporter
