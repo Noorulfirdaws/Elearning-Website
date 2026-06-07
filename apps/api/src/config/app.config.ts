@@ -1,14 +1,22 @@
 import { registerAs } from '@nestjs/config';
 
+function require_env(key: string, fallback?: string): string {
+  const value = process.env[key] || fallback;
+  if (!value && process.env.NODE_ENV === 'production') {
+    throw new Error(`Missing required env var: ${key}`);
+  }
+  return value || '';
+}
+
 export default registerAs('app', () => ({
   env: process.env.NODE_ENV || 'development',
   port: parseInt(process.env.PORT || '4000', 10),
   frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3000',
 
   jwt: {
-    secret: process.env.JWT_SECRET || 'super-secret-change-in-production',
+    secret: require_env('JWT_SECRET'),
     expiresIn: process.env.JWT_EXPIRES_IN || '15m',
-    refreshSecret: process.env.JWT_REFRESH_SECRET || 'refresh-secret-change-in-production',
+    refreshSecret: require_env('JWT_REFRESH_SECRET'),
     refreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '7d',
   },
 

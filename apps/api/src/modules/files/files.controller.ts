@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Param, Query, UseGuards, ForbiddenException } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { FilesService } from './files.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -20,7 +20,14 @@ export class FilesController {
   }
 
   @Get('download-url')
-  getDownloadUrl(@Query('key') key: string) {
+  getDownloadUrl(
+    @Query('key') key: string,
+    @CurrentUser('id') userId: string,
+  ) {
+    // Validate the requesting user owns the file key (prefix check prevents IDOR)
+    if (!key || key.includes('..') || (!key.startsWith(`uploads/${userId}/`) && !key.startsWith('public/'))) {
+      throw new Error('Access denied to requested file');
+    }
     return this.filesService.getPresignedDownloadUrl(key);
   }
 

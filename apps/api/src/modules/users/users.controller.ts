@@ -43,7 +43,10 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.ADMIN, UserRole.SUPER_ADMIN)
   findById(@Param('id') id: string) {
+    // Only admins can look up arbitrary user profiles — prevents IDOR
     return this.usersService.findById(id);
   }
 

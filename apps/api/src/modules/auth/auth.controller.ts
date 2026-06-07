@@ -11,6 +11,7 @@ import {
   Ip,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { AuthGuard } from '@nestjs/passport';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
@@ -30,6 +31,7 @@ export class AuthController {
 
   @Public()
   @Post('register')
+  @Throttle({ default: { ttl: 3600000, limit: 10 } }) // 10 registrations per hour per IP
   @ApiOperation({ summary: 'Register new user' })
   async register(@Body() dto: RegisterDto) {
     return this.authService.register(dto);
@@ -38,6 +40,7 @@ export class AuthController {
   @Public()
   @Post('login')
   @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { ttl: 60000, limit: 5 } }) // 5 attempts per minute
   @ApiOperation({ summary: 'Login with email/password' })
   async login(@Body() dto: LoginDto, @Ip() ip: string) {
     return this.authService.login(dto, ip);
@@ -63,6 +66,7 @@ export class AuthController {
   @Public()
   @Post('forgot-password')
   @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { ttl: 3600000, limit: 3 } }) // 3 resets per hour per IP
   @ApiOperation({ summary: 'Request password reset email' })
   async forgotPassword(@Body() dto: ForgotPasswordDto) {
     await this.authService.forgotPassword(dto.email);
@@ -107,7 +111,8 @@ export class AuthController {
   @ApiOperation({ summary: 'Google OAuth callback' })
   async googleCallback(@Req() req: Request, @Res() res: Response) {
     const result = await this.authService.handleOAuthLogin((req as any).user);
-    res.redirect(`${process.env.FRONTEND_URL}/auth/callback?token=${result.accessToken}&refresh=${result.refreshToken}`);
+    // Use fragment (#) instead of query string — fragments are not sent to servers or logged
+    res.redirect(`${process.env.FRONTEND_URL}/auth/callback#token=${result.accessToken}&refresh=${result.refreshToken}`);
   }
 
   @Public()
@@ -122,7 +127,7 @@ export class AuthController {
   @ApiOperation({ summary: 'GitHub OAuth callback' })
   async githubCallback(@Req() req: Request, @Res() res: Response) {
     const result = await this.authService.handleOAuthLogin((req as any).user);
-    res.redirect(`${process.env.FRONTEND_URL}/auth/callback?token=${result.accessToken}&refresh=${result.refreshToken}`);
+    res.redirect(`${process.env.FRONTEND_URL}/auth/callback#token=${result.accessToken}&refresh=${result.refreshToken}`);
   }
 
   @Get('me')

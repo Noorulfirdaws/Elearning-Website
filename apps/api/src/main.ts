@@ -1,8 +1,9 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { ValidationPipe, Logger } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
+import { ThrottlerGuard } from '@nestjs/throttler';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
@@ -16,14 +17,39 @@ async function bootstrap() {
   const port = configService.get<number>('PORT', 4000);
   const apiPrefix = 'api/v1';
 
-  app.use(helmet());
+  // Security headers
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", 'data:', 'https:'],
+        connectSrc: ["'self'"],
+        frameSrc: ["'none'"],
+        objectSrc: ["'none'"],
+      },
+    },
+    hsts: { maxAge: 31536000, includeSubDomains: true, preload: true },
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  }));
   app.setGlobalPrefix(apiPrefix);
 
+  // CORS — strict allow-list
+  const allowedOrigins = (configService.get<string>('ALLOWED_ORIGINS') || configService.get<string>('FRONTEND_URL', 'http://localhost:3000')).split(',');
   app.enableCors({
-    origin: configService.get<string>('FRONTEND_URL', 'http://localhost:3000'),
+    origin: (origin, cb) => {
+      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+      cb(new Error('Not allowed by CORS'));
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Authorization', 'Content-Type', 'stripe-signature', 'x-api-key'],
   });
+
+  // Apply global rate-limit guard (ThrottlerModule configured in AppModule)
+  const { HttpAdapterHost } = await import('@nestjs/core');
+  app.useGlobalGuards(new ThrottlerGuard({} as any, {} as any, new Reflector()));
 
   app.useGlobalPipes(
     new ValidationPipe({

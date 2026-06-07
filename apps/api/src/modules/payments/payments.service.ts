@@ -90,16 +90,35 @@ export class PaymentsService {
   }
 
   async handleStripeWebhook(payload: Buffer, signature: string) {
-    let event: Stripe.Event;
+    const webhookSecret = this.config.get('app.stripe.webhookSecret');
+    if (!webhookSecret) {
+      this.logger.error('STRIPE_WEBHOOK_SECRET is not configured!');
+      throw new BadRequestException('Webhook not configured');
+    }
 
+    let event: Stripe.Event;
     try {
-      event = this.stripe.webhooks.constructEvent(
-        payload,
-        signature,
-        this.config.get('app.stripe.webhookSecret') || '',
-      );
+      // constructEvent verifies HMAC-SHA256 signature using the raw payload buffer
+      event = this.stripe.webhooks.constructEvent(payload, signature, webhookSecret);
     } catch (err) {
+      this.logger.warn(`Stripe webhook signature verification failed: ${err.message}`);
       throw new BadRequestException('Invalid webhook signature');
+    }
+
+    // Idempotency: skip events already processed
+    const alreadyProcessed = await this.prisma.payment.findFirst({
+      where: { providerPaymentId: event.id },
+    });
+    if (alreadyProcessed) {
+      this.logger.log(`Duplicate Stripe event ${event.id} — skipping`);
+      return { received: true };
+    }
+
+    // Reject events older than 5 minutes (replay attack protection)
+    const eventAge = Date.now() / 1000 - event.created;
+    if (eventAge > 300) {
+      this.logger.warn(`Stale Stripe event ${event.id} age=${eventAge}s — rejecting`);
+      throw new BadRequestException('Webhook event too old');
     }
 
     switch (event.type) {
@@ -112,6 +131,8 @@ export class PaymentsService {
       case 'charge.refunded':
         await this.handleRefund(event.data.object as Stripe.Charge);
         break;
+      default:
+        this.logger.log(`Unhandled Stripe event type: ${event.type}`);
     }
 
     return { received: true };
