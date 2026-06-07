@@ -226,6 +226,19 @@ model PasswordReset {
   @@map("password_resets")
 }
 
+model EmailVerification {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([email])
+  @@map("email_verifications")
+}
+
 // ─── ORGANIZATIONS ────────────────────────────────────────────────────────────
 
 model Organization {

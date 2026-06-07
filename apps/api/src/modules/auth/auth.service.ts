@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { User } from '@prisma/client';
+import { EmailService } from '../../common/email/email.service';
 
 const MAX_FAILED_ATTEMPTS = 5;
 const LOCKOUT_DURATION_MS = 15 * 60 * 1000; // 15 minutes
@@ -28,6 +29,7 @@ export class AuthService {
     private prisma: PrismaService,
     private jwtService: JwtService,
     private config: ConfigService,
+    private emailService: EmailService,
   ) {}
 
   // AES-256-GCM encryption for MFA secrets at rest
@@ -63,13 +65,62 @@ export class AuthService {
       },
     });
 
-    const tokens = await this.generateTokens(user);
-
     await this.prisma.auditLog.create({
       data: { userId: user.id, action: 'USER_REGISTER', entityType: 'User', entityId: user.id },
     });
 
+    // Send verification email (non-blocking)
+    const verifyToken = await this.createEmailVerificationToken(dto.email);
+    this.emailService.sendVerificationEmail(dto.email, verifyToken, dto.firstName);
+
+    return {
+      user: this.sanitizeUser(user),
+      requiresVerification: true,
+      message: 'Account created! Please check your email to verify your account.',
+    };
+  }
+
+  async createEmailVerificationToken(email: string): Promise<string> {
+    const token = uuidv4();
+    const expiresAt = new Date(Date.now() + 24 * 3600 * 1000); // 24 hours
+
+    // Invalidate any previous tokens for this email
+    await this.prisma.emailVerification.updateMany({
+      where: { email, usedAt: null },
+      data: { usedAt: new Date() },
+    });
+
+    await this.prisma.emailVerification.create({ data: { email, token, expiresAt } });
+    return token;
+  }
+
+  async verifyEmail(token: string) {
+    const record = await this.prisma.emailVerification.findFirst({
+      where: { token, usedAt: null, expiresAt: { gt: new Date() } },
+    });
+    if (!record) throw new BadRequestException('Invalid or expired verification link');
+
+    await this.prisma.user.update({
+      where: { email: record.email },
+      data: { emailVerified: new Date() },
+    });
+    await this.prisma.emailVerification.update({
+      where: { id: record.id },
+      data: { usedAt: new Date() },
+    });
+
+    const user = await this.prisma.user.findUnique({ where: { email: record.email } });
+    const tokens = await this.generateTokens(user);
     return { user: this.sanitizeUser(user), ...tokens };
+  }
+
+  async resendVerification(email: string) {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    if (!user) return; // Silent — don't reveal if email exists
+    if (user.emailVerified) throw new BadRequestException('Email is already verified');
+
+    const token = await this.createEmailVerificationToken(email);
+    this.emailService.sendVerificationEmail(email, token, user.firstName);
   }
 
   async login(dto: LoginDto, ip?: string) {

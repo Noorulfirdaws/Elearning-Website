@@ -38,11 +38,15 @@ export default function RegisterPage() {
       const res = await api.post(apiRoutes.auth.register, payload);
       const result = res.data.data;
 
-      setUser(result.user);
-      setTokens(result.accessToken, result.refreshToken);
-
-      toast.success('Account created! Welcome to LearnHub!');
-      router.push('/dashboard');
+      if (result.requiresVerification) {
+        toast.success('Account created! Please check your email to verify.');
+        router.push(`/check-email?email=${encodeURIComponent(data.email)}`);
+      } else {
+        setUser(result.user);
+        setTokens(result.accessToken, result.refreshToken);
+        toast.success('Account created! Welcome to LearnHub!');
+        router.push('/dashboard');
+      }
     } catch (err) {
       toast.error(parseApiError(err));
     }

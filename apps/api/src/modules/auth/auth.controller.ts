@@ -64,6 +64,24 @@ export class AuthController {
   }
 
   @Public()
+  @Post('verify-email')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Verify email with token from email link' })
+  async verifyEmail(@Body() body: { token: string }) {
+    return this.authService.verifyEmail(body.token);
+  }
+
+  @Public()
+  @Post('resend-verification')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ default: { ttl: 3600000, limit: 3 } }) // 3 resends per hour
+  @ApiOperation({ summary: 'Resend verification email' })
+  async resendVerification(@Body() body: { email: string }) {
+    await this.authService.resendVerification(body.email);
+    return { message: 'If that email is unverified, a new link has been sent.' };
+  }
+
+  @Public()
   @Post('forgot-password')
   @HttpCode(HttpStatus.OK)
   @Throttle({ default: { ttl: 3600000, limit: 3 } }) // 3 resets per hour per IP

@@ -32,7 +32,7 @@ interface Course {
 }
 
 export default function CourseDetailPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { courseId: slug } = useParams<{ courseId: string }>();
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
   const [openSections, setOpenSections] = useState<Set<string>>(new Set([0].map(String)));
