@@ -1,0 +1,174 @@
+{
+  "title": "LMS — Resilience & Failover",
+  "uid": "lms-resilience",
+  "description": "Circuit breaker states, fallback usage, queue retry depths, DB replica lag",
+  "tags": ["lms", "resilience", "sre"],
+  "timezone": "browser",
+  "refresh": "15s",
+  "time": { "from": "now-3h", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "title": "PostgreSQL Circuit",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {"type":"value","options":{"0":{"text":"CLOSED","color":"green"}}},
+            {"type":"value","options":{"1":{"text":"HALF_OPEN","color":"yellow"}}},
+            {"type":"value","options":{"2":{"text":"OPEN","color":"red"}}}
+          ]
+        }
+      },
+      "targets": [{ "expr": "lms_circuit_breaker_state{service=\"postgresql\"}", "legendFormat": "PostgreSQL" }]
+    },
+    {
+      "id": 2,
+      "title": "Redis Circuit",
+      "type": "stat",
+      "gridPos": { "x": 4, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {"type":"value","options":{"0":{"text":"CLOSED","color":"green"}}},
+            {"type":"value","options":{"1":{"text":"HALF_OPEN","color":"yellow"}}},
+            {"type":"value","options":{"2":{"text":"OPEN","color":"red"}}}
+          ]
+        }
+      },
+      "targets": [{ "expr": "lms_circuit_breaker_state{service=\"redis\"}", "legendFormat": "Redis" }]
+    },
+    {
+      "id": 3,
+      "title": "Meilisearch Circuit",
+      "type": "stat",
+      "gridPos": { "x": 8, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {"type":"value","options":{"0":{"text":"CLOSED","color":"green"}}},
+            {"type":"value","options":{"1":{"text":"HALF_OPEN","color":"yellow"}}},
+            {"type":"value","options":{"2":{"text":"OPEN","color":"red"}}}
+          ]
+        }
+      },
+      "targets": [{ "expr": "lms_circuit_breaker_state{service=\"meilisearch\"}", "legendFormat": "Meilisearch" }]
+    },
+    {
+      "id": 4,
+      "title": "Mux (Video) Circuit",
+      "type": "stat",
+      "gridPos": { "x": 12, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {"type":"value","options":{"0":{"text":"CLOSED","color":"green"}}},
+            {"type":"value","options":{"1":{"text":"HALF_OPEN","color":"yellow"}}},
+            {"type":"value","options":{"2":{"text":"OPEN","color":"red"}}}
+          ]
+        }
+      },
+      "targets": [{ "expr": "lms_circuit_breaker_state{service=\"mux\"}", "legendFormat": "Mux" }]
+    },
+    {
+      "id": 5,
+      "title": "Stripe Circuit",
+      "type": "stat",
+      "gridPos": { "x": 16, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {"type":"value","options":{"0":{"text":"CLOSED","color":"green"}}},
+            {"type":"value","options":{"1":{"text":"HALF_OPEN","color":"yellow"}}},
+            {"type":"value","options":{"2":{"text":"OPEN","color":"red"}}}
+          ]
+        }
+      },
+      "targets": [{ "expr": "lms_circuit_breaker_state{service=\"stripe\"}", "legendFormat": "Stripe" }]
+    },
+    {
+      "id": 6,
+      "title": "Redis Fallback Size",
+      "type": "stat",
+      "gridPos": { "x": 20, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "thresholds": { "steps": [{"value":0,"color":"green"},{"value":800,"color":"yellow"},{"value":950,"color":"red"}] },
+          "max": 1000
+        }
+      },
+      "targets": [{ "expr": "lms_cache_memory_fallback_size", "legendFormat": "LRU Entries" }]
+    },
+
+    {
+      "id": 10,
+      "title": "Circuit Breaker History",
+      "type": "state-timeline",
+      "gridPos": { "x": 0, "y": 4, "w": 24, "h": 8 },
+      "options": { "fillOpacity": 80 },
+      "fieldConfig": {
+        "defaults": {
+          "custom": { "lineWidth": 0 },
+          "mappings": [
+            {"type":"value","options":{"0":{"text":"CLOSED","color":"green"}}},
+            {"type":"value","options":{"1":{"text":"HALF_OPEN","color":"yellow"}}},
+            {"type":"value","options":{"2":{"text":"OPEN","color":"red"}}}
+          ]
+        }
+      },
+      "targets": [
+        { "expr": "lms_circuit_breaker_state{service=\"postgresql\"}",  "legendFormat": "PostgreSQL" },
+        { "expr": "lms_circuit_breaker_state{service=\"redis\"}",       "legendFormat": "Redis" },
+        { "expr": "lms_circuit_breaker_state{service=\"meilisearch\"}", "legendFormat": "Meilisearch" },
+        { "expr": "lms_circuit_breaker_state{service=\"mux\"}",         "legendFormat": "Mux" },
+        { "expr": "lms_circuit_breaker_state{service=\"stripe\"}",      "legendFormat": "Stripe" }
+      ]
+    },
+
+    {
+      "id": 20,
+      "title": "Cache: Redis vs In-Memory Fallback",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 12, "w": 12, "h": 8 },
+      "targets": [
+        { "expr": "rate(lms_cache_hits_total{backend=\"redis\"}[5m])",   "legendFormat": "Redis Hits" },
+        { "expr": "rate(lms_cache_hits_total{backend=\"memory\"}[5m])",  "legendFormat": "Memory Hits (fallback)" },
+        { "expr": "rate(lms_cache_misses_total[5m])",                    "legendFormat": "Misses" }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Search: Meilisearch vs PostgreSQL Fallback",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 12, "w": 12, "h": 8 },
+      "targets": [
+        { "expr": "rate(lms_search_requests_total{source=\"meilisearch\"}[5m])", "legendFormat": "Meilisearch" },
+        { "expr": "rate(lms_search_requests_total{source=\"postgresql\"}[5m])",  "legendFormat": "PostgreSQL Fallback" },
+        { "expr": "lms_search_pending_index_writes",                             "legendFormat": "Pending Index Writes" }
+      ]
+    },
+
+    {
+      "id": 30,
+      "title": "Video: Mux vs S3 Fallback Plays",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 20, "w": 12, "h": 8 },
+      "targets": [
+        { "expr": "rate(lms_video_plays_total{provider=\"mux\"}[5m])", "legendFormat": "Mux HLS" },
+        { "expr": "rate(lms_video_plays_total{provider=\"s3\"}[5m])",  "legendFormat": "S3/CloudFront Fallback" }
+      ]
+    },
+    {
+      "id": 31,
+      "title": "Payment Retry Queue",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 20, "w": 12, "h": 8 },
+      "fieldConfig": { "defaults": { "unit": "short" } },
+      "targets": [
+        { "expr": "lms_queue_depth{queue=\"payment-retry\"}", "legendFormat": "Pending Payments" }
+      ]
+    }
+  ]
+}

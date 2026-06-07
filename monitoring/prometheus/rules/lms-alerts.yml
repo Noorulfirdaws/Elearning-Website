@@ -1,0 +1,276 @@
+groups:
+  # ── API / HTTP ─────────────────────────────────────────────────────────────
+  - name: lms.http
+    rules:
+      - alert: HighErrorRate
+        expr: |
+          (
+            sum(rate(lms_http_requests_total{status_code=~"5.."}[5m]))
+            /
+            sum(rate(lms_http_requests_total[5m]))
+          ) > 0.01
+        for: 2m
+        labels:
+          severity: critical
+          team: backend
+        annotations:
+          summary: "High HTTP 5xx error rate ({{ $value | humanizePercentage }})"
+          description: "More than 1% of requests returning 5xx for 2 minutes. Check API logs immediately."
+          runbook_url: "https://wiki.lms.internal/runbooks/high-error-rate"
+
+      - alert: HighLatencyP95
+        expr: |
+          histogram_quantile(0.95,
+            sum(rate(lms_http_request_duration_seconds_bucket[5m])) by (le, route)
+          ) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "P95 latency > 500ms on {{ $labels.route }}"
+          description: "95th percentile response time is {{ $value | humanizeDuration }} on route {{ $labels.route }}."
+
+      - alert: HighLatencyP99
+        expr: |
+          histogram_quantile(0.99,
+            sum(rate(lms_http_request_duration_seconds_bucket[5m])) by (le)
+          ) > 2
+        for: 3m
+        labels:
+          severity: critical
+          team: backend
+        annotations:
+          summary: "P99 latency > 2s"
+          description: "99th percentile response time is {{ $value | humanizeDuration }}. SLA breach risk."
+
+      - alert: APIDown
+        expr: up{job="lms-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: ops
+          page: "true"
+        annotations:
+          summary: "LMS API is DOWN"
+          description: "The LMS API scrape target has been unreachable for 1 minute."
+
+  # ── Database ───────────────────────────────────────────────────────────────
+  - name: lms.database
+    rules:
+      - alert: DatabaseCircuitOpen
+        expr: lms_circuit_breaker_state{service="postgresql"} == 2
+        for: 30s
+        labels:
+          severity: critical
+          team: backend
+          page: "true"
+        annotations:
+          summary: "PostgreSQL circuit breaker OPEN"
+          description: "All DB writes are failing. API is running in read-only/degraded mode."
+          runbook_url: "https://wiki.lms.internal/runbooks/db-failover"
+
+      - alert: SlowDBQueries
+        expr: |
+          histogram_quantile(0.95,
+            sum(rate(lms_db_query_duration_seconds_bucket[5m])) by (le, model, operation)
+          ) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "Slow DB queries on {{ $labels.model }}.{{ $labels.operation }}"
+          description: "P95 query time is {{ $value | humanizeDuration }}. Check slow query log."
+
+      - alert: PostgreSQLDown
+        expr: up{job="postgresql"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: ops
+          page: "true"
+        annotations:
+          summary: "PostgreSQL exporter is DOWN"
+          description: "Cannot scrape PostgreSQL metrics. Database may be unreachable."
+
+  # ── Redis / Cache ──────────────────────────────────────────────────────────
+  - name: lms.cache
+    rules:
+      - alert: RedisCircuitOpen
+        expr: lms_circuit_breaker_state{service="redis"} == 2
+        for: 1m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "Redis circuit breaker OPEN — using memory fallback"
+          description: "Redis has been unavailable for 1 minute. In-memory LRU active. Cache hit rate will drop."
+
+      - alert: LowCacheHitRate
+        expr: |
+          (
+            sum(rate(lms_cache_hits_total[5m]))
+            /
+            (sum(rate(lms_cache_hits_total[5m])) + sum(rate(lms_cache_misses_total[5m])))
+          ) < 0.6
+        for: 10m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "Cache hit rate dropped below 60% ({{ $value | humanizePercentage }})"
+          description: "Elevated DB load expected. Investigate cache invalidation patterns."
+
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: ops
+        annotations:
+          summary: "Redis is DOWN"
+          description: "Redis exporter unreachable. Sessions, rate limiting and queues may be affected."
+
+  # ── Queues ─────────────────────────────────────────────────────────────────
+  - name: lms.queues
+    rules:
+      - alert: ProgressQueueBacklog
+        expr: lms_queue_depth{queue="progress"} > 5000
+        for: 5m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "Progress heartbeat queue backlog > 5,000"
+          description: "{{ $value }} jobs waiting. Workers may be overwhelmed or DB is slow."
+
+      - alert: QuizGradingQueueBacklog
+        expr: lms_queue_depth{queue="quiz-grading"} > 500
+        for: 3m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "Quiz grading backlog > 500 ({{ $value }} jobs)"
+          description: "Students are waiting for grades. Check grading worker health."
+
+      - alert: PaymentRetryQueueNotEmpty
+        expr: lms_queue_depth{queue="payment-retry"} > 0
+        for: 5m
+        labels:
+          severity: warning
+          team: payments
+        annotations:
+          summary: "{{ $value }} payments queued for retry (Stripe circuit open)"
+          description: "Stripe is unavailable. Pending orders are queued. Check Stripe status page."
+
+  # ── External Services ──────────────────────────────────────────────────────
+  - name: lms.external
+    rules:
+      - alert: StripeCircuitOpen
+        expr: lms_circuit_breaker_state{service="stripe"} == 2
+        for: 2m
+        labels:
+          severity: critical
+          team: payments
+          page: "true"
+        annotations:
+          summary: "Stripe circuit OPEN — payments degraded"
+          description: "New enrollments are being queued, not processed. Revenue impact in progress."
+          runbook_url: "https://wiki.lms.internal/runbooks/stripe-outage"
+
+      - alert: MuxCircuitOpen
+        expr: lms_circuit_breaker_state{service="mux"} == 2
+        for: 2m
+        labels:
+          severity: warning
+          team: video
+        annotations:
+          summary: "Mux circuit OPEN — video serving from S3 fallback"
+          description: "No HLS adaptive streaming. Students see MP4 direct playback."
+
+      - alert: MeilisearchCircuitOpen
+        expr: lms_circuit_breaker_state{service="meilisearch"} == 2
+        for: 3m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "Meilisearch circuit OPEN — search falling back to PostgreSQL"
+          description: "Search is functional but slower, no typo tolerance or facets."
+
+  # ── Business Metrics ───────────────────────────────────────────────────────
+  - name: lms.business
+    rules:
+      - alert: PaymentFailureSpike
+        expr: |
+          sum(rate(lms_payments_total{status="failed"}[10m]))
+          /
+          sum(rate(lms_payments_total[10m])) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+          team: payments
+          page: "true"
+        annotations:
+          summary: "Payment failure rate > 10% ({{ $value | humanizePercentage }})"
+          description: "High payment failure rate. Check Stripe dashboard and webhook delivery."
+
+      - alert: ZeroEnrollmentsLast30Min
+        expr: |
+          sum(increase(lms_enrollments_total[30m])) == 0
+            and hour() >= 8 and hour() <= 22
+        for: 5m
+        labels:
+          severity: warning
+          team: payments
+        annotations:
+          summary: "Zero enrollments in the last 30 minutes (business hours)"
+          description: "No successful enrollments in 30 min during business hours. Possible payment issue."
+
+      - alert: HighLoginFailureRate
+        expr: |
+          sum(rate(lms_login_attempts_total{status="failed"}[5m]))
+          /
+          sum(rate(lms_login_attempts_total[5m])) > 0.2
+        for: 5m
+        labels:
+          severity: warning
+          team: security
+        annotations:
+          summary: "High login failure rate ({{ $value | humanizePercentage }}) — possible credential stuffing"
+          description: "20%+ of login attempts are failing. May indicate a brute-force or credential stuffing attack."
+
+  # ── Infrastructure ─────────────────────────────────────────────────────────
+  - name: lms.infra
+    rules:
+      - alert: HighMemoryUsage
+        expr: |
+          lms_node_process_resident_memory_bytes / (1024 * 1024 * 1024) > 1.5
+        for: 5m
+        labels:
+          severity: warning
+          team: ops
+        annotations:
+          summary: "API memory usage > 1.5GB"
+          description: "Process RSS is {{ $value | humanize }}GB. Consider restarting or increasing limits."
+
+      - alert: HighEventLoopLag
+        expr: lms_node_eventloop_lag_seconds_max > 0.5
+        for: 3m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "Node.js event loop lag > 500ms"
+          description: "Event loop is backed up. Check for synchronous blocking operations."
+
+      - alert: NodeProcessRestart
+        expr: increase(lms_node_process_start_time_seconds[5m]) > 0
+        labels:
+          severity: warning
+          team: ops
+        annotations:
+          summary: "LMS API process restarted"
+          description: "The Node.js process was restarted. Check for OOM kills or crashes."

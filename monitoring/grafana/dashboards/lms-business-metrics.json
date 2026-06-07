@@ -1,0 +1,136 @@
+{
+  "title": "LMS — Business Metrics",
+  "uid": "lms-business",
+  "description": "Enrollments, revenue, learner activity, video plays, quizzes, certificates",
+  "tags": ["lms", "business"],
+  "timezone": "browser",
+  "refresh": "1m",
+  "time": { "from": "now-24h", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Enrollments Today",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": { "defaults": { "unit": "short", "color": { "mode": "thresholds" }, "thresholds": { "steps": [{"value": 0, "color": "blue"}] } } },
+      "targets": [{ "expr": "sum(increase(lms_enrollments_total[24h]))", "legendFormat": "Enrollments" }]
+    },
+    {
+      "id": 2,
+      "title": "Revenue Today (USD)",
+      "type": "stat",
+      "gridPos": { "x": 4, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": { "defaults": { "unit": "currencyUSD", "thresholds": { "steps": [{"value": 0, "color": "green"}] } } },
+      "targets": [{ "expr": "sum(increase(lms_payment_revenue_cents_total{currency=\"USD\"}[24h])) / 100", "legendFormat": "Revenue" }]
+    },
+    {
+      "id": 3,
+      "title": "Active Learners (last 5min)",
+      "type": "stat",
+      "gridPos": { "x": 8, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": { "defaults": { "unit": "short", "color": {"fixedColor": "blue", "mode": "fixed"} } },
+      "targets": [{ "expr": "lms_active_learners", "legendFormat": "Active" }]
+    },
+    {
+      "id": 4,
+      "title": "Video Plays Today",
+      "type": "stat",
+      "gridPos": { "x": 12, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": { "defaults": { "unit": "short" } },
+      "targets": [{ "expr": "sum(increase(lms_video_plays_total[24h]))", "legendFormat": "Plays" }]
+    },
+    {
+      "id": 5,
+      "title": "Quizzes Submitted Today",
+      "type": "stat",
+      "gridPos": { "x": 16, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": { "defaults": { "unit": "short" } },
+      "targets": [{ "expr": "sum(increase(lms_quiz_submissions_total[24h]))", "legendFormat": "Submissions" }]
+    },
+    {
+      "id": 6,
+      "title": "Certificates Issued Today",
+      "type": "stat",
+      "gridPos": { "x": 20, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": { "defaults": { "unit": "short", "color": {"fixedColor": "gold", "mode": "fixed"} } },
+      "targets": [{ "expr": "sum(increase(lms_certificates_issued_total[24h]))", "legendFormat": "Certs" }]
+    },
+
+    {
+      "id": 10,
+      "title": "Enrollment Rate (per minute)",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 4, "w": 12, "h": 8 },
+      "fieldConfig": { "defaults": { "unit": "short", "custom": { "fillOpacity": 10 } } },
+      "targets": [
+        { "expr": "lms:enrollments_per_minute:5m", "legendFormat": "Enrollments/min" }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Revenue per Hour",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 4, "w": 12, "h": 8 },
+      "fieldConfig": { "defaults": { "unit": "currencyUSD", "custom": { "fillOpacity": 10 } } },
+      "targets": [
+        { "expr": "lms:revenue_per_hour:1h", "legendFormat": "Revenue/hr" }
+      ]
+    },
+
+    {
+      "id": 20,
+      "title": "Payment Success / Failure Rate",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 12, "w": 12, "h": 8 },
+      "targets": [
+        { "expr": "rate(lms_payments_total{status=\"completed\"}[5m])", "legendFormat": "Completed" },
+        { "expr": "rate(lms_payments_total{status=\"failed\"}[5m])",    "legendFormat": "Failed" },
+        { "expr": "rate(lms_payments_total{status=\"queued\"}[5m])",    "legendFormat": "Queued (Stripe down)" }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Quiz Pass / Fail Rate",
+      "type": "piechart",
+      "gridPos": { "x": 12, "y": 12, "w": 6, "h": 8 },
+      "targets": [
+        { "expr": "sum(increase(lms_quiz_submissions_total{status=\"passed\"}[24h]))", "legendFormat": "Passed" },
+        { "expr": "sum(increase(lms_quiz_submissions_total{status=\"failed\"}[24h]))", "legendFormat": "Failed" }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Video Provider Distribution",
+      "type": "piechart",
+      "gridPos": { "x": 18, "y": 12, "w": 6, "h": 8 },
+      "targets": [
+        { "expr": "sum(increase(lms_video_plays_total{provider=\"mux\"}[24h]))", "legendFormat": "Mux (HLS)" },
+        { "expr": "sum(increase(lms_video_plays_total{provider=\"s3\"}[24h]))",  "legendFormat": "S3 Fallback" }
+      ]
+    },
+
+    {
+      "id": 30,
+      "title": "New User Registrations",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 20, "w": 12, "h": 8 },
+      "targets": [
+        { "expr": "rate(lms_registrations_total{method=\"email\"}[30m]) * 1800",  "legendFormat": "Email" },
+        { "expr": "rate(lms_registrations_total{method=\"google\"}[30m]) * 1800", "legendFormat": "Google OAuth" },
+        { "expr": "rate(lms_registrations_total{method=\"github\"}[30m]) * 1800", "legendFormat": "GitHub OAuth" }
+      ]
+    },
+    {
+      "id": 31,
+      "title": "Login Security Events",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 20, "w": 12, "h": 8 },
+      "targets": [
+        { "expr": "rate(lms_login_attempts_total{status=\"success\"}[5m])", "legendFormat": "Success" },
+        { "expr": "rate(lms_login_attempts_total{status=\"failed\"}[5m])",  "legendFormat": "Failed" },
+        { "expr": "rate(lms_login_attempts_total{status=\"locked\"}[5m])",  "legendFormat": "Account Locked" },
+        { "expr": "rate(lms_mfa_verifications_total{status=\"failed\"}[5m])", "legendFormat": "MFA Failed" }
+      ]
+    }
+  ]
+}

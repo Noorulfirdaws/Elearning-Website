@@ -1,0 +1,195 @@
+{
+  "title": "LMS API — Overview",
+  "uid": "lms-api-overview",
+  "description": "HTTP request rate, latency, errors, DB, cache and queue health",
+  "tags": ["lms", "api", "overview"],
+  "timezone": "browser",
+  "refresh": "30s",
+  "time": { "from": "now-1h", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Request Rate (req/s)",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 0, "w": 4, "h": 4 },
+      "options": { "colorMode": "background", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "thresholds": { "steps": [{"value": 0, "color": "green"}, {"value": 500, "color": "yellow"}, {"value": 1000, "color": "red"}] }
+        }
+      },
+      "targets": [{ "expr": "lms:http_request_rate:5m", "legendFormat": "RPS" }]
+    },
+    {
+      "id": 2,
+      "title": "Error Rate",
+      "type": "stat",
+      "gridPos": { "x": 4, "y": 0, "w": 4, "h": 4 },
+      "options": { "colorMode": "background", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "thresholds": { "steps": [{"value": 0, "color": "green"}, {"value": 0.01, "color": "yellow"}, {"value": 0.05, "color": "red"}] }
+        }
+      },
+      "targets": [{ "expr": "lms:http_error_rate:5m", "legendFormat": "Error %" }]
+    },
+    {
+      "id": 3,
+      "title": "P95 Latency",
+      "type": "stat",
+      "gridPos": { "x": 8, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "thresholds": { "steps": [{"value": 0, "color": "green"}, {"value": 0.25, "color": "yellow"}, {"value": 0.5, "color": "red"}] }
+        }
+      },
+      "targets": [{ "expr": "lms:http_request_duration_p95:5m", "legendFormat": "P95" }]
+    },
+    {
+      "id": 4,
+      "title": "P99 Latency",
+      "type": "stat",
+      "gridPos": { "x": 12, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "thresholds": { "steps": [{"value": 0, "color": "green"}, {"value": 0.5, "color": "yellow"}, {"value": 2, "color": "red"}] }
+        }
+      },
+      "targets": [{ "expr": "lms:http_request_duration_p99:5m", "legendFormat": "P99" }]
+    },
+    {
+      "id": 5,
+      "title": "Cache Hit Rate",
+      "type": "stat",
+      "gridPos": { "x": 16, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "thresholds": { "steps": [{"value": 0, "color": "red"}, {"value": 0.6, "color": "yellow"}, {"value": 0.8, "color": "green"}] }
+        }
+      },
+      "targets": [{ "expr": "lms:cache_hit_ratio:5m", "legendFormat": "Hit Rate" }]
+    },
+    {
+      "id": 6,
+      "title": "Active Learners",
+      "type": "stat",
+      "gridPos": { "x": 20, "y": 0, "w": 4, "h": 4 },
+      "fieldConfig": { "defaults": { "unit": "short", "color": { "mode": "thresholds" }, "thresholds": { "steps": [{"value": 0, "color": "blue"}] } } },
+      "targets": [{ "expr": "lms_active_learners", "legendFormat": "Learners" }]
+    },
+
+    {
+      "id": 10,
+      "title": "Request Rate Over Time",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 4, "w": 12, "h": 8 },
+      "fieldConfig": { "defaults": { "unit": "reqps" } },
+      "targets": [
+        { "expr": "sum(rate(lms_http_requests_total{status_code!~\"5..\"}[5m]))", "legendFormat": "Success" },
+        { "expr": "sum(rate(lms_http_requests_total{status_code=~\"5..\"}[5m]))", "legendFormat": "5xx Errors" },
+        { "expr": "sum(rate(lms_http_requests_total{status_code=~\"4..\"}[5m]))", "legendFormat": "4xx Client Errors" }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Latency Percentiles",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 4, "w": 12, "h": 8 },
+      "fieldConfig": { "defaults": { "unit": "s" } },
+      "targets": [
+        { "expr": "lms:http_request_duration_p50:5m", "legendFormat": "P50" },
+        { "expr": "lms:http_request_duration_p95:5m", "legendFormat": "P95" },
+        { "expr": "lms:http_request_duration_p99:5m", "legendFormat": "P99" }
+      ]
+    },
+
+    {
+      "id": 20,
+      "title": "Circuit Breaker States",
+      "type": "state-timeline",
+      "gridPos": { "x": 0, "y": 12, "w": 24, "h": 6 },
+      "options": {
+        "fillOpacity": 80,
+        "legend": { "displayMode": "list" }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {"type": "value", "options": {"0": {"text": "CLOSED",    "color": "green"}}},
+            {"type": "value", "options": {"1": {"text": "HALF_OPEN", "color": "yellow"}}},
+            {"type": "value", "options": {"2": {"text": "OPEN",      "color": "red"}}}
+          ]
+        }
+      },
+      "targets": [
+        { "expr": "lms_circuit_breaker_state{service=\"postgresql\"}",  "legendFormat": "PostgreSQL" },
+        { "expr": "lms_circuit_breaker_state{service=\"redis\"}",       "legendFormat": "Redis" },
+        { "expr": "lms_circuit_breaker_state{service=\"meilisearch\"}", "legendFormat": "Meilisearch" },
+        { "expr": "lms_circuit_breaker_state{service=\"mux\"}",         "legendFormat": "Mux (Video)" },
+        { "expr": "lms_circuit_breaker_state{service=\"stripe\"}",      "legendFormat": "Stripe" }
+      ]
+    },
+
+    {
+      "id": 30,
+      "title": "DB Query Duration P95 by Operation",
+      "type": "bargauge",
+      "gridPos": { "x": 0, "y": 18, "w": 12, "h": 8 },
+      "fieldConfig": { "defaults": { "unit": "s", "max": 1 } },
+      "targets": [
+        { "expr": "topk(10, lms:db_query_p95:5m)", "legendFormat": "{{model}}.{{operation}}" }
+      ]
+    },
+    {
+      "id": 31,
+      "title": "Queue Depths",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 18, "w": 12, "h": 8 },
+      "fieldConfig": { "defaults": { "unit": "short" } },
+      "targets": [
+        { "expr": "lms_queue_depth{queue=\"progress\"}",      "legendFormat": "Progress Heartbeat" },
+        { "expr": "lms_queue_depth{queue=\"quiz-grading\"}",  "legendFormat": "Quiz Grading" },
+        { "expr": "lms_queue_depth{queue=\"payment-retry\"}", "legendFormat": "Payment Retry" }
+      ]
+    },
+
+    {
+      "id": 40,
+      "title": "Node.js Memory",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 26, "w": 8, "h": 6 },
+      "fieldConfig": { "defaults": { "unit": "bytes" } },
+      "targets": [
+        { "expr": "lms_node_process_resident_memory_bytes", "legendFormat": "RSS" },
+        { "expr": "lms_node_nodejs_heap_size_used_bytes",   "legendFormat": "Heap Used" },
+        { "expr": "lms_node_nodejs_heap_size_total_bytes",  "legendFormat": "Heap Total" }
+      ]
+    },
+    {
+      "id": 41,
+      "title": "Event Loop Lag",
+      "type": "timeseries",
+      "gridPos": { "x": 8, "y": 26, "w": 8, "h": 6 },
+      "fieldConfig": { "defaults": { "unit": "s" } },
+      "targets": [
+        { "expr": "lms_node_eventloop_lag_seconds_mean", "legendFormat": "Mean" },
+        { "expr": "lms_node_eventloop_lag_seconds_max",  "legendFormat": "Max" }
+      ]
+    },
+    {
+      "id": 42,
+      "title": "GC Duration",
+      "type": "timeseries",
+      "gridPos": { "x": 16, "y": 26, "w": 8, "h": 6 },
+      "fieldConfig": { "defaults": { "unit": "s" } },
+      "targets": [
+        { "expr": "rate(lms_node_gc_duration_seconds_sum[5m])", "legendFormat": "GC time/sec" }
+      ]
+    }
+  ]
+}

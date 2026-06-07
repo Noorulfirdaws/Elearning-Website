@@ -1,0 +1,46 @@
+groups:
+  - name: lms.recordings
+    interval: 30s
+    rules:
+      # Pre-compute P50/P95/P99 for the main Grafana dashboard
+      - record: lms:http_request_duration_p50:5m
+        expr: histogram_quantile(0.50, sum(rate(lms_http_request_duration_seconds_bucket[5m])) by (le))
+
+      - record: lms:http_request_duration_p95:5m
+        expr: histogram_quantile(0.95, sum(rate(lms_http_request_duration_seconds_bucket[5m])) by (le))
+
+      - record: lms:http_request_duration_p99:5m
+        expr: histogram_quantile(0.99, sum(rate(lms_http_request_duration_seconds_bucket[5m])) by (le))
+
+      # Request rate
+      - record: lms:http_request_rate:5m
+        expr: sum(rate(lms_http_requests_total[5m]))
+
+      # Error rate
+      - record: lms:http_error_rate:5m
+        expr: |
+          sum(rate(lms_http_requests_total{status_code=~"5.."}[5m]))
+          /
+          sum(rate(lms_http_requests_total[5m]))
+
+      # Cache hit ratio
+      - record: lms:cache_hit_ratio:5m
+        expr: |
+          sum(rate(lms_cache_hits_total[5m]))
+          /
+          (sum(rate(lms_cache_hits_total[5m])) + sum(rate(lms_cache_misses_total[5m])))
+
+      # DB query P95 per operation
+      - record: lms:db_query_p95:5m
+        expr: |
+          histogram_quantile(0.95,
+            sum(rate(lms_db_query_duration_seconds_bucket[5m])) by (le, model, operation)
+          )
+
+      # Enrollment rate per minute
+      - record: lms:enrollments_per_minute:5m
+        expr: sum(rate(lms_enrollments_total[5m])) * 60
+
+      # Revenue per hour
+      - record: lms:revenue_per_hour:1h
+        expr: sum(increase(lms_payment_revenue_cents_total[1h])) / 100
