@@ -6,7 +6,8 @@
  * GET /health/detailed — Full dependency dashboard
  * GET /metrics         — Prometheus scrape endpoint
  */
-import { Controller, Get, Header, Res } from '@nestjs/common';
+import { Controller, Get, Header, Res, Req, ForbiddenException } from '@nestjs/common';
+import { Request } from 'express';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { SkipThrottle } from '@nestjs/throttler';
 import { Response } from 'express';
@@ -20,7 +21,7 @@ import { VideoService }    from '../video/video.service';
 import { PaymentsService } from '../payments/payments.service';
 import { MetricsService }  from '../../common/metrics/metrics.service';
 
-@SkipThrottle()   // Health + metrics must never be rate-limited
+@SkipThrottle({ short: true, medium: true, long: true })   // Health + metrics must never be rate-limited
 @ApiTags('health')
 @Controller()
 export class HealthController {
@@ -112,10 +113,17 @@ export class HealthController {
   }
 
   // ── Prometheus scrape ─────────────────────────────────────────────────────
+  // Restricted to localhost and internal Docker network only
+  private readonly METRICS_ALLOWED = ['127.0.0.1', '::1', '::ffff:127.0.0.1', '172.', '10.', '192.168.'];
+
   @Public()
   @Get('metrics')
   @Header('Cache-Control', 'no-cache, no-store')
-  async prometheusMetrics(@Res() res: Response) {
+  async prometheusMetrics(@Req() req: Request, @Res() res: Response) {
+    const ip = (req.ip || req.socket?.remoteAddress || '');
+    const allowed = process.env.NODE_ENV === 'development' ||
+      this.METRICS_ALLOWED.some(prefix => ip.startsWith(prefix));
+    if (!allowed) throw new ForbiddenException('Metrics endpoint is internal only');
     res.set('Content-Type', this.metrics.contentType());
     res.end(await this.metrics.getMetrics());
   }
