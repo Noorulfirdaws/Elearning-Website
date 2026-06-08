@@ -50,7 +50,13 @@ export default function LoginPage() {
       if (role === 'SUPER_ADMIN' || role === 'ADMIN') router.push('/admin');
       else if (role === 'INSTRUCTOR') router.push('/instructor');
       else router.push('/dashboard');
-    } catch (err) {
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || '';
+      if (msg === 'EMAIL_NOT_VERIFIED') {
+        toast.error('Please verify your email first. A new link has been sent!');
+        router.push(`/check-email?email=${encodeURIComponent(data.email)}`);
+        return;
+      }
       toast.error(parseApiError(err));
     }
   };

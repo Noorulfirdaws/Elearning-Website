@@ -33,7 +33,16 @@ export default function LoginScreen() {
       setUser(user);
       router.replace('/(tabs)');
     } catch (err: any) {
-      Alert.alert('Login Failed', err.response?.data?.message || 'Invalid credentials');
+      const msg = err?.response?.data?.message || '';
+      if (msg === 'EMAIL_NOT_VERIFIED') {
+        Alert.alert(
+          'Email Not Verified',
+          'Please verify your email first. A new verification link has been sent to your inbox.',
+          [{ text: 'OK', onPress: () => router.push({ pathname: '/auth/check-email', params: { email: data.email } }) }]
+        );
+        return;
+      }
+      Alert.alert('Login Failed', msg || 'Invalid credentials');
     } finally {
       setLoading(false);
     }

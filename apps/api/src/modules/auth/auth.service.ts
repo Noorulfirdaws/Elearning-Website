@@ -141,6 +141,14 @@ export class AuthService {
     }
     if (!user.isActive || user.isBanned) throw new UnauthorizedException('Account suspended');
 
+    // Block login until email is verified (OAuth users are pre-verified)
+    if (!user.emailVerified) {
+      // Resend a fresh verification link automatically
+      const token = await this.createEmailVerificationToken(user.email);
+      this.emailService.sendVerificationEmail(user.email, token, user.firstName);
+      throw new UnauthorizedException('EMAIL_NOT_VERIFIED');
+    }
+
     // Account lockout after repeated failures
     if (user.failedLoginAttempts >= MAX_FAILED_ATTEMPTS) {
       const lockoutExpiry = new Date((user.lastFailedLoginAt?.getTime() || 0) + LOCKOUT_DURATION_MS);
