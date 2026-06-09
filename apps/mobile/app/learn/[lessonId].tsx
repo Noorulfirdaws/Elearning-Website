@@ -1,14 +1,33 @@
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useState, useRef, useCallback } from 'react';
 import Video, { OnProgressData, OnLoadData } from 'react-native-video';
-import { ChevronLeft, Play, Pause, SkipBack, SkipForward, Maximize2, CheckCircle2 } from 'lucide-react-native';
+import { ChevronLeft, Play, Pause, SkipBack, SkipForward, CheckCircle2 } from 'lucide-react-native';
 import { WebView } from 'react-native-webview';
 import { api } from '../../lib/api';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const VIDEO_HEIGHT = (SCREEN_WIDTH * 9) / 16;
+
+// Extract YouTube video ID from any YouTube URL
+function getYouTubeId(url: string): string | null {
+  if (!url) return null;
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+    /youtube\.com\/shorts\/([^&\n?#]+)/,
+  ];
+  for (const p of patterns) {
+    const m = url.match(p);
+    if (m) return m[1];
+  }
+  return null;
+}
+
+function isYouTubeUrl(url: string): boolean {
+  return /youtube\.com|youtu\.be/.test(url);
+}
 
 export default function LessonPlayerScreen() {
   const { lessonId } = useLocalSearchParams<{ lessonId: string }>();
@@ -87,45 +106,70 @@ export default function LessonPlayerScreen() {
         {completed && <CheckCircle2 size={20} color="#10b981" />}
       </View>
 
-      {isVideo && lesson?.videoUrl && (
-        <View style={styles.videoContainer}>
-          <TouchableOpacity activeOpacity={1} onPress={() => setShowControls(!showControls)} style={styles.videoWrapper}>
-            <Video
-              ref={videoRef}
-              source={{ uri: lesson.videoUrl }}
-              style={styles.video}
-              resizeMode="contain"
-              paused={paused}
-              onProgress={onProgress}
-              onLoad={onLoad}
-              progressUpdateInterval={1000}
-            />
-
-            {showControls && (
-              <View style={styles.controls}>
-                <TouchableOpacity onPress={() => seek(-10)}>
-                  <SkipBack size={28} color="#fff" />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.playBtn} onPress={() => setPaused(!paused)}>
-                  {paused ? <Play size={32} color="#fff" fill="#fff" /> : <Pause size={32} color="#fff" fill="#fff" />}
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => seek(10)}>
-                  <SkipForward size={28} color="#fff" />
-                </TouchableOpacity>
-              </View>
-            )}
-          </TouchableOpacity>
-
-          {/* Progress bar */}
-          <View style={styles.progressBar}>
-            <View style={[styles.progressFill, { width: duration ? `${(progress / duration) * 100}%` : '0%' }]} />
+      {isVideo && lesson?.videoUrl && (() => {
+        const youtubeId = getYouTubeId(lesson.videoUrl);
+        if (youtubeId || isYouTubeUrl(lesson.videoUrl)) {
+          const vid = youtubeId || '';
+          const embedUrl = `https://www.youtube.com/embed/${vid}?rel=0&modestbranding=1&playsinline=1`;
+          return (
+            <View style={styles.videoContainer}>
+              <WebView
+                source={{ uri: embedUrl }}
+                style={{ width: SCREEN_WIDTH, height: VIDEO_HEIGHT }}
+                allowsFullscreenVideo
+                mediaPlaybackRequiresUserAction={false}
+                javaScriptEnabled
+                domStorageEnabled
+                onMessage={(e) => {
+                  try {
+                    const d = JSON.parse(e.nativeEvent.data);
+                    if (d?.event === 'infoDelivery' && d?.info?.playerState === 0 && !completed) {
+                      completeMutation.mutate();
+                    }
+                  } catch {}
+                }}
+              />
+            </View>
+          );
+        }
+        // Native video (direct URL / HLS)
+        return (
+          <View style={styles.videoContainer}>
+            <TouchableOpacity activeOpacity={1} onPress={() => setShowControls(!showControls)} style={styles.videoWrapper}>
+              <Video
+                ref={videoRef}
+                source={{ uri: lesson.videoUrl }}
+                style={styles.video}
+                resizeMode="contain"
+                paused={paused}
+                onProgress={onProgress}
+                onLoad={onLoad}
+                progressUpdateInterval={1000}
+              />
+              {showControls && (
+                <View style={styles.controls}>
+                  <TouchableOpacity onPress={() => seek(-10)}>
+                    <SkipBack size={28} color="#fff" />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.playBtn} onPress={() => setPaused(!paused)}>
+                    {paused ? <Play size={32} color="#fff" fill="#fff" /> : <Pause size={32} color="#fff" fill="#fff" />}
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => seek(10)}>
+                    <SkipForward size={28} color="#fff" />
+                  </TouchableOpacity>
+                </View>
+              )}
+            </TouchableOpacity>
+            <View style={styles.progressBar}>
+              <View style={[styles.progressFill, { width: duration ? `${(progress / duration) * 100}%` : '0%' }]} />
+            </View>
+            <View style={styles.timeRow}>
+              <Text style={styles.timeText}>{formatTime(progress)}</Text>
+              <Text style={styles.timeText}>{formatTime(duration)}</Text>
+            </View>
           </View>
-          <View style={styles.timeRow}>
-            <Text style={styles.timeText}>{formatTime(progress)}</Text>
-            <Text style={styles.timeText}>{formatTime(duration)}</Text>
-          </View>
-        </View>
-      )}
+        );
+      })()}
 
       {isText && (
         <ScrollView style={styles.textContent} contentContainerStyle={styles.textInner}>
