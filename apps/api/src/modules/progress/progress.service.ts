@@ -34,7 +34,7 @@ export class ProgressService {
               include: {
                 lessons: {
                   orderBy: { position: 'asc' },
-                  select: { id: true, title: true, type: true, duration: true, videoUrl: true, embedUrl: true, content: true, isFree: true },
+                  select: { id: true, title: true, type: true, duration: true, videoUrl: true, embedUrl: true, content: true },
                 },
               },
             },
