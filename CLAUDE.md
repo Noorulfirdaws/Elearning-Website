@@ -1,245 +1,227 @@
-# CLAUDE.md
+# CLAUDE.md — LearnHub LMS Platform
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides full context for Claude Code when resuming work on this project.
 
 ---
 
 ## Project Overview
 
-Full-stack **Learning Management System (LMS)** monorepo with:
-- **`apps/api`** — NestJS 10 REST API (port 3001)
-- **`apps/web`** — Next.js 14 frontend (port 3000)
-- **`apps/mobile`** — React Native / Expo app
-- **`packages/database`** — Prisma schema + migrations (PostgreSQL)
-- **`packages/shared`** — Shared TypeScript types
+Full-stack **Learning Management System (LMS)** — production-ready monorepo.
+
+| App | Tech | Port |
+|---|---|---|
+| `apps/api` | NestJS 10 + Prisma + PostgreSQL | 3001 |
+| `apps/web` | Next.js 14 App Router | 3000 |
+| `apps/mobile` | React Native / Expo | 8081 |
+| `packages/database` | Prisma schema (shared) | — |
+| `packages/shared` | TypeScript types | — |
 
 **Package manager:** pnpm workspaces + Turborepo. Node ≥ 20, pnpm ≥ 9.
 
 ---
 
+## GitHub Repository
+
+**URL:** https://github.com/Noorulfirdaws/Elearning-Website  
+**Branch:** `main`  
+**Owner:** noorulfirdaws@gmail.com
+
+---
+
+## Quick Start (Resume Work)
+
+```bash
+# 1. API is managed by pm2 — check if running
+pm2 status
+pm2 start apps/api/ecosystem.config.js   # if not running
+pm2 logs lms-api --lines 30 --nostream   # check for errors
+
+# 2. Web frontend
+cd apps/web && pnpm dev   # http://localhost:3000
+
+# 3. Database already exists — no migration needed
+# Connection: postgresql://lms:lmspassword@localhost:5432/lmsdb
+```
+
+---
+
+## Test Accounts (Already in DB)
+
+| Role | Email | Password |
+|---|---|---|
+| Instructor | cabdikarimcaligeydh@gmail.com | Instructor123! |
+| Instructor | noorulfirdaws@gmail.com | Instructor123! |
+| Student | student@learnhub.com | Student123! |
+
+---
+
+## What Is Fully Working ✅
+
+- **Auth**: login, register, email verification, JWT refresh
+- **Instructor**: dashboard, create course, course builder (sections/lessons)
+- **Lesson editor**: title, description, type, duration, YouTube URL with preview, free preview toggle
+- **AI course generation**: Claude API (`claude-opus-4-5`) generates full outline → creates sections + lessons + updates course fields. Bulletproof with type normalization and error handling.
+- **Course catalog**: search, filter by level, sort
+- **Course detail page**: enroll button, curriculum, instructor info
+- **Student enrollment**: free courses (409 handled gracefully)
+- **Course player**: YouTube embed + native HLS, progress tracking, lesson navigation, AI tutor chat
+- **Home page**: shows real published courses from DB
+- **Featured courses**: live from `/courses/featured` API
+
+---
+
+## What Is PARKED (do later) 🅿️
+
+| # | Feature | Notes |
+|---|---|---|
+| 1 | **Payments / Stripe** | Keys are placeholders in `.env`. Endpoint exists at `POST /payments/stripe/checkout`. |
+| 2 | **Video upload** | MUX/S3 keys are placeholders. Currently YouTube links only. |
+| 3 | **SMTP email delivery** | Code works. Needs real Gmail App Password in `apps/api/.env` (`SMTP_PASS`). |
+| 4 | **Course thumbnail upload** | No image upload UI. Can paste URLs manually in settings. |
+| 5 | **Certificates** | API endpoint exists. Not tested end-to-end. |
+| 6 | **Quiz builder UI** | API fully built. No instructor UI to create quizzes. |
+| 7 | **Assignment submission** | API built. No student/instructor UI. |
+| 8 | **Meilisearch / Search** | Container needs to run + index courses. |
+| 9 | **Instructor analytics** | Page exists, needs real DB aggregations. |
+| 10 | **Course reviews UI** | API exists (`POST /courses/:id/reviews`). No UI. |
+| 11 | **Mobile app** | Expo structure complete. Needs same WiFi to test with Expo Go. |
+| 12 | **OAuth (Google/GitHub)** | Needs real `GOOGLE_CLIENT_ID` / `GITHUB_CLIENT_ID`. |
+| 13 | **Admin panel** | Page skeleton at `/admin`. Not wired to API. |
+
+---
+
+## Key Environment File
+
+**Location:** `apps/api/.env` (gitignored — never commit)
+
+Critical vars:
+```
+DATABASE_URL=postgresql://lms:lmspassword@localhost:5432/lmsdb?schema=public
+ANTHROPIC_API_KEY=sk-ant-api03-...   ← already set, credits purchased
+JWT_SECRET=...
+JWT_REFRESH_SECRET=...
+SMTP_HOST=smtp.gmail.com
+SMTP_USER=...
+SMTP_PASS=...   ← needs real Gmail App Password
+FRONTEND_URL=http://localhost:3000
+```
+
+---
+
 ## Essential Commands
 
-### Running the API
+### API
 ```bash
-# Start with pm2 (reads apps/api/.env automatically)
-pm2 start apps/api/ecosystem.config.js
-pm2 restart lms-api
-pm2 logs lms-api --lines 50 --nostream
-
-# Or run directly (dev/debug)
-cd apps/api
-node ../../node_modules/ts-node/dist/bin.js --transpile-only src/main.ts
+pm2 start apps/api/ecosystem.config.js    # start
+pm2 restart lms-api                        # restart after code changes
+pm2 logs lms-api --lines 50 --nostream    # view logs
+pm2 stop lms-api                           # stop
 ```
-> The API uses `ts-node --transpile-only` (skips type checking) to avoid TypeScript errors blocking startup.
 
-### Running the Frontend
+### Database
+```bash
+# Schema: packages/database/prisma/schema.prisma
+# Push schema changes (no migration files)
+DATABASE_URL="postgresql://lms:lmspassword@localhost:5432/lmsdb?schema=public" \
+  npx prisma db push --schema packages/database/prisma/schema.prisma
+
+# Regenerate Prisma client (must kill pm2 first on Windows — DLL lock)
+pm2 stop lms-api
+DATABASE_URL="..." npx prisma generate --schema packages/database/prisma/schema.prisma
+pm2 start apps/api/ecosystem.config.js
+```
+
+### Frontend
 ```bash
 cd apps/web && pnpm dev        # http://localhost:3000
 cd apps/mobile && npx expo start
 ```
 
-### Database
-```bash
-# Schema is in packages/database/prisma/schema.prisma
-# Push schema changes (dev — no migration files)
-DATABASE_URL="postgresql://postgres:djib123@localhost:5432/lms?schema=public" \
-  npx prisma db push --schema packages/database/prisma/schema.prisma
+---
 
-# Open Prisma Studio
-DATABASE_URL="..." npx prisma studio --schema packages/database/prisma/schema.prisma
+## Architecture Notes
 
-# Generate Prisma client after schema changes
-DATABASE_URL="..." npx prisma generate --schema packages/database/prisma/schema.prisma
+### API Pattern
+- **Global `JwtAuthGuard`** — all routes need JWT by default
+- **`@Public()`** — skips JWT (login, register, etc.)
+- **`TransformInterceptor`** — all responses: `{ success, data, timestamp }`
+- **Three throttler tiers**: short (10/s), medium (50/10s), long (200/min)
+- **`@SkipThrottle({ short: true, medium: true, long: true })`** — skip all 3
+
+### Database Schema Key Points
+- `sections` and `lessons` use `position` (NOT `order`) for ordering
+- `questions` use `position` (NOT `order`)
+- `learning_path_steps` use `order`
+- `lessons` has NO `deletedAt` column — use `isPublished: false` for soft delete
+- `courses` has `deletedAt` and `outcomes` (NOT `whatYoullLearn`)
+- `users` password field is `passwordHash` (NOT `password`)
+
+### Frontend Key Points
+- **API base URL**: `http://localhost:3001/api/v1` (set in `apps/web/.env.local`)
+- **Auth store**: Zustand persisted to localStorage (`useAuthStore`)
+- **Axios interceptor**: auto-attaches Bearer token, handles 401 → refresh → retry
+- **Course detail**: `/courses/[courseId]` where `courseId` is the **slug**
+- **Course player**: `/dashboard/courses/[courseId]/learn/[lessonId]` where `courseId` is the **UUID**
+
+### AI Generation (Anthropic)
+- Model: `claude-opus-4-5`, max_tokens: 4096
+- Endpoint: `POST /ai/course-outline` with `{ topic, level, targetAudience }`
+- Returns: `{ title, subtitle, description, outcomes, requirements, sections: [{ title, lessons: [{ title, type, description, estimatedMinutes }] }] }`
+- Lesson types normalized: AI output → valid enum (VIDEO, TEXT, DOCUMENT, EMBED, LIVE, QUIZ, ASSIGNMENT)
+
+---
+
+## Folder Structure (Key Files)
+
 ```
+apps/api/src/modules/
+  ai/            — Anthropic integration (course outline, quiz, tutor chat)
+  auth/          — JWT, register, login, email verify, refresh
+  courses/       — CRUD, publish, featured, instructor endpoint
+  sections/      — Section CRUD (position-based ordering)
+  lessons/       — Lesson CRUD (position-based ordering)
+  enrollments/   — Free enrollment, my-enrollments
+  progress/      — Lesson progress, course progress
+  payments/      — Stripe (placeholder)
+  certificates/  — Certificate generation (placeholder)
+  users/         — Profile, password change
 
-### Security Audit
-```bash
-node apps/api/node_modules/ts-node/dist/bin.js --transpile-only \
-  --project apps/api/tsconfig.json \
-  security/security-audit.ts --base-url http://localhost:3001
-```
+apps/web/src/app/
+  (auth)/        — login, register, verify-email, forgot-password
+  (dashboard)/   — student dashboard, course player (/dashboard/courses/[id]/learn/[lessonId])
+  (instructor)/  — instructor dashboard, course builder, lesson editor
+  courses/[courseId]/  — public course detail (slug-based)
+  catalog/       — course catalog with search+filter
+  page.tsx       — home page with real featured courses
 
-### Load Testing (k6 required)
-```bash
-k6 run load-testing/scenarios/01-smoke.js
-k6 run load-testing/scenarios/02-load.js
-k6 run load-testing/scenarios/03-stress.js
-```
-
-### Backup
-```bash
-bash scripts/backup/backup.sh       # Full backup
-bash scripts/backup/validate-backup.sh  # Test restore + measure RTO
+apps/web/src/components/
+  player/video-player.tsx   — auto-detects YouTube vs native HLS
+  course/featured-courses.tsx — fetches from /courses/featured API
+  layout/navbar.tsx, hero-section.tsx, footer.tsx
 ```
 
 ---
 
-## Infrastructure (Docker)
-
-```bash
-# Core services (Postgres, Redis, Meilisearch)
-docker-compose up -d
-
-# Monitoring stack (Prometheus, Grafana, exporters)
-docker-compose -f docker-compose.monitoring.yml up -d
+## Git History (Recent)
 ```
-
-**Service ports:**
-| Service | Port |
-|---|---|
-| API | 3001 |
-| Web | 3000 |
-| PostgreSQL | 5432 (container: `lms_postgres`) |
-| Redis | 6379 (container: `lms_redis`) |
-| Meilisearch | 7700 |
-| Prometheus | 9090 |
-| Grafana | 3100 |
-| Alertmanager | 9093 |
-
----
-
-## API Architecture
-
-### Auth Pattern
-- **Global `JwtAuthGuard`** — all routes require JWT by default
-- **`@Public()`** decorator — marks routes that skip JWT (login, register, etc.)
-- **Global `ThrottlerGuard`** — rate limiting on all routes via DI (`APP_GUARD`)
-- **`@SkipThrottle({ short: true, medium: true, long: true })`** — must pass all 3 named throttlers to skip (throttler v5 requirement)
-- Three throttler tiers: `short` (10/s), `medium` (50/10s), `long` (200/min)
-
-### Request/Response Flow
-All responses are wrapped by `TransformInterceptor`:
-```json
-{ "success": true, "data": {...}, "timestamp": "..." }
-```
-Errors go through `HttpExceptionFilter` — no stack traces exposed in responses.
-
-### Key Common Modules (`apps/api/src/common/`)
-- **`cache/`** — Redis cache with in-memory fallback when Redis is down
-- **`metrics/`** — Prometheus metrics via `prom-client` (scraped at `GET /metrics`)
-- **`resilience/circuit-breaker.ts`** — Circuit breaker used by Stripe, DB, Redis, MUX, Meilisearch
-- **`email/email.service.ts`** — Nodemailer SMTP service (Gmail configured)
-- **`guards/jwt-auth.guard.ts`** — Global JWT guard with `@Public()` bypass
-
-### Module Structure
-Each feature module in `apps/api/src/modules/` follows:
-```
-module-name/
-  module-name.module.ts
-  module-name.controller.ts
-  module-name.service.ts
-  dto/
-```
-
-### API Prefix
-All routes: `http://localhost:3001/api/v1/...`
-Swagger docs: `http://localhost:3001/api/docs`
-
----
-
-## Frontend Architecture
-
-### Next.js App Router Layout
-```
-src/app/
-  (auth)/         — login, register, verify-email, check-email, forgot/reset password
-  (dashboard)/    — student dashboard, enrolled courses, course player
-  (instructor)/   — instructor studio, course builder
-  (marketing)/    — landing page, about, pricing
-  (admin)/        — admin panel
-  courses/[courseId]/  — public course detail page
-  checkout/[courseId]/ — Stripe checkout
-```
-
-### Auth State (`apps/web/src/store/auth.store.ts`)
-Zustand store persisted to localStorage:
-- `useAuthStore()` — access `user`, `accessToken`, `isAuthenticated`
-- Axios interceptor in `apps/web/src/lib/api.ts` auto-attaches Bearer token and handles 401 → token refresh → retry
-
-### API Client
-```ts
-import { api, apiRoutes } from '@/lib/api';
-// api is an axios instance pointing to NEXT_PUBLIC_API_URL || http://localhost:4000/api/v1
-```
-> Note: `NEXT_PUBLIC_API_URL` defaults to port **4000** in web/lib/api.ts but the API actually runs on **3001**. Set `NEXT_PUBLIC_API_URL=http://localhost:3001/api/v1` in `apps/web/.env.local`.
-
----
-
-## Environment & Secrets
-
-**All secrets live in `apps/api/.env`** (gitignored). The `ecosystem.config.js` loads it via `require('dotenv').config()` — never hardcode credentials there.
-
-Key env vars:
-```
-DATABASE_URL, REDIS_HOST, JWT_SECRET, JWT_REFRESH_SECRET
-SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_FROM   ← Gmail App Password
-STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET
-MUX_TOKEN_ID, MUX_TOKEN_SECRET
-FRONTEND_URL, ALLOWED_ORIGINS
-ENCRYPTION_KEY  ← AES-256-GCM for MFA secrets at rest
+dc3ea4e fix: lesson editor page + bulletproof AI generation + PATCH course endpoint
+8753eab fix: remove isFree from lesson select in progress service
+02c27d8 fix: connect featured courses to API and fix course detail field names
+f9fa454 fix: resolve course builder, AI generation and schema mismatches
+66c1d93 feat: add YouTube embed support for web and mobile video player
+aea30ef feat: complete all 5 priority fixes
+d6ebe0b docs: add CLAUDE.md for AI-assisted development context
 ```
 
 ---
 
-## Database Schema
-
-Schema: `packages/database/prisma/schema.prisma`
-
-Key models: `User`, `Course`, `Section`, `Lesson`, `Enrollment`, `LessonProgress`, `Payment`, `Certificate`, `Quiz`, `Assignment`, `Community`, `Notification`, `Organization`, `PasswordReset`, `EmailVerification`, `Session` (refresh tokens), `AuditLog`.
-
-`emailVerified DateTime?` on `User` — set when user clicks verification link.
-
----
-
-## Email Verification Flow
-
-1. `POST /auth/register` → creates user → sends email → returns `{ requiresVerification: true }`
-2. Frontend redirects to `/check-email?email=...`
-3. User clicks link → `GET /verify-email?token=...` → calls `POST /auth/verify-email`
-4. API sets `emailVerified`, returns JWT → frontend logs user in → redirect to `/dashboard`
-5. `POST /auth/resend-verification` — rate-limited to 3/hour
+## Security Notes
+- `.env` is gitignored — secrets never committed
+- Anthropic API key is in `apps/api/.env` only
+- Two GitHub PATs were previously exposed in chat and must remain revoked
+- CORS restricted to `ALLOWED_ORIGINS` env var
+- `/metrics` restricted to localhost
 
 ---
 
-## Beta & Feature Flags
-
-`apps/api/src/modules/beta/` — in-memory feature flags with deterministic rollout:
-- `GET /beta/flags` — list flags
-- `GET /beta/flags/:key/check?userId=` — check if enabled
-- `PATCH /beta/flags/:key` — update rollout %
-- `POST /beta/feedback` — submit user feedback (bug/feature/ux/performance/general)
-
-Rollout: `hash(userId) % 100 < rolloutPct` — same user always gets same result.
-
----
-
-## Security Posture
-
-Current audit result: **20 PASS, 0 Critical, 0 High** (OWASP Top-10).
-
-- Helmet with full CSP, HSTS (1yr + preload), referrer policy
-- CORS strict allowlist from `ALLOWED_ORIGINS` env var
-- `/metrics` endpoint restricted to localhost + internal Docker IPs (403 for external)
-- `/health` uses `@SkipThrottle({ short: true, medium: true, long: true })` — never rate-limited
-- No secrets committed — `.env` is gitignored, `ecosystem.config.js` reads from it
-
----
-
-## pnpm Workspace Notes
-
-`.npmrc` at root has `shamefully-hoist=true` — required for NestJS to find transitive deps like `express`. Without it the API fails at runtime with `MODULE_NOT_FOUND`.
-
-When adding packages to the API:
-```bash
-cd apps/api && pnpm add <package>
-```
-
----
-
-## What's Left / Known TODOs
-
-- `NEXT_PUBLIC_API_URL` in `apps/web` points to port 4000 by default — needs `.env.local` with port 3001
-- Login does not currently block unverified users (no `emailVerified` check in `auth.service.ts login()`)
-- Mobile app (`apps/mobile`) — Expo Router structure in place, not fully implemented
-- OAuth (Google/GitHub) strategies require real `GOOGLE_CLIENT_ID` / `GITHUB_CLIENT_ID` env vars
-- Stripe, MUX, AWS are placeholder keys — real keys needed for payments/video/storage
+*Last updated: 2026-06-09 — Project parked. Core LMS is functional. Resume when ready.*
