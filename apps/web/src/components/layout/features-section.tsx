@@ -4,15 +4,15 @@ import { motion } from 'framer-motion';
 import { Video, FileText, Brain, Award, Users, BarChart3, Shield, Smartphone, Zap } from 'lucide-react';
 
 const features = [
-  { icon: Video, title: 'HD Video Streaming', desc: 'Adaptive bitrate streaming with HLS/DASH, resume playback, speed control, and captions.', color: 'bg-blue-50 dark:bg-blue-950 text-blue-600' },
-  { icon: Brain, title: 'AI Learning Assistant', desc: 'Personalized AI tutor that answers questions, generates quizzes, and recommends courses.', color: 'bg-purple-50 dark:bg-purple-950 text-purple-600' },
-  { icon: Award, title: 'Verified Certificates', desc: 'QR-verified certificates with unique IDs. Share on LinkedIn in one click.', color: 'bg-yellow-50 dark:bg-yellow-950 text-yellow-600' },
-  { icon: FileText, title: 'Rich Course Builder', desc: 'Drag-and-drop course builder with video, PDF, PPTX, DOCX, quizzes, and assignments.', color: 'bg-green-50 dark:bg-green-950 text-green-600' },
-  { icon: BarChart3, title: 'Deep Analytics', desc: 'Track student progress, course completion rates, revenue, and engagement metrics.', color: 'bg-orange-50 dark:bg-orange-950 text-orange-600' },
-  { icon: Users, title: 'Community Platform', desc: 'Built-in community with groups, posts, polls, events — like Facebook Groups for learning.', color: 'bg-pink-50 dark:bg-pink-950 text-pink-600' },
-  { icon: Shield, title: 'Enterprise Security', desc: 'RBAC, MFA, rate limiting, CSRF protection, SOC2-ready infrastructure.', color: 'bg-red-50 dark:bg-red-950 text-red-600' },
-  { icon: Smartphone, title: 'Mobile Responsive', desc: 'Pixel-perfect on every device. Progressive Web App with offline support.', color: 'bg-teal-50 dark:bg-teal-950 text-teal-600' },
-  { icon: Zap, title: 'Blazing Fast', desc: 'Optimized with Redis caching, CDN delivery, and Next.js SSR for sub-second loads.', color: 'bg-indigo-50 dark:bg-indigo-950 text-indigo-600' },
+  { icon: Video, title: 'Cours vidéo HD', desc: 'Vidéos explicatives claires avec contrôle de vitesse et reprise là où tu t\'es arrêté.', color: 'bg-blue-50 dark:bg-blue-950 text-blue-600' },
+  { icon: Brain, title: 'Quiz interactifs', desc: 'Teste tes connaissances après chaque chapitre. Corrections détaillées avec explications pédagogiques.', color: 'bg-purple-50 dark:bg-purple-950 text-purple-600' },
+  { icon: Award, title: 'Suivi de progression', desc: 'Suis ta progression chapitre par chapitre. Visualise ce que tu as validé et ce qu\'il te reste.', color: 'bg-yellow-50 dark:bg-yellow-950 text-yellow-600' },
+  { icon: FileText, title: 'Cours structurés', desc: 'Chaque chapitre : cours complet, exemples résolus pas à pas, exercices avec corrigés détaillés.', color: 'bg-green-50 dark:bg-green-950 text-green-600' },
+  { icon: BarChart3, title: 'Programme officiel', desc: 'Contenu aligné sur le programme scolaire djiboutien. Du collège (6ème-3ème) au lycée (Terminale).', color: 'bg-orange-50 dark:bg-orange-950 text-orange-600' },
+  { icon: Users, title: 'Toutes les matières', desc: 'Mathématiques, Physique, SVT, Français, Histoire-Géo — toutes les matières clés couvertes.', color: 'bg-pink-50 dark:bg-pink-950 text-pink-600' },
+  { icon: Shield, title: 'Accès sécurisé', desc: 'Inscription simple et sécurisée. Tes données et ta progression sont protégées.', color: 'bg-red-50 dark:bg-red-950 text-red-600' },
+  { icon: Smartphone, title: 'Sur tous les appareils', desc: 'Apprends depuis ton téléphone, ta tablette ou ton ordinateur. Optimisé pour les smartphones.', color: 'bg-teal-50 dark:bg-teal-950 text-teal-600' },
+  { icon: Zap, title: 'Rapide et fluide', desc: 'Chargement instantané. Les cours fonctionnent même avec une connexion lente.', color: 'bg-indigo-50 dark:bg-indigo-950 text-indigo-600' },
 ];
 
 export function FeaturesSection() {
@@ -26,13 +26,13 @@ export function FeaturesSection() {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-4 border border-blue-200 dark:border-blue-800">
-            Everything you need
+            Tout ce dont tu as besoin
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-            The complete <span className="text-gradient">learning platform</span>
+            La plateforme <span className="text-gradient">complète</span> pour réussir
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            From course creation to student success — every feature you need, built with precision.
+            Du cours structuré au quiz de validation — chaque outil conçu pour t'aider à progresser.
           </p>
         </motion.div>
 

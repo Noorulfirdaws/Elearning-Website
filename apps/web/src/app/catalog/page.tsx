@@ -13,11 +13,11 @@ import { useDebounce } from '@/hooks/use-debounce';
 
 const levels = ['ALL_LEVELS', 'BEGINNER', 'INTERMEDIATE', 'ADVANCED'];
 const sortOptions = [
-  { value: 'newest', label: 'Newest' },
-  { value: 'rating', label: 'Highest Rated' },
-  { value: 'students', label: 'Most Popular' },
-  { value: 'price_asc', label: 'Price: Low to High' },
-  { value: 'price_desc', label: 'Price: High to Low' },
+  { value: 'newest', label: 'Plus récents' },
+  { value: 'rating', label: 'Mieux notés' },
+  { value: 'students', label: 'Plus populaires' },
+  { value: 'price_asc', label: 'Prix croissant' },
+  { value: 'price_desc', label: 'Prix décroissant' },
 ];
 
 export default function CatalogPage() {
@@ -44,8 +44,8 @@ export default function CatalogPage() {
       {/* Header */}
       <section className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pt-24 pb-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-2">Course Catalog</h1>
-          <p className="text-muted-foreground mb-6">Explore {meta?.total?.toLocaleString() || '15,000+'} expert-led courses</p>
+          <h1 className="text-4xl font-bold mb-2">Catalogue de cours</h1>
+          <p className="text-muted-foreground mb-6">Explorer {meta?.total?.toLocaleString() || ''} cours disponibles</p>
 
           {/* Search bar */}
           <div className="flex gap-3">
@@ -54,7 +54,7 @@ export default function CatalogPage() {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search for courses, skills, instructors..."
+                placeholder="Rechercher des cours, matières, instructeurs..."
                 className="w-full pl-12 pr-12 py-3.5 border border-input rounded-xl bg-background focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {search && (
@@ -65,7 +65,7 @@ export default function CatalogPage() {
             </div>
             <button onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-2 px-5 py-3.5 border border-input rounded-xl bg-background hover:bg-secondary transition-colors font-medium">
               <SlidersHorizontal className="w-5 h-5" />
-              Filters
+              Filtres
             </button>
           </div>
 
@@ -80,7 +80,7 @@ export default function CatalogPage() {
                     onClick={() => setLevel(level === l ? '' : l)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${level === l ? 'bg-primary text-primary-foreground border-primary' : 'border-gray-200 dark:border-gray-700 hover:border-primary/50'}`}
                   >
-                    {l === 'ALL_LEVELS' ? 'All Levels' : l.charAt(0) + l.slice(1).toLowerCase()}
+                    {l === 'ALL_LEVELS' ? 'Tous niveaux' : l === 'BEGINNER' ? 'Débutant' : l === 'INTERMEDIATE' ? 'Intermédiaire' : 'Avancé'}
                   </button>
                 ))}
               </div>
@@ -116,9 +116,9 @@ export default function CatalogPage() {
         ) : courses.length === 0 ? (
           <div className="text-center py-20">
             <Search className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-2">No courses found</h2>
-            <p className="text-muted-foreground">Try adjusting your search or filters</p>
-            <button onClick={() => { setSearch(''); setLevel(''); }} className="mt-4 text-primary hover:underline">Clear all filters</button>
+            <h2 className="text-2xl font-bold mb-2">Aucun cours trouvé</h2>
+            <p className="text-muted-foreground">Essaie d'ajuster ta recherche ou tes filtres</p>
+            <button onClick={() => { setSearch(''); setLevel(''); }} className="mt-4 text-primary hover:underline">Réinitialiser les filtres</button>
           </div>
         ) : (
           <>
@@ -144,7 +144,7 @@ export default function CatalogPage() {
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-500" />
                         )}
-                        {course.isFree && <div className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">FREE</div>}
+                        {course.isFree && <div className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">GRATUIT</div>}
                         {Number(course.price) > 0 && course.comparePrice && calculateDiscount(Number(course.price), Number(course.comparePrice)) > 0 && (
                           <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
                             -{calculateDiscount(Number(course.price), Number(course.comparePrice))}%
@@ -170,7 +170,7 @@ export default function CatalogPage() {
                               <span className="text-xs text-muted-foreground line-through">${Number(course.comparePrice).toFixed(0)}</span>
                             )}
                             <span className={`font-bold text-sm ${course.isFree ? 'text-green-600' : ''}`}>
-                              {course.isFree ? 'Free' : `$${Number(course.price).toFixed(0)}`}
+                              {course.isFree ? 'Gratuit' : `${Number(course.price).toFixed(0)} USD`}
                             </span>
                           </div>
                         </div>

@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
 
 const testimonials = [
-  { name: 'Sarah Chen', role: 'Software Engineer at Google', avatar: 'SC', rating: 5, text: 'LearnHub transformed my career. The courses are incredibly well-structured and the AI tutor helped me whenever I was stuck. Got my dream job 3 months after completing the Full-Stack course!' },
-  { name: 'Marcus Johnson', role: 'Freelance Designer', avatar: 'MJ', rating: 5, text: 'The UX/UI design course was everything I needed. The certificate is actually recognized by companies. Went from $30/hr to $120/hr in 6 months.' },
-  { name: 'Priya Patel', role: 'Data Scientist at Meta', avatar: 'PP', rating: 5, text: "The community is amazing. You're not just buying a course, you're joining a network of learners. The discussions and peer feedback are invaluable." },
-  { name: 'Alex Rivera', role: 'CTO at Startup', avatar: 'AR', rating: 5, text: 'I enrolled my entire team on the enterprise plan. The analytics dashboard lets me track everyone\'s progress and the completion rates are through the roof.' },
-  { name: 'Emma Wilson', role: 'Product Manager', avatar: 'EW', rating: 5, text: 'The quizzes and assignments are actually challenging. Not just checkbox exercises. I genuinely learned by doing. Worth every penny.' },
-  { name: 'David Kim', role: 'DevOps Engineer', avatar: 'DK', rating: 5, text: 'The video quality is exceptional. Resume playback, bookmarks, note-taking — everything you need to learn at your own pace. Best LMS I\'ve used.' },
+  { name: 'Amina Hassan', role: 'Élève en Terminale, Djibouti-ville', avatar: 'AH', rating: 5, text: 'Grâce aux cours structurés, j\'ai enfin compris les fonctions en mathématiques. Les exemples pas à pas sont parfaits. J\'ai eu 16/20 à mon devoir !' },
+  { name: 'Mohamed Ali', role: 'Élève en 3ème, Ali-Sabieh', avatar: 'MA', rating: 5, text: 'Le quiz sur Pythagore m\'a vraiment aidé à me préparer pour le Brevet. Je refais les questions jusqu\'à avoir 100%. C\'est motivant !' },
+  { name: 'Fatouma Ibrahim', role: 'Élève en Seconde, Obock', avatar: 'FI', rating: 5, text: 'Je vis loin et je n\'ai pas toujours accès à un bon professeur. Cette plateforme m\'a permis de réviser Physique-Chimie de chez moi.' },
+  { name: 'Ismail Daoud', role: 'Parent d\'élève, Djibouti', avatar: 'ID', rating: 5, text: 'Mon fils utilise la plateforme chaque soir pour ses révisions. Les corrigés détaillés lui permettent de comprendre ses erreurs sans aide extérieure.' },
+  { name: 'Hodan Warsame', role: 'Élève en 6ème, Tadjourah', avatar: 'HW', rating: 5, text: 'Les fractions c\'était difficile avant. Maintenant avec les exemples et les exercices, j\'ai compris. Mon professeur est étonné de mes progrès !' },
+  { name: 'Abdi Youssouf', role: 'Élève en Première, Djibouti', avatar: 'AY', rating: 5, text: 'Interface claire, cours bien organisés par chapitre. Je peux suivre ma progression et voir exactement ce qu\'il me reste à réviser avant le Bac.' },
 ];
 
 export function TestimonialsSection() {
@@ -23,9 +23,9 @@ export function TestimonialsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-            Loved by <span className="text-gradient">2 million</span> learners
+            Ce que disent nos <span className="text-gradient">élèves</span>
           </h2>
-          <p className="text-xl text-muted-foreground">Real stories from real students who transformed their careers</p>
+          <p className="text-xl text-muted-foreground">Des témoignages d'élèves djiboutiens qui progressent chaque jour</p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

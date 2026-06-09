@@ -34,30 +34,30 @@ export default function VerifyEmailPage() {
         {status === 'loading' && (
           <>
             <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-gray-600 font-medium">Verifying your email…</p>
+            <p className="text-gray-600 font-medium">Vérification de ton e-mail…</p>
           </>
         )}
         {status === 'success' && (
           <>
             <div className="text-6xl mb-4">✅</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Email verified!</h2>
-            <p className="text-gray-500 mb-6">Your account is now active. Taking you to the dashboard…</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">E-mail vérifié !</h2>
+            <p className="text-gray-500 mb-6">Ton compte est maintenant actif. Redirection vers le tableau de bord…</p>
             <Link href="/dashboard" className="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition">
-              Go to Dashboard
+              Aller au tableau de bord
             </Link>
           </>
         )}
         {status === 'error' && (
           <>
             <div className="text-6xl mb-4">❌</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Verification failed</h2>
-            <p className="text-gray-500 mb-6">The link is invalid or has expired. Request a new one below.</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Vérification échouée</h2>
+            <p className="text-gray-500 mb-6">Le lien est invalide ou a expiré. Demande un nouveau lien ci-dessous.</p>
             <div className="flex gap-3 justify-center">
               <Link href="/check-email" className="inline-block bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition text-sm">
-                Resend email
+                Renvoyer l'e-mail
               </Link>
               <Link href="/login" className="inline-block border border-gray-200 text-gray-700 px-5 py-2.5 rounded-lg font-medium hover:bg-gray-50 transition text-sm">
-                Back to login
+                Retour à la connexion
               </Link>
             </div>
           </>

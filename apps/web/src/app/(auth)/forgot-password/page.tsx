@@ -18,7 +18,7 @@ export default function ForgotPasswordPage() {
       await api.post('/auth/forgot-password', { email });
       setSent(true);
     } catch {
-      setError('Could not send reset email. Please try again.');
+      setError('Impossible d\'envoyer le lien. Veuillez réessayer.');
     } finally {
       setLoading(false);
     }
@@ -31,30 +31,30 @@ export default function ForgotPasswordPage() {
           {sent ? (
             <div className="text-center">
               <div className="text-5xl mb-4">📧</div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Check your email</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Vérifie ton e-mail</h2>
               <p className="text-gray-500 mb-6">
-                We sent a password reset link to <strong>{email}</strong>
+                Un lien de réinitialisation a été envoyé à <strong>{email}</strong>
               </p>
               <Link href="/login" className="text-indigo-600 font-medium hover:underline">
-                Back to login
+                Retour à la connexion
               </Link>
             </div>
           ) : (
             <>
               <div className="mb-8">
-                <h1 className="text-2xl font-bold text-gray-900 mb-1">Forgot password?</h1>
-                <p className="text-gray-500 text-sm">Enter your email and we'll send a reset link.</p>
+                <h1 className="text-2xl font-bold text-gray-900 mb-1">Mot de passe oublié ?</h1>
+                <p className="text-gray-500 text-sm">Saisis ton e-mail et nous t'enverrons un lien de réinitialisation.</p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Adresse e-mail</label>
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    placeholder="you@example.com"
+                    placeholder="toi@exemple.com"
                   />
                 </div>
                 {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -63,12 +63,12 @@ export default function ForgotPasswordPage() {
                   disabled={loading}
                   className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50"
                 >
-                  {loading ? 'Sending…' : 'Send Reset Link'}
+                  {loading ? 'Envoi en cours…' : 'Envoyer le lien'}
                 </button>
               </form>
               <p className="text-center text-sm text-gray-500 mt-6">
-                Remember your password?{' '}
-                <Link href="/login" className="text-indigo-600 font-medium hover:underline">Sign in</Link>
+                Tu te souviens de ton mot de passe ?{' '}
+                <Link href="/login" className="text-indigo-600 font-medium hover:underline">Se connecter</Link>
               </p>
             </>
           )}

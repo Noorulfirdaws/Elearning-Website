@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { GraduationCap, Twitter, Linkedin, Github, Youtube } from 'lucide-react';
 
 const links = {
-  Product: ['Courses', 'Pricing', 'Enterprise', 'AI Features', 'Mobile App'],
-  Company: ['About', 'Blog', 'Careers', 'Press', 'Contact'],
-  Resources: ['Documentation', 'Help Center', 'Community', 'Status', 'Changelog'],
-  Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'GDPR'],
+  Plateforme: ['Cours', 'Tarifs', 'Entreprise', 'Application Mobile'],
+  Société: ['À propos', 'Blog', 'Carrières', 'Contact'],
+  Ressources: ['Documentation', 'Aide', 'Communauté', 'Statut'],
+  Légal: ['Confidentialité', 'Conditions d\'utilisation', 'Cookies', 'RGPD'],
 };
 
 export function Footer() {
@@ -21,7 +21,7 @@ export function Footer() {
               LearnHub
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed mb-4">
-              The world's most advanced learning management platform. Built for learners, instructors, and organizations.
+              La plateforme éducative dédiée aux élèves de Djibouti. Du collège au lycée, progressez à votre rythme.
             </p>
             <div className="flex items-center gap-3">
               {[Twitter, Linkedin, Github, Youtube].map((Icon, i) => (
@@ -47,8 +47,8 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-500">© 2024 LearnHub. All rights reserved.</p>
-          <p className="text-sm text-gray-500">Made with ♥ for learners worldwide</p>
+          <p className="text-sm text-gray-500">© 2024 LearnHub Djibouti. Tous droits réservés.</p>
+          <p className="text-sm text-gray-500">🇩🇯 Fait avec ♥ pour les élèves djiboutiens</p>
         </div>
       </div>
     </footer>

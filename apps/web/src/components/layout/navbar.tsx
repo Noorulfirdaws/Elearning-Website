@@ -10,9 +10,9 @@ import { useAuthStore } from '@/store/auth.store';
 import { cn } from '@/lib/utils';
 
 const navigation = [
-  { name: 'Courses', href: '/catalog' },
-  { name: 'Community', href: '/community' },
-  { name: 'Pricing', href: '/pricing' },
+  { name: 'Cours', href: '/catalog' },
+  { name: 'Apprendre 🇩🇯', href: '/apprendre' },
+  { name: 'Communauté', href: '/community' },
 ];
 
 export function Navbar() {
@@ -65,7 +65,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <Link href="/catalog?focus=search" className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-foreground text-sm bg-secondary px-3 py-1.5 rounded-full transition-colors">
             <Search className="w-4 h-4" />
-            <span>Search courses...</span>
+            <span>Rechercher des cours...</span>
           </Link>
 
           <button
@@ -103,16 +103,16 @@ export function Navbar() {
                     </div>
                     <div className="p-1">
                       <Link href="/dashboard" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-secondary transition-colors" onClick={() => setUserMenuOpen(false)}>
-                        <LayoutDashboard className="w-4 h-4" /> Dashboard
+                        <LayoutDashboard className="w-4 h-4" /> Tableau de bord
                       </Link>
                       <Link href="/dashboard/courses" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-secondary transition-colors" onClick={() => setUserMenuOpen(false)}>
-                        <BookOpen className="w-4 h-4" /> My Learning
+                        <BookOpen className="w-4 h-4" /> Mes cours
                       </Link>
                       <Link href="/settings" className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-secondary transition-colors" onClick={() => setUserMenuOpen(false)}>
-                        <User className="w-4 h-4" /> Settings
+                        <User className="w-4 h-4" /> Paramètres
                       </Link>
                       <button onClick={() => { logout(); setUserMenuOpen(false); }} className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-red-50 dark:hover:bg-red-950 text-red-600 w-full text-left transition-colors">
-                        <LogOut className="w-4 h-4" /> Sign out
+                        <LogOut className="w-4 h-4" /> Se déconnecter
                       </button>
                     </div>
                   </motion.div>
@@ -122,10 +122,10 @@ export function Navbar() {
           ) : (
             <div className="hidden md:flex items-center gap-2">
               <Link href="/login" className="text-sm font-medium px-4 py-2 rounded-full hover:bg-secondary transition-colors">
-                Sign in
+                Se connecter
               </Link>
               <Link href="/register" className="text-sm font-medium px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-                Get started
+                S'inscrire
               </Link>
             </div>
           )}
@@ -156,11 +156,11 @@ export function Navbar() {
               ))}
               <hr className="border-gray-200 dark:border-gray-700" />
               {isAuthenticated ? (
-                <Link href="/dashboard" className="text-sm font-medium py-2" onClick={() => setMobileOpen(false)}>Dashboard</Link>
+                <Link href="/dashboard" className="text-sm font-medium py-2" onClick={() => setMobileOpen(false)}>Tableau de bord</Link>
               ) : (
                 <div className="flex flex-col gap-2">
-                  <Link href="/login" className="text-center py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium" onClick={() => setMobileOpen(false)}>Sign in</Link>
-                  <Link href="/register" className="text-center py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium" onClick={() => setMobileOpen(false)}>Get started</Link>
+                  <Link href="/login" className="text-center py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium" onClick={() => setMobileOpen(false)}>Se connecter</Link>
+                  <Link href="/register" className="text-center py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium" onClick={() => setMobileOpen(false)}>S'inscrire</Link>
                 </div>
               )}
             </div>

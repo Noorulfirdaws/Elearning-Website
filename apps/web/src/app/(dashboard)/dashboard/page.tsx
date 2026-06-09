@@ -41,21 +41,21 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Navbar />
       <main className="container mx-auto px-4 pt-24 pb-16">
-        {/* Welcome */}
+        {/* Bienvenue */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <h1 className="text-3xl font-bold mb-1">
-            Welcome back, <span className="text-gradient">{user.firstName}</span> 👋
+            Bon retour, <span className="text-gradient">{user.firstName}</span> 👋
           </h1>
-          <p className="text-muted-foreground">Pick up where you left off</p>
+          <p className="text-muted-foreground">Reprends là où tu t'es arrêté</p>
         </motion.div>
 
-        {/* Stats */}
+        {/* Statistiques */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
-            { label: 'Enrolled Courses', value: enrollments?.length || 0, icon: BookOpen, color: 'text-blue-500 bg-blue-50 dark:bg-blue-950' },
-            { label: 'In Progress', value: inProgress.length, icon: TrendingUp, color: 'text-orange-500 bg-orange-50 dark:bg-orange-950' },
-            { label: 'Completed', value: completed.length, icon: CheckCircle, color: 'text-green-500 bg-green-50 dark:bg-green-950' },
-            { label: 'Certificates', value: certificates?.length || 0, icon: Award, color: 'text-yellow-500 bg-yellow-50 dark:bg-yellow-950' },
+            { label: 'Cours inscrits', value: enrollments?.length || 0, icon: BookOpen, color: 'text-blue-500 bg-blue-50 dark:bg-blue-950' },
+            { label: 'En cours', value: inProgress.length, icon: TrendingUp, color: 'text-orange-500 bg-orange-50 dark:bg-orange-950' },
+            { label: 'Terminés', value: completed.length, icon: CheckCircle, color: 'text-green-500 bg-green-50 dark:bg-green-950' },
+            { label: 'Certificats', value: certificates?.length || 0, icon: Award, color: 'text-yellow-500 bg-yellow-50 dark:bg-yellow-950' },
           ].map((stat, i) => (
             <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-gray-100 dark:border-gray-800">
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${stat.color} mb-3`}>
@@ -68,22 +68,22 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Continue Learning */}
+          {/* Continuer l'apprentissage */}
           <div className="lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold">Continue Learning</h2>
-              <Link href="/dashboard/courses" className="text-sm text-primary flex items-center gap-1 hover:gap-2 transition-all">
-                View all <ArrowRight className="w-4 h-4" />
+              <h2 className="text-xl font-bold">Continuer l'apprentissage</h2>
+              <Link href="/my-courses" className="text-sm text-primary flex items-center gap-1 hover:gap-2 transition-all">
+                Voir tout <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
             {inProgress.length === 0 && notStarted.length === 0 ? (
               <div className="bg-white dark:bg-gray-900 rounded-2xl p-12 border border-gray-100 dark:border-gray-800 text-center">
                 <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">No courses yet</h3>
-                <p className="text-muted-foreground text-sm mb-4">Start learning by exploring our catalog</p>
+                <h3 className="font-semibold mb-2">Aucun cours pour l'instant</h3>
+                <p className="text-muted-foreground text-sm mb-4">Commence par explorer le catalogue de cours</p>
                 <Link href="/catalog" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors">
-                  Browse Courses <ArrowRight className="w-4 h-4" />
+                  Parcourir les cours <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             ) : (
@@ -124,11 +124,11 @@ export default function DashboardPage() {
             )}
           </div>
 
-          {/* Certificates */}
+          {/* Certificats */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold">Certificates</h2>
-              <Link href="/dashboard/certificates" className="text-sm text-primary">View all</Link>
+              <h2 className="text-xl font-bold">Certificats</h2>
+              <Link href="/certificates" className="text-sm text-primary">Voir tout</Link>
             </div>
             <div className="space-y-3">
               {certificates?.slice(0, 3).map((cert: any, i: number) => (
@@ -151,7 +151,7 @@ export default function DashboardPage() {
               {(!certificates || certificates.length === 0) && (
                 <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-800 text-center">
                   <Award className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
-                  <p className="text-sm text-muted-foreground">Complete courses to earn certificates</p>
+                  <p className="text-sm text-muted-foreground">Termine des cours pour obtenir des certificats</p>
                 </div>
               )}
             </div>

@@ -40,23 +40,27 @@ export default function MyCoursesPage() {
     <div className="max-w-5xl mx-auto px-4 py-10">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">My Courses</h1>
-          <p className="text-gray-500 mt-1">{enrollments.length} enrolled course{enrollments.length !== 1 ? 's' : ''}</p>
+          <h1 className="text-3xl font-bold text-gray-900">Mes cours</h1>
+          <p className="text-gray-500 mt-1">{enrollments.length} cours inscrit{enrollments.length !== 1 ? 's' : ''}</p>
         </div>
         <Link href="/catalog" className="bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors">
-          Browse More
+          Explorer le catalogue
         </Link>
       </div>
 
-      {/* Filter tabs */}
+      {/* Filtres */}
       <div className="flex gap-2 mb-6">
-        {(['all', 'in-progress', 'completed'] as const).map((f) => (
+        {[
+          { key: 'all', label: 'Tous' },
+          { key: 'in-progress', label: 'En cours' },
+          { key: 'completed', label: 'Terminés' },
+        ].map((f) => (
           <button
-            key={f}
-            onClick={() => setFilter(f)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${filter === f ? 'bg-indigo-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:border-indigo-400'}`}
+            key={f.key}
+            onClick={() => setFilter(f.key as any)}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${filter === f.key ? 'bg-indigo-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:border-indigo-400'}`}
           >
-            {f === 'all' ? 'All' : f === 'in-progress' ? 'In Progress' : 'Completed'}
+            {f.label}
           </button>
         ))}
       </div>
@@ -69,11 +73,11 @@ export default function MyCoursesPage() {
         <div className="text-center py-20">
           <div className="text-5xl mb-4">📚</div>
           <p className="text-gray-400 text-lg">
-            {filter === 'all' ? "You haven't enrolled in any courses yet." : `No ${filter} courses.`}
+            {filter === 'all' ? "Tu n'es inscrit à aucun cours pour l'instant." : `Aucun cours ${filter === 'in-progress' ? 'en cours' : 'terminé'}.`}
           </p>
           {filter === 'all' && (
             <Link href="/catalog" className="mt-4 inline-block text-indigo-600 font-medium hover:underline">
-              Explore courses →
+              Explorer les cours →
             </Link>
           )}
         </div>
@@ -95,9 +99,9 @@ export default function MyCoursesPage() {
                 </p>
                 <div className="mb-3">
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-gray-500">Progress</span>
+                    <span className="text-gray-500">Progression</span>
                     <span className={`font-semibold ${e.completedAt ? 'text-green-600' : 'text-indigo-600'}`}>
-                      {e.completedAt ? '✓ Completed' : `${e.progress}%`}
+                      {e.completedAt ? '✓ Terminé' : `${e.progress}%`}
                     </span>
                   </div>
                   <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
@@ -111,7 +115,7 @@ export default function MyCoursesPage() {
                   href={`/courses/${e.course.slug}`}
                   className="block text-center bg-indigo-50 text-indigo-600 rounded-xl py-2 text-sm font-semibold hover:bg-indigo-100 transition-colors"
                 >
-                  {e.progress > 0 ? 'Continue' : 'Start'} Learning
+                  {e.progress > 0 ? 'Continuer' : 'Commencer'}
                 </Link>
               </div>
             </div>

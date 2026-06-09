@@ -14,8 +14,8 @@ import { useAuthStore } from '@/store/auth.store';
 import { parseApiError } from '@/lib/utils';
 
 const schema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  email: z.string().email('Adresse e-mail invalide'),
+  password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
   mfaCode: z.string().optional(),
 });
 
@@ -44,7 +44,7 @@ export default function LoginPage() {
       setUser(result.user);
       setTokens(result.accessToken, result.refreshToken);
 
-      toast.success(`Welcome back, ${result.user.firstName}!`);
+      toast.success(`Bon retour, ${result.user.firstName} !`);
 
       const role = result.user.role;
       if (role === 'SUPER_ADMIN' || role === 'ADMIN') router.push('/admin');
@@ -53,7 +53,7 @@ export default function LoginPage() {
     } catch (err: any) {
       const msg = err?.response?.data?.message || '';
       if (msg === 'EMAIL_NOT_VERIFIED') {
-        toast.error('Please verify your email first. A new link has been sent!');
+        toast.error('Verifie d\'abord ton adresse e-mail. Un nouveau lien a été envoyé !');
         router.push(`/check-email?email=${encodeURIComponent(data.email)}`);
         return;
       }
@@ -67,22 +67,22 @@ export default function LoginPage() {
       <div className="hidden lg:flex flex-1 bg-gradient-to-br from-blue-600 to-indigo-700 items-center justify-center p-12 relative overflow-hidden">
         <div className="absolute inset-0">
           {[...Array(20)].map((_, i) => (
-            <div key={i} className="absolute w-2 h-2 bg-white/10 rounded-full" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, animationDelay: `${Math.random() * 3}s` }} />
+            <div key={i} className="absolute w-2 h-2 bg-white/10 rounded-full" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }} />
           ))}
         </div>
         <div className="relative text-center text-white">
           <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <GraduationCap className="w-9 h-9 text-white" />
           </div>
-          <h2 className="text-4xl font-bold mb-4">Welcome back!</h2>
+          <h2 className="text-4xl font-bold mb-4">Bon retour ! 🇩🇯</h2>
           <p className="text-blue-100 text-lg max-w-sm">
-            Continue your learning journey. You're one step closer to achieving your goals.
+            Continue ton parcours scolaire. Tu es à un pas de tes objectifs.
           </p>
           <div className="mt-12 grid grid-cols-2 gap-4 text-left">
             {[
-              { label: 'Active Learners', value: '2M+' },
-              { label: 'Expert Courses', value: '15K+' },
-              { label: 'Certificates', value: '500K+' },
+              { label: 'Niveaux disponibles', value: '7' },
+              { label: 'Matières', value: '38' },
+              { label: 'Chapitres complets', value: '100+' },
               { label: 'Satisfaction', value: '98%' },
             ].map((s) => (
               <div key={s.label} className="bg-white/10 rounded-xl p-4">
@@ -108,23 +108,11 @@ export default function LoginPage() {
               </div>
               LearnHub
             </Link>
-            <h1 className="text-3xl font-bold">Sign in to your account</h1>
+            <h1 className="text-3xl font-bold">Se connecter</h1>
             <p className="text-muted-foreground mt-2">
-              Don't have an account?{' '}
-              <Link href="/register" className="text-primary font-medium hover:underline">Sign up</Link>
+              Pas encore de compte ?{' '}
+              <Link href="/register" className="text-primary font-medium hover:underline">S'inscrire</Link>
             </p>
-          </div>
-
-          {/* OAuth buttons */}
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            <a href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`} className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl text-sm font-medium hover:bg-secondary transition-colors">
-              <Chrome className="w-5 h-5 text-red-500" />
-              Google
-            </a>
-            <a href={`${process.env.NEXT_PUBLIC_API_URL}/auth/github`} className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl text-sm font-medium hover:bg-secondary transition-colors">
-              <Github className="w-5 h-5" />
-              GitHub
-            </a>
           </div>
 
           <div className="relative mb-6">
@@ -132,19 +120,19 @@ export default function LoginPage() {
               <div className="w-full border-t border-gray-200 dark:border-gray-700" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-background px-3 text-muted-foreground">or continue with email</span>
+              <span className="bg-background px-3 text-muted-foreground">continuer avec l'e-mail</span>
             </div>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-              <label className="text-sm font-medium block mb-1.5">Email address</label>
+              <label className="text-sm font-medium block mb-1.5">Adresse e-mail</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   {...register('email')}
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder="toi@exemple.com"
                   className="w-full pl-10 pr-4 py-3 border border-input rounded-xl bg-background focus:outline-none focus:ring-2 focus:ring-primary text-sm"
                 />
               </div>
@@ -153,8 +141,8 @@ export default function LoginPage() {
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-sm font-medium">Password</label>
-                <Link href="/forgot-password" className="text-sm text-primary hover:underline">Forgot password?</Link>
+                <label className="text-sm font-medium">Mot de passe</label>
+                <Link href="/forgot-password" className="text-sm text-primary hover:underline">Mot de passe oublié ?</Link>
               </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -173,7 +161,7 @@ export default function LoginPage() {
 
             {requiresMfa && (
               <div>
-                <label className="text-sm font-medium block mb-1.5">MFA Code</label>
+                <label className="text-sm font-medium block mb-1.5">Code MFA</label>
                 <input
                   {...register('mfaCode')}
                   placeholder="000000"
@@ -188,7 +176,7 @@ export default function LoginPage() {
               disabled={isSubmitting}
               className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50"
             >
-              {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Sign in'}
+              {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Se connecter'}
             </button>
           </form>
         </motion.div>
