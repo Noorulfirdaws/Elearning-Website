@@ -1,26 +1,48 @@
 {
-  "name": "LMS Platform",
-  "short_name": "LMS",
-  "description": "Learn anything, anytime, anywhere",
-  "start_url": "/",
+  "name": "LearnHub Djibouti",
+  "short_name": "LearnHub 🇩🇯",
+  "description": "Plateforme éducative pour les élèves de Djibouti — du collège au lycée, cours gratuits.",
+  "start_url": "/apprendre",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#6366f1",
   "orientation": "portrait-primary",
-  "categories": ["education", "productivity"],
+  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
+  "lang": "fr-DJ",
+  "dir": "ltr",
+  "categories": ["education"],
   "icons": [
-    { "src": "/icon-72.png", "sizes": "72x72", "type": "image/png" },
-    { "src": "/icon-96.png", "sizes": "96x96", "type": "image/png" },
-    { "src": "/icon-128.png", "sizes": "128x128", "type": "image/png" },
-    { "src": "/icon-144.png", "sizes": "144x144", "type": "image/png" },
-    { "src": "/icon-152.png", "sizes": "152x152", "type": "image/png" },
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
-    { "src": "/icon-384.png", "sizes": "384x384", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/icon-72.png",  "sizes": "72x72",   "type": "image/png", "purpose": "maskable any" },
+    { "src": "/icon-96.png",  "sizes": "96x96",   "type": "image/png", "purpose": "maskable any" },
+    { "src": "/icon-128.png", "sizes": "128x128", "type": "image/png", "purpose": "maskable any" },
+    { "src": "/icon-144.png", "sizes": "144x144", "type": "image/png", "purpose": "maskable any" },
+    { "src": "/icon-152.png", "sizes": "152x152", "type": "image/png", "purpose": "maskable any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable any" },
+    { "src": "/icon-384.png", "sizes": "384x384", "type": "image/png", "purpose": "maskable any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
   ],
   "shortcuts": [
-    { "name": "My Dashboard", "url": "/dashboard", "icons": [{ "src": "/icon-96.png", "sizes": "96x96" }] },
-    { "name": "Browse Courses", "url": "/catalog", "icons": [{ "src": "/icon-96.png", "sizes": "96x96" }] }
+    {
+      "name": "Collège",
+      "short_name": "Collège",
+      "description": "Cours du collège (6ème–3ème)",
+      "url": "/apprendre/C6",
+      "icons": [{ "src": "/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Lycée",
+      "short_name": "Lycée",
+      "description": "Cours du lycée (Seconde–Terminale)",
+      "url": "/apprendre/LS",
+      "icons": [{ "src": "/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Mes cours",
+      "short_name": "Mes cours",
+      "description": "Accéder à mes cours",
+      "url": "/my-courses",
+      "icons": [{ "src": "/icon-96.png", "sizes": "96x96" }]
+    }
   ],
   "screenshots": [],
   "prefer_related_applications": false

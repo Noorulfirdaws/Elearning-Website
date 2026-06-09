@@ -1,16 +1,20 @@
-// LMS Platform Service Worker — Offline Learning Support
-const CACHE_VERSION = 'v1';
-const STATIC_CACHE = `lms-static-${CACHE_VERSION}`;
-const DYNAMIC_CACHE = `lms-dynamic-${CACHE_VERSION}`;
-const VIDEO_CACHE = `lms-video-${CACHE_VERSION}`;
-const API_CACHE = `lms-api-${CACHE_VERSION}`;
+// LearnHub Djibouti — Service Worker PWA
+// Offline-first pour les élèves djiboutiens avec connexion limitée
+const CACHE_VERSION = 'v2';
+const STATIC_CACHE    = `learnhub-static-${CACHE_VERSION}`;
+const DYNAMIC_CACHE   = `learnhub-dynamic-${CACHE_VERSION}`;
+const VIDEO_CACHE     = `learnhub-video-${CACHE_VERSION}`;
+const API_CACHE       = `learnhub-api-${CACHE_VERSION}`;
+const CHAPITRES_CACHE = `learnhub-chapitres-${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
   '/',
-  '/dashboard',
+  '/apprendre',
   '/catalog',
   '/offline',
   '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
 ];
 
 const CACHE_STRATEGIES = {
@@ -31,11 +35,12 @@ self.addEventListener('install', (event) => {
 
 // Activate: clean old caches
 self.addEventListener('activate', (event) => {
+  const validCaches = [STATIC_CACHE, DYNAMIC_CACHE, VIDEO_CACHE, API_CACHE, CHAPITRES_CACHE];
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
         keys
-          .filter(k => k !== STATIC_CACHE && k !== DYNAMIC_CACHE && k !== VIDEO_CACHE && k !== API_CACHE)
+          .filter(k => !validCaches.includes(k))
           .map(k => caches.delete(k))
       )
     ).then(() => self.clients.claim())
@@ -47,34 +52,46 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Skip non-GET and chrome-extension
+  // Ignorer non-GET et extensions Chrome
   if (request.method !== 'GET' || url.protocol === 'chrome-extension:') return;
 
-  // Video segments — cache first (offline video)
-  if (url.pathname.includes('.m3u8') || url.pathname.includes('.ts') || url.pathname.includes('.mp4')) {
-    event.respondWith(cacheFirst(request, VIDEO_CACHE, 365 * 24 * 60 * 60 * 1000));
+  // 1. Pages /apprendre — Cache First (offline prioritaire pour les élèves)
+  if (url.pathname.startsWith('/apprendre')) {
+    event.respondWith(cacheFirst(request, CHAPITRES_CACHE, 7 * 24 * 60 * 60 * 1000));
     return;
   }
 
-  // API calls — network first
+  // 2. API chapitres/niveaux/matieres — Network First avec fallback cache
+  if (url.pathname.includes('/chapitres') || url.pathname.includes('/niveaux') || url.pathname.includes('/matieres')) {
+    event.respondWith(networkFirst(request, CHAPITRES_CACHE, 5000));
+    return;
+  }
+
+  // 3. Autres appels API — Network First
   if (url.pathname.startsWith('/api/') || url.host.includes('api.')) {
     event.respondWith(networkFirst(request, API_CACHE, 60 * 1000));
     return;
   }
 
-  // Images — stale while revalidate
+  // 4. Vidéos HLS
+  if (url.pathname.includes('.m3u8') || url.pathname.includes('.ts') || url.pathname.includes('.mp4')) {
+    event.respondWith(cacheFirst(request, VIDEO_CACHE, 365 * 24 * 60 * 60 * 1000));
+    return;
+  }
+
+  // 5. Images — stale while revalidate
   if (request.destination === 'image') {
     event.respondWith(staleWhileRevalidate(request, DYNAMIC_CACHE));
     return;
   }
 
-  // Static assets — cache first
-  if (url.pathname.match(/\.(js|css|woff2?|ico)$/)) {
+  // 6. Assets statiques (_next/static, JS, CSS, fonts)
+  if (url.pathname.startsWith('/_next/static') || url.pathname.match(/\.(js|css|woff2?|ico|png|svg)$/)) {
     event.respondWith(cacheFirst(request, STATIC_CACHE, 7 * 24 * 60 * 60 * 1000));
     return;
   }
 
-  // HTML pages — network first with offline fallback
+  // 7. Pages HTML — Network First avec fallback /offline
   event.respondWith(
     fetch(request).catch(() =>
       caches.match(request).then(cached => cached || caches.match('/offline'))
