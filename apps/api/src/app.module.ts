@@ -25,6 +25,7 @@ import { OrganizationsModule } from './modules/organizations/organizations.modul
 import { FilesModule } from './modules/files/files.module';
 import { VideoModule } from './modules/video/video.module';
 import { AiModule } from './modules/ai/ai.module';
+import { EducationModule } from './modules/education/education.module';
 import { SearchModule } from './modules/search/search.module';
 import { HealthModule } from './modules/health/health.module';
 import { ScormModule } from './modules/scorm/scorm.module';
@@ -88,6 +89,7 @@ import appConfig from './config/app.config';
     FilesModule,
     VideoModule,
     AiModule,
+    EducationModule,
     SearchModule,
     HealthModule,
     // Enterprise modules

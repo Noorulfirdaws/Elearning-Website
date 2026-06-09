@@ -168,6 +168,7 @@ model User {
   reactions         Reaction[]
   auditLogs         AuditLog[]
   analyticsEvents   AnalyticsEvent[]
+  chapitreProgress  ChapitreProgress[]
 
   @@index([email])
   @@index([role])
@@ -1561,4 +1562,82 @@ model AiVideoJob {
 
   @@index([userId])
   @@map("ai_video_jobs")
+}
+
+// ─── DJIBOUTI ÉDUCATION ───────────────────────────────────────────────────────
+// Système scolaire djiboutien : 6ème → Terminale (programme français)
+
+model Niveau {
+  id        String    @id  // ex: 'C6', 'C5', 'C4', 'C3', 'LS', 'LP', 'LT'
+  nom       String    @db.VarChar(50)  // ex: '6eme', '3eme', 'Terminale'
+  cycle     String    @db.VarChar(20)  // 'college' ou 'lycee'
+  ordre     Int                        // 1→7 pour tri affiché
+  matieres  Matiere[]
+  createdAt DateTime  @default(now())
+
+  @@map("niveaux")
+}
+
+model Matiere {
+  id        String     @id @default(cuid())
+  nom       String     @db.VarChar(100)  // 'Mathematiques', 'Physique-Chimie'
+  icone     String     @db.VarChar(10) @default("📚")  // emoji
+  couleur   String     @db.VarChar(20) @default("#3B82F6") // couleur hex
+  niveauId  String
+  niveau    Niveau     @relation(fields: [niveauId], references: [id], onDelete: Cascade)
+  chapitres Chapitre[]
+  createdAt DateTime   @default(now())
+
+  @@unique([niveauId, nom])
+  @@index([niveauId])
+  @@map("matieres")
+}
+
+model Chapitre {
+  id          String   @id  // ex: '3eme_math_pythagore'
+  matiereId   String
+  matiere     Matiere  @relation(fields: [matiereId], references: [id], onDelete: Cascade)
+  titre       String   @db.VarChar(255)
+  ordre       Int      // ordre dans le programme
+
+  // Contenu pédagogique complet (stocké en JSON pour lecture offline)
+  contenuCours  Json   // { introduction, points_cles: [{titre, explication, formule}] }
+  exemples      Json   // [ { situation, resolution_pas_a_pas } ]
+  exercices     Json   // [ { enonce, corrige_detaille } ]
+  quiz          Json   // [ { question, options, reponse_correcte, explication_pedagogique } ]
+
+  // Liens médias externes (nécessitent connexion)
+  youtubeUrl      String?
+  khanAcademyUrl  String?
+  youtubeMotsCles String? @db.VarChar(255)
+
+  versionId   Int      @default(1)   // incrémenté à chaque mise à jour du contenu
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  progres     ChapitreProgress[]
+
+  @@index([matiereId, ordre])
+  @@map("chapitres")
+}
+
+model ChapitreProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  chapitreId  String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapitre    Chapitre @relation(fields: [chapitreId], references: [id], onDelete: Cascade)
+
+  estComplete    Boolean  @default(false)
+  scoreQuiz      Int?     // score en % (0-100)
+  tentativesQuiz Int      @default(0)
+  tempsLecture   Int      @default(0) // secondes passées sur le cours
+  completedAt    DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([userId, chapitreId])
+  @@index([userId])
+  @@map("chapitre_progress")
 }
