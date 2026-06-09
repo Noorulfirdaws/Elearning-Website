@@ -38,6 +38,20 @@ export default registerAs('app', () => ({
     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
   },
 
+  // ─── Paiements locaux Djibouti ───────────────────────────────────────────
+  waafi: {
+    merchantUid: process.env.WAAFI_MERCHANT_UID || '',
+    apiUserId:   process.env.WAAFI_API_USER_ID  || '',
+    apiKey:      process.env.WAAFI_API_KEY       || '',
+    sandbox:     process.env.WAAFI_SANDBOX       || 'true',
+  },
+  dmoney: {
+    apiUrl:     process.env.DMONEY_API_URL      || 'https://api.d-money.dj',
+    merchantId: process.env.DMONEY_MERCHANT_ID  || '',
+    apiKey:     process.env.DMONEY_API_KEY       || '',
+    sandbox:    process.env.DMONEY_SANDBOX       || 'true',
+  },
+
   paypal: {
     clientId: process.env.PAYPAL_CLIENT_ID,
     clientSecret: process.env.PAYPAL_CLIENT_SECRET,
