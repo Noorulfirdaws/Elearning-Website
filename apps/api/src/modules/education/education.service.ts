@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+﻿import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../config/prisma.service';
 import Anthropic from '@anthropic-ai/sdk';
 import { ConfigService } from '@nestjs/config';
@@ -180,6 +180,13 @@ Paramètres :
 - Matière : ${matiere}
 - Chapitre : ${titre}
 
+RÈGLES JSON OBLIGATOIRES :
+1. Renvoie UNIQUEMENT du JSON valide — aucun texte avant ou après.
+2. Utilise des guillemets droits " pour toutes les chaînes (jamais de guillemets typographiques).
+3. Les apostrophes dans le texte français doivent être échappées ou remplacées : écris "n inconnue" ou "l'inconnue" (avec apostrophe droite ').
+4. Aucune virgule trailing après le dernier élément d'un tableau ou objet.
+5. Toutes les chaînes sur une seule ligne (pas de retours à la ligne dans les valeurs).
+
 Renvoie UNIQUEMENT un objet JSON valide, sans texte avant ni après, structuré exactement comme ceci :
 {
   "contenuCours": {
@@ -223,11 +230,19 @@ Renvoie UNIQUEMENT un objet JSON valide, sans texte avant ni après, structuré 
     if (!jsonMatch) throw new Error('Génération échouée — format invalide');
 
     let parsed: any;
+    const raw = jsonMatch[0];
+
+    // Reparation JSON robuste (les LLMs generent parfois de vrais \n dans les strings)
+    const repaired = raw
+      .replace(/\r\n/g, ' ').replace(/\r/g, ' ').replace(/\n/g, ' ') // newlines -> espaces
+      .replace(/,\s*([}\]])/g, '$1')                                   // trailing commas
+      .replace(/\\(?!["\\/bfnrtu])/g, '\\\\')                         // backslashes non echappes
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');             // caracteres de controle
+
     try {
-      parsed = JSON.parse(jsonMatch[0]);
-    } catch {
-      const cleaned = jsonMatch[0].replace(/,\s*([}\]])/g, '$1');
-      parsed = JSON.parse(cleaned);
+      parsed = JSON.parse(repaired);
+    } catch (e) {
+      throw new Error(`JSON invalide: ${(e as Error).message}`);
     }
 
     // Mettre à jour le chapitre avec le contenu généré
