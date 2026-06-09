@@ -68,27 +68,92 @@ export default function CourseBuilderPage() {
     finally { setSaving(false); }
   };
 
+  // Valid lesson types in the DB schema
+  const VALID_LESSON_TYPES = ['VIDEO', 'TEXT', 'DOCUMENT', 'EMBED', 'LIVE', 'QUIZ', 'ASSIGNMENT'];
+  const normalizeLessonType = (t?: string) => {
+    if (!t) return 'VIDEO';
+    const up = t.toUpperCase();
+    if (VALID_LESSON_TYPES.includes(up)) return up;
+    // Map common AI aliases
+    if (up.includes('VIDEO') || up.includes('WATCH')) return 'VIDEO';
+    if (up.includes('TEXT') || up.includes('READ') || up.includes('ARTICLE')) return 'TEXT';
+    if (up.includes('QUIZ') || up.includes('TEST') || up.includes('ASSESS')) return 'QUIZ';
+    if (up.includes('ASSIGN') || up.includes('PROJECT') || up.includes('EXERCISE')) return 'ASSIGNMENT';
+    return 'VIDEO';
+  };
+
   const generateOutline = async () => {
+    // Warn if course already has sections
+    if (sections && sections.length > 0) {
+      const ok = confirm(
+        `This course already has ${sections.length} section(s).\n\nAI will ADD new sections on top. Continue?`
+      );
+      if (!ok) return;
+    }
+    if (!course?.title?.trim()) {
+      toast.error('Please set a course title in Settings first');
+      setActiveTab('settings');
+      return;
+    }
+
     setGenerating(true);
     try {
-      const { data } = await axios.post(apiRoutes.ai.generateOutline, {
-        topic: course?.title,
-        level: course?.level || 'BEGINNER',
-        targetAudience: 'Students interested in ' + (course?.title || 'this subject'),
+      // Step 1: Call AI to get outline
+      const { data: aiResp } = await axios.post(apiRoutes.ai.generateOutline, {
+        topic: course.title,
+        level: course.level || 'BEGINNER',
+        targetAudience: 'Students interested in ' + course.title,
       });
-      // Create sections+lessons from AI outline
-      for (const section of data.data.sections || []) {
-        const { data: sec } = await axios.post(`/courses/${courseId}/sections`, { title: section.title });
+
+      const outline = aiResp.data; // { title, subtitle, description, outcomes, requirements, sections }
+      if (!outline || !Array.isArray(outline.sections) || outline.sections.length === 0) {
+        throw new Error('AI returned an empty outline. Please try again.');
+      }
+
+      // Step 2: Update course with AI-generated description/outcomes/requirements (if they're empty)
+      const courseUpdates: any = {};
+      if (!course.description && outline.description) courseUpdates.description = outline.description;
+      if (!course.shortDescription && outline.subtitle) courseUpdates.shortDescription = outline.subtitle;
+      if ((course.outcomes || []).length === 0 && outline.outcomes?.length > 0) courseUpdates.outcomes = outline.outcomes;
+      if ((course.requirements || []).length === 0 && outline.requirements?.length > 0) courseUpdates.requirements = outline.requirements;
+      if (Object.keys(courseUpdates).length > 0) {
+        await axios.patch(`/courses/${courseId}`, courseUpdates);
+        qc.invalidateQueries({ queryKey: ['course-edit', courseId] });
+      }
+
+      // Step 3: Create sections and lessons one by one
+      let createdSections = 0;
+      let createdLessons = 0;
+      for (const section of outline.sections) {
+        if (!section.title) continue;
+        const { data: secResp } = await axios.post(`/courses/${courseId}/sections`, {
+          title: section.title,
+          description: section.description || undefined,
+        });
+        const newSectionId = secResp.data?.id;
+        if (!newSectionId) continue;
+        createdSections++;
+
         for (const lesson of section.lessons || []) {
-          await axios.post(`/sections/${sec.data.id}/lessons`, {
-            title: lesson.title, type: lesson.type || 'VIDEO', description: lesson.description,
+          if (!lesson.title) continue;
+          await axios.post(`/sections/${newSectionId}/lessons`, {
+            title: lesson.title,
+            type: normalizeLessonType(lesson.type),
+            description: lesson.description || undefined,
+            duration: lesson.estimatedMinutes ? lesson.estimatedMinutes * 60 : undefined,
           });
+          createdLessons++;
         }
       }
-      refetchSections();
-      toast.success('AI outline generated!');
-    } catch { toast.error('Failed to generate outline'); }
-    finally { setGenerating(false); }
+
+      await refetchSections();
+      toast.success(`AI generated ${createdSections} sections and ${createdLessons} lessons!`);
+    } catch (err: any) {
+      const msg = err?.response?.data?.error?.message || err?.message || 'Failed to generate outline';
+      toast.error(msg);
+    } finally {
+      setGenerating(false);
+    }
   };
 
   if (!course) return (

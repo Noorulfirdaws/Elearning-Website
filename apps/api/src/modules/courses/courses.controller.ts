@@ -78,8 +78,21 @@ export class CoursesController {
   @Put(':id')
   @Roles(UserRole.INSTRUCTOR, UserRole.ADMIN, UserRole.SUPER_ADMIN)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Update course' })
+  @ApiOperation({ summary: 'Update course (PUT)' })
   update(
+    @Param('id') id: string,
+    @CurrentUser('id') userId: string,
+    @CurrentUser('role') role: UserRole,
+    @Body() dto: UpdateCourseDto,
+  ) {
+    return this.coursesService.update(id, userId, role, dto);
+  }
+
+  @Patch(':id')
+  @Roles(UserRole.INSTRUCTOR, UserRole.ADMIN, UserRole.SUPER_ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Update course (PATCH)' })
+  partialUpdate(
     @Param('id') id: string,
     @CurrentUser('id') userId: string,
     @CurrentUser('role') role: UserRole,
