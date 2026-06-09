@@ -15,6 +15,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
+import { openLearnHubDB } from '@/lib/idb';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -30,31 +31,10 @@ export interface ChapitreProgressLocal {
   synced: boolean;                 // Si synchronise avec le serveur
 }
 
-const DB_NAME = 'learnhub-offline';
-const DB_VERSION = 1;
 const STORE_NAME = 'progression';
 
-// ─── Ouverture IndexedDB ──────────────────────────────────────────────────────
-
-function openDB(): Promise<IDBDatabase> {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
-
-    req.onupgradeneeded = (e) => {
-      const db = (e.target as IDBOpenDBRequest).result;
-      if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME, { keyPath: 'chapitreId' });
-      }
-      // Store pour la file d'attente de sync
-      if (!db.objectStoreNames.contains('sync-queue')) {
-        db.createObjectStore('sync-queue', { keyPath: 'chapitreId' });
-      }
-    };
-
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
-}
+// openDB() -> remplace par le module partage idb.ts (version 2 unifiee)
+const openDB = openLearnHubDB;
 
 async function idbGet(chapitreId: string): Promise<ChapitreProgressLocal | null> {
   try {

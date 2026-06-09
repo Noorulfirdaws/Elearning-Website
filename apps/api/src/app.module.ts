@@ -26,6 +26,7 @@ import { FilesModule } from './modules/files/files.module';
 import { VideoModule } from './modules/video/video.module';
 import { AiModule } from './modules/ai/ai.module';
 import { EducationModule } from './modules/education/education.module';
+import { AchatModule }    from './modules/achats/achat.module';
 import { SearchModule } from './modules/search/search.module';
 import { HealthModule } from './modules/health/health.module';
 import { ScormModule } from './modules/scorm/scorm.module';
@@ -90,6 +91,7 @@ import appConfig from './config/app.config';
     VideoModule,
     AiModule,
     EducationModule,
+    AchatModule,       // Paywall Djibouti — achats 1000/5000/10000 DJF
     SearchModule,
     HealthModule,
     // Enterprise modules

@@ -71,6 +71,21 @@ enum PaymentProvider {
   PAYPAL
 }
 
+// ─── Paiements locaux Djibouti ────────────────────────────────────────────────
+
+enum TypeAcces {
+  CHAPITRE  // 1 000 DJF -> 1 chapitre specifique
+  CLASSE    // 5 000 DJF -> toute la classe (niveau)
+  EXAMEN    // 10 000 DJF -> pack Brevet/Bac
+}
+
+enum StatutAchat {
+  EN_ATTENTE  // paiement initie, en cours de confirmation
+  VALIDE      // paiement confirme, acces accorde
+  ECHOUE      // paiement echoue ou expire
+  REMBOURSE   // rembourse par l'admin
+}
+
 enum NotificationType {
   ENROLLMENT
   COMPLETION
@@ -169,6 +184,7 @@ model User {
   auditLogs         AuditLog[]
   analyticsEvents   AnalyticsEvent[]
   chapitreProgress  ChapitreProgress[]
+  achats            Achat[]
 
   @@index([email])
   @@index([role])
@@ -1640,4 +1656,40 @@ model ChapitreProgress {
   @@unique([userId, chapitreId])
   @@index([userId])
   @@map("chapitre_progress")
+}
+
+// ─── Achats / Droits d'acces ──────────────────────────────────────────────────
+// Gestion du paywall LearnHub Djibouti
+// typeAcces  | itemId                    | montantDJF
+// CHAPITRE   | chapitreId                | 1000
+// CLASSE     | niveauId ('C3', 'LS'...)  | 5000
+// EXAMEN     | 'BREVET' ou 'BAC'         | 10000
+
+model Achat {
+  id            String      @id @default(cuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  typeAcces     TypeAcces
+  itemId        String      // chapitreId | niveauId | 'BREVET' | 'BAC'
+  montantDJF    Int         // 1000 | 5000 | 10000
+
+  provider      String      @db.VarChar(20)  // 'WAAFI' | 'DMONEY' | 'GRATUIT' | 'ADMIN'
+  status        StatutAchat @default(EN_ATTENTE)
+
+  transactionId  String?    // ID transaction Waafi / D-Money
+  waafiRequestId String?    // requestId pour le commit Waafi
+
+  expiresAt     DateTime?   // null = permanent; sinon date expiration
+  metadata      Json?       // donnees supplementaires (numero tel, etc.)
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  // Un seul achat valide par (user, type, item)
+  @@unique([userId, typeAcces, itemId])
+  @@index([userId])
+  @@index([userId, typeAcces])
+  @@index([status])
+  @@map("achats")
 }

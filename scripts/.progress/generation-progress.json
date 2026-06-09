@@ -1,0 +1,114 @@
+{
+  "c3-maths-pythagore": {
+    "done": true,
+    "ts": "2026-06-09T22:52:46.789Z"
+  },
+  "c3-maths-equations": {
+    "done": true,
+    "ts": "2026-06-09T22:53:31.719Z"
+  },
+  "c3-maths-fonctions": {
+    "done": true,
+    "ts": "2026-06-09T22:54:24.071Z"
+  },
+  "c3-maths-statistiques": {
+    "done": true,
+    "ts": "2026-06-09T22:55:16.025Z"
+  },
+  "c3-maths-thales": {
+    "done": true,
+    "ts": "2026-06-09T22:56:12.207Z"
+  },
+  "c3-physique-forces-equilibre": {
+    "done": true,
+    "ts": "2026-06-09T22:57:10.030Z"
+  },
+  "c3-physique-loi-ohm": {
+    "done": true,
+    "ts": "2026-06-09T22:57:58.931Z"
+  },
+  "c3-physique-chimie-concentration": {
+    "done": true,
+    "ts": "2026-06-09T22:58:47.645Z"
+  },
+  "c3-physique-energie-puissance": {
+    "done": true,
+    "ts": "2026-06-09T22:59:38.636Z"
+  },
+  "c3-physique-radioactivite": {
+    "done": true,
+    "ts": "2026-06-09T23:00:37.154Z"
+  },
+  "c3-svt-adn-heredite": {
+    "done": true,
+    "ts": "2026-06-09T23:02:13.142Z"
+  },
+  "c3-svt-heredite-transmission": {
+    "done": true,
+    "ts": "2026-06-09T23:03:17.107Z"
+  },
+  "c3-svt-evolution-humaine": {
+    "done": true,
+    "ts": "2026-06-09T23:04:18.707Z"
+  },
+  "c3-svt-corps-sante": {
+    "done": false,
+    "error": "Unexpected token '`', \"```json\n{\n\"... is not valid JSON",
+    "ts": "2026-06-09T23:07:45.451Z"
+  },
+  "c3-svt-developpement-durable": {
+    "done": false,
+    "error": "POST chapitre échoué: {\"success\":false,\"statusCode\":401,\"timestamp\":\"2026-06-09T23:08:45.612Z\",\"path\":\"/api/v1/chapitres\",\"method\":\"POST\",\"error\":{\"message\":\"Authentication required\",\"error\":\"Unauthorized\",\"statusCode\":401",
+    "ts": "2026-06-09T23:08:45.615Z"
+  },
+  "c3-francais-autobiographie": {
+    "done": false,
+    "error": "Unexpected token '`', \"```json\n{\n\"... is not valid JSON",
+    "ts": "2026-06-09T23:12:34.478Z"
+  },
+  "c3-francais-poesie-engagee": {
+    "done": false,
+    "error": "POST chapitre échoué: {\"success\":false,\"statusCode\":401,\"timestamp\":\"2026-06-09T23:15:00.087Z\",\"path\":\"/api/v1/chapitres\",\"method\":\"POST\",\"error\":{\"message\":\"Authentication required\",\"error\":\"Unauthorized\",\"statusCode\":401",
+    "ts": "2026-06-09T23:15:00.086Z"
+  },
+  "c3-francais-roman-xxe-siecle": {
+    "done": false,
+    "error": "POST chapitre échoué: {\"success\":false,\"statusCode\":401,\"timestamp\":\"2026-06-09T23:17:36.987Z\",\"path\":\"/api/v1/chapitres\",\"method\":\"POST\",\"error\":{\"message\":\"Authentication required\",\"error\":\"Unauthorized\",\"statusCode\":401",
+    "ts": "2026-06-09T23:17:36.988Z"
+  },
+  "c3-francais-argumentation-convaincre": {
+    "done": false,
+    "error": "POST chapitre échoué: {\"success\":false,\"statusCode\":401,\"timestamp\":\"2026-06-09T23:18:36.552Z\",\"path\":\"/api/v1/chapitres\",\"method\":\"POST\",\"error\":{\"message\":\"Authentication required\",\"error\":\"Unauthorized\",\"statusCode\":401",
+    "ts": "2026-06-09T23:18:36.554Z"
+  },
+  "c3-francais-revision-brevet": {
+    "done": false,
+    "error": "Unexpected token '`', \"```json\n{\n\"... is not valid JSON",
+    "ts": "2026-06-09T23:22:10.800Z"
+  },
+  "c3-histgeo-premiere-guerre-mondiale": {
+    "done": false,
+    "error": "POST chapitre échoué: {\"success\":false,\"statusCode\":401,\"timestamp\":\"2026-06-09T23:23:08.267Z\",\"path\":\"/api/v1/chapitres\",\"method\":\"POST\",\"error\":{\"message\":\"Authentication required\",\"error\":\"Unauthorized\",\"statusCode\":401",
+    "ts": "2026-06-09T23:23:08.263Z"
+  },
+  "c3-histgeo-seconde-guerre-mondiale": {
+    "done": false,
+    "error": "POST chapitre échoué: {\"success\":false,\"statusCode\":401,\"timestamp\":\"2026-06-09T23:25:23.212Z\",\"path\":\"/api/v1/chapitres\",\"method\":\"POST\",\"error\":{\"message\":\"Authentication required\",\"error\":\"Unauthorized\",\"statusCode\":401",
+    "ts": "2026-06-09T23:25:23.208Z"
+  },
+  "c3-histgeo-decolonisation-djibouti": {
+    "done": false,
+    "error": "POST chapitre échoué: {\"success\":false,\"statusCode\":401,\"timestamp\":\"2026-06-09T23:26:32.824Z\",\"path\":\"/api/v1/chapitres\",\"method\":\"POST\",\"error\":{\"message\":\"Authentication required\",\"error\":\"Unauthorized\",\"statusCode\":401",
+    "ts": "2026-06-09T23:26:32.828Z"
+  },
+  "c3-histgeo-monde-contemporain": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-09T23:28:00.281Z"
+  },
+  "c3-histgeo-pays-developpement": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-09T23:28:22.535Z"
+  }
+}

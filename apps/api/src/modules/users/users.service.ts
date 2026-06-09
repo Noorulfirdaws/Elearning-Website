@@ -92,6 +92,13 @@ export class UsersService {
     if (!admin || ![UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(admin.role)) {
       throw new ForbiddenException('Not authorized');
     }
+    // Un ADMIN ne peut pas bannir un INSTRUCTOR ou un SUPER_ADMIN — réservé aux propriétaires
+    if (admin.role === UserRole.ADMIN) {
+      const target = await this.prisma.user.findUnique({ where: { id: userId }, select: { role: true } });
+      if (target && [UserRole.SUPER_ADMIN, UserRole.INSTRUCTOR].includes(target.role)) {
+        throw new ForbiddenException('Seuls les propriétaires peuvent gérer les instructeurs et les autres administrateurs');
+      }
+    }
     return this.prisma.user.update({
       where: { id: userId },
       data: { isBanned: true, bannedReason: reason },
@@ -102,6 +109,13 @@ export class UsersService {
     const admin = await this.prisma.user.findUnique({ where: { id: adminId } });
     if (!admin || ![UserRole.SUPER_ADMIN, UserRole.ADMIN].includes(admin.role)) {
       throw new ForbiddenException('Not authorized');
+    }
+    // Un ADMIN ne peut pas débannir un INSTRUCTOR ou un SUPER_ADMIN
+    if (admin.role === UserRole.ADMIN) {
+      const target = await this.prisma.user.findUnique({ where: { id: userId }, select: { role: true } });
+      if (target && [UserRole.SUPER_ADMIN, UserRole.INSTRUCTOR].includes(target.role)) {
+        throw new ForbiddenException('Seuls les propriétaires peuvent gérer les instructeurs et les autres administrateurs');
+      }
     }
     return this.prisma.user.update({
       where: { id: userId },
