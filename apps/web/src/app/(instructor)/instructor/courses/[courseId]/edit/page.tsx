@@ -27,7 +27,7 @@ export default function CourseBuilderPage() {
 
   const { data: course } = useQuery<any>({
     queryKey: ['course-edit', courseId],
-    queryFn: () => axios.get(apiRoutes.courses.getById(courseId)).then(r => r.data.data),
+    queryFn: () => axios.get(`/courses/instructor/${courseId}`).then(r => r.data.data),
   });
 
   const { data: sections, refetch: refetchSections } = useQuery<any[]>({
@@ -72,9 +72,9 @@ export default function CourseBuilderPage() {
     setGenerating(true);
     try {
       const { data } = await axios.post(apiRoutes.ai.generateOutline, {
-        title: course?.title,
-        description: course?.description,
-        level: course?.level,
+        topic: course?.title,
+        level: course?.level || 'BEGINNER',
+        targetAudience: 'Students interested in ' + (course?.title || 'this subject'),
       });
       // Create sections+lessons from AI outline
       for (const section of data.data.sections || []) {

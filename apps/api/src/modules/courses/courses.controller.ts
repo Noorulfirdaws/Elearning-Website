@@ -56,6 +56,18 @@ export class CoursesController {
     return this.coursesService.getInstructorCourses(userId);
   }
 
+  @Get('instructor/:id')
+  @Roles(UserRole.INSTRUCTOR, UserRole.ADMIN, UserRole.SUPER_ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get instructor course by ID for editing' })
+  getInstructorCourseById(
+    @Param('id') id: string,
+    @CurrentUser('id') userId: string,
+    @CurrentUser('role') role: UserRole,
+  ) {
+    return this.coursesService.getInstructorCourseById(id, userId, role);
+  }
+
   @Public()
   @Get(':slug')
   @ApiOperation({ summary: 'Get course detail by slug' })

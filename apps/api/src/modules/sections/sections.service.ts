@@ -16,7 +16,7 @@ export class SectionsService {
     await this.verifyInstructor(courseId, userId);
     const count = await this.prisma.section.count({ where: { courseId } });
     return this.prisma.section.create({
-      data: { courseId, title, description, order: count + 1 },
+      data: { courseId, title, description, position: count + 1 },
     });
   }
 
@@ -24,9 +24,9 @@ export class SectionsService {
     return this.prisma.section.findMany({
       where: { courseId },
       include: {
-        lessons: { where: { deletedAt: null }, orderBy: { order: 'asc' } },
+        lessons: { orderBy: { position: 'asc' } },
       },
-      orderBy: { order: 'asc' },
+      orderBy: { position: 'asc' },
     });
   }
 
@@ -40,7 +40,7 @@ export class SectionsService {
   async reorder(courseId: string, userId: string, ids: string[]) {
     await this.verifyInstructor(courseId, userId);
     await Promise.all(
-      ids.map((id, index) => this.prisma.section.update({ where: { id }, data: { order: index + 1 } })),
+      ids.map((id, index) => this.prisma.section.update({ where: { id }, data: { position: index + 1 } })),
     );
   }
 

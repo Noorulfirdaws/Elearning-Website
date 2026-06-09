@@ -209,6 +209,26 @@ export class CoursesService {
     });
   }
 
+  async getInstructorCourseById(id: string, userId: string, role: string) {
+    const course = await this.prisma.course.findFirst({
+      where: {
+        id,
+        deletedAt: null,
+        ...(role === 'INSTRUCTOR' ? { instructorId: userId } : {}),
+      },
+      include: {
+        sections: {
+          orderBy: { position: 'asc' },
+          include: { lessons: { orderBy: { position: 'asc' } } },
+        },
+        category: true,
+        instructor: { select: { id: true, firstName: true, lastName: true, avatar: true } },
+      },
+    });
+    if (!course) throw new NotFoundException('Course not found');
+    return course;
+  }
+
   async getFeatured() {
     return this.prisma.course.findMany({
       where: { status: CourseStatus.PUBLISHED, deletedAt: null },

@@ -132,10 +132,12 @@ model User {
   isBanned          Boolean   @default(false)
   bannedAt          DateTime?
   bannedReason      String?
-  mfaEnabled        Boolean   @default(false)
-  mfaSecret         String?
-  lastLoginAt       DateTime?
-  lastLoginIp       String?
+  mfaEnabled           Boolean   @default(false)
+  mfaSecret            String?
+  failedLoginAttempts  Int       @default(0)
+  lastFailedLoginAt    DateTime?
+  lastLoginAt          DateTime?
+  lastLoginIp          String?
   stripeCustomerId  String?
   paypalCustomerId  String?
   tenantId          String?

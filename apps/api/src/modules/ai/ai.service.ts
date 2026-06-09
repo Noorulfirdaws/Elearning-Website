@@ -13,27 +13,27 @@ export class AiService {
 
   async generateCourseOutline(topic: string, level: string, targetAudience: string) {
     const message = await this.client.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 2048,
+      model: 'claude-opus-4-5',
+      max_tokens: 4096,
       messages: [
         {
           role: 'user',
-          content: `Create a comprehensive course outline for: "${topic}"
+          content: `Create a course outline for: "${topic}"
 Level: ${level}
 Target Audience: ${targetAudience}
 
-Return a JSON object with:
+Return ONLY a JSON object (no extra text) with exactly this structure — keep it concise with 4-6 sections and 3-5 lessons each:
 {
   "title": "...",
   "subtitle": "...",
   "description": "...",
-  "outcomes": ["..."],
-  "requirements": ["..."],
+  "outcomes": ["outcome1", "outcome2", "outcome3"],
+  "requirements": ["req1", "req2"],
   "sections": [
     {
-      "title": "...",
+      "title": "Section Title",
       "lessons": [
-        { "title": "...", "type": "VIDEO|TEXT|QUIZ", "description": "...", "estimatedMinutes": 0 }
+        { "title": "Lesson Title", "type": "VIDEO", "description": "brief description", "estimatedMinutes": 10 }
       ]
     }
   ]
@@ -45,7 +45,13 @@ Return a JSON object with:
     const text = message.content[0].type === 'text' ? message.content[0].text : '';
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error('AI did not return valid JSON');
-    return JSON.parse(jsonMatch[0]);
+    try {
+      return JSON.parse(jsonMatch[0]);
+    } catch {
+      // Try to extract just the valid part
+      const trimmed = jsonMatch[0].replace(/,\s*([}\]])/g, '$1');
+      return JSON.parse(trimmed);
+    }
   }
 
   async generateQuizQuestions(topic: string, lessonContent: string, count: number, difficulty: string) {
