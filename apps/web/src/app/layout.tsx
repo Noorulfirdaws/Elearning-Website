@@ -4,6 +4,7 @@ import './globals.css';
 import { Providers } from './providers';
 import { Toaster } from 'sonner';
 import { PWAInstallBanner } from '@/components/pwa/install-banner';
+import { OfflineSync } from '@/components/pwa/offline-sync';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <Toaster richColors position="top-right" closeButton />
           <PWAInstallBanner />
+          <OfflineSync />
         </Providers>
         {/* Enregistrement du Service Worker PWA */}
         <script

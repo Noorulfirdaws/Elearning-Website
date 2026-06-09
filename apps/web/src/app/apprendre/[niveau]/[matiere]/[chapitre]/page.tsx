@@ -12,6 +12,7 @@ import {
 import axios from '@/lib/api';
 import { Navbar } from '@/components/layout/navbar';
 import { cn } from '@/lib/utils';
+import { useOfflineProgress } from '@/hooks/use-offline-progress';
 
 const TABS = ['cours', 'exemples', 'exercices', 'quiz'] as const;
 type Tab = typeof TABS[number];
@@ -36,10 +37,22 @@ export default function ChapitreDetailPage() {
   const [reponses, setReponses] = useState<Record<number, string>>({});
   const [quizScore, setQuizScore] = useState(0);
 
+  // Cache local IndexedDB (offline-first)
+  const { progression, sauvegarderQuiz } = useOfflineProgress(chapitreId);
+
   const { data, isLoading, error } = useQuery<any>({
     queryKey: ['chapitre', chapitreId],
     queryFn: () => axios.get(`/chapitres/${chapitreId}`).then(r => r.data.data),
   });
+
+  // Restaurer le dernier score si l'eleve a deja fait ce quiz
+  useEffect(() => {
+    if (progression?.quizDoneAt && progression.scoreQuiz !== null) {
+      setQuizScore(progression.scoreQuiz);
+      setQuizDone(true);
+      setReponses(progression.reponses || {});
+    }
+  }, [progression]);
 
   const saveProgression = useMutation({
     mutationFn: (payload: any) => axios.post(`/chapitres/${chapitreId}/progression`, payload).then(r => r.data),
@@ -64,7 +77,7 @@ export default function ChapitreDetailPage() {
     setReponses(prev => ({ ...prev, [qIdx]: option }));
   };
 
-  const validerQuiz = () => {
+  const validerQuiz = async () => {
     let correct = 0;
     quiz.forEach((q: any, i: number) => {
       if (reponses[i] === q.reponse_correcte) correct++;
@@ -72,7 +85,14 @@ export default function ChapitreDetailPage() {
     const score = Math.round((correct / quiz.length) * 100);
     setQuizScore(score);
     setQuizDone(true);
-    saveProgression.mutate({ estComplete: score >= 60, scoreQuiz: score });
+
+    // Sauvegarde locale IMMEDIATE (fonctionne offline)
+    // + sync API en arriere-plan si connecte
+    await sauvegarderQuiz(
+      score,
+      reponses,
+      () => saveProgression.mutateAsync({ estComplete: score >= 60, scoreQuiz: score }),
+    );
   };
 
   const recommencerQuiz = () => {
@@ -98,7 +118,25 @@ export default function ChapitreDetailPage() {
           <Link href={`/apprendre/${niveauId}/${matiereId}`} className="inline-flex items-center gap-1 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 mb-2 text-sm transition-colors">
             <ChevronLeft className="h-4 w-4" /> {chapitre.matiere?.nom}
           </Link>
-          <h1 className="text-xl font-bold text-gray-900 dark:text-white truncate">{chapitre.titre}</h1>
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white truncate">{chapitre.titre}</h1>
+            {/* Badge progression locale */}
+            {progression?.meilleurScore !== null && progression?.meilleurScore !== undefined && (
+              <span className={cn(
+                'flex-shrink-0 text-xs font-bold px-2.5 py-1 rounded-full',
+                progression.estComplete
+                  ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+                  : 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300'
+              )}>
+                {progression.estComplete ? '✅' : '🔄'} {progression.meilleurScore}%
+              </span>
+            )}
+            {!navigator?.onLine && (
+              <span className="flex-shrink-0 text-xs bg-gray-100 dark:bg-gray-800 text-gray-500 px-2 py-1 rounded-full">
+                📴 Hors-ligne
+              </span>
+            )}
+          </div>
 
           {/* Onglets */}
           <div className="flex gap-1 mt-3 overflow-x-auto pb-1">
