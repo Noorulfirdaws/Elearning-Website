@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, Filter, SlidersHorizontal, Star, Clock, Users, X, ChevronDown } from 'lucide-react';
 import { api, apiRoutes } from '@/lib/api';
 import { buildQueryString, calculateDiscount } from '@/lib/utils';
@@ -140,7 +141,14 @@ export default function CatalogPage() {
                     <div className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 card-hover group h-full flex flex-col">
                       <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
                         {course.thumbnail ? (
-                          <img src={course.thumbnail} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                          <Image
+                            src={course.thumbnail}
+                            alt={course.title}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                          />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-500" />
                         )}

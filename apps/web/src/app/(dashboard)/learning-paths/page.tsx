@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { api } from '@/lib/api';
 
 interface LearningPath {
@@ -52,7 +53,9 @@ export default function LearningPathsPage() {
             return (
               <Link key={path.id} href={`/learning-paths/${path.id}`} className="group block bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow overflow-hidden">
                 {path.thumbnail && (
-                  <img src={path.thumbnail} alt={path.title} className="w-full h-40 object-cover" />
+                  <div className="relative w-full h-40">
+                    <Image src={path.thumbnail} alt={path.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" loading="lazy" />
+                  </div>
                 )}
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-2">

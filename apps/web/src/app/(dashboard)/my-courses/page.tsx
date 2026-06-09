@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { api } from '@/lib/api';
 
 interface Enrollment {
@@ -86,7 +87,9 @@ export default function MyCoursesPage() {
           {filtered.map((e) => (
             <div key={e.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
               {e.course.thumbnail ? (
-                <img src={e.course.thumbnail} alt={e.course.title} className="w-full h-40 object-cover" />
+                <div className="relative w-full h-40">
+                  <Image src={e.course.thumbnail} alt={e.course.title} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" loading="lazy" />
+                </div>
               ) : (
                 <div className="w-full h-40 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
                   <span className="text-4xl">📖</span>

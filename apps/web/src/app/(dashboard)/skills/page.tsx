@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { api } from '@/lib/api';
 
 interface UserSkill {
@@ -111,7 +112,9 @@ export default function SkillsPage() {
                         className="flex items-center gap-3 bg-white rounded-lg p-3 hover:shadow-sm transition-shadow"
                       >
                         {course.thumbnail && (
-                          <img src={course.thumbnail} alt={course.title} className="w-12 h-9 object-cover rounded" />
+                          <div className="relative w-12 h-9 rounded overflow-hidden flex-shrink-0">
+                            <Image src={course.thumbnail} alt={course.title} fill sizes="48px" className="object-cover" loading="lazy" />
+                          </div>
                         )}
                         <div>
                           <p className="text-sm font-medium text-gray-800">{course.title}</p>

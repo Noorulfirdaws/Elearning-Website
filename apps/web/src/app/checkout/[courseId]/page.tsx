@@ -7,6 +7,7 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import { useState } from 'react';
 import { ShieldCheck, Lock, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import axios, { apiRoutes } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
 import { formatCurrency } from '@/lib/utils';
@@ -68,7 +69,9 @@ function CheckoutForm({ course }: { course: Course }) {
         <h3 className="font-semibold">Order Summary</h3>
         <div className="flex items-center gap-3">
           {course.thumbnail && (
-            <img src={course.thumbnail} className="w-16 h-12 rounded object-cover" alt="" />
+            <div className="relative w-16 h-12 rounded overflow-hidden flex-shrink-0">
+              <Image src={course.thumbnail} alt="" fill sizes="64px" className="object-cover" loading="lazy" />
+            </div>
           )}
           <div className="flex-1 min-w-0">
             <p className="font-medium text-sm truncate">{course.title}</p>

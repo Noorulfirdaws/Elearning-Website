@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BookOpen, Award, TrendingUp, Clock, ArrowRight, Play, CheckCircle } from 'lucide-react';
 import { useAuthStore } from '@/store/auth.store';
 import { api, apiRoutes } from '@/lib/api';
@@ -94,7 +95,7 @@ export default function DashboardPage() {
                       <div className="bg-white dark:bg-gray-900 rounded-2xl p-4 border border-gray-100 dark:border-gray-800 hover:border-primary/30 card-hover flex items-center gap-4">
                         <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 flex-shrink-0">
                           {enrollment.course.thumbnail ? (
-                            <img src={enrollment.course.thumbnail} alt={enrollment.course.title} className="w-full h-full object-cover" />
+                            <Image src={enrollment.course.thumbnail} alt={enrollment.course.title} fill sizes="64px" className="object-cover" loading="lazy" />
                           ) : (
                             <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center">
                               <BookOpen className="w-6 h-6 text-white" />

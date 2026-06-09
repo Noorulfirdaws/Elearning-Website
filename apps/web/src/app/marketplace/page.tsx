@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { api } from '@/lib/api';
 
 interface InstructorProfile {
@@ -95,7 +96,9 @@ export default function MarketplacePage() {
               <div key={instr.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
                   {instr.avatar ? (
-                    <img src={instr.avatar} alt="" className="w-12 h-12 rounded-full object-cover" />
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                      <Image src={instr.avatar} alt="" fill sizes="48px" className="object-cover" loading="lazy" />
+                    </div>
                   ) : (
                     <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center font-bold text-indigo-600">
                       {instr.firstName[0]}{instr.lastName[0]}

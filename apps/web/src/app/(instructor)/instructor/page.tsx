@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { Plus, BookOpen, Users, DollarSign, Star, Eye, BarChart2 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import axios, { apiRoutes } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
 import { useRouter } from 'next/navigation';
@@ -108,7 +109,9 @@ export default function InstructorDashboard() {
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-3">
                           {course.thumbnail && (
-                            <img src={course.thumbnail} className="w-10 h-8 rounded object-cover hidden sm:block" alt="" />
+                            <div className="relative w-10 h-8 rounded overflow-hidden hidden sm:block flex-shrink-0">
+                              <Image src={course.thumbnail} alt="" fill sizes="40px" className="object-cover" loading="lazy" />
+                            </div>
                           )}
                           <div>
                             <p className="font-medium text-sm">{course.title}</p>

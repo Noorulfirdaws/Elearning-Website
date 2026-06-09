@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { api } from '@/lib/api';
 import { format } from 'date-fns';
 
@@ -65,7 +66,11 @@ export default function WebinarsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {webinars.map((w) => (
             <div key={w.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-              {w.thumbnail && <img src={w.thumbnail} alt={w.title} className="w-full h-44 object-cover" />}
+              {w.thumbnail && (
+                <div className="relative w-full h-44">
+                  <Image src={w.thumbnail} alt={w.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" loading="lazy" />
+                </div>
+              )}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
                   <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${STATUS_STYLE[w.status]}`}>
@@ -80,7 +85,11 @@ export default function WebinarsPage() {
                   <span>· {w.durationMins}min</span>
                 </div>
                 <div className="flex items-center gap-2 mb-5">
-                  {w.host.avatar && <img src={w.host.avatar} alt="" className="w-8 h-8 rounded-full" />}
+                  {w.host.avatar && (
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                      <Image src={w.host.avatar} alt="" fill sizes="32px" className="object-cover" loading="lazy" />
+                    </div>
+                  )}
                   <span className="text-sm text-gray-600">
                     {w.host.firstName} {w.host.lastName}
                   </span>

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { apiRoutes } from '@/lib/api';
 import { useAuthStore } from '@/store/auth.store';
 import { formatCurrency, formatDuration } from '@/lib/utils';
@@ -136,7 +137,9 @@ export default function CourseDetailPage() {
 
             <div className="flex items-center gap-3">
               {course.instructor.avatar ? (
-                <img src={course.instructor.avatar} className="w-10 h-10 rounded-full" alt="" />
+                <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                  <Image src={course.instructor.avatar} alt="" fill sizes="40px" className="object-cover" loading="lazy" />
+                </div>
               ) : (
                 <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">
                   {course.instructor.firstName[0]}
@@ -249,7 +252,9 @@ export default function CourseDetailPage() {
             <h2 className="text-xl font-bold mb-4">Your Instructor</h2>
             <div className="flex items-start gap-4">
               {course.instructor.avatar ? (
-                <img src={course.instructor.avatar} className="w-16 h-16 rounded-full" alt="" />
+                <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <Image src={course.instructor.avatar} alt="" fill sizes="64px" className="object-cover" loading="lazy" />
+                </div>
               ) : (
                 <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
                   {course.instructor.firstName[0]}
@@ -275,7 +280,9 @@ export default function CourseDetailPage() {
                 <video src={course.trailerUrl || course.previewVideo} controls className="w-full h-full" />
               </div>
             ) : course.thumbnail ? (
-              <img src={course.thumbnail} alt={course.title} className="w-full aspect-video object-cover" />
+              <div className="relative w-full aspect-video">
+                <Image src={course.thumbnail} alt={course.title} fill sizes="(max-width: 768px) 100vw, 400px" className="object-cover" loading="lazy" />
+              </div>
             ) : (
               <div className="aspect-video bg-gradient-to-br from-primary/20 to-purple-500/20 flex items-center justify-center">
                 <PlayCircle className="h-16 w-16 text-primary" />
