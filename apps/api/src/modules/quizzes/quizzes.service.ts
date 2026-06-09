@@ -35,25 +35,25 @@ export class QuizzesService {
             correctAnswers: q.correctAnswers || [],
             explanation: q.explanation,
             points: q.points || 1,
-            order: q.order,
+            position: q.position,
           })),
         },
       },
-      include: { questions: { orderBy: { order: 'asc' } } },
+      include: { questions: { orderBy: { position: 'asc' } } },
     });
   }
 
   async findByLesson(lessonId: string) {
     return this.prisma.quiz.findFirst({
       where: { lessonId },
-      include: { questions: { orderBy: { order: 'asc' } } },
+      include: { questions: { orderBy: { position: 'asc' } } },
     });
   }
 
   async startAttempt(quizId: string, userId: string) {
     const quiz = await this.prisma.quiz.findUnique({
       where: { id: quizId },
-      include: { questions: { orderBy: { order: 'asc' } } },
+      include: { questions: { orderBy: { position: 'asc' } } },
     });
     if (!quiz) throw new NotFoundException('Quiz not found');
 
@@ -71,7 +71,7 @@ export class QuizzesService {
     // Return questions without correct answers
     const questions = quiz.questions.map(q => ({
       id: q.id, text: q.text, type: q.type,
-      options: q.options, points: q.points, order: q.order,
+      options: q.options, points: q.points, position: q.position,
     }));
 
     return { attempt, questions, timeLimit: quiz.timeLimit };

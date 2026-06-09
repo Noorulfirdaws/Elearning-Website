@@ -62,7 +62,7 @@ export class SkillsService {
   async startAssessment(assessmentId: string, userId: string) {
     const assessment = await this.prisma.skillAssessment.findUnique({
       where: { id: assessmentId },
-      include: { questions: { orderBy: { order: 'asc' } } },
+      include: { questions: { orderBy: { position: 'asc' } } },
     });
     if (!assessment) throw new NotFoundException('Assessment not found');
 

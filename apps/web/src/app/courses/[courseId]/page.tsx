@@ -16,16 +16,17 @@ import axios from '@/lib/api';
 
 interface Course {
   id: string; title: string; slug: string; description: string; thumbnail?: string;
-  previewVideo?: string; price: number; comparePrice?: number; isFree: boolean;
+  trailerUrl?: string; previewVideo?: string; price: number; comparePrice?: number; isFree: boolean;
   level: string; language: string; totalStudents: number; rating: number;
-  reviewCount: number; totalDuration: number; totalLessons: number;
+  totalRatings: number; reviewCount?: number; totalDuration: number; totalLessons: number;
   instructor: { id: string; firstName: string; lastName: string; avatar?: string; bio?: string };
   category?: { name: string };
   sections: Array<{
     id: string; title: string; description?: string;
     lessons: Array<{ id: string; title: string; type: string; duration?: number; isFree: boolean }>;
   }>;
-  whatYoullLearn: string[];
+  outcomes: string[];
+  whatYoullLearn?: string[];
   requirements: string[];
   tags: string[];
   isEnrolled?: boolean;
@@ -59,10 +60,15 @@ export default function CourseDetailPage() {
       setEnrolling(true);
       try {
         await axios.post(apiRoutes.enrollments.enroll(course.id));
-        router.push(`/dashboard`);
-      } finally {
-        setEnrolling(false);
+      } catch (err: any) {
+        // 409 = already enrolled, just redirect
+        if (err?.response?.status !== 409) {
+          setEnrolling(false);
+          return;
+        }
       }
+      router.push(`/dashboard`);
+      setEnrolling(false);
     } else {
       router.push(`/checkout/${course.id}`);
     }
@@ -103,12 +109,12 @@ export default function CourseDetailPage() {
             <div className="flex flex-wrap items-center gap-4 text-sm mb-6">
               <div className="flex items-center gap-1">
                 <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-                <span className="font-bold">{course.rating.toFixed(1)}</span>
-                <span className="text-gray-400">({course.reviewCount} reviews)</span>
+                <span className="font-bold">{Number(course.rating || 0).toFixed(1)}</span>
+                <span className="text-gray-400">({course.totalRatings || course.reviewCount || 0} reviews)</span>
               </div>
               <div className="flex items-center gap-1">
                 <Users className="h-4 w-4 text-gray-400" />
-                <span>{course.totalStudents.toLocaleString()} students</span>
+                <span>{(course.totalStudents || 0).toLocaleString()} students</span>
               </div>
               <div className="flex items-center gap-1">
                 <Clock className="h-4 w-4 text-gray-400" />
@@ -155,7 +161,7 @@ export default function CourseDetailPage() {
         <div className="lg:col-span-2 space-y-8">
 
           {/* What You'll Learn */}
-          {course.whatYoullLearn?.length > 0 && (
+          {(course.outcomes || course.whatYoullLearn || []).length > 0 && (
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -163,7 +169,7 @@ export default function CourseDetailPage() {
             >
               <h2 className="text-xl font-bold mb-4">What you'll learn</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {course.whatYoullLearn.map((item, i) => (
+                {(course.outcomes || course.whatYoullLearn || []).map((item, i) => (
                   <div key={i} className="flex items-start gap-2">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                     <span className="text-sm">{item}</span>
@@ -264,9 +270,9 @@ export default function CourseDetailPage() {
         {/* Sticky Purchase Card */}
         <div>
           <div className="sticky top-24 border rounded-xl overflow-hidden shadow-xl">
-            {course.previewVideo ? (
+            {(course.trailerUrl || course.previewVideo) ? (
               <div className="relative aspect-video bg-black">
-                <video src={course.previewVideo} controls className="w-full h-full" />
+                <video src={course.trailerUrl || course.previewVideo} controls className="w-full h-full" />
               </div>
             ) : course.thumbnail ? (
               <img src={course.thumbnail} alt={course.title} className="w-full aspect-video object-cover" />
