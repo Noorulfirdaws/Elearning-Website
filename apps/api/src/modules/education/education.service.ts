@@ -106,6 +106,33 @@ export class EducationService {
     return { ...chapitre, progression };
   }
 
+  async rechercheChapitres(q: string, niveauId?: string, matiereId?: string) {
+    const where: any = { isPublished: true };
+    if (q) where.titre = { contains: q, mode: 'insensitive' };
+    if (matiereId) where.matiereId = matiereId;
+    if (niveauId) where.matiere = { niveauId };
+
+    return this.prisma.chapitre.findMany({
+      where,
+      orderBy: [{ matiere: { niveauId: 'asc' } }, { ordre: 'asc' }],
+      take: 40,
+      select: {
+        id: true,
+        titre: true,
+        ordre: true,
+        matiere: {
+          select: {
+            id: true,
+            nom: true,
+            icone: true,
+            couleur: true,
+            niveau: { select: { id: true, nom: true, cycle: true } },
+          },
+        },
+      },
+    });
+  }
+
   async getChapitresByMatiere(matiereId: string) {
     return this.prisma.chapitre.findMany({
       where: { matiereId, isPublished: true },

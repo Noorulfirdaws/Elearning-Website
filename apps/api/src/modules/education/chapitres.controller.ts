@@ -1,5 +1,5 @@
 import {
-  Controller, Get, Post, Patch, Param, Body, UseGuards, Request,
+  Controller, Get, Post, Patch, Param, Body, Query, UseGuards, Request,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { Public } from '../../common/decorators/public.decorator';
@@ -14,6 +14,18 @@ import { EducationService } from './education.service';
 @Controller('chapitres')
 export class ChapitresController {
   constructor(private readonly eduService: EducationService) {}
+
+  // ─── Recherche globale (doit être avant :id) ────────────────────────────────
+  @Get('recherche')
+  @Public()
+  @ApiOperation({ summary: 'Recherche de chapitres par mot-clé' })
+  recherche(
+    @Query('q') q: string,
+    @Query('niveau') niveauId: string,
+    @Query('matiere') matiereId: string,
+  ) {
+    return this.eduService.rechercheChapitres(q, niveauId, matiereId);
+  }
 
   @Get('matiere/:matiereId')
   @Public()
