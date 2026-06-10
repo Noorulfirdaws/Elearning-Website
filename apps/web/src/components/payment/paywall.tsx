@@ -286,12 +286,28 @@ export default function Paywall({
           <div className="text-center mb-8">
             <div className="text-5xl mb-3">🔒</div>
             <h1 className="text-2xl font-bold text-white mb-2">
-              Contenu reserve
+              Chapitre réservé aux abonnés
             </h1>
             <p className="text-slate-300 text-sm max-w-md mx-auto">
-              <span className="font-semibold text-white">{chapitreNom}</span> est un chapitre payant.
-              Choisissez votre formule pour debloquer l'acces.
+              <span className="font-semibold text-white">{chapitreNom}</span> nécessite un abonnement mensuel.
+              Le 1er chapitre de chaque matière est <span className="text-green-400 font-semibold">gratuit sans inscription</span>.
             </p>
+            {!token && (
+              <div className="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  onClick={() => onConnexion?.()}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl transition-colors text-sm"
+                >
+                  Se connecter
+                </button>
+                <a
+                  href="/register"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl transition-colors text-sm text-center"
+                >
+                  Créer un compte →
+                </a>
+              </div>
+            )}
           </div>
         )}
 
@@ -299,16 +315,30 @@ export default function Paywall({
         {/* ETAPE 1 : Choix de l'offre                                     */}
         {/* ═══════════════════════════════════════════════════════════════ */}
         {etape === 'offres' && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {offres.map((offre) => (
-              <OffreCard
-                key={offre.type}
-                offre={offre}
-                onClick={() => choisirOffre(offre)}
-                estConnecte={!!token}
-              />
-            ))}
-          </div>
+          <>
+            {/* Flux sans compte */}
+            {!token && (
+              <div className="bg-amber-900/30 border border-amber-700 rounded-2xl p-4 mb-6 text-center">
+                <p className="text-amber-300 text-sm font-semibold">
+                  ⚠️ Inscription requise pour payer — crée ton compte gratuitement en 30 secondes
+                </p>
+              </div>
+            )}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {offres.map((offre) => (
+                <OffreCard
+                  key={offre.type}
+                  offre={offre}
+                  onClick={() => choisirOffre(offre)}
+                  estConnecte={!!token}
+                />
+              ))}
+            </div>
+            {/* Note mensuel */}
+            <p className="text-center text-slate-500 text-xs mt-5">
+              🔄 Abonnement mensuel · 🔔 Rappel 2 jours avant expiration · ✂️ Accès coupé si non renouvelé
+            </p>
+          </>
         )}
 
         {/* ═══════════════════════════════════════════════════════════════ */}
@@ -334,7 +364,7 @@ export default function Paywall({
                 <div className="flex justify-between items-center">
                   <span className="text-slate-300 text-sm">{offreChoisie.titre}</span>
                   <span className="text-white font-bold">
-                    {offreChoisie.prix.toLocaleString('fr-DJ')} DJF
+                    {offreChoisie.prix.toLocaleString('fr-DJ')} DJF<span className="text-slate-400 text-xs font-normal">/mois</span>
                   </span>
                 </div>
               </div>
@@ -441,9 +471,12 @@ export default function Paywall({
           <div className="max-w-md mx-auto text-center">
             <div className="bg-slate-800 border border-green-500/30 rounded-2xl p-8 shadow-xl">
               <div className="text-6xl mb-4">🎉</div>
-              <h2 className="text-white font-bold text-2xl mb-2">Acces debloque !</h2>
-              <p className="text-slate-300 text-sm mb-6">
-                {succesMsg} Bon apprentissage !
+              <h2 className="text-white font-bold text-2xl mb-2">Abonnement activé !</h2>
+              <p className="text-slate-300 text-sm mb-2">
+                {succesMsg}
+              </p>
+              <p className="text-slate-400 text-xs mb-6">
+                🔔 Tu recevras un rappel 2 jours avant l'expiration. Bon apprentissage !
               </p>
               <button
                 onClick={onAccesDebloque}
@@ -520,8 +553,8 @@ function OffreCard({
         <span className="text-3xl font-black text-white">
           {offre.prix.toLocaleString('fr-DJ')}
         </span>
-        <span className="text-slate-400 text-sm ml-1">DJF</span>
-        <p className="text-slate-500 text-xs">paiement unique · acces permanent</p>
+        <span className="text-slate-400 text-sm ml-1">DJF<span className="text-xs">/mois</span></span>
+        <p className="text-slate-500 text-xs mt-0.5">🔔 Rappel 2j avant · renouvellement mensuel</p>
       </div>
 
       <ul className="space-y-2 mb-6 flex-1">
@@ -537,7 +570,9 @@ function OffreCard({
         onClick={onClick}
         className={`${c.btn} text-white font-bold py-3 rounded-xl transition w-full text-sm`}
       >
-        {estConnecte ? `Choisir — ${offre.prix.toLocaleString('fr-DJ')} DJF` : 'Se connecter pour acheter'}
+        {estConnecte
+          ? `Souscrire — ${offre.prix.toLocaleString('fr-DJ')} DJF/mois`
+          : '🔐 Créer un compte pour souscrire'}
       </button>
     </div>
   );

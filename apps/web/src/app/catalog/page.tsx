@@ -242,15 +242,37 @@ export default function CatalogPage() {
               </div>
 
               {/* Tarifs rapide */}
-              <div className="mt-12 grid sm:grid-cols-3 gap-4">
+              <div className="mt-12 grid sm:grid-cols-4 gap-4">
                 {[
-                  { label: '🎒 Gratuit', desc: 'Premier chapitre de chaque matière — sans inscription', color: 'bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700' },
-                  { label: '📖 1 000 DJF', desc: 'Un chapitre complet à vie — cours, exemples, exercices, quiz', color: 'bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800' },
-                  { label: '🏆 5 000 DJF', desc: 'Toute l\'année scolaire — tous chapitres + fiches PDF illimitées', color: 'bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800' },
+                  {
+                    label: '🎒 Gratuit',
+                    badge: 'Sans inscription',
+                    desc: '1er chapitre de chaque matière accessible à tous',
+                    color: 'bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700',
+                  },
+                  {
+                    label: '📖 1 000 DJF/mois',
+                    badge: 'Inscription requise',
+                    desc: 'Un chapitre complet — cours, exemples, exercices, quiz',
+                    color: 'bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800',
+                  },
+                  {
+                    label: '🏆 5 000 DJF/mois',
+                    badge: 'Inscription requise',
+                    desc: 'Toutes les matières d\'un niveau scolaire complet',
+                    color: 'bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800',
+                  },
+                  {
+                    label: '🎓 10 000 DJF/mois',
+                    badge: 'Inscription requise',
+                    desc: 'Tout inclus + annales Brevet/Bac + simulateur d\'examen',
+                    color: 'bg-purple-50 dark:bg-purple-950 border border-purple-200 dark:border-purple-800',
+                  },
                 ].map(t => (
                   <div key={t.label} className={`${t.color} rounded-2xl p-5`}>
-                    <p className="font-bold text-gray-900 dark:text-white mb-1">{t.label}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{t.desc}</p>
+                    <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">{t.badge}</span>
+                    <p className="font-bold text-gray-900 dark:text-white mt-1 mb-1">{t.label}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{t.desc}</p>
                   </div>
                 ))}
               </div>
