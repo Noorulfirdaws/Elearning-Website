@@ -2,52 +2,99 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Check, Zap } from 'lucide-react';
+import { Check, Star, BookOpen, GraduationCap, Flame } from 'lucide-react';
 
 const plans = [
   {
-    name: 'Free',
-    price: '$0',
-    period: 'forever',
-    description: 'Perfect for getting started',
-    features: ['Access to 100+ free courses', 'Community access', 'Course certificates', 'Mobile app access'],
-    cta: 'Get started free',
-    href: '/register',
+    name: 'Gratuit',
+    emoji: '🎒',
+    price: '0',
+    currency: 'DJF',
+    period: 'pour toujours',
+    description: 'Commence à apprendre dès maintenant',
+    features: [
+      'Premier chapitre de chaque matière',
+      'Accès au programme complet',
+      'Quiz de validation gratuits',
+      'Cours disponibles hors-ligne',
+    ],
+    cta: 'Commencer gratuitement',
+    href: '/apprendre',
     highlighted: false,
+    color: 'from-gray-700 to-gray-800',
+    icon: BookOpen,
   },
   {
-    name: 'Pro',
-    price: '$29',
-    period: 'per month',
-    description: 'For serious learners',
-    features: ['Unlimited course access', 'AI tutor assistant', 'Priority support', 'Offline downloads', 'Advanced certificates', 'Course completion badges'],
-    cta: 'Start Pro trial',
-    href: '/register?plan=pro',
+    name: 'Chapitre',
+    emoji: '📖',
+    price: '1 000',
+    currency: 'DJF',
+    period: 'par chapitre',
+    description: 'Un chapitre complet, à vie',
+    features: [
+      'Cours complet du chapitre',
+      'Exemples résolus pas à pas',
+      'Exercices avec corrigés détaillés',
+      'Quiz de validation illimités',
+      'Fiches PDF téléchargeables',
+      'Accès à vie',
+    ],
+    cta: 'Acheter un chapitre',
+    href: '/apprendre',
+    highlighted: false,
+    badge: null,
+    color: 'from-blue-600 to-blue-700',
+    icon: BookOpen,
+  },
+  {
+    name: 'Classe',
+    emoji: '🏆',
+    price: '5 000',
+    currency: 'DJF',
+    period: 'toute l\'année',
+    description: 'Tous les chapitres d\'un niveau',
+    features: [
+      'Tous les chapitres du niveau',
+      'Toutes les matières incluses',
+      'Cours + Exemples + Exercices',
+      'Fiches PDF illimitées',
+      'Export cours en PDF',
+      'Quiz illimités + corrigés',
+      'Accès prioritaire aux nouveautés',
+    ],
+    cta: 'Prendre l\'accès Classe',
+    href: '/apprendre',
     highlighted: true,
-    badge: 'Most Popular',
-  },
-  {
-    name: 'Enterprise',
-    price: 'Custom',
-    period: 'per team',
-    description: 'For organizations',
-    features: ['Everything in Pro', 'Team management', 'Custom branding', 'SSO integration', 'Dedicated CSM', 'Analytics dashboard', 'API access'],
-    cta: 'Contact sales',
-    href: '/contact',
-    highlighted: false,
+    badge: '⭐ Le meilleur choix',
+    color: 'from-emerald-600 to-emerald-700',
+    icon: GraduationCap,
   },
 ];
 
 export function PricingPreview() {
   return (
-    <section className="py-24 bg-gray-50 dark:bg-gray-950">
+    <section className="py-20 bg-gray-950">
       <div className="container mx-auto px-4">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4">Simple, transparent <span className="text-gradient">pricing</span></h2>
-          <p className="text-xl text-muted-foreground">Start free, upgrade when you're ready</p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-14"
+        >
+          <span className="inline-block bg-emerald-900/50 text-emerald-400 text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider border border-emerald-700">
+            Tarifs simples
+          </span>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+            Apprends à ton rythme
+          </h2>
+          <p className="text-lg text-gray-400 max-w-xl mx-auto">
+            Paye uniquement ce dont tu as besoin — par chapitre ou toute l'année.
+            <br />
+            <span className="text-emerald-400 font-semibold">Pas d'abonnement, pas de surprise.</span>
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -55,49 +102,78 @@ export function PricingPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`relative rounded-2xl p-8 ${plan.highlighted
-                ? 'bg-gradient-to-b from-blue-600 to-indigo-600 text-white shadow-2xl shadow-blue-500/25 scale-105'
-                : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800'
-              }`}
+              className="relative"
             >
-              {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
-                  <Zap className="w-3 h-3" /> {plan.badge}
+              {plan.highlighted && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+                  <span className="bg-amber-400 text-amber-900 text-xs font-bold px-5 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                    {plan.badge}
+                  </span>
                 </div>
               )}
 
-              <div className="mb-6">
-                <p className={`text-sm font-semibold mb-1 ${plan.highlighted ? 'text-blue-100' : 'text-muted-foreground'}`}>{plan.name}</p>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  <span className={`text-sm ${plan.highlighted ? 'text-blue-200' : 'text-muted-foreground'}`}>/{plan.period}</span>
-                </div>
-                <p className={`text-sm mt-1 ${plan.highlighted ? 'text-blue-100' : 'text-muted-foreground'}`}>{plan.description}</p>
-              </div>
+              <div className={`h-full rounded-2xl overflow-hidden border ${
+                plan.highlighted
+                  ? 'border-emerald-500 shadow-2xl shadow-emerald-900/40 scale-[1.03]'
+                  : 'border-gray-800'
+              } bg-gray-900`}>
 
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm">
-                    <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${plan.highlighted ? 'bg-white/20' : 'bg-green-50 dark:bg-green-950'}`}>
-                      <Check className={`w-3 h-3 ${plan.highlighted ? 'text-white' : 'text-green-600'}`} />
+                {/* En-tête coloré */}
+                <div className={`bg-gradient-to-br ${plan.color} px-7 py-7`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-3xl">{plan.emoji}</span>
+                    <p className="text-white/90 font-bold text-lg">{plan.name}</p>
+                  </div>
+                  <div className="flex items-end gap-1.5">
+                    <span className="text-5xl font-black text-white leading-none">{plan.price}</span>
+                    <div className="mb-1">
+                      <span className="text-white/80 text-sm font-semibold block">{plan.currency}</span>
+                      <span className="text-white/60 text-xs">{plan.period}</span>
                     </div>
-                    {f}
-                  </li>
-                ))}
-              </ul>
+                  </div>
+                  <p className="text-white/70 text-sm mt-2">{plan.description}</p>
+                </div>
 
-              <Link
-                href={plan.href}
-                className={`block text-center py-3 rounded-xl font-semibold transition-all ${plan.highlighted
-                  ? 'bg-white text-blue-600 hover:bg-blue-50'
-                  : 'bg-primary text-primary-foreground hover:bg-primary/90'
-                }`}
-              >
-                {plan.cta}
-              </Link>
+                {/* Features */}
+                <div className="px-7 py-6">
+                  <ul className="space-y-3 mb-7">
+                    {plan.features.map((f) => (
+                      <li key={f} className="flex items-start gap-3 text-sm text-gray-300">
+                        <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 ${
+                          plan.highlighted ? 'bg-emerald-500/20' : 'bg-gray-700'
+                        }`}>
+                          <Check className={`w-2.5 h-2.5 ${plan.highlighted ? 'text-emerald-400' : 'text-gray-400'}`} />
+                        </div>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link
+                    href={plan.href}
+                    className={`block text-center py-3 rounded-xl font-bold text-sm transition-all ${
+                      plan.highlighted
+                        ? 'bg-emerald-500 text-white hover:bg-emerald-400 shadow-lg shadow-emerald-900/50'
+                        : 'bg-gray-800 text-gray-200 hover:bg-gray-700 border border-gray-700'
+                    }`}
+                  >
+                    {plan.cta} →
+                  </Link>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Note bas de page */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center text-gray-500 text-sm mt-10"
+        >
+          💳 Paiement sécurisé · 🇩🇯 Conçu pour les élèves de Djibouti · Accès à vie sur chaque achat
+        </motion.p>
       </div>
     </section>
   );
