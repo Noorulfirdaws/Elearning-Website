@@ -50,6 +50,14 @@ export class UsersController {
     return this.usersService.findById(id);
   }
 
+  // Statistiques admin dashboard
+  @Get('admin/stats')
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.SUPER_ADMIN, UserRole.ADMIN)
+  getAdminStats() {
+    return this.usersService.getAdminStats();
+  }
+
   // Admin endpoints
   @Get()
   @UseGuards(RolesGuard)

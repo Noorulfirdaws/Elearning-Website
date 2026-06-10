@@ -7,6 +7,44 @@ import * as bcrypt from 'bcryptjs';
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
+  async getAdminStats() {
+    const [
+      totalEleves,
+      totalInstructeurs,
+      totalChapitres,
+      achatsValides,
+      achatsCeMois,
+      derniersEleves,
+    ] = await Promise.all([
+      this.prisma.user.count({ where: { role: 'STUDENT' } }),
+      this.prisma.user.count({ where: { role: 'INSTRUCTOR' } }),
+      this.prisma.chapitre.count(),
+      this.prisma.achat.count({ where: { statut: 'VALIDE' } }),
+      this.prisma.achat.aggregate({
+        where: {
+          statut: 'VALIDE',
+          createdAt: { gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1) },
+        },
+        _sum: { montant: true },
+      }),
+      this.prisma.user.findMany({
+        where: { role: 'STUDENT' },
+        orderBy: { createdAt: 'desc' },
+        take: 6,
+        select: { id: true, firstName: true, lastName: true, email: true, createdAt: true, isBanned: true },
+      }),
+    ]);
+
+    return {
+      totalEleves,
+      totalInstructeurs,
+      totalChapitres,
+      achatsValides,
+      revenusMois: achatsCeMois._sum.montant || 0,
+      derniersEleves,
+    };
+  }
+
   async findById(id: string) {
     const user = await this.prisma.user.findUnique({
       where: { id },
