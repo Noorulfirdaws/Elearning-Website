@@ -78,13 +78,20 @@ export class AchatService {
 
     const niveauId = chapitre.matiere.niveauId;
 
+    const maintenant = new Date();
+
+    // Helper : vérifie si un achat est valide ET non expiré
+    const estValide = (achat: any) =>
+      achat?.status === StatutAchat.VALIDE &&
+      (!achat.expiresAt || new Date(achat.expiresAt) > maintenant);
+
     // 5. Verifier si achat CHAPITRE specifique
     const achatChapitre = await this.prisma.achat.findUnique({
       where: {
         userId_typeAcces_itemId: { userId, typeAcces: TypeAcces.CHAPITRE, itemId: chapitreId },
       },
     });
-    if (achatChapitre?.status === StatutAchat.VALIDE) {
+    if (estValide(achatChapitre)) {
       return { autorise: true, raison: 'ACHAT_VALIDE', achat: achatChapitre as any };
     }
 
@@ -94,7 +101,7 @@ export class AchatService {
         userId_typeAcces_itemId: { userId, typeAcces: TypeAcces.CLASSE, itemId: niveauId },
       },
     });
-    if (achatClasse?.status === StatutAchat.VALIDE) {
+    if (estValide(achatClasse)) {
       return { autorise: true, raison: 'ACCES_CLASSE', achat: achatClasse as any };
     }
 
@@ -105,7 +112,7 @@ export class AchatService {
         userId_typeAcces_itemId: { userId, typeAcces: TypeAcces.EXAMEN, itemId: cycleExamen },
       },
     });
-    if (achatExamen?.status === StatutAchat.VALIDE) {
+    if (estValide(achatExamen)) {
       return { autorise: true, raison: 'ACCES_EXAMEN', achat: achatExamen as any };
     }
 
@@ -191,10 +198,12 @@ export class AchatService {
       data: {
         status:        StatutAchat.VALIDE,
         transactionId: params.transactionId,
+        // Abonnement mensuel : accès valable 30 jours
+        expiresAt:     new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
       },
     });
 
-    this.logger.log(`[Achat] VALIDE — user=${params.userId} type=${params.typeAcces} item=${params.itemId} txId=${params.transactionId}`);
+    this.logger.log(`[Achat] VALIDE (30j) — user=${params.userId} type=${params.typeAcces} item=${params.itemId} txId=${params.transactionId} expires=${achat.expiresAt}`);
     return achat;
   }
 
@@ -291,12 +300,14 @@ export class AchatService {
         montantDJF: 0,
         provider:  'ADMIN',
         status:    StatutAchat.VALIDE,
+        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
         metadata:  { note: params.adminNote ?? 'Acces offert par un admin' },
       },
       update: {
-        status:   StatutAchat.VALIDE,
-        provider: 'ADMIN',
-        metadata: { note: params.adminNote ?? 'Acces offert par un admin' },
+        status:    StatutAchat.VALIDE,
+        provider:  'ADMIN',
+        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        metadata:  { note: params.adminNote ?? 'Acces offert par un admin' },
       },
     });
   }

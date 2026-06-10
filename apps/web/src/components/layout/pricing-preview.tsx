@@ -6,40 +6,21 @@ import { Check, Star, BookOpen, GraduationCap, Flame } from 'lucide-react';
 
 const plans = [
   {
-    name: 'Gratuit',
-    emoji: '🎒',
-    price: '0',
-    currency: 'DJF',
-    period: 'pour toujours',
-    description: 'Commence à apprendre dès maintenant',
-    features: [
-      'Premier chapitre de chaque matière',
-      'Accès au programme complet',
-      'Quiz de validation gratuits',
-      'Cours disponibles hors-ligne',
-    ],
-    cta: 'Commencer gratuitement',
-    href: '/apprendre',
-    highlighted: false,
-    color: 'from-gray-700 to-gray-800',
-    icon: BookOpen,
-  },
-  {
     name: 'Chapitre',
     emoji: '📖',
     price: '1 000',
     currency: 'DJF',
-    period: 'par chapitre',
-    description: 'Un chapitre complet, à vie',
+    period: '/mois',
+    description: 'Accès à un chapitre — renouvelé chaque mois',
     features: [
       'Cours complet du chapitre',
       'Exemples résolus pas à pas',
       'Exercices avec corrigés détaillés',
       'Quiz de validation illimités',
       'Fiches PDF téléchargeables',
-      'Accès à vie',
+      'Rappel 2 jours avant expiration',
     ],
-    cta: 'Acheter un chapitre',
+    cta: 'Commencer — 1 000 DJF/mois',
     href: '/apprendre',
     highlighted: false,
     badge: null,
@@ -51,8 +32,8 @@ const plans = [
     emoji: '🏆',
     price: '5 000',
     currency: 'DJF',
-    period: 'toute l\'année',
-    description: 'Tous les chapitres d\'un niveau',
+    period: '/mois',
+    description: 'Tous les chapitres d\'un niveau scolaire',
     features: [
       'Tous les chapitres du niveau',
       'Toutes les matières incluses',
@@ -60,13 +41,36 @@ const plans = [
       'Fiches PDF illimitées',
       'Export cours en PDF',
       'Quiz illimités + corrigés',
-      'Accès prioritaire aux nouveautés',
+      'Rappel 2 jours avant expiration',
     ],
     cta: 'Prendre l\'accès Classe',
     href: '/apprendre',
     highlighted: true,
     badge: '⭐ Le meilleur choix',
     color: 'from-emerald-600 to-emerald-700',
+    icon: GraduationCap,
+  },
+  {
+    name: 'Examen',
+    emoji: '🎓',
+    price: '10 000',
+    currency: 'DJF',
+    period: '/mois',
+    description: 'Préparation intensive Brevet / Bac',
+    features: [
+      'Tout l\'accès Classe inclus',
+      'Annales des examens nationaux',
+      'Corrigés détaillés',
+      'Fiches de révision',
+      'Simulateur d\'examen chronométré',
+      'Conseils de méthode',
+      'Rappel 2 jours avant expiration',
+    ],
+    cta: 'Pack Examen — 10 000 DJF/mois',
+    href: '/apprendre',
+    highlighted: false,
+    badge: null,
+    color: 'from-purple-700 to-purple-900',
     icon: GraduationCap,
   },
 ];
@@ -88,9 +92,9 @@ export function PricingPreview() {
             Apprends à ton rythme
           </h2>
           <p className="text-lg text-gray-400 max-w-xl mx-auto">
-            Paye uniquement ce dont tu as besoin — par chapitre ou toute l'année.
+            Abonnement mensuel — paye chaque mois, accès coupé si non renouvelé.
             <br />
-            <span className="text-emerald-400 font-semibold">Pas d'abonnement, pas de surprise.</span>
+            <span className="text-emerald-400 font-semibold">🔔 Rappel automatique 2 jours avant expiration.</span>
           </p>
         </motion.div>
 
@@ -166,14 +170,20 @@ export function PricingPreview() {
         </div>
 
         {/* Note bas de page */}
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center text-gray-500 text-sm mt-10"
+          className="mt-10 bg-gray-800/50 border border-gray-700 rounded-2xl px-6 py-4 max-w-2xl mx-auto"
         >
-          💳 Paiement sécurisé · 🇩🇯 Conçu pour les élèves de Djibouti · Accès à vie sur chaque achat
-        </motion.p>
+          <p className="text-center text-gray-300 text-sm font-medium mb-2">ℹ️ Comment fonctionne l'abonnement ?</p>
+          <ul className="text-xs text-gray-400 space-y-1.5 text-center">
+            <li>📅 L'accès est valable <strong className="text-white">30 jours</strong> à partir du paiement</li>
+            <li>🔔 Un rappel SMS/notification est envoyé <strong className="text-white">2 jours avant</strong> l'expiration</li>
+            <li>🔒 Sans renouvellement, l'accès est <strong className="text-white">automatiquement coupé</strong> à la date d'expiration</li>
+            <li>💳 Paiement via <strong className="text-white">Waafi · D-Money</strong> · Conçu pour les élèves 🇩🇯</li>
+          </ul>
+        </motion.div>
       </div>
     </section>
   );
