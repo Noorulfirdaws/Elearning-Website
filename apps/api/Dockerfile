@@ -21,4 +21,5 @@ WORKDIR /app/apps/api
 RUN npx tsc -p tsconfig.json || true
 
 EXPOSE 3000
+ENV PORT=3000
 CMD ["node", "dist/main.js"]
