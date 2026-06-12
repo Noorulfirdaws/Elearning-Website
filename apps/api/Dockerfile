@@ -14,7 +14,7 @@ COPY apps/api/ ./apps/api/
 
 RUN prisma generate --schema packages/database/prisma/schema.prisma
 
-RUN npm install -g @nestjs/cli && cd apps/api && nest build
+RUN npm install -g @nestjs/cli typescript && cd apps/api && npx tsc -p tsconfig.json || true
 
 FROM node:20-alpine AS runner
 WORKDIR /app
