@@ -1,20 +1,24 @@
 FROM node:20-alpine
 WORKDIR /app
 
-RUN npm install -g pnpm prisma@5.22.0 @nestjs/cli typescript
+RUN npm install -g prisma@5.22.0 @nestjs/cli typescript
 
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
-COPY packages/database/package.json ./packages/database/
-COPY apps/api/package.json ./apps/api/
-
-RUN echo "shamefully-hoist=true" >> .npmrc && pnpm install --no-frozen-lockfile
-
+# Copy all needed files
 COPY packages/database/ ./packages/database/
 COPY apps/api/ ./apps/api/
+COPY package.json ./
 
+# Install deps using npm (flat node_modules, no hoisting issues)
+WORKDIR /app/apps/api
+RUN npm install --legacy-peer-deps
+
+# Generate Prisma client
+WORKDIR /app
 RUN prisma generate --schema packages/database/prisma/schema.prisma
 
-RUN cd apps/api && npx tsc -p tsconfig.json || true
+# Build
+WORKDIR /app/apps/api
+RUN npx tsc -p tsconfig.json || true
 
-EXPOSE 3001
-CMD ["node", "apps/api/dist/main.js"]
+EXPOSE 3000
+CMD ["node", "dist/main.js"]
