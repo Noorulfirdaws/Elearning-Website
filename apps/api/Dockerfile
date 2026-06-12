@@ -6,18 +6,15 @@ RUN npm install -g prisma@5.22.0 @nestjs/cli typescript
 # Copy all needed files
 COPY packages/database/ ./packages/database/
 COPY apps/api/ ./apps/api/
-COPY package.json ./
 
-# Install deps using npm (flat node_modules, no hoisting issues)
+# Install deps in api directory
 WORKDIR /app/apps/api
 RUN npm install --legacy-peer-deps
 
-# Generate Prisma client
-WORKDIR /app
-RUN prisma generate --schema packages/database/prisma/schema.prisma
+# Generate Prisma client FROM api directory so client lands in api/node_modules
+RUN prisma generate --schema /app/packages/database/prisma/schema.prisma
 
 # Build
-WORKDIR /app/apps/api
 RUN npx tsc -p tsconfig.json || true
 
 EXPOSE 3000
