@@ -3,23 +3,22 @@ WORKDIR /app
 
 RUN npm install -g pnpm
 
-# Copy workspace config
+# Copy workspace config and package manifests that exist
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY packages/database/package.json ./packages/database/
-COPY packages/shared/package.json ./packages/shared/
 COPY apps/api/package.json ./apps/api/
 
 RUN pnpm install --no-frozen-lockfile
 
-# Copy source
-COPY packages/ ./packages/
+# Copy source code
+COPY packages/database/ ./packages/database/
 COPY apps/api/ ./apps/api/
 
-# Generate Prisma client explicitly
+# Generate Prisma client
 RUN npx prisma generate --schema packages/database/prisma/schema.prisma
 
-# Build API only (not turbo, not web)
-RUN pnpm --filter @lms/api exec nest build
+# Build API
+RUN cd apps/api && npx nest build
 
 FROM node:20-alpine AS runner
 WORKDIR /app
@@ -28,12 +27,10 @@ RUN npm install -g pnpm
 
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY packages/database/package.json ./packages/database/
-COPY packages/shared/package.json ./packages/shared/
 COPY apps/api/package.json ./apps/api/
 
 RUN pnpm install --no-frozen-lockfile --prod
 
-# Copy built output and generated Prisma client
 COPY --from=builder /app/apps/api/dist ./apps/api/dist
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/packages/database/prisma ./packages/database/prisma
