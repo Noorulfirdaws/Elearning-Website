@@ -35,21 +35,11 @@ export default function ApprendrePage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Navbar />
 
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-700 via-blue-600 to-green-600 text-white pt-24 pb-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-medium mb-6">
-              🇩🇯 Programme scolaire de Djibouti
-            </div>
-            <h1 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-              Choisir ton niveau
-            </h1>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-              Des cours structurés, des exercices pratiques et des quiz interactifs —
-              conçus pour les élèves djiboutiens du collège au lycée.
-            </p>
-          </motion.div>
+      {/* Header compact */}
+      <section className="bg-gradient-to-r from-blue-700 to-blue-500 text-white pt-16 pb-4 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-lg font-bold">Choisir ton niveau</h1>
+          <p className="text-blue-100 text-xs mt-0.5">Programme scolaire Djibouti · Collège et Lycée</p>
         </div>
       </section>
 

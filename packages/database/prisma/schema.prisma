@@ -1622,6 +1622,10 @@ model Chapitre {
   exercices     Json   // [ { enonce, corrige_detaille } ]
   quiz          Json   // [ { question, options, reponse_correcte, explication_pedagogique } ]
 
+  // Fichiers pédagogiques uploadés (PDF, Word, Excel, PPT, etc.)
+  // [ { nom, url, type, taille, acces: 'GRATUIT'|'CLASSE'|'CHAPITRE' } ]
+  fichiers      Json     @default("[]")
+
   // Liens médias externes (nécessitent connexion)
   youtubeUrl      String?
   khanAcademyUrl  String?

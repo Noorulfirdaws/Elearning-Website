@@ -54,7 +54,7 @@ loadEnv();
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const API_BASE          = 'http://localhost:3001/api/v1';
-const CLAUDE_MODEL      = 'claude-opus-4-5';
+const CLAUDE_MODEL      = 'claude-sonnet-4-5';
 const ANTHROPIC_URL     = 'https://api.anthropic.com/v1/messages';
 
 // Fichier de progression (permet --resume)
@@ -625,7 +625,7 @@ function buildPrompt(niveauNom, nomMatiere, titreChapitre, cycle) {
     : 'collège (niveau accessible, exemples concrets, langage clair)';
 
   return `Tu es un professeur expert du système éducatif français enseignant à Djibouti.
-Génère le contenu pédagogique COMPLET pour le chapitre suivant :
+Génère le contenu pédagogique pour le chapitre suivant :
 
 NIVEAU   : ${niveauNom} (${contexte})
 MATIÈRE  : ${nomMatiere}
@@ -637,8 +637,8 @@ CONSIGNES STRICTES :
 - Utilise un français académique correct
 - Génère exactement 3 points clés dans le cours
 - Génère exactement 3 exemples résolus
-- Génère exactement 3 exercices avec leur corrigé
 - Génère exactement 5 questions de quiz (4 options chacune, 1 bonne réponse)
+- NE génère PAS d'exercices (les professeurs les fourniront en PDF)
 
 RÉPONDS UNIQUEMENT AVEC CE JSON (PAS de commentaires, PAS de markdown, PAS de texte avant/après) :
 {
@@ -676,20 +676,7 @@ RÉPONDS UNIQUEMENT AVEC CE JSON (PAS de commentaires, PAS de markdown, PAS de t
       "resolution_pas_a_pas": "Étape 1 : ... Étape 2 : ... Étape 3 : ... Conclusion : ..."
     }
   ],
-  "exercices": [
-    {
-      "enonce": "Énoncé complet et précis de l'exercice 1 (avec toutes les données)",
-      "corrige_detaille": "Correction étape par étape avec explications"
-    },
-    {
-      "enonce": "Énoncé complet et précis de l'exercice 2",
-      "corrige_detaille": "Correction étape par étape avec explications"
-    },
-    {
-      "enonce": "Énoncé complet et précis de l'exercice 3",
-      "corrige_detaille": "Correction étape par étape avec explications"
-    }
-  ],
+  "exercices": [],
   "quiz": [
     {
       "question": "Question précise et sans ambiguïté",
@@ -727,23 +714,33 @@ RÉPONDS UNIQUEMENT AVEC CE JSON (PAS de commentaires, PAS de markdown, PAS de t
 
 // ─── API LearnHub (créer + mettre à jour les chapitres) ───────────────────────
 
-let authToken = null;
+let authToken    = null;
+let lastLoginAt  = 0;
+const TOKEN_TTL  = 12 * 60 * 1000; // re-login toutes les 12 min (JWT expire à 15m)
 
 async function login() {
   const res = await fetch(`${API_BASE}/auth/login`, {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
     body:    JSON.stringify({
-      email:    'cabdikarimcaligeydh@gmail.com',
+      email:    'noorulfirdaws@gmail.com',
       password: 'Instructor123!',
     }),
   });
 
   if (!res.ok) throw new Error(`Login échoué: HTTP ${res.status}`);
   const data = await res.json();
-  authToken = data.data?.accessToken || data.data?.tokens?.accessToken;
+  authToken   = data.data?.accessToken || data.data?.tokens?.accessToken;
+  lastLoginAt = Date.now();
   if (!authToken) throw new Error('Token JWT non trouvé dans la réponse login');
   log.success(`Connecté à l'API LearnHub (JWT obtenu)`);
+}
+
+async function ensureFreshToken() {
+  if (Date.now() - lastLoginAt > TOKEN_TTL) {
+    log.info('🔄 Renouvellement du token JWT...');
+    await login();
+  }
 }
 
 function getAuthHeaders() {
@@ -829,7 +826,7 @@ async function main() {
   console.log(c('bold', c('blue', `
 ╔═══════════════════════════════════════════════════════════╗
 ║         LearnHub Djibouti — Générateur de masse           ║
-║         Powered by Anthropic Claude (claude-opus-4-5)      ║
+║         Powered by Anthropic Claude (claude-sonnet-4-5)    ║
 ╚═══════════════════════════════════════════════════════════╝`)));
   console.log('');
 
@@ -943,6 +940,9 @@ async function main() {
     }
 
     try {
+      // 0. S'assurer que le token JWT est encore valide
+      await ensureFreshToken();
+
       // 1. Récupérer l'ID de la matière en DB
       const matiereId = await getMatiereId(task.niveauId, task.nomMatiere);
       if (!matiereId) {
@@ -953,7 +953,7 @@ async function main() {
       }
 
       // 2. Appel Claude
-      log.step('Appel Claude (claude-opus-4-5)...');
+      log.step(`Appel Claude (${CLAUDE_MODEL})...`);
       const prompt  = buildPrompt(task.niveauNom, task.nomMatiere, task.titreChapitre, task.cycle);
       const contenu = await callClaude(prompt);
 

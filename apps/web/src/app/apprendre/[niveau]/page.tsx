@@ -23,16 +23,14 @@ export default function NiveauPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Navbar />
 
-      {/* Header */}
-      <div className="bg-gradient-to-br from-blue-700 to-blue-500 text-white pt-24 pb-10 px-4">
+      {/* Header compact */}
+      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white pt-16 pb-4 px-4">
         <div className="max-w-4xl mx-auto">
-          <Link href="/apprendre" className="inline-flex items-center gap-1 text-blue-100 hover:text-white mb-4 text-sm transition-colors">
-            <ChevronLeft className="h-4 w-4" /> Tous les niveaux
+          <Link href="/apprendre" className="inline-flex items-center gap-1 text-blue-100 hover:text-white mb-1 text-xs transition-colors">
+            <ChevronLeft className="h-3 w-3" /> Tous les niveaux
           </Link>
-          <h1 className="text-4xl font-bold">{niveau.nom}</h1>
-          <p className="text-blue-100 mt-2">
-            {niveau.matieres?.length || 0} matières disponibles
-          </p>
+          <h1 className="text-lg font-bold">{niveau.nom}</h1>
+          <p className="text-blue-100 text-xs">{niveau.matieres?.length || 0} matières disponibles</p>
         </div>
       </div>
 

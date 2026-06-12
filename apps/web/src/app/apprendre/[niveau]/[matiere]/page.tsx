@@ -25,22 +25,22 @@ export default function MatierePage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Navbar />
 
-      {/* Header coloré selon la matière */}
+      {/* Header compact */}
       <div
-        className="text-white pt-24 pb-10 px-4"
+        className="text-white pt-16 pb-4 px-4"
         style={{ background: `linear-gradient(135deg, ${matiere.couleur}dd, ${matiere.couleur}99)` }}
       >
-        <div className="max-w-3xl mx-auto">
-          <Link href={`/apprendre/${niveauId}`} className="inline-flex items-center gap-1 text-white/80 hover:text-white mb-4 text-sm transition-colors">
-            <ChevronLeft className="h-4 w-4" /> {matiere.niveau?.nom}
+        <div className="max-w-4xl mx-auto">
+          <Link href={`/apprendre/${niveauId}`} className="inline-flex items-center gap-1 text-white/70 hover:text-white mb-2 text-xs transition-colors">
+            <ChevronLeft className="h-3 w-3" /> {matiere.niveau?.nom}
           </Link>
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center text-3xl">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center text-lg flex-shrink-0">
               {matiere.icone}
             </div>
             <div>
-              <h1 className="text-3xl font-bold">{matiere.nom}</h1>
-              <p className="text-white/80 mt-1">{chapitres.length} chapitre{chapitres.length > 1 ? 's' : ''} au programme</p>
+              <h1 className="text-lg font-bold leading-tight">{matiere.nom}</h1>
+              <p className="text-white/70 text-xs">{chapitres.length} chapitre{chapitres.length > 1 ? 's' : ''} au programme</p>
             </div>
           </div>
         </div>

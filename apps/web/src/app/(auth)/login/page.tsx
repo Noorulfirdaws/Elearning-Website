@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -25,6 +25,8 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [requiresMfa, setRequiresMfa] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get('redirect');
   const { setUser, setTokens } = useAuthStore();
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({
@@ -47,9 +49,16 @@ export default function LoginPage() {
       toast.success(`Bon retour, ${result.user.firstName} !`);
 
       const role = result.user.role;
-      if (role === 'SUPER_ADMIN' || role === 'ADMIN') router.push('/admin');
-      else if (role === 'INSTRUCTOR') router.push('/instructor');
-      else router.push('/dashboard');
+      // Si l'élève venait d'un chapitre payant → on le ramène au chapitre
+      if (redirectTo && role === 'STUDENT') {
+        router.push(redirectTo);
+      } else if (role === 'SUPER_ADMIN' || role === 'ADMIN') {
+        router.push('/admin');
+      } else if (role === 'INSTRUCTOR') {
+        router.push('/instructor');
+      } else {
+        router.push(redirectTo || '/dashboard');
+      }
     } catch (err: any) {
       const msg = err?.response?.data?.message || '';
       if (msg === 'EMAIL_NOT_VERIFIED') {

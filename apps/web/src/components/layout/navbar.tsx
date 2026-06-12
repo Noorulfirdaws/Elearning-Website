@@ -66,31 +66,7 @@ export function Navbar() {
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
 
-      {/* ── Barre d'annonce ──────────────────────────────────── */}
-      <AnimatePresence>
-        {bannerVisible && (
-          <motion.div
-            initial={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="bg-emerald-700 text-white text-sm overflow-hidden"
-          >
-            <div className="container mx-auto px-4 h-10 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-2 truncate">
-                <Megaphone className="w-4 h-4 flex-shrink-0" />
-                <span className="truncate">🇩🇯 Programme scolaire Djibouti — Tous les cours gratuits pour les élèves !</span>
-              </div>
-              <div className="flex items-center gap-3 flex-shrink-0">
-                <Link href="/apprendre" className="bg-white text-emerald-700 font-semibold text-xs px-4 py-1.5 rounded-full hover:bg-emerald-50 transition-colors whitespace-nowrap">
-                  Commencer
-                </Link>
-                <button onClick={() => setBannerVisible(false)} className="text-white/70 hover:text-white">
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Barre d'annonce supprimée — déplacée en bas de la home page */}
 
       {/* ── Navbar principale ─────────────────────────────────── */}
       <header className={cn(

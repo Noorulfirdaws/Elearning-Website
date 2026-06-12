@@ -72,6 +72,9 @@ export default function ChapitreDetailPage() {
   const [uploading,    setUploading]    = useState(false);
   const [uploadMsg,    setUploadMsg]    = useState('');
 
+  // PDF embed viewer
+  const [previewFichier, setPreviewFichier] = useState<{ nom: string; blobUrl: string } | null>(null);
+
   // PDF export
   const [exportingPdf, setExportingPdf] = useState(false);
 
@@ -163,7 +166,6 @@ export default function ChapitreDetailPage() {
   };
 
   const handleDownload = async (fichier: any) => {
-    const token = accessToken;
     const url = `/chapitres/${chapitreId}/fichiers/${fichier.id}/download`;
     try {
       const res = await axios.get(url, { responseType: 'blob' });
@@ -172,9 +174,27 @@ export default function ChapitreDetailPage() {
       link.href = URL.createObjectURL(blob);
       link.download = fichier.nom;
       link.click();
-    } catch (e: any) {
+    } catch {
       alert('Accès refusé ou fichier non disponible.');
     }
+  };
+
+  const handlePreview = async (fichier: any) => {
+    const url = `/chapitres/${chapitreId}/fichiers/${fichier.id}/download`;
+    try {
+      const res = await axios.get(url, { responseType: 'blob' });
+      const mimeType = fichier.type === 'pdf' ? 'application/pdf' : res.data.type;
+      const blob = new Blob([res.data], { type: mimeType });
+      const blobUrl = URL.createObjectURL(blob);
+      setPreviewFichier({ nom: fichier.nom, blobUrl });
+    } catch {
+      alert('Impossible d\'afficher ce fichier.');
+    }
+  };
+
+  const closePreview = () => {
+    if (previewFichier) URL.revokeObjectURL(previewFichier.blobUrl);
+    setPreviewFichier(null);
   };
 
   const handleExportPdf = () => {
@@ -728,12 +748,22 @@ export default function ChapitreDetailPage() {
                               </div>
                               <div className="flex items-center gap-2 flex-shrink-0">
                                 {accessible ? (
-                                  <button
-                                    onClick={() => handleDownload(f)}
-                                    className="flex items-center gap-1.5 bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-indigo-700 transition-colors"
-                                  >
-                                    <Download className="h-3.5 w-3.5" /> Télécharger
-                                  </button>
+                                  <>
+                                    {f.type === 'pdf' && (
+                                      <button
+                                        onClick={() => handlePreview(f)}
+                                        className="flex items-center gap-1.5 bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-indigo-200 dark:hover:bg-indigo-800 transition-colors"
+                                      >
+                                        <FileText className="h-3.5 w-3.5" /> Aperçu
+                                      </button>
+                                    )}
+                                    <button
+                                      onClick={() => handleDownload(f)}
+                                      className="flex items-center gap-1.5 bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-indigo-700 transition-colors"
+                                    >
+                                      <Download className="h-3.5 w-3.5" /> Télécharger
+                                    </button>
+                                  </>
                                 ) : (
                                   <span className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 text-gray-400 px-3 py-1.5 rounded-lg text-xs font-semibold">
                                     <Lock className="h-3.5 w-3.5" /> Accès requis
@@ -832,6 +862,49 @@ export default function ChapitreDetailPage() {
 
         </AnimatePresence>
       </div>{/* fin max-w-5xl */}
+
+      {/* ─── Modal Aperçu PDF ─────────────────────────────────────────── */}
+      {previewFichier && (
+        <div
+          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+          onClick={closePreview}
+        >
+          <div
+            className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col overflow-hidden"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Barre du modal */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-indigo-600 text-white">
+              <div className="flex items-center gap-3 min-w-0">
+                <FileText className="h-5 w-5 flex-shrink-0" />
+                <span className="font-semibold truncate">{previewFichier.nom}</span>
+              </div>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <a
+                  href={previewFichier.blobUrl}
+                  download={previewFichier.nom}
+                  className="flex items-center gap-1.5 bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
+                >
+                  <Download className="h-3.5 w-3.5" /> Télécharger
+                </a>
+                <button
+                  onClick={closePreview}
+                  className="p-1.5 hover:bg-white/20 rounded-lg transition-colors text-xl font-bold leading-none"
+                  title="Fermer"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+            {/* Iframe PDF */}
+            <iframe
+              src={previewFichier.blobUrl}
+              className="flex-1 w-full"
+              title={previewFichier.nom}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
