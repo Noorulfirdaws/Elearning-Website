@@ -15,7 +15,7 @@ COPY packages/database/ ./packages/database/
 COPY apps/api/ ./apps/api/
 
 # Generate Prisma client
-RUN npx prisma generate --schema packages/database/prisma/schema.prisma
+RUN ./node_modules/.bin/prisma generate --schema packages/database/prisma/schema.prisma
 
 # Build API
 RUN cd apps/api && npx nest build
