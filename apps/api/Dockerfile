@@ -7,7 +7,7 @@ COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY packages/database/package.json ./packages/database/
 COPY apps/api/package.json ./apps/api/
 
-RUN pnpm install --no-frozen-lockfile
+RUN echo "shamefully-hoist=true" >> .npmrc && pnpm install --no-frozen-lockfile
 
 COPY packages/database/ ./packages/database/
 COPY apps/api/ ./apps/api/
