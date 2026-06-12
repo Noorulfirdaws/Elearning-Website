@@ -1,29 +1,42 @@
-FROM node:20-alpine AS base
-RUN apk add --no-cache libc6-compat openssl && corepack enable pnpm
-
-FROM base AS deps
+FROM node:20-alpine AS builder
 WORKDIR /app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY apps/api/package.json ./apps/api/
+
+RUN npm install -g pnpm
+
+# Copy workspace config
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY packages/database/package.json ./packages/database/
-RUN pnpm install --frozen-lockfile
+COPY packages/shared/package.json ./packages/shared/
+COPY apps/api/package.json ./apps/api/
 
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN pnpm --filter @lms/database run generate
-RUN pnpm --filter @lms/api run build
+RUN pnpm install --no-frozen-lockfile
+
+# Copy source
+COPY packages/ ./packages/
+COPY apps/api/ ./apps/api/
+
+# Generate Prisma client explicitly
+RUN npx prisma generate --schema packages/database/prisma/schema.prisma
+
+# Build API only (not turbo, not web)
+RUN pnpm --filter @lms/api exec nest build
 
 FROM node:20-alpine AS runner
-RUN apk add --no-cache openssl
 WORKDIR /app
-ENV NODE_ENV=production
-RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nestjs
-COPY --from=builder --chown=nestjs:nodejs /app/apps/api/dist ./dist
-COPY --from=builder --chown=nestjs:nodejs /app/node_modules ./node_modules
-COPY --from=builder /app/packages/database/prisma ./prisma
-USER nestjs
+
+RUN npm install -g pnpm
+
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY packages/database/package.json ./packages/database/
+COPY packages/shared/package.json ./packages/shared/
+COPY apps/api/package.json ./apps/api/
+
+RUN pnpm install --no-frozen-lockfile --prod
+
+# Copy built output and generated Prisma client
+COPY --from=builder /app/apps/api/dist ./apps/api/dist
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/packages/database/prisma ./packages/database/prisma
+
 EXPOSE 3001
-ENV PORT=3001
-CMD ["node", "dist/main"]
+CMD ["node", "apps/api/dist/main.js"]
