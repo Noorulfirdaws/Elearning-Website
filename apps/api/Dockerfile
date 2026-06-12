@@ -1,23 +1,19 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm prisma
 
-# Copy workspace config and package manifests that exist
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY packages/database/package.json ./packages/database/
 COPY apps/api/package.json ./apps/api/
 
 RUN pnpm install --no-frozen-lockfile
 
-# Copy source code
 COPY packages/database/ ./packages/database/
 COPY apps/api/ ./apps/api/
 
-# Generate Prisma client
-RUN cd packages/database && pnpm exec prisma generate
+RUN prisma generate --schema packages/database/prisma/schema.prisma
 
-# Build API
 RUN cd apps/api && npx nest build
 
 FROM node:20-alpine AS runner
