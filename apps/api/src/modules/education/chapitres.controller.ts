@@ -70,7 +70,7 @@ export class ChapitresController {
   @Roles(UserRole.INSTRUCTOR, UserRole.ADMIN, UserRole.SUPER_ADMIN)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Créer un chapitre (vide)' })
-  create(@Body() body: { id: string; matiereId: string; titre: string; ordre: number; youtubeUrl?: string }) {
+  create(@Body() body: { id: string; matiereId: string; titre: string; ordre: number; youtubeUrl?: string; isPublished?: boolean }) {
     return this.eduService.createChapitre(body);
   }
 

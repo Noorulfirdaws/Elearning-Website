@@ -1,20 +1,52 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ChevronLeft, BookOpen, CheckCircle, Lock } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronLeft, BookOpen, CheckCircle, Lock, Plus, Loader2 } from 'lucide-react';
 import axios from '@/lib/api';
 import { Navbar } from '@/components/layout/navbar';
+import { useAuthStore } from '@/store/auth.store';
 
 export default function MatierePage() {
   const { niveau: niveauId, matiere: matiereId } = useParams<{ niveau: string; matiere: string }>();
+  const { user } = useAuthStore();
+  const queryClient = useQueryClient();
+  const isAdmin = ['SUPER_ADMIN', 'ADMIN', 'INSTRUCTOR'].includes(user?.role || '');
+
+  const [showForm, setShowForm] = useState(false);
+  const [titre, setTitre] = useState('');
+  const [creating, setCreating] = useState(false);
+  const [createMsg, setCreateMsg] = useState('');
 
   const { data: matiere, isLoading } = useQuery<any>({
     queryKey: ['matiere', matiereId],
     queryFn: () => axios.get(`/matieres/${matiereId}`).then(r => r.data.data),
   });
+
+  async function handleCreate() {
+    if (!titre.trim()) return;
+    setCreating(true);
+    setCreateMsg('');
+    try {
+      const slug = titre.trim().toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+      const id = `${matiereId.slice(0, 8)}-${slug}-${Date.now().toString(36)}`;
+      const ordre = (matiere?.chapitres?.length || 0) + 1;
+      await axios.post('/chapitres', { id, matiereId, titre: titre.trim(), ordre, isPublished: true });
+      setTitre('');
+      setShowForm(false);
+      setCreateMsg('✅ Chapitre créé ! Ouvre-le pour ajouter ton PDF.');
+      await queryClient.invalidateQueries({ queryKey: ['matiere', matiereId] });
+    } catch (e: any) {
+      setCreateMsg('❌ Erreur : ' + (e?.response?.data?.message || e.message));
+    } finally {
+      setCreating(false);
+    }
+  }
 
   if (isLoading) return <LoadingSkeleton />;
   if (!matiere) return <div className="min-h-screen flex items-center justify-center">Matière introuvable</div>;
@@ -48,6 +80,47 @@ export default function MatierePage() {
 
       {/* Liste des chapitres */}
       <div className="max-w-3xl mx-auto px-4 py-8">
+        {isAdmin && (
+          <div className="mb-6">
+            {!showForm ? (
+              <button
+                onClick={() => setShowForm(true)}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-600 text-white font-medium hover:bg-green-700 transition-colors text-sm"
+              >
+                <Plus className="h-4 w-4" /> Nouveau chapitre
+              </button>
+            ) : (
+              <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-4 space-y-3">
+                <p className="text-sm font-semibold text-gray-900 dark:text-white">Créer un chapitre</p>
+                <input
+                  autoFocus
+                  value={titre}
+                  onChange={(e) => setTitre(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleCreate()}
+                  placeholder="Titre du chapitre (ex: Les temps du passé)"
+                  className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleCreate}
+                    disabled={creating || !titre.trim()}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-green-600 text-white text-sm font-medium hover:bg-green-700 disabled:opacity-50 transition-colors"
+                  >
+                    {creating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
+                    Créer
+                  </button>
+                  <button
+                    onClick={() => { setShowForm(false); setTitre(''); }}
+                    className="px-4 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  >
+                    Annuler
+                  </button>
+                </div>
+              </div>
+            )}
+            {createMsg && <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">{createMsg}</p>}
+          </div>
+        )}
         {chapitres.length === 0 ? (
           <div className="text-center py-16">
             <div className="text-5xl mb-4">📚</div>

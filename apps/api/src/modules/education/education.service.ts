@@ -324,15 +324,17 @@ Renvoie UNIQUEMENT un objet JSON valide, sans texte avant ni après, structuré 
     titre: string;
     ordre: number;
     youtubeUrl?: string;
+    isPublished?: boolean;
   }) {
+    const { isPublished, ...rest } = data;
     return this.prisma.chapitre.create({
       data: {
-        ...data,
+        ...rest,
         contenuCours: {},
         exemples: [],
         exercices: [],
         quiz: [],
-        isPublished: false,
+        isPublished: isPublished ?? false,
       },
     });
   }
