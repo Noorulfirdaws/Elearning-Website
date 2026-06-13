@@ -1,6 +1,8 @@
 FROM node:20-alpine
 WORKDIR /app
 
+RUN apk add --no-cache openssl openssl-dev libc6-compat
+
 RUN npm install -g prisma@5.22.0 @nestjs/cli typescript
 
 # Copy all needed files
