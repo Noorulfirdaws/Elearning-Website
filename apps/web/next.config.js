@@ -23,8 +23,9 @@ const YOUTUBE_EMBED = 'https://www.youtube.com https://www.youtube-nocookie.com'
 
 const ContentSecurityPolicy = [
   `default-src 'self'`,
-  // Scripts : self + Next.js HMR en dev uniquement
-  `script-src 'self' ${isDev ? "'unsafe-inline' 'unsafe-eval'" : ''}`,
+  // Scripts : Next.js App Router injecte des scripts inline d'hydratation —
+  // 'unsafe-inline' requis (sans nonce middleware). 'unsafe-eval' en dev seulement.
+  `script-src 'self' 'unsafe-inline' ${isDev ? "'unsafe-eval'" : ''}`,
   // Styles : self + inline pour Tailwind (nécessaire)
   `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
   // Fonts
