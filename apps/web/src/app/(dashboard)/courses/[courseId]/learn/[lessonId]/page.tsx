@@ -354,7 +354,6 @@ export default function CoursePlayerPage() {
             {currentLesson?.type === 'VIDEO' && currentLesson.videoUrl && (
               <VideoPlayer
                 src={currentLesson.videoUrl}
-                hlsUrl={currentLesson.hlsUrl}
                 poster={currentLesson.thumbnailUrl}
                 initialPosition={lessonProgress?.lastPosition}
                 onProgress={(data) => updateProgressMutation.mutate(data)}
