@@ -53,7 +53,7 @@ function loadEnv() {
 loadEnv();
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const API_BASE          = 'http://localhost:3001/api/v1';
+const API_BASE          = process.env.GEN_API_BASE || 'https://elearning-website-production.up.railway.app/api/v1';
 const CLAUDE_MODEL      = 'claude-sonnet-4-5';
 const ANTHROPIC_URL     = 'https://api.anthropic.com/v1/messages';
 
@@ -723,8 +723,8 @@ async function login() {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
     body:    JSON.stringify({
-      email:    'noorulfirdaws@gmail.com',
-      password: 'Instructor123!',
+      email:    process.env.GEN_EMAIL || 'noorulfirdaws@gmail.com',
+      password: process.env.GEN_PASSWORD,
     }),
   });
 
