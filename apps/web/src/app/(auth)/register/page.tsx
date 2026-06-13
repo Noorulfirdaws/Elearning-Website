@@ -44,7 +44,7 @@ export default function RegisterPage() {
       } else {
         setUser(result.user);
         setTokens(result.accessToken, result.refreshToken);
-        toast.success('Compte créé ! Bienvenue sur LearnHub Djibouti !');
+        toast.success('Compte créé ! Bienvenue sur NoorAcademie Djibouti !');
         router.push('/dashboard');
       }
     } catch (err) {
@@ -55,13 +55,13 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex">
       {/* Left visual */}
-      <div className="hidden lg:flex flex-1 bg-gradient-to-br from-indigo-600 to-purple-700 items-center justify-center p-12 relative overflow-hidden">
+      <div className="hidden lg:flex flex-1 bg-gradient-to-br from-emerald-600 to-purple-700 items-center justify-center p-12 relative overflow-hidden">
         <div className="relative text-center text-white max-w-md">
           <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <GraduationCap className="w-9 h-9 text-white" />
           </div>
           <h2 className="text-4xl font-bold mb-4">🇩🇯 Commence ton parcours</h2>
-          <p className="text-indigo-100 text-lg leading-relaxed">
+          <p className="text-emerald-100 text-lg leading-relaxed">
             Rejoins des milliers d'élèves djiboutiens. Accède aux cours du programme officiel et progresse à ton rythme.
           </p>
           <div className="mt-12 space-y-4 text-left">
@@ -75,7 +75,7 @@ export default function RegisterPage() {
                 <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                   <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                 </div>
-                <span className="text-indigo-100 text-sm">{f}</span>
+                <span className="text-emerald-100 text-sm">{f}</span>
               </div>
             ))}
           </div>
@@ -87,10 +87,10 @@ export default function RegisterPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-2 font-bold text-xl mb-6">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-green-600 to-emerald-600 rounded-lg flex items-center justify-center">
                 <GraduationCap className="w-5 h-5 text-white" />
               </div>
-              LearnHub
+              NoorAcademie
             </Link>
             <h1 className="text-3xl font-bold">Créer un compte</h1>
             <p className="text-muted-foreground mt-2">

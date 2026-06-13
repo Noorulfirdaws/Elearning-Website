@@ -28,7 +28,7 @@ export default function LearningPathsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-64">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -59,7 +59,7 @@ export default function LearningPathsPage() {
                 )}
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-2">
-                    <h2 className="text-lg font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
+                    <h2 className="text-lg font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
                       {path.title}
                     </h2>
                     {completed && (
@@ -78,15 +78,15 @@ export default function LearningPathsPage() {
                     <div>
                       <div className="flex justify-between text-xs mb-1">
                         <span className="text-gray-500">Progress</span>
-                        <span className="font-medium text-indigo-600">{progress}%</span>
+                        <span className="font-medium text-emerald-600">{progress}%</span>
                       </div>
                       <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-indigo-600 rounded-full" style={{ width: `${progress}%` }} />
+                        <div className="h-full bg-emerald-600 rounded-full" style={{ width: `${progress}%` }} />
                       </div>
                     </div>
                   )}
                   {progress === null && (
-                    <span className="text-sm font-semibold text-indigo-600">Start Path →</span>
+                    <span className="text-sm font-semibold text-emerald-600">Start Path →</span>
                   )}
                 </div>
               </Link>

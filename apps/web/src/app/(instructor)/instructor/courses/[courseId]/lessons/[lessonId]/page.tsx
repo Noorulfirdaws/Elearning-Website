@@ -245,7 +245,7 @@ export default function LessonEditPage() {
               )}
 
               {form.videoUrl && !ytId && (
-                <p className="mt-2 text-xs text-blue-600">Direct video URL — will be played with the built-in player.</p>
+                <p className="mt-2 text-xs text-green-600">Direct video URL — will be played with the built-in player.</p>
               )}
             </div>
 

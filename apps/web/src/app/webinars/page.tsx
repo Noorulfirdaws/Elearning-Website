@@ -21,7 +21,7 @@ interface Webinar {
 
 const STATUS_STYLE: Record<string, string> = {
   LIVE: 'bg-red-100 text-red-700 animate-pulse',
-  SCHEDULED: 'bg-blue-100 text-blue-700',
+  SCHEDULED: 'bg-green-100 text-green-700',
   ENDED: 'bg-gray-100 text-gray-600',
   CANCELLED: 'bg-orange-100 text-orange-700',
 };
@@ -45,7 +45,7 @@ export default function WebinarsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-64">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -109,7 +109,7 @@ export default function WebinarsPage() {
                   ) : (
                     <button
                       onClick={() => register(w.id)}
-                      className="w-full bg-indigo-600 text-white rounded-xl py-2.5 font-semibold hover:bg-indigo-700 transition-colors"
+                      className="w-full bg-emerald-600 text-white rounded-xl py-2.5 font-semibold hover:bg-emerald-700 transition-colors"
                     >
                       Register
                     </button>

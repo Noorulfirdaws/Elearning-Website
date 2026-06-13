@@ -48,10 +48,10 @@ export default function NotificationsPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Notifications</h1>
-          {unreadCount > 0 && <p className="text-indigo-600 text-sm mt-1">{unreadCount} unread</p>}
+          {unreadCount > 0 && <p className="text-emerald-600 text-sm mt-1">{unreadCount} unread</p>}
         </div>
         {unreadCount > 0 && (
-          <button onClick={markAllRead} className="text-sm text-gray-500 hover:text-indigo-600 transition-colors font-medium">
+          <button onClick={markAllRead} className="text-sm text-gray-500 hover:text-emerald-600 transition-colors font-medium">
             Mark all as read
           </button>
         )}
@@ -59,7 +59,7 @@ export default function NotificationsPage() {
 
       {loading ? (
         <div className="flex justify-center py-20">
-          <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : notifications.length === 0 ? (
         <div className="text-center py-20">
@@ -72,13 +72,13 @@ export default function NotificationsPage() {
             <div
               key={n.id}
               onClick={() => { if (!n.isRead) markRead(n.id); if (n.link) window.location.href = n.link; }}
-              className={`flex gap-4 p-4 rounded-2xl cursor-pointer transition-colors ${n.isRead ? 'bg-white border border-gray-100' : 'bg-indigo-50 border border-indigo-100'} hover:shadow-sm`}
+              className={`flex gap-4 p-4 rounded-2xl cursor-pointer transition-colors ${n.isRead ? 'bg-white border border-gray-100' : 'bg-emerald-50 border border-emerald-100'} hover:shadow-sm`}
             >
               <div className="text-2xl flex-shrink-0">{TYPE_ICON[n.type] || '🔔'}</div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
                   <p className={`text-sm font-semibold ${n.isRead ? 'text-gray-700' : 'text-gray-900'}`}>{n.title}</p>
-                  {!n.isRead && <span className="w-2 h-2 bg-indigo-600 rounded-full flex-shrink-0 mt-1.5" />}
+                  {!n.isRead && <span className="w-2 h-2 bg-emerald-600 rounded-full flex-shrink-0 mt-1.5" />}
                 </div>
                 <p className="text-sm text-gray-500 mt-0.5 line-clamp-2">{n.message}</p>
                 <p className="text-xs text-gray-400 mt-1">

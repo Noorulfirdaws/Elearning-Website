@@ -24,7 +24,7 @@ const plans = [
     href: '/apprendre',
     highlighted: false,
     badge: null,
-    color: 'from-blue-600 to-blue-700',
+    color: 'from-green-600 to-green-700',
     icon: BookOpen,
   },
   {

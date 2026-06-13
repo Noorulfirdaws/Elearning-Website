@@ -1,6 +1,6 @@
 'use client';
 /**
- * Paywall — Composant mur de paiement LearnHub Djibouti
+ * Paywall — Composant mur de paiement NoorAcademie Djibouti
  * ======================================================
  * Affiche les 3 offres tarifaires et le formulaire de paiement Waafi/D-Money.
  *
@@ -296,7 +296,7 @@ export default function Paywall({
               <div className="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
                 <button
                   onClick={() => onConnexion?.()}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl transition-colors text-sm"
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-2.5 rounded-xl transition-colors text-sm"
                 >
                   Se connecter
                 </button>
@@ -382,7 +382,7 @@ export default function Paywall({
                   placeholder="77 XX XX XX"
                   value={telephone}
                   onChange={(e) => setTelephone(e.target.value)}
-                  className="flex-1 bg-slate-700 border border-slate-600 text-white px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 bg-slate-700 border border-slate-600 text-white px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
               </div>
               <p className="text-slate-500 text-xs mb-5">
@@ -398,7 +398,7 @@ export default function Paywall({
               <button
                 onClick={lancerPaiement}
                 disabled={chargement || !telephone.trim()}
-                className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-900 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl transition"
+                className="w-full bg-green-600 hover:bg-green-500 disabled:bg-green-900 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl transition"
               >
                 {chargement ? '⏳ Connexion...' : `💳 Payer ${offreChoisie.prix.toLocaleString('fr-DJ')} DJF`}
               </button>
@@ -429,7 +429,7 @@ export default function Paywall({
               {/* Barre de progression */}
               <div className="bg-slate-700 rounded-full h-2 mb-2 overflow-hidden">
                 <div
-                  className="bg-blue-500 h-2 rounded-full transition-all duration-500"
+                  className="bg-green-500 h-2 rounded-full transition-all duration-500"
                   style={{ width: `${Math.min((pollCount / 36) * 100, 100)}%` }}
                 />
               </div>
@@ -531,7 +531,7 @@ function OffreCard({
   estConnecte: boolean;
 }) {
   const couleurs: Record<string, { bg: string; border: string; btn: string; badge: string }> = {
-    blue:   { bg: 'bg-blue-950/40',   border: 'border-blue-500/30',   btn: 'bg-blue-600 hover:bg-blue-500',   badge: 'bg-blue-600'   },
+    blue:   { bg: 'bg-green-950/40',   border: 'border-green-500/30',   btn: 'bg-green-600 hover:bg-green-500',   badge: 'bg-green-600'   },
     green:  { bg: 'bg-green-950/40',  border: 'border-green-500/30',  btn: 'bg-green-600 hover:bg-green-500',  badge: 'bg-green-600'  },
     purple: { bg: 'bg-purple-950/40', border: 'border-purple-500/30', btn: 'bg-purple-600 hover:bg-purple-500', badge: 'bg-purple-600' },
   };

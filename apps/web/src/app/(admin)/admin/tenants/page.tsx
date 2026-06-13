@@ -15,7 +15,7 @@ interface Tenant {
 
 const PLAN_STYLE: Record<string, string> = {
   STARTER: 'bg-gray-100 text-gray-600',
-  PROFESSIONAL: 'bg-blue-100 text-blue-700',
+  PROFESSIONAL: 'bg-green-100 text-green-700',
   ENTERPRISE: 'bg-purple-100 text-purple-700',
 };
 
@@ -39,7 +39,7 @@ export default function AdminTenantsPage() {
           <h1 className="text-3xl font-bold text-gray-900">Tenants</h1>
           <p className="text-gray-500 mt-1">{tenants.length} tenants</p>
         </div>
-        <button className="bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors">
+        <button className="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-emerald-700 transition-colors">
           + New Tenant
         </button>
       </div>
@@ -80,7 +80,7 @@ export default function AdminTenantsPage() {
                 <td className="px-5 py-4">
                   <button
                     onClick={() => toggleActive(tenant.id, tenant.isActive)}
-                    className="text-xs font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
+                    className="text-xs font-medium text-emerald-600 hover:text-emerald-800 transition-colors"
                   >
                     {tenant.isActive ? 'Deactivate' : 'Activate'}
                   </button>

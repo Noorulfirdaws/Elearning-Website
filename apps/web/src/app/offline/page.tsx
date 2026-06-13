@@ -5,12 +5,12 @@ import { WifiOff, BookOpen, RefreshCw } from 'lucide-react';
 
 export default function OfflinePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center px-4">
       <div className="text-center max-w-md">
 
         {/* Icône */}
         <div className="w-24 h-24 bg-white rounded-3xl shadow-lg flex items-center justify-center mx-auto mb-8">
-          <WifiOff className="w-12 h-12 text-blue-600" />
+          <WifiOff className="w-12 h-12 text-green-600" />
         </div>
 
         <h1 className="text-3xl font-bold text-gray-900 mb-3">
@@ -27,7 +27,7 @@ export default function OfflinePage() {
         <div className="flex flex-col gap-3">
           <button
             onClick={() => window.location.reload()}
-            className="flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-blue-700 transition-colors"
+            className="flex items-center justify-center gap-2 bg-green-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-green-700 transition-colors"
           >
             <RefreshCw className="w-5 h-5" />
             Réessayer
@@ -35,7 +35,7 @@ export default function OfflinePage() {
 
           <Link
             href="/apprendre"
-            className="flex items-center justify-center gap-2 bg-white text-blue-600 border border-blue-200 px-8 py-3.5 rounded-xl font-semibold hover:bg-blue-50 transition-colors"
+            className="flex items-center justify-center gap-2 bg-white text-green-600 border border-green-200 px-8 py-3.5 rounded-xl font-semibold hover:bg-green-50 transition-colors"
           >
             <BookOpen className="w-5 h-5" />
             Cours en cache
@@ -50,7 +50,7 @@ export default function OfflinePage() {
           </p>
         </div>
 
-        <p className="text-xs text-gray-400 mt-6">🇩🇯 LearnHub Djibouti</p>
+        <p className="text-xs text-gray-400 mt-6">🇩🇯 NoorAcademie Djibouti</p>
       </div>
     </div>
   );

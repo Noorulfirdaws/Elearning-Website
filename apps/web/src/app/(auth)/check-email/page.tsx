@@ -29,10 +29,10 @@ export default function CheckEmailPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-purple-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-purple-50 px-4">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 max-w-md w-full text-center">
-        <div className="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-          <Mail className="w-8 h-8 text-indigo-600" />
+        <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <Mail className="w-8 h-8 text-emerald-600" />
         </div>
 
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Vérifie ton e-mail</h1>
@@ -60,7 +60,7 @@ export default function CheckEmailPage() {
           {sent ? 'E-mail renvoyé !' : resending ? 'Envoi en cours…' : 'Renvoyer l\'e-mail de vérification'}
         </button>
 
-        <Link href="/login" className="text-sm text-indigo-600 hover:underline font-medium">
+        <Link href="/login" className="text-sm text-emerald-600 hover:underline font-medium">
           Retour à la connexion
         </Link>
       </div>

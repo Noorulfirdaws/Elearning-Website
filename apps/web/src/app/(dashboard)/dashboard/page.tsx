@@ -53,7 +53,7 @@ export default function DashboardPage() {
         {/* Statistiques */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
-            { label: 'Cours inscrits', value: enrollments?.length || 0, icon: BookOpen, color: 'text-blue-500 bg-blue-50 dark:bg-blue-950' },
+            { label: 'Cours inscrits', value: enrollments?.length || 0, icon: BookOpen, color: 'text-green-500 bg-green-50 dark:bg-green-950' },
             { label: 'En cours', value: inProgress.length, icon: TrendingUp, color: 'text-orange-500 bg-orange-50 dark:bg-orange-950' },
             { label: 'Terminés', value: completed.length, icon: CheckCircle, color: 'text-green-500 bg-green-50 dark:bg-green-950' },
             { label: 'Certificats', value: certificates?.length || 0, icon: Award, color: 'text-yellow-500 bg-yellow-50 dark:bg-yellow-950' },
@@ -97,7 +97,7 @@ export default function DashboardPage() {
                           {enrollment.course.thumbnail ? (
                             <Image src={enrollment.course.thumbnail} alt={enrollment.course.title} fill sizes="64px" className="object-cover" loading="lazy" />
                           ) : (
-                            <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center">
+                            <div className="w-full h-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
                               <BookOpen className="w-6 h-6 text-white" />
                             </div>
                           )}

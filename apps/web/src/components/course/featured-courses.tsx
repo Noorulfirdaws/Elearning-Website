@@ -11,8 +11,8 @@ import { formatDuration, formatCurrency } from '@/lib/utils';
 const levelColors: Record<string, string> = {
   BEGINNER: 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400',
   Beginner: 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400',
-  INTERMEDIATE: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400',
-  Intermediate: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400',
+  INTERMEDIATE: 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400',
+  Intermediate: 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400',
   ADVANCED: 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400',
   Advanced: 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400',
 };
@@ -49,7 +49,7 @@ export function FeaturedCourses() {
       <div className="container mx-auto px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex items-end justify-between mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-4 border border-blue-200 dark:border-blue-800">
+            <div className="inline-flex items-center gap-2 bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300 px-4 py-2 rounded-full text-sm font-medium mb-4 border border-green-200 dark:border-green-800">
               Top rated courses
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold">
@@ -115,7 +115,7 @@ export function FeaturedCourses() {
 
                     <div className="p-5 flex flex-col flex-1">
                       {course.category && (
-                        <div className="text-xs text-blue-600 dark:text-blue-400 font-medium mb-1">{course.category.name}</div>
+                        <div className="text-xs text-green-600 dark:text-green-400 font-medium mb-1">{course.category.name}</div>
                       )}
                       <h3 className="font-semibold text-base mb-1 line-clamp-2 group-hover:text-primary transition-colors">{course.title}</h3>
                       {course.description && (

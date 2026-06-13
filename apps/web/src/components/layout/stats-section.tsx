@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Users, BookOpen, Award, Globe } from 'lucide-react';
 
 const stats = [
-  { icon: Users, value: '7', label: 'Niveaux scolaires', color: 'text-blue-500' },
+  { icon: Users, value: '7', label: 'Niveaux scolaires', color: 'text-green-500' },
   { icon: BookOpen, value: '38', label: 'Matières au programme', color: 'text-green-500' },
   { icon: Award, value: '6ème–Tle', label: 'Collège & Lycée', color: 'text-yellow-500' },
   { icon: Globe, value: '100%', label: 'Programme djiboutien', color: 'text-purple-500' },

@@ -24,13 +24,13 @@ export default function NiveauPage() {
       <Navbar />
 
       {/* Header compact */}
-      <div className="bg-gradient-to-r from-blue-700 to-blue-500 text-white pt-16 pb-4 px-4">
+      <div className="bg-gradient-to-r from-green-700 to-green-500 text-white pt-16 pb-4 px-4">
         <div className="max-w-4xl mx-auto">
-          <Link href="/apprendre" className="inline-flex items-center gap-1 text-blue-100 hover:text-white mb-1 text-xs transition-colors">
+          <Link href="/apprendre" className="inline-flex items-center gap-1 text-green-100 hover:text-white mb-1 text-xs transition-colors">
             <ChevronLeft className="h-3 w-3" /> Tous les niveaux
           </Link>
           <h1 className="text-lg font-bold">{niveau.nom}</h1>
-          <p className="text-blue-100 text-xs">{niveau.matieres?.length || 0} matières disponibles</p>
+          <p className="text-green-100 text-xs">{niveau.matieres?.length || 0} matières disponibles</p>
         </div>
       </div>
 
@@ -91,7 +91,7 @@ function MatiereCard({ matiere, niveauId, index }: { matiere: any; niveauId: str
 function LoadingSkeleton() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="h-48 bg-blue-600 animate-pulse" />
+      <div className="h-48 bg-green-600 animate-pulse" />
       <div className="max-w-4xl mx-auto px-4 py-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {[...Array(5)].map((_, i) => (
           <div key={i} className="h-40 bg-gray-200 rounded-2xl animate-pulse" />

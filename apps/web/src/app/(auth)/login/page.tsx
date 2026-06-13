@@ -74,7 +74,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex">
       {/* Left visual */}
-      <div className="hidden lg:flex flex-1 bg-gradient-to-br from-blue-600 to-indigo-700 items-center justify-center p-12 relative overflow-hidden">
+      <div className="hidden lg:flex flex-1 bg-gradient-to-br from-green-600 to-emerald-700 items-center justify-center p-12 relative overflow-hidden">
         <div className="absolute inset-0">
           {[...Array(20)].map((_, i) => (
             <div key={i} className="absolute w-2 h-2 bg-white/10 rounded-full" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }} />
@@ -85,7 +85,7 @@ export default function LoginPage() {
             <GraduationCap className="w-9 h-9 text-white" />
           </div>
           <h2 className="text-4xl font-bold mb-4">Bon retour ! 🇩🇯</h2>
-          <p className="text-blue-100 text-lg max-w-sm">
+          <p className="text-green-100 text-lg max-w-sm">
             Continue ton parcours scolaire. Tu es à un pas de tes objectifs.
           </p>
           <div className="mt-12 grid grid-cols-2 gap-4 text-left">
@@ -97,7 +97,7 @@ export default function LoginPage() {
             ].map((s) => (
               <div key={s.label} className="bg-white/10 rounded-xl p-4">
                 <p className="text-2xl font-bold">{s.value}</p>
-                <p className="text-blue-200 text-sm">{s.label}</p>
+                <p className="text-green-200 text-sm">{s.label}</p>
               </div>
             ))}
           </div>
@@ -113,10 +113,10 @@ export default function LoginPage() {
         >
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-2 font-bold text-xl mb-6">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-green-600 to-emerald-600 rounded-lg flex items-center justify-center">
                 <GraduationCap className="w-5 h-5 text-white" />
               </div>
-              LearnHub
+              NoorAcademie
             </Link>
             <h1 className="text-3xl font-bold">Se connecter</h1>
             <p className="text-muted-foreground mt-2">

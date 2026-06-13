@@ -9,26 +9,26 @@ import { OfflineSync } from '@/components/pwa/offline-sync';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: { default: 'LearnHub Djibouti — Plateforme éducative', template: '%s | LearnHub Djibouti' },
+  title: { default: 'NoorAcademie Djibouti — Plateforme éducative', template: '%s | NoorAcademie Djibouti' },
   description: 'Cours gratuits pour les élèves de Djibouti — du collège (6ème) au lycée (Terminale). Maths, SVT, Physique, Français, Histoire-Géo.',
   keywords: ['cours djibouti', 'education djibouti', 'brevet djibouti', 'bac djibouti', 'collège lycée', 'mathématiques', 'SVT', 'physique'],
-  authors: [{ name: 'LearnHub Djibouti' }],
-  creator: 'LearnHub Djibouti',
+  authors: [{ name: 'NoorAcademie Djibouti' }],
+  creator: 'NoorAcademie Djibouti',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'LearnHub 🇩🇯',
+    title: 'NoorAcademie 🇩🇯',
   },
   formatDetection: { telephone: false },
   openGraph: {
     type: 'website',
     locale: 'fr_DJ',
-    siteName: 'LearnHub Djibouti',
-    title: 'LearnHub Djibouti — Cours gratuits du collège au lycée',
+    siteName: 'NoorAcademie Djibouti',
+    title: 'NoorAcademie Djibouti — Cours gratuits du collège au lycée',
     description: 'Plateforme éducative pour les élèves de Djibouti.',
   },
-  twitter: { card: 'summary_large_image', title: 'LearnHub Djibouti 🇩🇯', description: 'Cours gratuits pour les élèves djiboutiens' },
+  twitter: { card: 'summary_large_image', title: 'NoorAcademie Djibouti 🇩🇯', description: 'Cours gratuits pour les élèves djiboutiens' },
   robots: { index: true, follow: true },
 };
 
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="LearnHub 🇩🇯" />
+        <meta name="apple-mobile-web-app-title" content="NoorAcademie 🇩🇯" />
         {/* PWA — Microsoft */}
         <meta name="msapplication-TileImage" content="/icon-144.png" />
         <meta name="msapplication-TileColor" content="#2563EB" />

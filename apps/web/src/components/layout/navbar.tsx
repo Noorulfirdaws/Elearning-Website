@@ -79,11 +79,11 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 font-bold text-lg flex-shrink-0">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
+            <div className="w-8 h-8 bg-gradient-to-br from-green-600 to-emerald-600 rounded-lg flex items-center justify-center shadow-sm">
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
             <span className="hidden sm:block text-gray-900 dark:text-white">
-              Learn<span className="text-blue-600">Hub</span>
+              Learn<span className="text-green-600">Hub</span>
             </span>
           </Link>
 
@@ -97,7 +97,7 @@ export function Navbar() {
                 className={cn(
                   'px-3 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap',
                   pathname === item.href
-                    ? 'bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
+                    ? 'bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300'
                     : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800',
                 )}
               >
@@ -112,7 +112,7 @@ export function Navbar() {
                 className={cn(
                   'flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap',
                   classeOpen || pathname.startsWith('/apprendre')
-                    ? 'bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
+                    ? 'bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300'
                     : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 )}
               >
@@ -132,10 +132,10 @@ export function Navbar() {
                     {/* Collège */}
                     <div className="p-3">
                       <div className="flex items-center gap-2 px-2 py-1.5 mb-1">
-                        <div className="w-6 h-6 bg-blue-100 dark:bg-blue-950 rounded-md flex items-center justify-center">
-                          <School className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                        <div className="w-6 h-6 bg-green-100 dark:bg-green-950 rounded-md flex items-center justify-center">
+                          <School className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
                         </div>
-                        <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">
+                        <span className="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wider">
                           Collège — Brevet
                         </span>
                       </div>
@@ -145,11 +145,11 @@ export function Navbar() {
                             key={n.id}
                             href={`/apprendre/${n.id}`}
                             onClick={() => setClasseOpen(false)}
-                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-950 group transition-colors"
+                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-green-50 dark:hover:bg-green-950 group transition-colors"
                           >
                             <span className="text-xl w-7 text-center">{n.icone}</span>
                             <div>
-                              <p className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
+                              <p className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors">
                                 {n.nom}
                               </p>
                               <p className="text-xs text-gray-400 dark:text-gray-500">{n.desc}</p>
@@ -196,7 +196,7 @@ export function Navbar() {
                       <Link
                         href="/apprendre"
                         onClick={() => setClasseOpen(false)}
-                        className="flex items-center justify-center gap-2 w-full py-2 bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity"
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-gradient-to-r from-green-600 to-green-600 text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity"
                       >
                         Voir tous les niveaux →
                       </Link>
@@ -224,7 +224,7 @@ export function Navbar() {
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
                   className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white text-xs font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white text-xs font-bold">
                     {user.firstName[0]}{user.lastName[0]}
                   </div>
                   <span className="hidden md:block text-sm font-medium text-gray-700 dark:text-gray-300 max-w-24 truncate">
@@ -270,7 +270,7 @@ export function Navbar() {
                 <Link href="/login" className="px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                   Se connecter
                 </Link>
-                <Link href="/register" className="px-4 py-2 rounded-lg text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm">
+                <Link href="/register" className="px-4 py-2 rounded-lg text-sm font-semibold bg-green-600 text-white hover:bg-green-700 transition-colors shadow-sm">
                   S'inscrire
                 </Link>
               </div>
@@ -299,7 +299,7 @@ export function Navbar() {
                   <Link key={item.name} href={item.href} onClick={() => setMobileOpen(false)}
                     className={cn('px-4 py-2.5 rounded-xl text-sm font-medium transition-colors',
                       pathname === item.href
-                        ? 'bg-blue-50 dark:bg-blue-950 text-blue-700'
+                        ? 'bg-green-50 dark:bg-green-950 text-green-700'
                         : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                     )}>
                     {item.name}
@@ -308,13 +308,13 @@ export function Navbar() {
 
                 {/* Collège mobile */}
                 <div className="px-4 py-2">
-                  <p className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <p className="text-xs font-bold text-green-600 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                     <School className="w-3.5 h-3.5" /> Collège
                   </p>
                   <div className="grid grid-cols-2 gap-1.5">
                     {COLLEGE.map((n) => (
                       <Link key={n.id} href={`/apprendre/${n.id}`} onClick={() => setMobileOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-950 rounded-xl text-sm font-medium text-blue-700 dark:text-blue-300 hover:bg-blue-100 transition-colors">
+                        className="flex items-center gap-2 px-3 py-2 bg-green-50 dark:bg-green-950 rounded-xl text-sm font-medium text-green-700 dark:text-green-300 hover:bg-green-100 transition-colors">
                         <span>{n.icone}</span> {n.nom}
                       </Link>
                     ))}
@@ -344,7 +344,7 @@ export function Navbar() {
                       Se connecter
                     </Link>
                     <Link href="/register" onClick={() => setMobileOpen(false)}
-                      className="text-center py-2.5 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:bg-blue-700 transition-colors">
+                      className="text-center py-2.5 bg-green-600 text-white rounded-xl text-sm font-semibold hover:bg-green-700 transition-colors">
                       S'inscrire
                     </Link>
                   </div>

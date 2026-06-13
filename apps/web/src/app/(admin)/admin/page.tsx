@@ -78,13 +78,13 @@ export default function AdminDashboardPage() {
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <Shield className="h-5 w-5 text-indigo-600" />
-              <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest">Tableau de bord</span>
+              <Shield className="h-5 w-5 text-emerald-600" />
+              <span className="text-xs font-bold text-emerald-600 uppercase tracking-widest">Tableau de bord</span>
             </div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               {greet()}{user ? `, ${(user as any).firstName || 'Admin'}` : ''} 👋
             </h1>
-            <p className="text-sm text-gray-400 mt-0.5">LearnHub Djibouti — Vue d'ensemble de la plateforme</p>
+            <p className="text-sm text-gray-400 mt-0.5">NoorAcademie Djibouti — Vue d'ensemble de la plateforme</p>
           </div>
           <Link
             href="/apprendre"
@@ -104,7 +104,7 @@ export default function AdminDashboardPage() {
             value={loading ? '…' : (stats?.totalEleves ?? 0)}
             sub="Comptes STUDENT actifs"
             icon={Users}
-            color="bg-blue-500"
+            color="bg-green-500"
             href="/admin/users"
             delay={0}
           />
@@ -152,7 +152,7 @@ export default function AdminDashboardPage() {
                   <Clock className="h-4 w-4 text-gray-400" />
                   <h2 className="font-bold text-gray-900 dark:text-white text-sm">Derniers élèves inscrits</h2>
                 </div>
-                <Link href="/admin/users" className="text-xs text-blue-600 hover:text-blue-700 font-semibold">
+                <Link href="/admin/users" className="text-xs text-green-600 hover:text-green-700 font-semibold">
                   Voir tous →
                 </Link>
               </div>
@@ -167,7 +167,7 @@ export default function AdminDashboardPage() {
                   {stats.derniersEleves.map((eleve) => (
                     <div key={eleve.id} className="flex items-center justify-between px-6 py-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                           {(eleve.firstName?.[0] || '?').toUpperCase()}
                         </div>
                         <div>
@@ -210,7 +210,7 @@ export default function AdminDashboardPage() {
               </div>
               <div className="p-4 space-y-2">
                 {[
-                  { label: 'Gérer les utilisateurs', sub: 'Élèves, instructeurs, rôles', icon: UserCheck, href: '/admin/users', color: 'text-blue-600 bg-blue-50 dark:bg-blue-950' },
+                  { label: 'Gérer les utilisateurs', sub: 'Élèves, instructeurs, rôles', icon: UserCheck, href: '/admin/users', color: 'text-green-600 bg-green-50 dark:bg-green-950' },
                   { label: 'Contenu pédagogique', sub: 'Niveaux, matières, chapitres', icon: GraduationCap, href: '/apprendre', color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-950' },
                   { label: 'Analytiques', sub: 'Progression et statistiques', icon: BarChart3, href: '/admin/analytics', color: 'text-purple-600 bg-purple-50 dark:bg-purple-950' },
                   { label: 'Paramètres', sub: 'Configuration plateforme', icon: Settings, href: '/admin/settings', color: 'text-gray-600 bg-gray-50 dark:bg-gray-800' },
@@ -234,12 +234,12 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Niveaux rapides */}
-            <div className="mt-4 bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl p-5 text-white">
+            <div className="mt-4 bg-gradient-to-br from-emerald-600 to-green-700 rounded-2xl p-5 text-white">
               <p className="font-bold text-sm mb-1">🇩🇯 Programme Djibouti</p>
-              <p className="text-xs text-blue-100 mb-4">Collège C6→C3 · Lycée LS→LT</p>
+              <p className="text-xs text-green-100 mb-4">Collège C6→C3 · Lycée LS→LT</p>
               <Link
                 href="/apprendre"
-                className="block text-center bg-white text-indigo-700 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-blue-50 transition-colors"
+                className="block text-center bg-white text-emerald-700 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-green-50 transition-colors"
               >
                 Voir les cours →
               </Link>

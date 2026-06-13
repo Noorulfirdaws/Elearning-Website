@@ -41,9 +41,9 @@ const PROVIDERS = [
     id: 'waafi' as Provider,
     name: 'WaafiPay',
     logo: '🏦',
-    color: 'from-blue-600 to-blue-700',
-    border: 'border-blue-200 dark:border-blue-800',
-    bg: 'bg-blue-50 dark:bg-blue-950',
+    color: 'from-green-600 to-green-700',
+    border: 'border-green-200 dark:border-green-800',
+    bg: 'bg-green-50 dark:bg-green-950',
     wallets: ['Salaam Bank', 'ZAAD', 'EVCPlus', 'SAHAL'],
     placeholder: '2526XXXXXXX',
     description: 'Payez avec votre wallet Salaam, ZAAD ou EVCPlus',
@@ -199,7 +199,7 @@ export function DjiboutiPayment({ courseId, courseTitle, amount, currency = 'USD
         <p className="text-2xl mb-1">🇩🇯</p>
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">Paiement local Djibouti</h2>
         <p className="text-sm text-gray-500 mt-1 line-clamp-1">{courseTitle}</p>
-        <div className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-sm font-bold mt-2">
+        <div className="inline-flex items-center gap-1.5 bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300 px-3 py-1 rounded-full text-sm font-bold mt-2">
           {amount} {currency}
         </div>
       </div>
@@ -281,7 +281,7 @@ export function DjiboutiPayment({ courseId, courseTitle, amount, currency = 'USD
                 value={phone}
                 onChange={e => setPhone(e.target.value)}
                 placeholder={selectedProvider.placeholder}
-                className="w-full px-4 py-3.5 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 text-lg tracking-wide"
+                className="w-full px-4 py-3.5 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:border-green-500 text-lg tracking-wide"
                 autoFocus
               />
               <p className="text-xs text-gray-400 mt-2">
@@ -299,7 +299,7 @@ export function DjiboutiPayment({ courseId, courseTitle, amount, currency = 'USD
             <button
               onClick={handleInitiate}
               disabled={loading || !phone.trim()}
-              className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-base hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 shadow-lg"
+              className="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-base hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 shadow-lg"
             >
               {loading ? (
                 <><Loader2 className="w-5 h-5 animate-spin" /> Envoi en cours...</>
@@ -320,8 +320,8 @@ export function DjiboutiPayment({ courseId, courseTitle, amount, currency = 'USD
         {/* ── ETAPE 3 : En attente de confirmation ── */}
         {step === 'waiting' && (
           <motion.div key="waiting" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-center py-4">
-            <div className="w-20 h-20 bg-blue-50 dark:bg-blue-950 rounded-full flex items-center justify-center mx-auto mb-5">
-              <Phone className="w-10 h-10 text-blue-600 animate-pulse" />
+            <div className="w-20 h-20 bg-green-50 dark:bg-green-950 rounded-full flex items-center justify-center mx-auto mb-5">
+              <Phone className="w-10 h-10 text-green-600 animate-pulse" />
             </div>
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
               Confirmez sur votre telephone
@@ -334,7 +334,7 @@ export function DjiboutiPayment({ courseId, courseTitle, amount, currency = 'USD
             {/* Barre de progression */}
             <div className="bg-gray-100 dark:bg-gray-800 rounded-full h-2 mb-5 mx-auto max-w-xs overflow-hidden">
               <motion.div
-                className="h-full bg-blue-600 rounded-full"
+                className="h-full bg-green-600 rounded-full"
                 initial={{ width: '0%' }}
                 animate={{ width: `${Math.min((pollCount / 36) * 100, 95)}%` }}
                 transition={{ duration: 0.5 }}
@@ -408,7 +408,7 @@ export function DjiboutiPayment({ courseId, courseTitle, amount, currency = 'USD
             </div>
             <button
               onClick={onSuccess}
-              className="w-full bg-blue-600 text-white py-3.5 rounded-xl font-bold hover:bg-blue-700 transition-colors"
+              className="w-full bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition-colors"
             >
               Commencer le cours →
             </button>
@@ -425,7 +425,7 @@ export function DjiboutiPayment({ courseId, courseTitle, amount, currency = 'USD
             <p className="text-sm text-red-600 mb-6">{error}</p>
             <button
               onClick={() => { setStep('phone'); setError(''); }}
-              className="w-full bg-blue-600 text-white py-3.5 rounded-xl font-bold hover:bg-blue-700 transition-colors"
+              className="w-full bg-green-600 text-white py-3.5 rounded-xl font-bold hover:bg-green-700 transition-colors"
             >
               Reessayer
             </button>

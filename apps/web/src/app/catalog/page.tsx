@@ -23,7 +23,7 @@ const NIVEAUX_FILTRES = [
 ];
 
 const CYCLE_COLORS: Record<string, string> = {
-  college: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400',
+  college: 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400',
   lycee:   'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400',
 };
 
@@ -56,13 +56,13 @@ export default function CatalogPage() {
       <Navbar />
 
       {/* En-tête */}
-      <section className="bg-gradient-to-br from-blue-700 to-indigo-700 text-white pt-20 pb-12 px-4">
+      <section className="bg-gradient-to-br from-green-700 to-emerald-700 text-white pt-20 pb-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
             🇩🇯 Programme scolaire de Djibouti
           </div>
           <h1 className="text-4xl font-bold mb-3">Catalogue des cours</h1>
-          <p className="text-blue-100 mb-8 text-lg">
+          <p className="text-green-100 mb-8 text-lg">
             Collège & Lycée — Mathématiques, Physique, SVT, Français, Histoire-Géo
           </p>
 
@@ -73,7 +73,7 @@ export default function CatalogPage() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Rechercher un chapitre, une matière… (ex: fractions, photosynthèse)"
-              className="w-full pl-14 pr-12 py-4 rounded-2xl bg-white text-gray-900 text-base shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="w-full pl-14 pr-12 py-4 rounded-2xl bg-white text-gray-900 text-base shadow-xl focus:outline-none focus:ring-2 focus:ring-green-300"
             />
             {search && (
               <button
@@ -94,7 +94,7 @@ export default function CatalogPage() {
                 className={cn(
                   'px-4 py-1.5 rounded-full text-sm font-semibold transition-all border',
                   niveau === n.id
-                    ? 'bg-white text-blue-700 border-white shadow-md'
+                    ? 'bg-white text-green-700 border-white shadow-md'
                     : 'bg-white/10 text-white border-white/20 hover:bg-white/20',
                 )}
               >
@@ -123,7 +123,7 @@ export default function CatalogPage() {
                 </h2>
                 <button
                   onClick={() => { setSearch(''); setNiveau(''); }}
-                  className="text-sm text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-1"
+                  className="text-sm text-green-600 hover:text-green-700 font-semibold flex items-center gap-1"
                 >
                   <X className="h-3.5 w-3.5" /> Réinitialiser
                 </button>
@@ -142,7 +142,7 @@ export default function CatalogPage() {
                   <p className="text-gray-400 mb-4">Essaie avec d'autres mots-clés ou change le filtre de niveau</p>
                   <button
                     onClick={() => { setSearch(''); setNiveau(''); }}
-                    className="text-blue-600 hover:underline font-semibold"
+                    className="text-green-600 hover:underline font-semibold"
                   >
                     Voir tous les cours →
                   </button>
@@ -175,13 +175,13 @@ export default function CatalogPage() {
                                 </span>
                                 <span className="text-xs text-gray-400">{ch.matiere?.nom}</span>
                               </div>
-                              <h3 className="font-bold text-gray-900 dark:text-white text-sm leading-snug group-hover:text-blue-600 transition-colors">
+                              <h3 className="font-bold text-gray-900 dark:text-white text-sm leading-snug group-hover:text-green-600 transition-colors">
                                 Chapitre {ch.ordre} · {ch.titre}
                               </h3>
                             </div>
                           </div>
                           <div className="flex items-center justify-end">
-                            <span className="text-xs text-blue-600 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                            <span className="text-xs text-green-600 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
                               Étudier <ChevronRight className="h-3.5 w-3.5" />
                             </span>
                           </div>
@@ -208,11 +208,11 @@ export default function CatalogPage() {
               {/* Collège */}
               <div className="mb-10">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="h-px flex-1 bg-blue-200 dark:bg-blue-800" />
-                  <span className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider px-3 py-1 bg-blue-50 dark:bg-blue-950 rounded-full border border-blue-200 dark:border-blue-800">
+                  <div className="h-px flex-1 bg-green-200 dark:bg-green-800" />
+                  <span className="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wider px-3 py-1 bg-green-50 dark:bg-green-950 rounded-full border border-green-200 dark:border-green-800">
                     🏫 Collège — Préparation au Brevet
                   </span>
-                  <div className="h-px flex-1 bg-blue-200 dark:bg-blue-800" />
+                  <div className="h-px flex-1 bg-green-200 dark:bg-green-800" />
                 </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {niveaux?.filter(n => n.cycle === 'college').map((n: any, i: number) => (
@@ -254,7 +254,7 @@ export default function CatalogPage() {
                     label: '📖 1 000 DJF/mois',
                     badge: 'Inscription requise',
                     desc: 'Un chapitre complet — cours, exemples, exercices, quiz',
-                    color: 'bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800',
+                    color: 'bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800',
                   },
                   {
                     label: '🏆 5 000 DJF/mois',
@@ -297,7 +297,7 @@ function NiveauCard({ niveau, index }: { niveau: any; index: number }) {
     >
       <Link href={`/apprendre/${niveau.id}`}>
         <div className={`relative overflow-hidden rounded-2xl text-white p-6 shadow-md hover:shadow-xl transition-all cursor-pointer h-full bg-gradient-to-br ${
-          isCollege ? 'from-blue-600 to-blue-800' : 'from-green-600 to-green-800'
+          isCollege ? 'from-green-600 to-green-800' : 'from-green-600 to-green-800'
         }`}>
           <div className="flex items-start justify-between mb-3">
             <h2 className="text-2xl font-bold">{niveau.nom}</h2>

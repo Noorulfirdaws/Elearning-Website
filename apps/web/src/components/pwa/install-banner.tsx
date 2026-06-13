@@ -69,14 +69,14 @@ export function PWAInstallBanner() {
           <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-800 p-4 flex items-start gap-4">
 
             {/* Icône app */}
-            <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+            <div className="w-14 h-14 bg-gradient-to-br from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
               <GraduationCap className="w-8 h-8 text-white" />
             </div>
 
             {/* Texte */}
             <div className="flex-1 min-w-0">
               <p className="font-bold text-gray-900 dark:text-white text-sm">
-                Installer LearnHub 🇩🇯
+                Installer NoorAcademie 🇩🇯
               </p>
               <p className="text-gray-500 dark:text-gray-400 text-xs mt-0.5 leading-relaxed">
                 Ajoute l'application sur ton écran d'accueil. Accès rapide + mode hors ligne.
@@ -85,7 +85,7 @@ export function PWAInstallBanner() {
               <div className="flex items-center gap-2 mt-3">
                 <button
                   onClick={handleInstall}
-                  className="flex items-center gap-1.5 bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition-colors"
+                  className="flex items-center gap-1.5 bg-green-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-green-700 transition-colors"
                 >
                   <Download className="w-3.5 h-3.5" />
                   Installer

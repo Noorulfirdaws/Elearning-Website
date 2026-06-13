@@ -92,7 +92,7 @@ function ChapitreRow({ chapitre, niveauId, matiereId, index, couleur }: any) {
 
           {/* Titre */}
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors truncate">
+            <p className="font-semibold text-gray-900 dark:text-white group-hover:text-green-600 transition-colors truncate">
               {chapitre.titre}
             </p>
             <p className="text-xs text-gray-400 mt-0.5">Chapitre {index + 1}</p>
@@ -100,7 +100,7 @@ function ChapitreRow({ chapitre, niveauId, matiereId, index, couleur }: any) {
 
           {/* Statut */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <BookOpen className="h-4 w-4 text-gray-300 group-hover:text-blue-400 transition-colors" />
+            <BookOpen className="h-4 w-4 text-gray-300 group-hover:text-green-400 transition-colors" />
           </div>
         </div>
       </Link>

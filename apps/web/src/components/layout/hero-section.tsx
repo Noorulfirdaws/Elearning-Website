@@ -9,9 +9,9 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center gradient-hero overflow-hidden pt-16">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-green-400/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 py-20 lg:py-32 relative z-10">
@@ -27,7 +27,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-blue-200 dark:border-blue-800"
+              className="inline-flex items-center gap-2 bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-green-200 dark:border-green-800"
             >
               <Sparkles className="w-4 h-4" />
               🇩🇯 Programme scolaire de Djibouti
@@ -48,7 +48,7 @@ export function HeroSection() {
             <div className="flex flex-wrap gap-4 mb-12">
               <Link
                 href="/apprendre"
-                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-base font-semibold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full text-base font-semibold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-green-500/25 hover:-translate-y-0.5"
               >
                 Commencer à apprendre
                 <ArrowRight className="w-5 h-5" />
@@ -67,7 +67,7 @@ export function HeroSection() {
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-2">
                   {['A', 'B', 'C', 'D'].map((l, i) => (
-                    <div key={i} className={`w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center text-xs font-bold text-white ${['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-orange-500'][i]}`}>{l}</div>
+                    <div key={i} className={`w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 flex items-center justify-center text-xs font-bold text-white ${['bg-green-500', 'bg-green-500', 'bg-purple-500', 'bg-orange-500'][i]}`}>{l}</div>
                   ))}
                 </div>
                 <div>
@@ -81,7 +81,7 @@ export function HeroSection() {
               <div className="w-px h-10 bg-border" />
 
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <BookOpen className="w-5 h-5 text-blue-500" />
+                <BookOpen className="w-5 h-5 text-green-500" />
                 <span><strong className="text-foreground">38</strong> matières</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -105,7 +105,7 @@ export function HeroSection() {
                 className="glass rounded-2xl p-6 shadow-2xl"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
                     <BookOpen className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -159,8 +159,8 @@ export function HeroSection() {
                 className="absolute -bottom-6 -left-6 glass rounded-xl p-3 shadow-lg"
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                    <Users className="w-5 h-5 text-blue-600" />
+                  <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+                    <Users className="w-5 h-5 text-green-600" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold">38 matières disponibles</p>

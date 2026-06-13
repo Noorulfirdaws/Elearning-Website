@@ -7,7 +7,7 @@ import axios from '@/lib/api';
 import { Navbar } from '@/components/layout/navbar';
 
 const CYCLE_COLORS = {
-  college: { bg: 'from-blue-500 to-blue-700', badge: 'bg-blue-100 text-blue-700', border: 'border-blue-200' },
+  college: { bg: 'from-green-500 to-green-700', badge: 'bg-green-100 text-green-700', border: 'border-green-200' },
   lycee:   { bg: 'from-green-500 to-green-700', badge: 'bg-green-100 text-green-700', border: 'border-green-200' },
 };
 
@@ -36,10 +36,10 @@ export default function ApprendrePage() {
       <Navbar />
 
       {/* Header compact */}
-      <section className="bg-gradient-to-r from-blue-700 to-blue-500 text-white pt-16 pb-4 px-4">
+      <section className="bg-gradient-to-r from-green-700 to-green-500 text-white pt-16 pb-4 px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-lg font-bold">Choisir ton niveau</h1>
-          <p className="text-blue-100 text-xs mt-0.5">Programme scolaire Djibouti · Collège et Lycée</p>
+          <p className="text-green-100 text-xs mt-0.5">Programme scolaire Djibouti · Collège et Lycée</p>
         </div>
       </section>
 
@@ -55,11 +55,11 @@ export default function ApprendrePage() {
             {/* Collège */}
             <div className="mb-10">
               <div className="flex items-center gap-3 mb-6">
-                <div className="h-px flex-1 bg-blue-200 dark:bg-blue-800" />
-                <span className="text-sm font-semibold text-blue-700 dark:text-blue-400 uppercase tracking-wider px-3 py-1 bg-blue-50 dark:bg-blue-950 rounded-full border border-blue-200 dark:border-blue-800">
+                <div className="h-px flex-1 bg-green-200 dark:bg-green-800" />
+                <span className="text-sm font-semibold text-green-700 dark:text-green-400 uppercase tracking-wider px-3 py-1 bg-green-50 dark:bg-green-950 rounded-full border border-green-200 dark:border-green-800">
                   🏫 Collège — Préparation au Brevet
                 </span>
-                <div className="h-px flex-1 bg-blue-200 dark:bg-blue-800" />
+                <div className="h-px flex-1 bg-green-200 dark:bg-green-800" />
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {college.map((n, i) => (

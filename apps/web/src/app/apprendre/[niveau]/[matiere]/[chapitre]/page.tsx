@@ -34,7 +34,7 @@ const TAB_LABELS: Record<Tab, string> = {
 // Icônes par type de fichier
 function FichierIcone({ type }: { type: string }) {
   if (type === 'pdf') return <FileText className="h-5 w-5 text-red-500" />;
-  if (['doc', 'docx'].includes(type)) return <FileText className="h-5 w-5 text-blue-600" />;
+  if (['doc', 'docx'].includes(type)) return <FileText className="h-5 w-5 text-green-600" />;
   if (['xls', 'xlsx'].includes(type)) return <FileSpreadsheet className="h-5 w-5 text-green-600" />;
   if (['ppt', 'pptx'].includes(type)) return <Presentation className="h-5 w-5 text-orange-500" />;
   if (['jpg', 'jpeg', 'png', 'webp'].includes(type)) return <ImageIcon className="h-5 w-5 text-purple-500" />;
@@ -295,13 +295,13 @@ export default function ChapitreDetailPage() {
         <div className="max-w-5xl mx-auto px-6">
           {/* Fil d'ariane */}
           <div className="flex items-center gap-2 text-sm text-gray-400 pt-3 pb-2">
-            <Link href="/apprendre" className="hover:text-blue-600 transition-colors">Apprendre</Link>
+            <Link href="/apprendre" className="hover:text-green-600 transition-colors">Apprendre</Link>
             <span>/</span>
-            <Link href={`/apprendre/${niveauId}`} className="hover:text-blue-600 transition-colors capitalize">
+            <Link href={`/apprendre/${niveauId}`} className="hover:text-green-600 transition-colors capitalize">
               {chapitre.matiere?.niveau?.nom || niveauId}
             </Link>
             <span>/</span>
-            <Link href={`/apprendre/${niveauId}/${matiereId}`} className="hover:text-blue-600 transition-colors">
+            <Link href={`/apprendre/${niveauId}/${matiereId}`} className="hover:text-green-600 transition-colors">
               {chapitre.matiere?.nom}
             </Link>
             <span>/</span>
@@ -350,7 +350,7 @@ export default function ChapitreDetailPage() {
                   className={cn(
                     'flex items-center gap-2 px-5 py-3 text-sm font-semibold whitespace-nowrap transition-all border-b-2',
                     activeTab === tab
-                      ? 'border-blue-600 text-blue-600'
+                      ? 'border-green-600 text-green-600'
                       : 'border-transparent text-gray-500 hover:text-gray-800 dark:hover:text-gray-200',
                   )}
                 >
@@ -359,7 +359,7 @@ export default function ChapitreDetailPage() {
                   {tab === 'quiz' && quiz.length > 0 && (
                     <span className={cn(
                       'text-xs px-1.5 py-0.5 rounded-full font-bold',
-                      activeTab === tab ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 dark:bg-gray-800 text-gray-500',
+                      activeTab === tab ? 'bg-green-100 text-green-700' : 'bg-gray-100 dark:bg-gray-800 text-gray-500',
                     )}>
                       {quiz.length}
                     </span>
@@ -367,7 +367,7 @@ export default function ChapitreDetailPage() {
                   {tab === 'ressources' && fichiers.length > 0 && (
                     <span className={cn(
                       'text-xs px-1.5 py-0.5 rounded-full font-bold',
-                      activeTab === tab ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-100 dark:bg-gray-800 text-gray-500',
+                      activeTab === tab ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 dark:bg-gray-800 text-gray-500',
                     )}>
                       {fichiers.length}
                     </span>
@@ -395,9 +395,9 @@ export default function ChapitreDetailPage() {
               <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
 
                 {/* En-tête du document */}
-                <div className="bg-gradient-to-r from-blue-700 to-blue-500 px-10 py-5">
+                <div className="bg-gradient-to-r from-green-700 to-green-500 px-10 py-5">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-blue-200 text-xs font-medium uppercase tracking-widest">
+                    <span className="text-green-200 text-xs font-medium uppercase tracking-widest">
                       {chapitre.matiere?.niveau?.nom || niveauId} · {chapitre.matiere?.nom} · Chapitre {chapitre.ordre}
                     </span>
                   </div>
@@ -411,10 +411,10 @@ export default function ChapitreDetailPage() {
                   {contenu?.introduction && (
                     <div className="mb-10">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="h-1 w-8 bg-blue-600 rounded-full" />
-                        <h3 className="text-xs font-bold uppercase tracking-widest text-blue-600">Introduction</h3>
+                        <div className="h-1 w-8 bg-green-600 rounded-full" />
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-green-600">Introduction</h3>
                       </div>
-                      <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed border-l-4 border-blue-200 dark:border-blue-700 pl-6 italic">
+                      <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed border-l-4 border-green-200 dark:border-green-700 pl-6 italic">
                         {contenu.introduction}
                       </p>
                     </div>
@@ -424,8 +424,8 @@ export default function ChapitreDetailPage() {
                   {(contenu?.points_cles || []).length > 0 && (
                     <div className="mb-10">
                       <div className="flex items-center gap-3 mb-6">
-                        <div className="h-1 w-8 bg-blue-600 rounded-full" />
-                        <h3 className="text-xs font-bold uppercase tracking-widest text-blue-600">Points clés du cours</h3>
+                        <div className="h-1 w-8 bg-green-600 rounded-full" />
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-green-600">Points clés du cours</h3>
                       </div>
                       <div className="space-y-6">
                         {(contenu?.points_cles || []).map((point: any, i: number) => (
@@ -437,7 +437,7 @@ export default function ChapitreDetailPage() {
                             className="flex gap-5"
                           >
                             {/* Numéro */}
-                            <div className="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-md">
+                            <div className="flex-shrink-0 w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-md">
                               {i + 1}
                             </div>
                             {/* Contenu */}
@@ -490,12 +490,12 @@ export default function ChapitreDetailPage() {
                   {/* Pied de page document */}
                   <div className="border-t border-gray-100 dark:border-gray-800 pt-6 mt-6 flex items-center justify-between">
                     <p className="text-xs text-gray-400">
-                      LearnHub Djibouti · Programme officiel {chapitre.matiere?.niveau?.nom || niveauId}
+                      NoorAcademie Djibouti · Programme officiel {chapitre.matiere?.niveau?.nom || niveauId}
                     </p>
                     {exemples.length > 0 && (
                       <button
                         onClick={() => setActiveTab('exemples')}
-                        className="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-blue-700 transition-colors text-sm flex items-center gap-2"
+                        className="bg-green-600 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-green-700 transition-colors text-sm flex items-center gap-2"
                       >
                         Voir les exemples <ChevronDown className="h-4 w-4 rotate-[-90deg]" />
                       </button>
@@ -539,7 +539,7 @@ export default function ChapitreDetailPage() {
                     </div>
                   ))}
                   <div className="border-t border-gray-100 dark:border-gray-800 pt-6 flex justify-between items-center">
-                    <button onClick={() => setActiveTab('cours')} className="text-gray-400 hover:text-blue-600 text-sm flex items-center gap-1 transition-colors">
+                    <button onClick={() => setActiveTab('cours')} className="text-gray-400 hover:text-green-600 text-sm flex items-center gap-1 transition-colors">
                       <ChevronLeft className="h-4 w-4" /> Retour au cours
                     </button>
                     {exercices.length > 0 && (
@@ -666,13 +666,13 @@ export default function ChapitreDetailPage() {
               <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
 
                 {/* En-tête */}
-                <div className="bg-gradient-to-r from-indigo-700 to-indigo-500 px-10 py-5">
-                  <p className="text-indigo-100 text-xs font-medium uppercase tracking-widest mb-0.5">
+                <div className="bg-gradient-to-r from-emerald-700 to-emerald-500 px-10 py-5">
+                  <p className="text-emerald-100 text-xs font-medium uppercase tracking-widest mb-0.5">
                     {chapitre.matiere?.nom} · Chapitre {chapitre.ordre}
                   </p>
                   <h2 className="text-xl font-bold text-white">
                     Ressources pédagogiques{' '}
-                    <span className="text-indigo-100 text-sm font-normal">· Fiches & PDF</span>
+                    <span className="text-emerald-100 text-sm font-normal">· Fiches & PDF</span>
                   </h2>
                 </div>
 
@@ -680,7 +680,7 @@ export default function ChapitreDetailPage() {
 
                   {/* ─── Téléchargement PDF du cours (accès CLASSE) ── */}
                   <div>
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-indigo-600 mb-4">
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-emerald-600 mb-4">
                       📄 Exporter le cours en PDF
                     </h3>
                     {autoriseClasse || estInstructeur ? (
@@ -688,7 +688,7 @@ export default function ChapitreDetailPage() {
                         <button
                           onClick={handleExportPdf}
                           disabled={exportingPdf}
-                          className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-indigo-700 transition-colors text-sm disabled:opacity-60"
+                          className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-emerald-700 transition-colors text-sm disabled:opacity-60"
                         >
                           <Download className="h-4 w-4" />
                           {exportingPdf ? 'Préparation...' : 'Télécharger le cours (PDF)'}
@@ -711,7 +711,7 @@ export default function ChapitreDetailPage() {
 
                   {/* ─── Liste des fichiers ─────────────────────────── */}
                   <div>
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-indigo-600 mb-4">
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-emerald-600 mb-4">
                       📎 Fiches téléchargeables ({fichiers.length})
                     </h3>
 
@@ -740,7 +740,7 @@ export default function ChapitreDetailPage() {
                                     'text-xs px-1.5 py-0.5 rounded-full font-semibold',
                                     f.acces === 'GRATUIT' ? 'bg-green-100 text-green-700' :
                                     f.acces === 'CLASSE'  ? 'bg-amber-100 text-amber-700' :
-                                    'bg-blue-100 text-blue-700',
+                                    'bg-green-100 text-green-700',
                                   )}>
                                     {f.acces === 'GRATUIT' ? 'Gratuit' : f.acces === 'CLASSE' ? 'Classe 5000 DJF' : 'Chapitre'}
                                   </span>
@@ -752,14 +752,14 @@ export default function ChapitreDetailPage() {
                                     {f.type === 'pdf' && (
                                       <button
                                         onClick={() => handlePreview(f)}
-                                        className="flex items-center gap-1.5 bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-indigo-200 dark:hover:bg-indigo-800 transition-colors"
+                                        className="flex items-center gap-1.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-200 dark:hover:bg-emerald-800 transition-colors"
                                       >
                                         <FileText className="h-3.5 w-3.5" /> Aperçu
                                       </button>
                                     )}
                                     <button
                                       onClick={() => handleDownload(f)}
-                                      className="flex items-center gap-1.5 bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-indigo-700 transition-colors"
+                                      className="flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-700 transition-colors"
                                     >
                                       <Download className="h-3.5 w-3.5" /> Télécharger
                                     </button>
@@ -789,10 +789,10 @@ export default function ChapitreDetailPage() {
                   {/* ─── Zone upload (instructeurs uniquement) ──────── */}
                   {estInstructeur && (
                     <div className="border-t border-gray-100 dark:border-gray-800 pt-8">
-                      <h3 className="text-sm font-bold uppercase tracking-widest text-indigo-600 mb-4">
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-emerald-600 mb-4">
                         📤 Ajouter une fiche
                       </h3>
-                      <div className="space-y-4 bg-indigo-50 dark:bg-indigo-950 rounded-xl p-6 border border-indigo-200 dark:border-indigo-800">
+                      <div className="space-y-4 bg-emerald-50 dark:bg-emerald-950 rounded-xl p-6 border border-emerald-200 dark:border-emerald-800">
                         {/* Choisir fichier */}
                         <div>
                           <label className="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5">
@@ -806,7 +806,7 @@ export default function ChapitreDetailPage() {
                               setUploadFile(f);
                               if (f && !uploadNom) setUploadNom(f.name.replace(/\.[^/.]+$/, ''));
                             }}
-                            className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200 cursor-pointer"
+                            className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-100 file:text-emerald-700 hover:file:bg-emerald-200 cursor-pointer"
                           />
                         </div>
                         {/* Nom affiché */}
@@ -819,7 +819,7 @@ export default function ChapitreDetailPage() {
                             value={uploadNom}
                             onChange={e => setUploadNom(e.target.value)}
                             placeholder="ex : Fiche de révision Chapitre 3"
-                            className="w-full px-4 py-2 border border-indigo-200 dark:border-indigo-700 rounded-lg text-sm bg-white dark:bg-gray-900 focus:ring-2 focus:ring-indigo-400 outline-none"
+                            className="w-full px-4 py-2 border border-emerald-200 dark:border-emerald-700 rounded-lg text-sm bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-400 outline-none"
                           />
                         </div>
                         {/* Niveau d'accès */}
@@ -830,7 +830,7 @@ export default function ChapitreDetailPage() {
                           <select
                             value={uploadAcces}
                             onChange={e => setUploadAcces(e.target.value as any)}
-                            className="w-full px-4 py-2 border border-indigo-200 dark:border-indigo-700 rounded-lg text-sm bg-white dark:bg-gray-900 focus:ring-2 focus:ring-indigo-400 outline-none"
+                            className="w-full px-4 py-2 border border-emerald-200 dark:border-emerald-700 rounded-lg text-sm bg-white dark:bg-gray-900 focus:ring-2 focus:ring-emerald-400 outline-none"
                           >
                             <option value="GRATUIT">Gratuit (tous les élèves)</option>
                             <option value="CHAPITRE">Chapitre uniquement (1 000 DJF)</option>
@@ -841,7 +841,7 @@ export default function ChapitreDetailPage() {
                         <button
                           onClick={handleUpload}
                           disabled={uploading || !uploadFile}
-                          className="flex items-center gap-2 bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+                          className="flex items-center gap-2 bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
                         >
                           <Upload className="h-4 w-4" />
                           {uploading ? 'Envoi en cours...' : 'Ajouter le fichier'}
@@ -874,7 +874,7 @@ export default function ChapitreDetailPage() {
             onClick={e => e.stopPropagation()}
           >
             {/* Barre du modal */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-indigo-600 text-white">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-emerald-600 text-white">
               <div className="flex items-center gap-3 min-w-0">
                 <FileText className="h-5 w-5 flex-shrink-0" />
                 <span className="font-semibold truncate">{previewFichier.nom}</span>
@@ -925,7 +925,7 @@ function QuizQuestion({
   return (
     <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 shadow-sm">
       <p className="font-semibold text-gray-900 dark:text-white mb-4">
-        <span className="text-blue-600 mr-2">{index + 1}.</span>
+        <span className="text-green-600 mr-2">{index + 1}.</span>
         {question.question}
       </p>
       <div className="space-y-2">
@@ -936,8 +936,8 @@ function QuizQuestion({
             className={cn(
               'w-full text-left px-4 py-3 rounded-xl border-2 text-sm font-medium transition-all',
               repChoisie === opt
-                ? 'border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300'
-                : 'border-gray-200 dark:border-gray-700 hover:border-blue-300 hover:bg-blue-50/50 dark:hover:bg-blue-950/30 text-gray-700 dark:text-gray-300',
+                ? 'border-green-500 bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300'
+                : 'border-gray-200 dark:border-gray-700 hover:border-green-300 hover:bg-green-50/50 dark:hover:bg-green-950/30 text-gray-700 dark:text-gray-300',
             )}
           >
             <span className="font-bold mr-2 text-gray-400">{String.fromCharCode(65 + j)}.</span>
@@ -1032,7 +1032,7 @@ function QuizResultats({
 
       <button
         onClick={onRecommencer}
-        className="w-full border-2 border-blue-600 text-blue-600 py-3 rounded-xl font-semibold hover:bg-blue-50 dark:hover:bg-blue-950 transition-colors"
+        className="w-full border-2 border-green-600 text-green-600 py-3 rounded-xl font-semibold hover:bg-green-50 dark:hover:bg-green-950 transition-colors"
       >
         Recommencer le quiz
       </button>

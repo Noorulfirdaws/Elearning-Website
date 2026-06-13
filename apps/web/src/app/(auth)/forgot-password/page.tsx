@@ -35,7 +35,7 @@ export default function ForgotPasswordPage() {
               <p className="text-gray-500 mb-6">
                 Un lien de réinitialisation a été envoyé à <strong>{email}</strong>
               </p>
-              <Link href="/login" className="text-indigo-600 font-medium hover:underline">
+              <Link href="/login" className="text-emerald-600 font-medium hover:underline">
                 Retour à la connexion
               </Link>
             </div>
@@ -53,7 +53,7 @@ export default function ForgotPasswordPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     placeholder="toi@exemple.com"
                   />
                 </div>
@@ -61,14 +61,14 @@ export default function ForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50"
+                  className="w-full bg-emerald-600 text-white py-3 rounded-xl font-semibold hover:bg-emerald-700 transition-colors disabled:opacity-50"
                 >
                   {loading ? 'Envoi en cours…' : 'Envoyer le lien'}
                 </button>
               </form>
               <p className="text-center text-sm text-gray-500 mt-6">
                 Tu te souviens de ton mot de passe ?{' '}
-                <Link href="/login" className="text-indigo-600 font-medium hover:underline">Se connecter</Link>
+                <Link href="/login" className="text-emerald-600 font-medium hover:underline">Se connecter</Link>
               </p>
             </>
           )}

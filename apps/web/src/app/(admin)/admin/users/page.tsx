@@ -19,7 +19,7 @@ interface User {
 const ROLE_STYLES: Record<string, string> = {
   SUPER_ADMIN: 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400',
   ADMIN:       'bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-400',
-  INSTRUCTOR:  'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400',
+  INSTRUCTOR:  'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400',
   STUDENT:     'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400',
 };
 
@@ -92,8 +92,8 @@ export default function AdminUsersPage() {
       <div className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 px-6 py-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-2 mb-1">
-            <Shield className="h-4 w-4 text-indigo-500" />
-            <span className="text-xs font-bold text-indigo-500 uppercase tracking-widest">Admin</span>
+            <Shield className="h-4 w-4 text-emerald-500" />
+            <span className="text-xs font-bold text-emerald-500 uppercase tracking-widest">Admin</span>
           </div>
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -121,7 +121,7 @@ export default function AdminUsersPage() {
           <div className="relative flex-1 min-w-56">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <input
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="w-full pl-9 pr-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               placeholder="Rechercher par nom ou email…"
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
@@ -130,7 +130,7 @@ export default function AdminUsersPage() {
           <select
             value={roleFilter}
             onChange={(e) => { setRoleFilter(e.target.value); setPage(1); }}
-            className="px-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="px-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-400"
           >
             <option value="">Tous les rôles</option>
             <option value="STUDENT">Élèves</option>
@@ -178,7 +178,7 @@ export default function AdminUsersPage() {
                   {/* Utilisateur */}
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400 to-blue-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                         {(u.firstName?.[0] || u.email[0]).toUpperCase()}
                       </div>
                       <div>

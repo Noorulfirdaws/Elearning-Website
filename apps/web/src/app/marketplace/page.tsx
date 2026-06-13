@@ -47,18 +47,18 @@ export default function MarketplacePage() {
 
       {/* Become an instructor CTA */}
       {!myAccount && (
-        <div className="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl p-8 text-white mb-10">
+        <div className="bg-gradient-to-br from-emerald-600 to-purple-600 rounded-2xl p-8 text-white mb-10">
           <h2 className="text-2xl font-bold mb-2">Start earning as an instructor</h2>
-          <p className="text-indigo-100 mb-6">Create and sell courses. Keep 70% of every sale, paid out directly to your bank.</p>
+          <p className="text-emerald-100 mb-6">Create and sell courses. Keep 70% of every sale, paid out directly to your bank.</p>
           <div className="flex gap-6 mb-6">
             {[['70%', 'Revenue share'], ['$0', 'Upfront cost'], ['Instant', 'Payouts']].map(([v, l]) => (
               <div key={l}>
                 <p className="text-2xl font-bold">{v}</p>
-                <p className="text-indigo-200 text-sm">{l}</p>
+                <p className="text-emerald-200 text-sm">{l}</p>
               </div>
             ))}
           </div>
-          <button onClick={startOnboarding} className="bg-white text-indigo-600 px-8 py-3 rounded-xl font-bold hover:bg-indigo-50 transition-colors">
+          <button onClick={startOnboarding} className="bg-white text-emerald-600 px-8 py-3 rounded-xl font-bold hover:bg-emerald-50 transition-colors">
             Connect Stripe & Start Selling
           </button>
         </div>
@@ -88,7 +88,7 @@ export default function MarketplacePage() {
         <h2 className="text-xl font-bold text-gray-800 mb-6">Top Instructors</h2>
         {loading ? (
           <div className="flex justify-center py-10">
-            <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -100,7 +100,7 @@ export default function MarketplacePage() {
                       <Image src={instr.avatar} alt="" fill sizes="48px" className="object-cover" loading="lazy" />
                     </div>
                   ) : (
-                    <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center font-bold text-indigo-600">
+                    <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-600">
                       {instr.firstName[0]}{instr.lastName[0]}
                     </div>
                   )}

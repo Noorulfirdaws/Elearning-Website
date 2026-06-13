@@ -70,7 +70,7 @@ export default function DeveloperPortalPage() {
         <h2 className="text-lg font-bold text-gray-800 mb-4">Create New API Key</h2>
         <div className="flex gap-3 mb-4">
           <input
-            className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
             placeholder="Key name (e.g. My Integration)"
             value={newKeyName}
             onChange={(e) => setNewKeyName(e.target.value)}
@@ -87,8 +87,8 @@ export default function DeveloperPortalPage() {
               }
               className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                 selectedScopes.includes(scope)
-                  ? 'bg-indigo-600 text-white border-indigo-600'
-                  : 'bg-white text-gray-600 border-gray-200 hover:border-indigo-400'
+                  ? 'bg-emerald-600 text-white border-emerald-600'
+                  : 'bg-white text-gray-600 border-gray-200 hover:border-emerald-400'
               }`}
             >
               {scope}
@@ -98,7 +98,7 @@ export default function DeveloperPortalPage() {
         <button
           onClick={createKey}
           disabled={loading || !newKeyName.trim()}
-          className="bg-indigo-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold disabled:opacity-50 hover:bg-indigo-700 transition-colors"
+          className="bg-emerald-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold disabled:opacity-50 hover:bg-emerald-700 transition-colors"
         >
           {loading ? 'Creating…' : 'Create Key'}
         </button>
@@ -118,7 +118,7 @@ export default function DeveloperPortalPage() {
                   <p className="text-xs text-gray-400 font-mono">{key.prefix}…</p>
                   <div className="flex gap-1 mt-1 flex-wrap">
                     {key.scopes.map((s) => (
-                      <span key={s} className="text-xs bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full">{s}</span>
+                      <span key={s} className="text-xs bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full">{s}</span>
                     ))}
                   </div>
                 </div>
@@ -135,14 +135,14 @@ export default function DeveloperPortalPage() {
       </div>
 
       {/* OpenAPI spec link */}
-      <div className="bg-indigo-50 rounded-2xl p-6">
-        <h2 className="text-lg font-bold text-indigo-900 mb-2">API Documentation</h2>
-        <p className="text-indigo-700 text-sm mb-3">Explore all available endpoints with our interactive API reference.</p>
+      <div className="bg-emerald-50 rounded-2xl p-6">
+        <h2 className="text-lg font-bold text-emerald-900 mb-2">API Documentation</h2>
+        <p className="text-emerald-700 text-sm mb-3">Explore all available endpoints with our interactive API reference.</p>
         <a
           href="/api/v1/developer/openapi"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors"
+          className="inline-flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-emerald-700 transition-colors"
         >
           View OpenAPI Spec ↗
         </a>

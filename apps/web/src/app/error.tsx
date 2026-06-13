@@ -15,7 +15,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
         <p className="text-gray-500 mb-8">Une erreur inattendue est survenue. Veuillez réessayer.</p>
         <button
           onClick={reset}
-          className="bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors"
+          className="bg-emerald-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-emerald-700 transition-colors"
         >
           Réessayer
         </button>

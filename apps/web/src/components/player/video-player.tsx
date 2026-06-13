@@ -200,24 +200,24 @@ function NativePlayer({ src, poster, onProgress, onComplete, initialPosition = 0
           <span className="text-white text-xs font-mono">{fmt(currentTime)}</span>
           <div className="flex-1 relative h-1 bg-white/30 rounded-full cursor-pointer" onClick={handleSeek}>
             <div className="absolute inset-y-0 left-0 bg-white/40 rounded-full" style={{ width: `${buffered}%` }} />
-            <div className="absolute inset-y-0 left-0 bg-indigo-500 rounded-full" style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }} />
+            <div className="absolute inset-y-0 left-0 bg-emerald-500 rounded-full" style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }} />
           </div>
           <span className="text-white text-xs font-mono">{fmt(duration)}</span>
         </div>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <button onClick={() => skip(-10)} className="text-white hover:text-indigo-400 transition-colors"><SkipBack className="w-5 h-5" /></button>
+            <button onClick={() => skip(-10)} className="text-white hover:text-emerald-400 transition-colors"><SkipBack className="w-5 h-5" /></button>
             <button onClick={togglePlay} className="w-9 h-9 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors">
               {isPlaying ? <Pause className="w-5 h-5 fill-current" /> : <Play className="w-5 h-5 fill-current ml-0.5" />}
             </button>
-            <button onClick={() => skip(10)} className="text-white hover:text-indigo-400 transition-colors"><SkipForward className="w-5 h-5" /></button>
-            <button onClick={() => { const v = videoRef.current; if (v) v.muted = !isMuted; }} className="text-white hover:text-indigo-400 transition-colors">
+            <button onClick={() => skip(10)} className="text-white hover:text-emerald-400 transition-colors"><SkipForward className="w-5 h-5" /></button>
+            <button onClick={() => { const v = videoRef.current; if (v) v.muted = !isMuted; }} className="text-white hover:text-emerald-400 transition-colors">
               {isMuted || volume === 0 ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
             </button>
             <input type="range" min="0" max="1" step="0.05" value={isMuted ? 0 : volume}
               onChange={e => { const v = videoRef.current; if (v) { v.volume = Number(e.target.value); v.muted = Number(e.target.value) === 0; } }}
-              className="w-20 h-1 accent-indigo-500 cursor-pointer" />
+              className="w-20 h-1 accent-emerald-500 cursor-pointer" />
           </div>
           <div className="flex items-center gap-2">
             <div className="relative">
@@ -226,14 +226,14 @@ function NativePlayer({ src, poster, onProgress, onComplete, initialPosition = 0
                 <div className="absolute bottom-full right-0 mb-2 bg-gray-900 rounded-xl overflow-hidden shadow-lg">
                   {[0.5, 0.75, 1, 1.25, 1.5, 2].map(r => (
                     <button key={r} onClick={() => { if (videoRef.current) videoRef.current.playbackRate = r; setPlaybackRate(r); setShowSettings(false); }}
-                      className={cn('block w-full text-left px-4 py-2 text-sm hover:bg-white/10 text-white', playbackRate === r && 'text-indigo-400 font-semibold')}>
+                      className={cn('block w-full text-left px-4 py-2 text-sm hover:bg-white/10 text-white', playbackRate === r && 'text-emerald-400 font-semibold')}>
                       {r}x
                     </button>
                   ))}
                 </div>
               )}
             </div>
-            <button onClick={toggleFullscreen} className="text-white hover:text-indigo-400 transition-colors">
+            <button onClick={toggleFullscreen} className="text-white hover:text-emerald-400 transition-colors">
               {isFullscreen ? <Minimize className="w-5 h-5" /> : <Maximize className="w-5 h-5" />}
             </button>
           </div>

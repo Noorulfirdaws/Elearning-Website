@@ -31,7 +31,7 @@ export default function CertificatesPage() {
 
       {loading ? (
         <div className="flex justify-center py-20">
-          <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : certs.length === 0 ? (
         <div className="text-center py-20">
@@ -42,7 +42,7 @@ export default function CertificatesPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {certs.map((cert) => (
             <div key={cert.id} className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-              <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-8 text-white text-center">
+              <div className="bg-gradient-to-br from-emerald-500 to-purple-600 p-8 text-white text-center">
                 <div className="text-4xl mb-3">🎓</div>
                 <p className="text-sm font-medium opacity-80 uppercase tracking-widest mb-1">Certificate of Completion</p>
                 <h3 className="text-lg font-bold">{cert.course.title}</h3>
@@ -55,7 +55,7 @@ export default function CertificatesPage() {
                 <div className="flex gap-3">
                   <a
                     href={`/certificates/${cert.id}`}
-                    className="flex-1 text-center bg-indigo-50 text-indigo-600 rounded-xl py-2 text-sm font-semibold hover:bg-indigo-100 transition-colors"
+                    className="flex-1 text-center bg-emerald-50 text-emerald-600 rounded-xl py-2 text-sm font-semibold hover:bg-emerald-100 transition-colors"
                   >
                     View
                   </a>

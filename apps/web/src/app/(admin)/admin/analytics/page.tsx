@@ -36,7 +36,7 @@ export default function AdminAnalyticsPage() {
 
   const stats = [
     { label: 'Total Revenue', value: formatCurrency(Number(overview?.totalRevenue || 0)), icon: DollarSign, change: '+12.5%', color: 'text-green-500 bg-green-50 dark:bg-green-950' },
-    { label: 'Total Users', value: overview?.totalUsers?.toLocaleString() || '0', icon: Users, change: '+8.2%', color: 'text-blue-500 bg-blue-50 dark:bg-blue-950' },
+    { label: 'Total Users', value: overview?.totalUsers?.toLocaleString() || '0', icon: Users, change: '+8.2%', color: 'text-green-500 bg-green-50 dark:bg-green-950' },
     { label: 'Active Courses', value: overview?.totalCourses?.toLocaleString() || '0', icon: BookOpen, change: '+3.1%', color: 'text-purple-500 bg-purple-50 dark:bg-purple-950' },
     { label: 'Enrollments', value: overview?.totalEnrollments?.toLocaleString() || '0', icon: TrendingUp, change: '+15.4%', color: 'text-orange-500 bg-orange-50 dark:bg-orange-950' },
   ];

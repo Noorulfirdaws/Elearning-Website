@@ -37,7 +37,7 @@ export default function WebinarRoomPage() {
       <div className="flex h-screen items-center justify-center bg-gray-950 text-white">
         <div className="text-center">
           <p className="text-xl font-semibold mb-4">❌ {error}</p>
-          <a href="/webinars" className="text-indigo-400 hover:underline">Back to Webinars</a>
+          <a href="/webinars" className="text-emerald-400 hover:underline">Back to Webinars</a>
         </div>
       </div>
     );

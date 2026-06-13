@@ -32,7 +32,7 @@ export default function InstructorDashboard() {
   });
 
   const stats = [
-    { label: 'Total Courses', value: courses?.length || 0, icon: BookOpen, color: 'text-blue-500' },
+    { label: 'Total Courses', value: courses?.length || 0, icon: BookOpen, color: 'text-green-500' },
     { label: 'Total Students', value: analytics?.totalStudents || 0, icon: Users, color: 'text-green-500' },
     { label: 'Total Revenue', value: formatCurrency(analytics?.totalRevenue || 0), icon: DollarSign, color: 'text-yellow-500' },
     { label: 'Avg Rating', value: analytics?.avgRating?.toFixed(1) || '0.0', icon: Star, color: 'text-purple-500' },

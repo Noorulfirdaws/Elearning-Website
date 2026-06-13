@@ -20,7 +20,7 @@ interface SkillGap {
 
 const PROFICIENCY_COLOR: Record<string, string> = {
   EXPERT: 'bg-purple-100 text-purple-700',
-  ADVANCED: 'bg-blue-100 text-blue-700',
+  ADVANCED: 'bg-green-100 text-green-700',
   INTERMEDIATE: 'bg-yellow-100 text-yellow-700',
   BEGINNER: 'bg-gray-100 text-gray-600',
 };
@@ -48,7 +48,7 @@ export default function SkillsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-64">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -77,7 +77,7 @@ export default function SkillsPage() {
                 </div>
                 <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-indigo-600 rounded-full transition-all"
+                    className="h-full bg-emerald-600 rounded-full transition-all"
                     style={{ width: `${PROFICIENCY_BAR[us.proficiency]}%` }}
                   />
                 </div>
@@ -118,7 +118,7 @@ export default function SkillsPage() {
                         )}
                         <div>
                           <p className="text-sm font-medium text-gray-800">{course.title}</p>
-                          <p className="text-xs text-indigo-600">{course.isFree ? 'Free' : `$${(course.price / 100).toFixed(2)}`}</p>
+                          <p className="text-xs text-emerald-600">{course.isFree ? 'Free' : `$${(course.price / 100).toFixed(2)}`}</p>
                         </div>
                       </a>
                     ))}
