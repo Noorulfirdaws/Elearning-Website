@@ -8,6 +8,16 @@ import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 
+// Global safety nets — never let an unhandled async error kill the process silently
+process.on('unhandledRejection', (reason: any) => {
+  // eslint-disable-next-line no-console
+  console.error('[UNHANDLED REJECTION]', reason?.message || reason, reason?.stack || '');
+});
+process.on('uncaughtException', (err: Error) => {
+  // eslint-disable-next-line no-console
+  console.error('[UNCAUGHT EXCEPTION]', err?.message, err?.stack);
+});
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'log'],
