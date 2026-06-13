@@ -60,21 +60,24 @@ import appConfig from './config/app.config';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         const redisUrl = config.get<string>('REDIS_URL');
-        const baseConfig = redisUrl
-          ? { url: redisUrl }
-          : {
-              redis: {
-                host: config.get('REDIS_HOST', 'localhost'),
-                port: config.get<number>('REDIS_PORT', 6379),
-              },
-            };
+        const redisOptions = {
+          // Prevent ioredis from crashing the process on connection failure
+          enableOfflineQueue: false,
+          lazyConnect: true,
+          maxRetriesPerRequest: null,
+          retryStrategy: (times: number) => {
+            if (times > 3) return null; // stop retrying
+            return Math.min(times * 1000, 3000);
+          },
+        };
+        if (redisUrl) {
+          return { url: redisUrl, redis: redisOptions };
+        }
         return {
-          ...baseConfig,
-          settings: {
-            // Don't block startup if Redis is unavailable
-            lockDuration: 30000,
-            stalledInterval: 30000,
-            maxStalledCount: 1,
+          redis: {
+            host: config.get('REDIS_HOST', 'localhost'),
+            port: config.get<number>('REDIS_PORT', 6379),
+            ...redisOptions,
           },
         };
       },
