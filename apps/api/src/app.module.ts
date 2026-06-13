@@ -60,13 +60,21 @@ import appConfig from './config/app.config';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         const redisUrl = config.get<string>('REDIS_URL');
-        if (redisUrl) {
-          return { url: redisUrl };
-        }
+        const baseConfig = redisUrl
+          ? { url: redisUrl }
+          : {
+              redis: {
+                host: config.get('REDIS_HOST', 'localhost'),
+                port: config.get<number>('REDIS_PORT', 6379),
+              },
+            };
         return {
-          redis: {
-            host: config.get('REDIS_HOST', 'localhost'),
-            port: config.get<number>('REDIS_PORT', 6379),
+          ...baseConfig,
+          settings: {
+            // Don't block startup if Redis is unavailable
+            lockDuration: 30000,
+            stalledInterval: 30000,
+            maxStalledCount: 1,
           },
         };
       },

@@ -10,7 +10,7 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: ['error', 'warn'],
+    logger: ['error', 'warn', 'log'],
   });
 
   const configService = app.get(ConfigService);
@@ -91,9 +91,9 @@ async function bootstrap() {
     swaggerOptions: { persistAuthorization: true },
   });
 
-  await app.listen(port);
-  Logger.log(`LMS API running on http://localhost:${port}/${apiPrefix}`, 'Bootstrap');
-  Logger.log(`Swagger docs at http://localhost:${port}/api/docs`, 'Bootstrap');
+  await app.listen(port, '0.0.0.0');
+  Logger.log(`LMS API running on http://0.0.0.0:${port}/${apiPrefix}`, 'Bootstrap');
+  Logger.log(`Swagger docs at http://0.0.0.0:${port}/api/docs`, 'Bootstrap');
 }
 
 bootstrap();
