@@ -1,6 +1,6 @@
 // LearnHub Djibouti — Service Worker PWA
 // Offline-first pour les élèves djiboutiens avec connexion limitée
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const STATIC_CACHE    = `learnhub-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE   = `learnhub-dynamic-${CACHE_VERSION}`;
 const VIDEO_CACHE     = `learnhub-video-${CACHE_VERSION}`;
@@ -23,6 +23,11 @@ const CACHE_STRATEGIES = {
   video: 'cache-first',
   images: 'stale-while-revalidate',
 };
+
+// Active la nouvelle version immédiatement quand la page le demande
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
+});
 
 // Install: pre-cache static assets
 self.addEventListener('install', (event) => {
@@ -55,9 +60,9 @@ self.addEventListener('fetch', (event) => {
   // Ignorer non-GET et extensions Chrome
   if (request.method !== 'GET' || url.protocol === 'chrome-extension:') return;
 
-  // 1. Pages /apprendre — Cache First (offline prioritaire pour les élèves)
+  // 1. Pages /apprendre — Network First (frais en ligne, cache en secours hors-ligne)
   if (url.pathname.startsWith('/apprendre')) {
-    event.respondWith(cacheFirst(request, CHAPITRES_CACHE, 7 * 24 * 60 * 60 * 1000));
+    event.respondWith(networkFirst(request, CHAPITRES_CACHE, 5000));
     return;
   }
 

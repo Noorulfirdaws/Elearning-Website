@@ -96,10 +96,13 @@ async function bootstrap() {
     .addTag('admin', 'Admin operations')
     .build();
 
-  const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('api/docs', app, document, {
-    swaggerOptions: { persistAuthorization: true },
-  });
+  // Swagger uniquement hors production (ne pas exposer le schéma API publiquement)
+  if (process.env.NODE_ENV !== 'production') {
+    const document = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('api/docs', app, document, {
+      swaggerOptions: { persistAuthorization: true },
+    });
+  }
 
   await app.listen(port, '0.0.0.0');
   Logger.log(`LMS API running on http://0.0.0.0:${port}/${apiPrefix}`, 'Bootstrap');

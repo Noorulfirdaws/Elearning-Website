@@ -67,15 +67,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: `
               if ('serviceWorker' in navigator) {
+                // Recharge automatiquement une seule fois quand une nouvelle version prend le contrôle
+                var refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', function() {
+                  if (refreshing) return;
+                  refreshing = true;
+                  window.location.reload();
+                });
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js', { scope: '/' })
                     .then(function(reg) {
-                      console.log('[PWA] Service Worker enregistré:', reg.scope);
+                      // Vérifie immédiatement et périodiquement s'il y a une mise à jour
+                      reg.update();
+                      setInterval(function() { reg.update(); }, 60 * 1000);
                       reg.addEventListener('updatefound', function() {
-                        const newWorker = reg.installing;
+                        var newWorker = reg.installing;
                         newWorker.addEventListener('statechange', function() {
+                          // Nouvelle version installée + déjà contrôlé => activer tout de suite
                           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            console.log('[PWA] Nouvelle version disponible');
+                            newWorker.postMessage({ type: 'SKIP_WAITING' });
                           }
                         });
                       });
