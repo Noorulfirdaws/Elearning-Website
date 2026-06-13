@@ -3,6 +3,30 @@ import { PrismaService } from '../../config/prisma.service';
 import Anthropic from '@anthropic-ai/sdk';
 import { ConfigService } from '@nestjs/config';
 
+// Ordre pédagogique des matières (au lieu de l'alphabétique)
+const SUBJECT_ORDER = [
+  'Mathématiques',
+  'Physique-Chimie',
+  'Physique',
+  'Chimie',
+  'SVT',
+  'Sciences de la Vie et de la Terre',
+  'Français',
+  'Histoire-Géographie',
+  'Histoire',
+  'Géographie',
+];
+function subjectRank(nom: string): number {
+  const i = SUBJECT_ORDER.indexOf(nom);
+  return i === -1 ? SUBJECT_ORDER.length : i;
+}
+function sortMatieres<T extends { nom: string }>(matieres: T[]): T[] {
+  return [...matieres].sort((a, b) => {
+    const r = subjectRank(a.nom) - subjectRank(b.nom);
+    return r !== 0 ? r : a.nom.localeCompare(b.nom);
+  });
+}
+
 @Injectable()
 export class EducationService {
   private anthropic: Anthropic;
@@ -40,15 +64,15 @@ export class EducationService {
       },
     });
     if (!niveau) throw new NotFoundException('Niveau introuvable');
+    if (niveau.matieres) niveau.matieres = sortMatieres(niveau.matieres);
     return niveau;
   }
 
   // ─── MATIÈRES ───────────────────────────────────────────────────────────────
 
   async getMatieresByNiveau(niveauId: string) {
-    return this.prisma.matiere.findMany({
+    const matieres = await this.prisma.matiere.findMany({
       where: { niveauId },
-      orderBy: { nom: 'asc' },
       include: {
         _count: { select: { chapitres: true } },
         chapitres: {
@@ -58,6 +82,7 @@ export class EducationService {
         },
       },
     });
+    return sortMatieres(matieres);
   }
 
   async getMatiereById(id: string) {
