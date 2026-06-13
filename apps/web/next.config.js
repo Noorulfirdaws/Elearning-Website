@@ -111,6 +111,8 @@ const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   experimental: {
     serverActions: { allowedOrigins: ['localhost:3000', 'nooracademie.vercel.app'] },
+    // Allow client pages using useSearchParams to build without explicit Suspense wrappers
+    missingSuspenseWithCSRBailout: false,
   },
   images: {
     remotePatterns: [
