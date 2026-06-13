@@ -12,6 +12,7 @@ const SUBJECT_ORDER = [
   'SVT',
   'Sciences de la Vie et de la Terre',
   'Français',
+  'Anglais',
   'Histoire-Géographie',
   'Histoire',
   'Géographie',
