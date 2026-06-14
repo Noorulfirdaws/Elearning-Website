@@ -628,6 +628,18 @@ function buildPrompt(niveauNom, nomMatiere, titreChapitre, cycle) {
     ? 'lycée (niveau avancé, vocabulaire scientifique précis, concepts approfondis)'
     : 'collège (niveau accessible, exemples concrets, langage clair)';
 
+  // Cours d'anglais : contenu EN ANGLAIS (avec traductions FR pour le vocabulaire)
+  const estAnglais = nomMatiere.toLowerCase().includes('anglais');
+  const consignesLangue = estAnglais
+    ? `- Ceci est un COURS D'ANGLAIS pour des élèves francophones de Djibouti.
+- Rédige TOUT le contenu (introduction, points clés, explications, exemples, quiz) EN ANGLAIS, adapté au niveau ${niveauNom}.
+- Pour chaque mot/expression de vocabulaire nouveau, ajoute la traduction française entre parenthèses, ex: "Hello (Bonjour)".
+- NE mélange PAS les deux langues dans les phrases : écris des phrases complètes en anglais, et mets seulement les traductions du vocabulaire entre parenthèses.
+- Garde un anglais simple et clair adapté à des débutants au collège, plus riche au lycée.`
+    : `- Adapte le contenu au contexte djiboutien quand c'est pertinent (exemples locaux, références à la Corne de l'Afrique)
+- Respecte strictement le programme français officiel
+- Utilise un français académique correct`;
+
   return `Tu es un professeur expert du système éducatif français enseignant à Djibouti.
 Génère le contenu pédagogique pour le chapitre suivant :
 
@@ -636,9 +648,7 @@ MATIÈRE  : ${nomMatiere}
 CHAPITRE : ${titreChapitre}
 
 CONSIGNES STRICTES :
-- Adapte le contenu au contexte djiboutien quand c'est pertinent (exemples locaux, références à la Corne de l'Afrique)
-- Respecte strictement le programme français officiel
-- Utilise un français académique correct
+${consignesLangue}
 - Génère exactement 3 points clés dans le cours
 - Génère exactement 3 exemples résolus
 - Génère exactement 5 questions de quiz (4 options chacune, 1 bonne réponse)
