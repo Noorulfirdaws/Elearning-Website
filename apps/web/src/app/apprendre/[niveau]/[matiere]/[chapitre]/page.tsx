@@ -929,22 +929,42 @@ function QuizQuestion({
         {question.question}
       </p>
       <div className="space-y-2">
-        {question.options.map((opt: string, j: number) => (
-          <button
-            key={j}
-            onClick={() => onChoisir(opt)}
-            className={cn(
-              'w-full text-left px-4 py-3 rounded-xl border-2 text-sm font-medium transition-all',
-              repChoisie === opt
-                ? 'border-green-500 bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300'
-                : 'border-gray-200 dark:border-gray-700 hover:border-green-300 hover:bg-green-50/50 dark:hover:bg-green-950/30 text-gray-700 dark:text-gray-300',
-            )}
-          >
-            <span className="font-bold mr-2 text-gray-400">{String.fromCharCode(65 + j)}.</span>
-            {opt}
-          </button>
-        ))}
+        {question.options.map((opt: string, j: number) => {
+          const repondu   = repChoisie !== undefined && repChoisie !== null;
+          const estBonne  = opt === question.reponse_correcte;
+          const estChoisie = repChoisie === opt;
+          let style = 'border-gray-200 dark:border-gray-700 hover:border-green-300 hover:bg-green-50/50 dark:hover:bg-green-950/30 text-gray-700 dark:text-gray-300';
+          if (repondu) {
+            if (estBonne) {
+              // La bonne réponse est toujours en vert une fois répondu
+              style = 'border-green-500 bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300';
+            } else if (estChoisie) {
+              // Le choix de l'élève, mauvais → rouge
+              style = 'border-red-500 bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300';
+            } else {
+              style = 'border-gray-200 dark:border-gray-700 text-gray-400 opacity-60';
+            }
+          }
+          return (
+            <button
+              key={j}
+              onClick={() => onChoisir(opt)}
+              disabled={repondu}
+              className={cn('w-full text-left px-4 py-3 rounded-xl border-2 text-sm font-medium transition-all', style)}
+            >
+              <span className="font-bold mr-2 text-gray-400">{String.fromCharCode(65 + j)}.</span>
+              {opt}
+              {repondu && estBonne && <span className="ml-2">✓</span>}
+              {repondu && estChoisie && !estBonne && <span className="ml-2">✗</span>}
+            </button>
+          );
+        })}
       </div>
+      {repChoisie !== undefined && repChoisie !== null && question.explication_pedagogique && (
+        <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 italic bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+          💡 {question.explication_pedagogique}
+        </p>
+      )}
     </div>
   );
 }
