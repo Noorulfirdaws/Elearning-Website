@@ -27,6 +27,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createInterface } from 'readline';
+import { EXPANSION } from './curriculum-expansion.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT      = join(__dirname, '..');
@@ -477,6 +478,9 @@ const CURRICULUM = [
     ],
   },
 ];
+
+// Ajoute l'expansion (Anglais + chapitres supplémentaires) au programme
+CURRICULUM.push(...EXPANSION);
 
 // ─── Utilitaires ──────────────────────────────────────────────────────────────
 
