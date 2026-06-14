@@ -243,7 +243,7 @@ export default function ChapitreDetailPage() {
 
   // ─── États de chargement ───────────────────────────────────────────────────
 
-  if (isLoading || (accesCh && !autorise && !chapitrePremier)) {
+  if (isLoading || (accesCh && !autorise && !chapitrePremier && !estInstructeur)) {
     return <LoadingSkeleton />;
   }
 
@@ -257,7 +257,7 @@ export default function ChapitreDetailPage() {
 
   // ─── Mur de paiement ───────────────────────────────────────────────────────
 
-  if (!autorise && !accesDebloque) {
+  if (!autorise && !accesDebloque && !estInstructeur) {
     return (
       <Paywall
         chapitreId={chapitreId}
