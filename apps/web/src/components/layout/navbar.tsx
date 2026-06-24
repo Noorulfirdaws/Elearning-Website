@@ -83,7 +83,7 @@ export function Navbar() {
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
             <span className="hidden sm:block text-gray-900 dark:text-white">
-              Learn<span className="text-green-600">Hub</span>
+              Noor<span className="text-green-600">Academie</span>
             </span>
           </Link>
 

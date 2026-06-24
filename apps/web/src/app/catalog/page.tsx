@@ -27,6 +27,31 @@ const CYCLE_COLORS: Record<string, string> = {
   lycee:   'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400',
 };
 
+// Ordre pédagogique des niveaux et matières (pour grouper le catalogue)
+const NIVEAU_RANK: Record<string, number> = { C6: 1, C5: 2, C4: 3, C3: 4, LS: 5, LP: 6, LT: 7 };
+const SUBJECT_ORDER = ['Mathématiques', 'Physique-Chimie', 'Physique', 'Chimie', 'SVT', 'Français', 'Anglais', 'Histoire-Géographie', 'Histoire', 'Géographie'];
+const subjectRank = (nom: string) => { const i = SUBJECT_ORDER.indexOf(nom); return i === -1 ? 99 : i; };
+
+// Regroupe une liste plate de chapitres par (niveau → matière), triée et ordonnée
+function grouperParMatiere(chapitres: any[]) {
+  const map = new Map<string, { niveau: any; matiere: any; chapitres: any[] }>();
+  for (const ch of chapitres || []) {
+    const niv = ch.matiere?.niveau;
+    const mat = ch.matiere;
+    const key = `${niv?.id}__${mat?.id}`;
+    if (!map.has(key)) map.set(key, { niveau: niv, matiere: mat, chapitres: [] });
+    map.get(key)!.chapitres.push(ch);
+  }
+  const groupes = Array.from(map.values());
+  groupes.forEach(g => g.chapitres.sort((a, b) => (a.ordre || 0) - (b.ordre || 0)));
+  groupes.sort((a, b) => {
+    const r = (NIVEAU_RANK[a.niveau?.id] || 99) - (NIVEAU_RANK[b.niveau?.id] || 99);
+    if (r !== 0) return r;
+    return subjectRank(a.matiere?.nom) - subjectRank(b.matiere?.nom);
+  });
+  return groupes;
+}
+
 export default function CatalogPage() {
   const [search, setSearch]   = useState('');
   const [niveau, setNiveau]   = useState('');
@@ -148,46 +173,60 @@ export default function CatalogPage() {
                   </button>
                 </div>
               ) : (
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {resultats?.map((ch: any, i: number) => (
-                    <motion.div
-                      key={ch.id}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.04 }}
-                    >
-                      <Link href={`/apprendre/${ch.matiere?.niveau?.id}/${ch.matiere?.id}/${ch.id}`}>
-                        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 shadow-sm hover:shadow-md transition-all group cursor-pointer h-full">
-                          <div className="flex items-start gap-3 mb-3">
-                            <div
-                              className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-                              style={{ backgroundColor: (ch.matiere?.couleur || '#3B82F6') + '20' }}
-                            >
-                              {ch.matiere?.icone || '📚'}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 mb-1">
-                                <span className={cn(
-                                  'text-xs font-bold px-2 py-0.5 rounded-full',
-                                  CYCLE_COLORS[ch.matiere?.niveau?.cycle || 'college'],
-                                )}>
-                                  {ch.matiere?.niveau?.nom}
-                                </span>
-                                <span className="text-xs text-gray-400">{ch.matiere?.nom}</span>
-                              </div>
-                              <h3 className="font-bold text-gray-900 dark:text-white text-sm leading-snug group-hover:text-green-600 transition-colors">
-                                Chapitre {ch.ordre} · {ch.titre}
-                              </h3>
-                            </div>
-                          </div>
-                          <div className="flex items-center justify-end">
-                            <span className="text-xs text-green-600 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                              Étudier <ChevronRight className="h-3.5 w-3.5" />
-                            </span>
-                          </div>
+                <div className="space-y-10">
+                  {grouperParMatiere(resultats || []).map((groupe) => (
+                    <div key={`${groupe.niveau?.id}__${groupe.matiere?.id}`}>
+                      {/* En-tête de la matière */}
+                      <div className="flex items-center gap-3 mb-4">
+                        <div
+                          className="w-9 h-9 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
+                          style={{ backgroundColor: (groupe.matiere?.couleur || '#10B981') + '20' }}
+                        >
+                          {groupe.matiere?.icone || '📚'}
                         </div>
-                      </Link>
-                    </motion.div>
+                        <div>
+                          <h3 className="font-bold text-gray-900 dark:text-white leading-tight">
+                            {groupe.matiere?.nom}
+                          </h3>
+                          <span className="text-xs text-gray-400">
+                            {groupe.niveau?.nom} · {groupe.chapitres.length} chapitre{groupe.chapitres.length > 1 ? 's' : ''}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Chapitres de la matière, dans l'ordre */}
+                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {groupe.chapitres.map((ch: any, i: number) => (
+                          <motion.div
+                            key={ch.id}
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.03 }}
+                          >
+                            <Link href={`/apprendre/${ch.matiere?.niveau?.id}/${ch.matiere?.id}/${ch.id}`}>
+                              <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5 shadow-sm hover:shadow-md transition-all group cursor-pointer h-full">
+                                <div className="flex items-start gap-3 mb-3">
+                                  <div
+                                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
+                                    style={{ backgroundColor: groupe.matiere?.couleur || '#10B981' }}
+                                  >
+                                    {ch.ordre}
+                                  </div>
+                                  <h3 className="font-bold text-gray-900 dark:text-white text-sm leading-snug group-hover:text-green-600 transition-colors flex-1">
+                                    {ch.titre}
+                                  </h3>
+                                </div>
+                                <div className="flex items-center justify-end">
+                                  <span className="text-xs text-green-600 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                    Étudier <ChevronRight className="h-3.5 w-3.5" />
+                                  </span>
+                                </div>
+                              </div>
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}
