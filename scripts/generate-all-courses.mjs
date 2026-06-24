@@ -651,8 +651,8 @@ CONSIGNES STRICTES :
 ${consignesLangue}
 - Génère exactement 3 points clés dans le cours
 - Génère exactement 3 exemples résolus
+- Génère exactement 3 exercices d'application avec corrigés détaillés pas à pas (difficulté croissante)
 - Génère exactement 5 questions de quiz (4 options chacune, 1 bonne réponse)
-- NE génère PAS d'exercices (les professeurs les fourniront en PDF)
 
 RÉPONDS UNIQUEMENT AVEC CE JSON (PAS de commentaires, PAS de markdown, PAS de texte avant/après) :
 {
@@ -690,7 +690,20 @@ RÉPONDS UNIQUEMENT AVEC CE JSON (PAS de commentaires, PAS de markdown, PAS de t
       "resolution_pas_a_pas": "Étape 1 : ... Étape 2 : ... Étape 3 : ... Conclusion : ..."
     }
   ],
-  "exercices": [],
+  "exercices": [
+    {
+      "enonce": "Énoncé clair et complet de l'exercice 1 (avec données chiffrées si pertinent)",
+      "corrige_detaille": "Correction détaillée pas à pas : Étape 1 : ... Étape 2 : ... Étape 3 : ... Résultat final : ..."
+    },
+    {
+      "enonce": "Énoncé de l'exercice 2 (plus difficile que le 1)",
+      "corrige_detaille": "Correction détaillée pas à pas avec toutes les étapes et le raisonnement."
+    },
+    {
+      "enonce": "Énoncé de l'exercice 3 (exercice de synthèse)",
+      "corrige_detaille": "Correction détaillée pas à pas avec explication complète."
+    }
+  ],
   "quiz": [
     {
       "question": "Question précise et sans ambiguïté",
