@@ -53,11 +53,25 @@ const EXTRA_COLLEGE = {
 };
 const EXTRA_LYCEE = {
   'Mathématiques': ['Suites numériques', 'Dérivation et applications', 'Probabilités et lois'],
-  'Physique': ['Ondes et signaux', 'Électricité et circuits avancés', 'Mécanique : lois de Newton'],
-  'Chimie': ['Structure de la matière', 'Réactions chimiques et équilibres', 'Chimie organique : introduction'],
   'SVT': ['Génétique et évolution', 'Le fonctionnement du corps humain', 'Écologie et climat'],
   'Français': ['Le roman et ses personnages', 'La dissertation littéraire', "L'oral : commentaire et entretien"],
   'Histoire-Géographie': ['Les grandes guerres mondiales', 'La mondialisation', 'Géopolitique contemporaine'],
+};
+
+// Physique et Chimie au lycée = matières séparées et VIDES → programme complet (5 chapitres, ordre 1→5)
+const LYCEE_PC = {
+  LS: {
+    'Physique': ['Mouvements et forces', 'La lumière et les ondes', "L'électricité : tension et intensité", 'La pression et les fluides', 'Signaux et information'],
+    'Chimie': ['La matière : atomes et éléments', 'Le tableau périodique', 'Les solutions et la concentration', 'Les transformations chimiques', 'Molécules et liaisons'],
+  },
+  LP: {
+    'Physique': ['Forces et énergie mécanique', 'Ondes mécaniques et lumineuses', 'Circuits électriques et puissance', "Énergie : conversions et rendement", 'Mouvement et interactions'],
+    'Chimie': ['Structure de la matière et modèles', 'Quantité de matière : la mole', 'Réactions acide-base', "Oxydoréduction", 'Introduction à la chimie organique'],
+  },
+  LT: {
+    'Physique': ['Mécanique de Newton et mouvement', 'Ondes et signaux', 'Énergie et transferts thermiques', 'Électromagnétisme', 'Physique nucléaire et radioactivité'],
+    'Chimie': ['Cinétique chimique', 'Équilibres chimiques', 'Acides, bases et pH', 'Chimie organique et synthèse', 'Piles, électrolyse et oxydoréduction'],
+  },
 };
 
 const NIVEAUX = [
@@ -85,6 +99,16 @@ export const EXPANSION = NIVEAUX.map(n => {
       ordre: i + 1, titre, slug: 'ang-' + slugify(titre),
     })),
   });
+
+  // Physique & Chimie au lycée — programme complet (matières vides, ordre 1→5)
+  if (n.cycle === 'lycee' && LYCEE_PC[n.niveauId]) {
+    for (const [nomMatiere, titres] of Object.entries(LYCEE_PC[n.niveauId])) {
+      matieres.push({
+        nomMatiere,
+        chapitres: titres.map((titre, i) => ({ ordre: i + 1, titre, slug: 'pc-' + slugify(titre) })),
+      });
+    }
+  }
 
   // Chapitres supplémentaires dans les matières existantes (ordre 6→8)
   const extra = n.cycle === 'college' ? EXTRA_COLLEGE : EXTRA_LYCEE;
