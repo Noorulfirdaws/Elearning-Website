@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import axios from '@/lib/api';
 import { Navbar } from '@/components/layout/navbar';
+import { ChapitreVideo } from '@/components/course/chapitre-video';
 import { cn } from '@/lib/utils';
 import { useOfflineProgress } from '@/hooks/use-offline-progress';
 import { useAcces } from '@/hooks/use-acces';
@@ -332,6 +333,24 @@ export default function ChapitreDetailPage() {
             </div>
           </div>
 
+          {/* Méta leçon : durée estimée · difficulté · XP */}
+          <div className="flex flex-wrap items-center gap-2 pb-3 text-[11px]">
+            <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full font-medium">
+              ⏱️ ~{Math.max(10, 8 + (chapitre.contenuCours?.points_cles?.length || 0) * 4 + exemples.length * 3 + quiz.length)} min
+            </span>
+            <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full font-medium">
+              {chapitre.ordre <= 3 ? '🟢 Facile' : chapitre.ordre <= 7 ? '🟡 Intermédiaire' : '🔴 Avancé'}
+            </span>
+            <span className="inline-flex items-center gap-1 bg-yellow-50 dark:bg-yellow-950 text-yellow-700 dark:text-yellow-400 px-2.5 py-1 rounded-full font-bold">
+              ⚡ +{50 + (quiz.length > 0 ? 50 : 0)} XP max
+            </span>
+            {exercices.length > 0 && (
+              <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full font-medium">
+                ✍️ {exercices.length} exercice{exercices.length > 1 ? 's' : ''} corrigé{exercices.length > 1 ? 's' : ''}
+              </span>
+            )}
+          </div>
+
           {/* Onglets */}
           <div className="flex gap-0 mt-1 overflow-x-auto">
             {TABS.map(tab => {
@@ -463,29 +482,13 @@ export default function ChapitreDetailPage() {
                     </div>
                   )}
 
-                  {/* Vidéo YouTube */}
-                  {chapitre.youtubeUrl && (
-                    <div className="mb-8 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-xl p-6 flex items-center gap-5">
-                      <Youtube className="h-10 w-10 text-red-600 flex-shrink-0" />
-                      <div className="flex-1">
-                        <p className="font-bold text-red-900 dark:text-red-100 mb-1">Vidéo explicative recommandée</p>
-                        {chapitre.youtubeMotsCles && (
-                          <p className="text-sm text-red-600 dark:text-red-400 mb-2">
-                            Mots-clés : <em>{chapitre.youtubeMotsCles}</em>
-                          </p>
-                        )}
-                        <a
-                          href={chapitre.youtubeUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition-colors"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                          Regarder sur YouTube
-                        </a>
-                      </div>
-                    </div>
-                  )}
+                  {/* Vidéos intégrées (YouTube + Khan Academy) */}
+                  <ChapitreVideo
+                    youtubeUrl={chapitre.youtubeUrl}
+                    khanAcademyUrl={chapitre.khanAcademyUrl}
+                    motsCles={chapitre.youtubeMotsCles}
+                    titre={chapitre.titre}
+                  />
 
                   {/* Pied de page document */}
                   <div className="border-t border-gray-100 dark:border-gray-800 pt-6 mt-6 flex items-center justify-between">
