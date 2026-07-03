@@ -503,6 +503,8 @@ export default function ChapitreDetailPage() {
                     khanAcademyUrl={chapitre.khanAcademyUrl}
                     motsCles={chapitre.youtubeMotsCles}
                     titre={chapitre.titre}
+                    matiere={chapitre.matiere?.nom}
+                    niveau={chapitre.matiere?.niveau?.nom}
                   />
 
                   {/* Pied de page document */}
