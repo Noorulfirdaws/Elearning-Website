@@ -309,8 +309,8 @@ export default function ChapitreDetailPage() {
       {/* ─── Barre de navigation du cours ───────────────────────────────── */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pt-16 sticky top-0 z-10 shadow-sm">
         <div className="max-w-5xl mx-auto px-6">
-          {/* Fil d'ariane */}
-          <div className="flex items-center gap-2 text-sm text-gray-400 pt-3 pb-2">
+          {/* Fil d'ariane (compact) */}
+          <div className="flex items-center gap-2 text-xs text-gray-400 pt-2 pb-1">
             <Link href="/apprendre" className="hover:text-green-600 transition-colors">Apprendre</Link>
             <span>/</span>
             <Link href={`/apprendre/${niveauId}`} className="hover:text-green-600 transition-colors capitalize">
@@ -320,19 +320,31 @@ export default function ChapitreDetailPage() {
             <Link href={`/apprendre/${niveauId}/${matiereId}`} className="hover:text-green-600 transition-colors">
               {chapitre.matiere?.nom}
             </Link>
-            <span>/</span>
-            <span className="text-gray-600 dark:text-gray-300 truncate max-w-xs">{chapitre.titre}</span>
           </div>
 
-          {/* Titre + badges */}
-          <div className="flex items-center justify-between gap-3 pb-2">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          {/* Titre à gauche + méta alignée à droite (remplit toute la largeur) */}
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pb-2">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white min-w-0">
               {chapitre.titre}
             </h1>
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex flex-wrap items-center gap-2 text-[11px]">
+              <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full font-medium">
+                ⏱️ ~{Math.max(10, 8 + (chapitre.contenuCours?.points_cles?.length || 0) * 4 + exemples.length * 3 + quiz.length)} min
+              </span>
+              <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full font-medium">
+                {chapitre.ordre <= 3 ? '🟢 Facile' : chapitre.ordre <= 7 ? '🟡 Intermédiaire' : '🔴 Avancé'}
+              </span>
+              <span className="inline-flex items-center gap-1 bg-yellow-50 dark:bg-yellow-950 text-yellow-700 dark:text-yellow-400 px-2.5 py-1 rounded-full font-bold">
+                ⚡ +{50 + (quiz.length > 0 ? 50 : 0)} XP
+              </span>
+              {exercices.length > 0 && (
+                <span className="hidden sm:inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full font-medium">
+                  ✍️ {exercices.length} exercice{exercices.length > 1 ? 's' : ''}
+                </span>
+              )}
               {progression?.meilleurScore != null && (
                 <span className={cn(
-                  'text-xs font-bold px-3 py-1 rounded-full',
+                  'font-bold px-2.5 py-1 rounded-full',
                   progression.estComplete
                     ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
                     : 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300',
@@ -341,29 +353,11 @@ export default function ChapitreDetailPage() {
                 </span>
               )}
               {typeof navigator !== 'undefined' && !navigator.onLine && (
-                <span className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-500 px-2 py-1 rounded-full">
-                  📴 Hors-ligne
+                <span className="bg-gray-100 dark:bg-gray-800 text-gray-500 px-2 py-1 rounded-full">
+                  📴
                 </span>
               )}
             </div>
-          </div>
-
-          {/* Méta leçon : durée estimée · difficulté · XP */}
-          <div className="flex flex-wrap items-center gap-2 pb-3 text-[11px]">
-            <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full font-medium">
-              ⏱️ ~{Math.max(10, 8 + (chapitre.contenuCours?.points_cles?.length || 0) * 4 + exemples.length * 3 + quiz.length)} min
-            </span>
-            <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full font-medium">
-              {chapitre.ordre <= 3 ? '🟢 Facile' : chapitre.ordre <= 7 ? '🟡 Intermédiaire' : '🔴 Avancé'}
-            </span>
-            <span className="inline-flex items-center gap-1 bg-yellow-50 dark:bg-yellow-950 text-yellow-700 dark:text-yellow-400 px-2.5 py-1 rounded-full font-bold">
-              ⚡ +{50 + (quiz.length > 0 ? 50 : 0)} XP max
-            </span>
-            {exercices.length > 0 && (
-              <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full font-medium">
-                ✍️ {exercices.length} exercice{exercices.length > 1 ? 's' : ''} corrigé{exercices.length > 1 ? 's' : ''}
-              </span>
-            )}
           </div>
 
           {/* Onglets */}

@@ -32,6 +32,7 @@ export function OfflineSync() {
           await axios.post(`/chapitres/${chapitreId}/progression`, data);
         });
         toast.success('Progression synchronisee avec succes', {
+          id: 'sync-status',
           duration: 3000,
           icon: '✅',
         });
@@ -43,6 +44,7 @@ export function OfflineSync() {
     const handleOffline = () => {
       wasOffline.current = true;
       toast.warning('Mode hors-ligne — tes resultats sont sauvegardes localement', {
+        id: 'offline-mode', // id fixe → jamais de doublons empilés
         duration: 4000,
         icon: '📴',
       });
