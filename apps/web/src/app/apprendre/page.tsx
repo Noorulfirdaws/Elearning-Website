@@ -44,8 +44,8 @@ export default function ApprendrePage() {
             alt=""
             className="w-full h-full object-cover animate-kenburns"
           />
-          {/* Voile vert pour la lisibilité */}
-          <div className="absolute inset-0 bg-gradient-to-r from-green-900/85 via-green-800/70 to-emerald-900/60" />
+          {/* Voile léger pour la lisibilité (photo bien visible) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-green-950/70 via-green-900/40 to-transparent" />
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 py-14 sm:py-20">
