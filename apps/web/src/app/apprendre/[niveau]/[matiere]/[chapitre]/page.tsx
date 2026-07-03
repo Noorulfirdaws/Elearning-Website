@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import axios from '@/lib/api';
 import { Navbar } from '@/components/layout/navbar';
+import { toast } from 'sonner';
 import { ChapitreVideo } from '@/components/course/chapitre-video';
 import { cn } from '@/lib/utils';
 import { useOfflineProgress } from '@/hooks/use-offline-progress';
@@ -102,13 +103,6 @@ export default function ChapitreDetailPage() {
   const userRole = (user as any)?.role || '';
   const estInstructeur = ['SUPER_ADMIN', 'ADMIN', 'INSTRUCTOR'].includes(userRole);
 
-  // Accès CLASSE : raison indique si c'est ACCES_CLASSE ou ROLE_ADMIN
-  const autoriseClasse =
-    estInstructeur ||
-    raison === 'ACCES_CLASSE' ||
-    raison === 'ROLE_ADMIN' ||
-    raison === 'ACCES_EXAMEN';
-
   // Vérification d'accès (offline-first via IndexedDB)
   const chapitrePremier = chapitre?.ordre === 1;
   const niveauIdReel    = chapitre?.matiere?.niveauId || niveauId;
@@ -119,6 +113,13 @@ export default function ChapitreDetailPage() {
     estPremierChapitre: chapitrePremier,
     token:              accessToken,
   });
+
+  // Accès CLASSE : raison indique si c'est ACCES_CLASSE ou ROLE_ADMIN
+  const autoriseClasse =
+    estInstructeur ||
+    raison === 'ACCES_CLASSE' ||
+    raison === 'ROLE_ADMIN' ||
+    raison === 'ACCES_EXAMEN';
 
   // Restaurer le dernier score si l'élève a déjà fait ce quiz
   useEffect(() => {
@@ -227,6 +228,20 @@ export default function ChapitreDetailPage() {
     const score = Math.round((correct / quiz.length) * 100);
     setQuizScore(score);
     setQuizDone(true);
+
+    // 🎉 Célébration XP (style Duolingo)
+    const xpGagne = (score >= 60 ? 50 : 0) + Math.round(score / 2);
+    if (score >= 60) {
+      toast.success(`⚡ +${xpGagne} XP · Chapitre validé !`, {
+        description: score === 100 ? '💯 Sans faute, incroyable !' : `Score : ${score}% — continue comme ça 🔥`,
+        duration: 5000,
+      });
+    } else {
+      toast(`Score : ${score}% — presque !`, {
+        description: 'Il faut 60% pour valider. Relis le cours et réessaie 💪',
+        duration: 5000,
+      });
+    }
 
     // Sauvegarde locale immédiate + sync API en arrière-plan
     await sauvegarderQuiz(
