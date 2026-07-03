@@ -16,7 +16,11 @@
 
 const isDev = process.env.NODE_ENV !== 'production';
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-const apiOrigin = new URL(apiUrl).origin;
+// apiUrl peut être relatif (/api/backend) en dev local — pas d'origin dans ce cas
+let apiOrigin = '';
+try { apiOrigin = new URL(apiUrl).origin; } catch { apiOrigin = ''; }
+// Cible du proxy /api/backend/* (dev local → API Railway sans CORS)
+const apiProxyTarget = process.env.API_PROXY_TARGET || (apiUrl.startsWith('http') ? apiUrl : 'http://localhost:3001/api/v1');
 
 // Sources autorisées pour les iframes YouTube (lecteur vidéo)
 const YOUTUBE_EMBED = 'https://www.youtube.com https://www.youtube-nocookie.com';
@@ -155,11 +159,11 @@ const nextConfig = {
   },
 
   async rewrites() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1';
+    // Proxy same-origin vers l'API (évite tout problème CORS en dev local)
     return [
       {
         source: '/api/backend/:path*',
-        destination: `${apiUrl}/:path*`,
+        destination: `${apiProxyTarget}/:path*`,
       },
     ];
   },
