@@ -35,11 +35,29 @@ export default function ApprendrePage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Navbar />
 
-      {/* Header compact */}
-      <section className="bg-gradient-to-r from-green-700 to-green-500 text-white pt-16 pb-4 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-lg font-bold">Choisir ton niveau</h1>
-          <p className="text-green-100 text-xs mt-0.5">Programme scolaire Djibouti · Collège et Lycée</p>
+      {/* Hero animé (image en mouvement — effet Ken Burns) */}
+      <section className="relative text-white pt-16 overflow-hidden">
+        {/* Image de fond animée */}
+        <div className="absolute inset-0">
+          <img
+            src="/hero-apprendre.jpg"
+            alt=""
+            className="w-full h-full object-cover animate-kenburns"
+          />
+          {/* Voile vert pour la lisibilité */}
+          <div className="absolute inset-0 bg-gradient-to-r from-green-900/85 via-green-800/70 to-emerald-900/60" />
+        </div>
+
+        <div className="relative max-w-4xl mx-auto px-4 py-14 sm:py-20">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+            <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur px-3 py-1 rounded-full text-xs font-medium mb-4">
+              🇩🇯 Programme scolaire de Djibouti
+            </span>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-2">Choisis ton niveau</h1>
+            <p className="text-green-100 text-sm sm:text-base max-w-lg">
+              Du collège au lycée — cours, vidéos, exercices corrigés et quiz pour réussir le Brevet et le Bac.
+            </p>
+          </motion.div>
         </div>
       </section>
 

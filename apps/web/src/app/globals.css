@@ -127,3 +127,14 @@
   position: relative;
   overflow: hidden;
 }
+
+/* Hero animé (effet Ken Burns — zoom/panoramique lent) */
+@keyframes kenburns {
+  0%   { transform: scale(1.02) translate(0, 0); }
+  50%  { transform: scale(1.12) translate(-1.5%, -2%); }
+  100% { transform: scale(1.02) translate(0, 0); }
+}
+.animate-kenburns {
+  animation: kenburns 24s ease-in-out infinite;
+  will-change: transform;
+}

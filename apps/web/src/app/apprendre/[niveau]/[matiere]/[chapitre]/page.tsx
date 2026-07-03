@@ -74,8 +74,11 @@ export default function ChapitreDetailPage() {
   const [uploading,    setUploading]    = useState(false);
   const [uploadMsg,    setUploadMsg]    = useState('');
 
-  // PDF embed viewer
+  // PDF embed viewer (modal)
   const [previewFichier, setPreviewFichier] = useState<{ nom: string; blobUrl: string } | null>(null);
+  // PDF intégré inline dans l'onglet Ressources (1er PDF accessible auto-chargé)
+  const [pdfEmbed, setPdfEmbed] = useState<{ nom: string; blobUrl: string } | null>(null);
+  const [pdfEmbedLoading, setPdfEmbedLoading] = useState(false);
 
   // PDF export
   const [exportingPdf, setExportingPdf] = useState(false);
@@ -198,6 +201,28 @@ export default function ChapitreDetailPage() {
     if (previewFichier) URL.revokeObjectURL(previewFichier.blobUrl);
     setPreviewFichier(null);
   };
+
+  // Auto-intègre le 1er PDF accessible quand on ouvre l'onglet Ressources
+  useEffect(() => {
+    if (activeTab !== 'ressources' || pdfEmbed || pdfEmbedLoading) return;
+    const premierPdf = fichiers.find((f: any) => {
+      if (f.type !== 'pdf') return false;
+      return estInstructeur ||
+        f.acces === 'GRATUIT' ||
+        (f.acces === 'CLASSE' && autoriseClasse) ||
+        (f.acces === 'CHAPITRE' && autorise);
+    });
+    if (!premierPdf) return;
+    setPdfEmbedLoading(true);
+    axios.get(`/chapitres/${chapitreId}/fichiers/${premierPdf.id}/download`, { responseType: 'blob' })
+      .then(res => {
+        const blob = new Blob([res.data], { type: 'application/pdf' });
+        setPdfEmbed({ nom: premierPdf.nom, blobUrl: URL.createObjectURL(blob) });
+      })
+      .catch(() => {})
+      .finally(() => setPdfEmbedLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, fichiers, autorise, autoriseClasse, estInstructeur]);
 
   const handleExportPdf = () => {
     setExportingPdf(true);
@@ -722,6 +747,26 @@ export default function ChapitreDetailPage() {
                       </div>
                     )}
                   </div>
+
+                  {/* ─── PDF intégré (lecture directe dans la page) ── */}
+                  {(pdfEmbed || pdfEmbedLoading) && (
+                    <div>
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-emerald-600 mb-4">
+                        📖 Lecture intégrée{pdfEmbed ? ` — ${pdfEmbed.nom}` : ''}
+                      </h3>
+                      {pdfEmbedLoading && !pdfEmbed ? (
+                        <div className="h-[60vh] bg-gray-100 dark:bg-gray-800 rounded-xl animate-pulse flex items-center justify-center text-gray-400 text-sm">
+                          Chargement du PDF…
+                        </div>
+                      ) : pdfEmbed ? (
+                        <iframe
+                          src={pdfEmbed.blobUrl}
+                          title={pdfEmbed.nom}
+                          className="w-full h-[70vh] rounded-xl border border-gray-200 dark:border-gray-700 bg-white"
+                        />
+                      ) : null}
+                    </div>
+                  )}
 
                   {/* ─── Liste des fichiers ─────────────────────────── */}
                   <div>

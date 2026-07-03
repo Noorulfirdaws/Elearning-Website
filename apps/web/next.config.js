@@ -41,7 +41,7 @@ const ContentSecurityPolicy = [
   // Médias (audio/vidéo YouTube)
   `media-src 'self' blob:`,
   // Iframes uniquement YouTube (lecteur vidéo LearnHub)
-  `frame-src ${YOUTUBE_EMBED}`,
+  `frame-src ${YOUTUBE_EMBED} blob:`, // blob: = visionneuse PDF intégrée
   // Interdit d'embedder LearnHub dans une iframe (anti-clickjacking)
   `frame-ancestors 'none'`,
   // Workers (Service Worker)
