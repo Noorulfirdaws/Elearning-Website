@@ -67,8 +67,23 @@ const config: Config = {
         'slide-in': 'slide-in 0.3s ease-out',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-heading)', 'var(--font-sans)', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+      },
+      boxShadow: {
+        soft: '0 1px 2px rgba(16,24,40,0.04), 0 1px 3px rgba(16,24,40,0.06)',
+        card: '0 6px 28px -10px rgba(16,24,40,0.12)',
+        lift: '0 24px 56px -20px rgba(16,24,40,0.22)',
+        glow: '0 10px 44px -10px rgba(34,197,94,0.40)',
+        'glow-blue': '0 10px 44px -10px rgba(37,99,235,0.40)',
+      },
+      backgroundImage: {
+        'grid-slate':
+          'linear-gradient(to right, rgba(15,23,42,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(15,23,42,0.045) 1px, transparent 1px)',
+      },
+      transitionTimingFunction: {
+        premium: 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
     },
   },

@@ -50,3 +50,4 @@ docker/nginx/ssl/
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+scripts/.genpw

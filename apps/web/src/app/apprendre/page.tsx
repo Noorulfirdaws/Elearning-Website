@@ -45,7 +45,7 @@ export default function ApprendrePage() {
             className="w-full h-full object-cover animate-kenburns"
           />
           {/* Voile léger pour la lisibilité (photo bien visible) */}
-          <div className="absolute inset-0 bg-gradient-to-r from-green-950/70 via-green-900/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-900/40 to-transparent" />
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 py-14 sm:py-20">
@@ -54,7 +54,7 @@ export default function ApprendrePage() {
               🇩🇯 Programme scolaire de Djibouti
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold mb-2">Choisis ton niveau</h1>
-            <p className="text-green-100 text-sm sm:text-base max-w-lg">
+            <p className="text-slate-100 text-sm sm:text-base max-w-lg">
               Du collège au lycée — cours, vidéos, exercices corrigés et quiz pour réussir le Brevet et le Bac.
             </p>
           </motion.div>

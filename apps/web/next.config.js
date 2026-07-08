@@ -114,6 +114,11 @@ const nextConfig = {
   // the app compiles successfully. Tracked as tech debt to clean up.
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
+  // Inclure les fiches PDF privées (hors public/) dans le bundle serveur
+  // pour que la route protégée /api/fiches puisse les lire en production.
+  outputFileTracingIncludes: {
+    '/api/fiches/[...path]': ['./fiches-privees/**/*'],
+  },
   experimental: {
     serverActions: { allowedOrigins: ['localhost:3000', 'nooracademie.vercel.app'] },
     // Allow client pages using useSearchParams to build without explicit Suspense wrappers
@@ -158,15 +163,9 @@ const nextConfig = {
     ];
   },
 
-  async rewrites() {
-    // Proxy same-origin vers l'API (évite tout problème CORS en dev local)
-    return [
-      {
-        source: '/api/backend/:path*',
-        destination: `${apiProxyTarget}/:path*`,
-      },
-    ];
-  },
+  // Le proxy /api/backend/* est désormais un Route Handler
+  // (src/app/api/backend/[...path]/route.ts) qui retire l'en-tête Origin
+  // pour éviter le rejet CORS de l'API. (Auparavant : rewrite ci-dessous.)
 };
 
 module.exports = nextConfig;

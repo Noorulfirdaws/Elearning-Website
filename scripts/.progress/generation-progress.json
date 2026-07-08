@@ -1,616 +1,550 @@
 {
-  "c3-maths-pythagore": {
+  "c6-anglais-ang-the-alphabet-and-greetings": {
     "done": true,
-    "ts": "2026-06-09T22:52:46.789Z"
+    "ts": "2026-06-14T19:14:44.535Z"
   },
-  "c3-maths-equations": {
+  "c6-anglais-ang-numbers-colours-and-days": {
     "done": true,
-    "ts": "2026-06-09T22:53:31.719Z"
+    "ts": "2026-06-14T19:15:18.064Z"
   },
-  "c3-maths-fonctions": {
+  "c6-anglais-ang-the-verb-to-be-and-personal-pronouns": {
     "done": true,
-    "ts": "2026-06-09T22:54:24.071Z"
+    "ts": "2026-06-14T19:15:52.949Z"
   },
-  "c3-maths-statistiques": {
+  "c6-anglais-ang-classroom-language-and-instructions": {
     "done": true,
-    "ts": "2026-06-09T22:55:16.025Z"
+    "ts": "2026-06-14T19:16:32.952Z"
   },
-  "c3-maths-thales": {
+  "c6-anglais-ang-family-and-basic-vocabulary": {
     "done": true,
-    "ts": "2026-06-09T22:56:12.207Z"
+    "ts": "2026-06-14T19:17:10.310Z"
   },
-  "c3-physique-forces-equilibre": {
+  "c6-anglais-ang-reading-short-simple-texts": {
     "done": true,
-    "ts": "2026-06-09T22:57:10.030Z"
+    "ts": "2026-06-14T19:17:48.080Z"
   },
-  "c3-physique-loi-ohm": {
+  "c5-anglais-ang-present-simple-and-daily-routines": {
     "done": true,
-    "ts": "2026-06-09T22:57:58.931Z"
+    "ts": "2026-06-14T19:18:31.784Z"
   },
-  "c3-physique-chimie-concentration": {
+  "c5-anglais-ang-present-continuous": {
     "done": true,
-    "ts": "2026-06-09T22:58:47.645Z"
+    "ts": "2026-06-14T19:19:09.270Z"
   },
-  "c3-physique-energie-puissance": {
+  "c5-anglais-ang-describing-people-and-places": {
     "done": true,
-    "ts": "2026-06-09T22:59:38.636Z"
+    "ts": "2026-06-14T19:19:48.316Z"
   },
-  "c3-physique-radioactivite": {
+  "c5-anglais-ang-food-drinks-and-shopping": {
     "done": true,
-    "ts": "2026-06-09T23:00:37.154Z"
+    "ts": "2026-06-14T19:20:28.879Z"
   },
-  "c3-svt-adn-heredite": {
+  "c5-anglais-ang-prepositions-of-place-and-time": {
     "done": true,
-    "ts": "2026-06-09T23:02:13.142Z"
+    "ts": "2026-06-14T19:21:06.513Z"
   },
-  "c3-svt-heredite-transmission": {
+  "c5-anglais-ang-reading-and-short-dialogues": {
     "done": true,
-    "ts": "2026-06-09T23:03:17.107Z"
+    "ts": "2026-06-14T19:21:50.688Z"
   },
-  "c3-svt-evolution-humaine": {
+  "c4-anglais-ang-past-simple-regular-and-irregular-verbs": {
     "done": true,
-    "ts": "2026-06-09T23:04:18.707Z"
+    "ts": "2026-06-14T19:22:29.553Z"
   },
-  "c3-svt-corps-sante": {
+  "c4-anglais-ang-telling-a-story-in-the-past": {
     "done": true,
-    "ts": "2026-06-13T11:18:40.135Z"
+    "ts": "2026-06-14T19:23:13.486Z"
   },
-  "c3-svt-developpement-durable": {
+  "c4-anglais-ang-the-future-will-and-going-to": {
     "done": true,
-    "ts": "2026-06-13T11:19:32.743Z"
+    "ts": "2026-06-14T19:23:54.117Z"
   },
-  "c3-francais-autobiographie": {
+  "c4-anglais-ang-comparatives-and-superlatives": {
     "done": true,
-    "ts": "2026-06-13T11:20:35.510Z"
+    "ts": "2026-06-14T19:24:42.363Z"
   },
-  "c3-francais-poesie-engagee": {
+  "c4-anglais-ang-asking-and-answering-questions": {
     "done": true,
-    "ts": "2026-06-13T11:21:35.145Z"
+    "ts": "2026-06-14T19:25:27.694Z"
   },
-  "c3-francais-roman-xxe-siecle": {
+  "c4-anglais-ang-reading-comprehension": {
     "done": true,
-    "ts": "2026-06-13T11:22:32.411Z"
+    "ts": "2026-06-14T19:26:11.054Z"
   },
-  "c3-francais-argumentation-convaincre": {
+  "c3-anglais-ang-present-perfect": {
     "done": true,
-    "ts": "2026-06-13T11:23:28.848Z"
+    "ts": "2026-06-14T19:26:57.882Z"
   },
-  "c3-francais-revision-brevet": {
+  "c3-anglais-ang-modal-verbs-can-must-should": {
     "done": true,
-    "ts": "2026-06-13T11:24:35.674Z"
+    "ts": "2026-06-14T19:27:39.663Z"
   },
-  "c3-histgeo-premiere-guerre-mondiale": {
+  "c3-anglais-ang-conditionals-zero-and-first": {
     "done": true,
-    "ts": "2026-06-13T11:25:31.077Z"
+    "ts": "2026-06-14T19:28:19.978Z"
   },
-  "c3-histgeo-seconde-guerre-mondiale": {
+  "c3-anglais-ang-expressing-opinions-and-feelings": {
     "done": true,
-    "ts": "2026-06-13T11:26:36.149Z"
+    "ts": "2026-06-14T19:29:02.697Z"
   },
-  "c3-histgeo-decolonisation-djibouti": {
+  "c3-anglais-ang-writing-a-structured-paragraph": {
     "done": true,
-    "ts": "2026-06-13T11:27:43.715Z"
+    "ts": "2026-06-14T19:29:43.260Z"
   },
-  "c3-histgeo-monde-contemporain": {
+  "c3-anglais-ang-brevet-exam-preparation": {
     "done": true,
-    "ts": "2026-06-13T11:28:40.563Z"
+    "ts": "2026-06-14T19:30:28.627Z"
   },
-  "c3-histgeo-pays-developpement": {
+  "ls-anglais-ang-review-of-tenses": {
     "done": true,
-    "ts": "2026-06-13T11:29:37.041Z"
+    "ts": "2026-06-14T19:31:21.642Z"
   },
-  "c6-maths-nombres-entiers": {
+  "ls-anglais-ang-building-and-expanding-vocabulary": {
     "done": true,
-    "ts": "2026-06-13T10:01:46.390Z"
+    "ts": "2026-06-14T19:33:08.593Z"
   },
-  "c6-maths-fractions-intro": {
+  "ls-anglais-ang-reading-literary-extracts": {
+    "done": true,
+    "ts": "2026-06-14T19:34:08.178Z"
+  },
+  "ls-anglais-ang-listening-strategies": {
+    "done": true,
+    "ts": "2026-06-14T19:35:07.984Z"
+  },
+  "ls-anglais-ang-speaking-introducing-and-describing": {
+    "done": true,
+    "ts": "2026-06-14T19:36:01.615Z"
+  },
+  "ls-anglais-ang-writing-a-short-essay": {
+    "done": true,
+    "ts": "2026-06-14T19:36:47.674Z"
+  },
+  "lp-anglais-ang-advanced-grammar-and-sentence-structure": {
+    "done": true,
+    "ts": "2026-06-14T19:37:35.395Z"
+  },
+  "lp-anglais-ang-argumentative-writing": {
+    "done": true,
+    "ts": "2026-06-14T19:38:27.006Z"
+  },
+  "lp-anglais-ang-text-and-document-analysis": {
+    "done": true,
+    "ts": "2026-06-14T19:39:17.561Z"
+  },
+  "lp-anglais-ang-idioms-register-and-connectors": {
+    "done": true,
+    "ts": "2026-06-14T19:46:15.360Z"
+  },
+  "lp-anglais-ang-oral-presentations": {
+    "done": true,
+    "ts": "2026-06-14T19:47:13.534Z"
+  },
+  "lp-anglais-ang-exam-techniques": {
+    "done": true,
+    "ts": "2026-06-14T19:48:04.402Z"
+  },
+  "lt-anglais-ang-complex-tenses-and-nuance": {
+    "done": true,
+    "ts": "2026-06-14T19:48:56.841Z"
+  },
+  "lt-anglais-ang-essay-writing-for-the-baccalaureat": {
+    "done": true,
+    "ts": "2026-06-14T19:49:59.578Z"
+  },
+  "lt-anglais-ang-literary-and-cultural-analysis": {
+    "done": true,
+    "ts": "2026-06-14T19:50:59.788Z"
+  },
+  "lt-anglais-ang-debate-and-discussion": {
+    "done": true,
+    "ts": "2026-06-14T19:51:51.709Z"
+  },
+  "lt-anglais-ang-translation-english-french": {
     "done": false,
-    "error": "fetch failed",
-    "ts": "2026-06-13T10:02:45.293Z"
+    "error": "POST chapitre échoué: {\"success\":false,\"statusCode\":401,\"timestamp\":\"2026-06-14T21:17:53.712Z\",\"path\":\"/api/v1/chapitres\",\"method\":\"POST\",\"error\":{\"message\":\"Authentication required\",\"error\":\"Unauthorized\",\"statusCode\":401",
+    "ts": "2026-06-14T21:17:54.210Z"
   },
-  "c6-maths-geometrie-plane": {
+  "lt-anglais-ang-bac-oral-preparation": {
     "done": true,
-    "ts": "2026-06-13T10:03:42.354Z"
-  },
-  "c6-maths-perimetres-aires": {
-    "done": true,
-    "ts": "2026-06-13T10:04:50.977Z"
-  },
-  "c6-maths-proportionnalite": {
-    "done": true,
-    "ts": "2026-06-13T10:06:29.340Z"
+    "ts": "2026-06-14T21:19:48.216Z"
   },
   "c6-physique-etats-matiere": {
     "done": true,
-    "ts": "2026-06-13T10:07:28.240Z"
+    "ts": "2026-06-24T10:38:16.993Z"
   },
   "c6-physique-melanges-solutions": {
     "done": true,
-    "ts": "2026-06-13T10:08:18.708Z"
+    "ts": "2026-06-24T10:39:08.349Z"
   },
   "c6-physique-air-composition": {
     "done": true,
-    "ts": "2026-06-13T10:09:23.861Z"
+    "ts": "2026-06-24T10:39:58.466Z"
   },
   "c6-physique-eau-nature": {
     "done": true,
-    "ts": "2026-06-13T10:10:11.843Z"
+    "ts": "2026-06-24T10:40:49.986Z"
   },
   "c6-physique-lumiere-sources": {
     "done": true,
-    "ts": "2026-06-13T10:11:33.247Z"
-  },
-  "c6-svt-cellule-unite": {
-    "done": true,
-    "ts": "2026-06-13T10:12:18.548Z"
-  },
-  "c6-svt-nutrition-digestion": {
-    "done": true,
-    "ts": "2026-06-13T10:13:01.816Z"
-  },
-  "c6-svt-photosynthese": {
-    "done": true,
-    "ts": "2026-06-13T10:13:50.967Z"
-  },
-  "c6-svt-groupes-vivants": {
-    "done": true,
-    "ts": "2026-06-13T10:14:52.429Z"
-  },
-  "c6-svt-ecosystemes-djibouti": {
-    "done": false,
-    "error": "fetch failed",
-    "ts": "2026-06-13T10:15:53.378Z"
-  },
-  "c6-francais-phrase-types": {
-    "done": true,
-    "ts": "2026-06-13T10:17:14.456Z"
-  },
-  "c6-francais-classes-grammaticales": {
-    "done": true,
-    "ts": "2026-06-13T10:18:39.029Z"
-  },
-  "c6-francais-recit-narrateur": {
-    "done": true,
-    "ts": "2026-06-13T10:19:59.596Z"
-  },
-  "c6-francais-description": {
-    "done": true,
-    "ts": "2026-06-13T10:21:19.219Z"
-  },
-  "c6-francais-lettre-correspondance": {
-    "done": true,
-    "ts": "2026-06-13T10:22:06.043Z"
-  },
-  "c6-histgeo-prehistoire": {
-    "done": true,
-    "ts": "2026-06-13T10:23:10.074Z"
-  },
-  "c6-histgeo-antiquite": {
-    "done": true,
-    "ts": "2026-06-13T10:24:02.932Z"
-  },
-  "c6-histgeo-grece-rome": {
-    "done": true,
-    "ts": "2026-06-13T10:25:01.102Z"
-  },
-  "c6-histgeo-geographie-djibouti": {
-    "done": true,
-    "ts": "2026-06-13T10:25:51.222Z"
-  },
-  "c6-histgeo-continents-oceans": {
-    "done": true,
-    "ts": "2026-06-13T10:26:39.004Z"
-  },
-  "c5-maths-nombres-relatifs": {
-    "done": true,
-    "ts": "2026-06-13T10:27:49.131Z"
-  },
-  "c5-maths-fractions-decimaux": {
-    "done": true,
-    "ts": "2026-06-13T10:28:49.097Z"
-  },
-  "c5-maths-triangles": {
-    "done": true,
-    "ts": "2026-06-13T10:29:37.256Z"
-  },
-  "c5-maths-symetrie": {
-    "done": true,
-    "ts": "2026-06-13T10:30:27.239Z"
-  },
-  "c5-maths-statistiques-graphiques": {
-    "done": true,
-    "ts": "2026-06-13T10:31:20.656Z"
+    "ts": "2026-06-24T10:41:33.918Z"
   },
   "c5-physique-atomes-molecules": {
     "done": true,
-    "ts": "2026-06-13T10:32:08.621Z"
+    "ts": "2026-06-24T10:42:21.437Z"
   },
   "c5-physique-reactions-chimiques": {
     "done": true,
-    "ts": "2026-06-13T10:32:53.367Z"
+    "ts": "2026-06-24T10:43:12.918Z"
   },
   "c5-physique-electricite-circuits": {
     "done": true,
-    "ts": "2026-06-13T10:34:22.470Z"
+    "ts": "2026-06-24T10:44:04.556Z"
   },
   "c5-physique-proprietes-lumiere": {
     "done": true,
-    "ts": "2026-06-13T10:35:10.394Z"
+    "ts": "2026-06-24T10:44:54.423Z"
   },
   "c5-physique-energie-formes": {
     "done": true,
-    "ts": "2026-06-13T10:36:00.915Z"
-  },
-  "c5-svt-respiration": {
-    "done": true,
-    "ts": "2026-06-13T10:36:55.367Z"
-  },
-  "c5-svt-reproduction": {
-    "done": true,
-    "ts": "2026-06-13T10:37:42.526Z"
-  },
-  "c5-svt-ecosystemes-relations": {
-    "done": true,
-    "ts": "2026-06-13T10:38:35.557Z"
-  },
-  "c5-svt-sol-roches": {
-    "done": true,
-    "ts": "2026-06-13T10:39:31.076Z"
-  },
-  "c5-svt-evolution-classification": {
-    "done": true,
-    "ts": "2026-06-13T10:44:27.410Z"
-  },
-  "c5-francais-roman-jeunesse": {
-    "done": true,
-    "ts": "2026-06-13T10:45:25.408Z"
-  },
-  "c5-francais-poesie-rythme": {
-    "done": true,
-    "ts": "2026-06-13T10:46:42.921Z"
-  },
-  "c5-francais-theatre-texte": {
-    "done": true,
-    "ts": "2026-06-13T10:47:37.212Z"
-  },
-  "c5-francais-argumentation-simple": {
-    "done": true,
-    "ts": "2026-06-13T10:48:28.608Z"
-  },
-  "c5-francais-temps-passe": {
-    "done": true,
-    "ts": "2026-06-13T10:49:21.853Z"
-  },
-  "c5-histgeo-moyen-age": {
-    "done": true,
-    "ts": "2026-06-13T10:51:23.249Z"
-  },
-  "c5-histgeo-islam-naissance": {
-    "done": true,
-    "ts": "2026-06-13T10:52:23.643Z"
-  },
-  "c5-histgeo-afrique-medievale": {
-    "done": true,
-    "ts": "2026-06-13T10:54:13.232Z"
-  },
-  "c5-histgeo-grandes-decouvertes": {
-    "done": true,
-    "ts": "2026-06-13T10:55:01.396Z"
-  },
-  "c5-histgeo-corne-afrique": {
-    "done": true,
-    "ts": "2026-06-13T10:55:58.438Z"
-  },
-  "c4-maths-equations-premier-degre": {
-    "done": true,
-    "ts": "2026-06-13T10:56:42.958Z"
-  },
-  "c4-maths-geometrie-espace": {
-    "done": true,
-    "ts": "2026-06-13T10:57:23.704Z"
-  },
-  "c4-maths-puissances-notation": {
-    "done": true,
-    "ts": "2026-06-13T10:58:34.835Z"
-  },
-  "c4-maths-trigonometrie": {
-    "done": true,
-    "ts": "2026-06-13T10:59:16.987Z"
-  },
-  "c4-maths-probabilites": {
-    "done": true,
-    "ts": "2026-06-13T11:00:01.002Z"
+    "ts": "2026-06-24T10:45:45.939Z"
   },
   "c4-physique-lois-newton": {
     "done": true,
-    "ts": "2026-06-13T11:00:54.407Z"
+    "ts": "2026-06-24T10:46:43.079Z"
   },
   "c4-physique-energie-electrique": {
     "done": true,
-    "ts": "2026-06-13T11:01:36.566Z"
+    "ts": "2026-06-24T10:47:24.031Z"
   },
   "c4-physique-chimie-solutions": {
     "done": true,
-    "ts": "2026-06-13T11:02:25.786Z"
+    "ts": "2026-06-24T10:48:13.610Z"
   },
   "c4-physique-optique-geometrique": {
     "done": true,
-    "ts": "2026-06-13T11:03:14.501Z"
+    "ts": "2026-06-24T10:48:59.189Z"
   },
   "c4-physique-son-propagation": {
     "done": true,
-    "ts": "2026-06-13T11:04:01.656Z"
+    "ts": "2026-06-24T10:49:41.479Z"
   },
-  "c4-svt-genetique-intro": {
+  "c3-physique-forces-equilibre": {
     "done": true,
-    "ts": "2026-06-13T11:04:48.910Z"
+    "ts": "2026-06-24T10:50:33.297Z"
   },
-  "c4-svt-systeme-nerveux": {
+  "c3-physique-loi-ohm": {
     "done": true,
-    "ts": "2026-06-13T11:05:42.685Z"
+    "ts": "2026-06-24T11:42:06.691Z"
   },
-  "c4-svt-systeme-immunitaire": {
+  "c3-physique-chimie-concentration": {
     "done": true,
-    "ts": "2026-06-13T11:06:33.347Z"
+    "ts": "2026-06-24T11:12:05.225Z"
   },
-  "c4-svt-reproduction-humaine": {
+  "c3-physique-energie-puissance": {
     "done": true,
-    "ts": "2026-06-13T11:07:19.083Z"
+    "ts": "2026-06-24T11:12:52.243Z"
   },
-  "c4-svt-tectonique-plaques": {
+  "c3-physique-radioactivite": {
     "done": true,
-    "ts": "2026-06-13T11:08:13.152Z"
+    "ts": "2026-06-24T11:13:40.026Z"
   },
-  "c4-francais-roman-realiste": {
+  "c6-physique-x-les-circuits-electriques": {
     "done": true,
-    "ts": "2026-06-13T11:09:16.656Z"
+    "ts": "2026-06-24T11:14:35.892Z"
   },
-  "c4-francais-comedie-classique": {
+  "c6-physique-x-les-forces-et-le-mouvement": {
     "done": true,
-    "ts": "2026-06-13T11:10:16.907Z"
+    "ts": "2026-06-24T11:15:19.005Z"
   },
-  "c4-francais-argumentation-ecrite": {
+  "c6-physique-x-l-energie-et-ses-formes": {
     "done": true,
-    "ts": "2026-06-13T11:11:08.326Z"
+    "ts": "2026-06-24T11:16:03.864Z"
   },
-  "c4-francais-discours-direct-indirect": {
+  "c5-physique-x-les-circuits-electriques": {
     "done": true,
-    "ts": "2026-06-13T11:11:57.479Z"
+    "ts": "2026-06-24T11:16:51.275Z"
   },
-  "c4-francais-ecrire-nouvelle": {
+  "c5-physique-x-les-forces-et-le-mouvement": {
     "done": true,
-    "ts": "2026-06-13T11:13:00.078Z"
+    "ts": "2026-06-24T11:17:35.315Z"
   },
-  "c4-histgeo-europe-lumieres": {
+  "c5-physique-x-l-energie-et-ses-formes": {
     "done": true,
-    "ts": "2026-06-13T11:13:50.271Z"
+    "ts": "2026-06-24T11:18:22.336Z"
   },
-  "c4-histgeo-revolution-francaise": {
+  "c4-physique-x-les-circuits-electriques": {
     "done": true,
-    "ts": "2026-06-13T11:14:47.888Z"
+    "ts": "2026-06-24T11:19:10.584Z"
   },
-  "c4-histgeo-napoleon-empire": {
+  "c4-physique-x-les-forces-et-le-mouvement": {
     "done": true,
-    "ts": "2026-06-13T11:15:48.208Z"
+    "ts": "2026-06-24T11:20:04.854Z"
   },
-  "c4-histgeo-colonisation-afrique": {
+  "c4-physique-x-l-energie-et-ses-formes": {
     "done": true,
-    "ts": "2026-06-13T11:16:39.370Z"
+    "ts": "2026-06-24T11:20:49.914Z"
   },
-  "c4-histgeo-industrialisation": {
+  "c3-physique-x-les-circuits-electriques": {
     "done": true,
-    "ts": "2026-06-13T11:17:35.149Z"
+    "ts": "2026-06-24T11:21:32.189Z"
   },
-  "ls-maths-fonctions-generalites": {
+  "c3-physique-x-les-forces-et-le-mouvement": {
     "done": true,
-    "ts": "2026-06-13T11:30:29.257Z"
+    "ts": "2026-06-24T11:22:25.259Z"
   },
-  "ls-maths-geometrie-analytique": {
+  "c3-physique-x-l-energie-et-ses-formes": {
     "done": true,
-    "ts": "2026-06-13T11:31:20.570Z"
+    "ts": "2026-06-24T11:23:10.944Z"
   },
-  "ls-maths-probabilites-stats": {
+  "ls-physique-pc-mouvements-et-forces": {
     "done": true,
-    "ts": "2026-06-13T11:32:13.559Z"
+    "ts": "2026-06-24T11:24:07.151Z"
   },
-  "ls-maths-arithmetique": {
+  "ls-physique-pc-la-lumiere-et-les-ondes": {
     "done": true,
-    "ts": "2026-06-13T11:33:01.756Z"
+    "ts": "2026-06-24T11:25:05.011Z"
   },
-  "ls-maths-algebre-equations": {
+  "ls-physique-pc-l-electricite-tension-et-intensite": {
     "done": true,
-    "ts": "2026-06-13T11:33:51.134Z"
+    "ts": "2026-06-24T11:25:53.440Z"
   },
-  "ls-svt-cellule-adn": {
+  "ls-physique-pc-la-pression-et-les-fluides": {
     "done": true,
-    "ts": "2026-06-13T11:34:49.021Z"
+    "ts": "2026-06-24T11:26:38.405Z"
   },
-  "ls-svt-terre-structure": {
+  "ls-physique-pc-signaux-et-information": {
     "done": true,
-    "ts": "2026-06-13T11:35:51.076Z"
+    "ts": "2026-06-24T11:27:40.574Z"
   },
-  "ls-svt-evolution-biodiversite": {
+  "lp-physique-pc-forces-et-energie-mecanique": {
     "done": true,
-    "ts": "2026-06-13T11:36:53.643Z"
+    "ts": "2026-06-24T11:28:37.301Z"
   },
-  "ls-svt-ecologie-durable": {
+  "lp-physique-pc-ondes-mecaniques-et-lumineuses": {
     "done": true,
-    "ts": "2026-06-13T11:38:14.688Z"
+    "ts": "2026-06-24T11:29:26.865Z"
   },
-  "ls-svt-corps-nutrition": {
+  "lp-physique-pc-circuits-electriques-et-puissance": {
     "done": true,
-    "ts": "2026-06-13T11:39:27.163Z"
+    "ts": "2026-06-24T11:30:18.377Z"
   },
-  "ls-francais-roman-reflexion": {
+  "lp-physique-pc-energie-conversions-et-rendement": {
     "done": true,
-    "ts": "2026-06-13T11:40:39.731Z"
+    "ts": "2026-06-24T11:31:11.624Z"
   },
-  "ls-francais-poesie-romantisme": {
+  "lp-physique-pc-mouvement-et-interactions": {
     "done": true,
-    "ts": "2026-06-13T11:41:56.736Z"
+    "ts": "2026-06-24T11:32:09.078Z"
   },
-  "ls-francais-essai-critique": {
+  "lt-physique-pc-mecanique-de-newton-et-mouvement": {
     "done": true,
-    "ts": "2026-06-13T11:43:45.138Z"
+    "ts": "2026-06-24T11:33:11.870Z"
   },
-  "ls-francais-theatre-classique": {
+  "lt-physique-pc-ondes-et-signaux": {
     "done": true,
-    "ts": "2026-06-13T11:44:58.545Z"
+    "ts": "2026-06-24T11:34:07.792Z"
   },
-  "ls-francais-commentaire-texte": {
-    "done": true,
-    "ts": "2026-06-13T11:47:31.363Z"
-  },
-  "ls-histgeo-monde-1945": {
-    "done": true,
-    "ts": "2026-06-13T11:51:04.563Z"
-  },
-  "ls-histgeo-guerre-froide": {
-    "done": true,
-    "ts": "2026-06-13T11:52:16.595Z"
-  },
-  "ls-histgeo-decolonisation": {
-    "done": true,
-    "ts": "2026-06-13T11:53:21.889Z"
-  },
-  "ls-histgeo-mondialisation": {
-    "done": true,
-    "ts": "2026-06-13T11:54:29.731Z"
-  },
-  "ls-histgeo-corne-afrique-geo": {
-    "done": true,
-    "ts": "2026-06-13T11:55:43.653Z"
-  },
-  "lp-maths-derivation": {
-    "done": true,
-    "ts": "2026-06-13T11:59:23.910Z"
-  },
-  "lp-maths-suites-numeriques": {
-    "done": true,
-    "ts": "2026-06-13T12:00:15.415Z"
-  },
-  "lp-maths-vecteurs-plans": {
-    "done": true,
-    "ts": "2026-06-13T12:01:13.115Z"
-  },
-  "lp-maths-probabilites-conditionnelles": {
-    "done": true,
-    "ts": "2026-06-13T12:02:27.526Z"
-  },
-  "lp-maths-trigonometrie-avancee": {
-    "done": true,
-    "ts": "2026-06-13T12:03:45.291Z"
-  },
-  "lp-svt-neurones-signal": {
-    "done": true,
-    "ts": "2026-06-13T12:04:52.145Z"
-  },
-  "lp-svt-genetique-mendel": {
-    "done": true,
-    "ts": "2026-06-13T12:05:55.488Z"
-  },
-  "lp-svt-immunologie": {
-    "done": true,
-    "ts": "2026-06-13T12:07:00.882Z"
-  },
-  "lp-svt-evolution-mecanismes": {
-    "done": true,
-    "ts": "2026-06-13T12:08:17.041Z"
-  },
-  "lp-svt-geologie-roches": {
-    "done": true,
-    "ts": "2026-06-13T12:09:26.728Z"
-  },
-  "lp-francais-litterature-absurde": {
-    "done": true,
-    "ts": "2026-06-13T12:10:43.799Z"
-  },
-  "lp-francais-dissertation-methode": {
-    "done": true,
-    "ts": "2026-06-13T12:11:51.748Z"
+  "lt-physique-pc-energie-et-transferts-thermiques": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:14:36.329Z"
   },
-  "lp-francais-commentaire-compose": {
+  "c6-physique-x-la-matiere-et-ses-transformations": {
     "done": true,
-    "ts": "2026-06-13T12:13:19.681Z"
+    "ts": "2026-06-24T11:44:49.362Z"
   },
-  "lp-francais-question-homme": {
+  "c6-physique-x-lumiere-et-couleurs": {
     "done": true,
-    "ts": "2026-06-13T12:14:27.955Z"
+    "ts": "2026-06-24T11:45:58.282Z"
   },
-  "lp-francais-oral-bac-prep": {
-    "done": true,
-    "ts": "2026-06-13T12:16:16.607Z"
-  },
-  "lp-histgeo-regimes-totalitaires": {
-    "done": true,
-    "ts": "2026-06-13T12:17:50.194Z"
-  },
-  "lp-histgeo-france-republiques": {
-    "done": true,
-    "ts": "2026-06-13T12:18:56.042Z"
-  },
-  "lp-histgeo-construction-europeenne": {
-    "done": true,
-    "ts": "2026-06-13T12:20:14.318Z"
-  },
-  "lp-histgeo-monde-arabe-islam": {
-    "done": true,
-    "ts": "2026-06-13T12:21:23.528Z"
-  },
-  "lp-histgeo-geopolitique-afrique": {
-    "done": true,
-    "ts": "2026-06-13T12:22:37.172Z"
-  },
-  "lt-maths-integrale": {
-    "done": true,
-    "ts": "2026-06-13T12:23:37.284Z"
-  },
-  "lt-maths-limites": {
-    "done": true,
-    "ts": "2026-06-13T12:24:28.998Z"
-  },
-  "lt-maths-probabilites-loi-normale": {
-    "done": true,
-    "ts": "2026-06-13T12:25:24.251Z"
+  "ls-chimie-pc-la-matiere-atomes-et-elements": {
+    "done": false,
+    "error": "Unexpected token '`', \"```json\n{\n\"... is not valid JSON",
+    "ts": "2026-06-24T11:52:33.521Z"
   },
-  "lt-maths-nombres-complexes": {
-    "done": true,
-    "ts": "2026-06-13T12:26:18.016Z"
-  },
-  "lt-maths-revision-bac-maths": {
-    "done": true,
-    "ts": "2026-06-13T12:27:36.768Z"
-  },
-  "lt-svt-genetique-moleculaire": {
-    "done": true,
-    "ts": "2026-06-13T12:28:41.647Z"
-  },
-  "lt-svt-systeme-immunitaire-vaccins": {
-    "done": true,
-    "ts": "2026-06-13T12:29:54.845Z"
-  },
-  "lt-svt-neurosciences-memoire": {
-    "done": true,
-    "ts": "2026-06-13T12:31:09.728Z"
+  "lp-chimie-pc-structure-de-la-matiere-et-modeles": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:05:42.947Z"
   },
-  "lt-svt-evolution-humaine-lycee": {
-    "done": true,
-    "ts": "2026-06-13T12:32:32.344Z"
-  },
-  "lt-svt-revision-bac-svt": {
-    "done": true,
-    "ts": "2026-06-13T12:33:51.418Z"
-  },
-  "lt-francais-dissertation-philo": {
-    "done": true,
-    "ts": "2026-06-13T12:34:58.350Z"
-  },
-  "lt-francais-analyse-argumentatif": {
-    "done": true,
-    "ts": "2026-06-13T12:35:57.890Z"
-  },
-  "lt-francais-oeuvres-programme-bac": {
-    "done": true,
-    "ts": "2026-06-13T12:37:08.832Z"
+  "ls-physique-pc-les-lentilles-et-l-optique": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:03:55.176Z"
+  },
+  "ls-physique-pc-la-gravitation": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:04:16.375Z"
+  },
+  "ls-physique-pc-energie-cinetique-et-potentielle": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:04:37.791Z"
+  },
+  "ls-physique-pc-les-ondes-sonores": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:04:59.606Z"
+  },
+  "ls-physique-pc-mesures-et-incertitudes": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:05:21.224Z"
+  },
+  "lp-chimie-pc-quantite-de-matiere-la-mole": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:06:04.501Z"
+  },
+  "lp-chimie-pc-reactions-acide-base": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:06:25.752Z"
+  },
+  "lp-chimie-pc-oxydoreduction": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:06:47.926Z"
+  },
+  "lp-chimie-pc-introduction-a-la-chimie-organique": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:07:09.486Z"
+  },
+  "lp-chimie-pc-concentration-et-dilution": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:07:30.291Z"
+  },
+  "lp-chimie-pc-spectroscopie-et-analyse": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:07:51.046Z"
+  },
+  "lp-chimie-pc-les-alcanes-et-alcools": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:08:12.121Z"
+  },
+  "lp-chimie-pc-energie-des-reactions": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:08:33.279Z"
+  },
+  "lp-chimie-pc-synthese-chimique": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:08:54.194Z"
+  },
+  "lp-physique-pc-champs-et-forces": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:09:14.914Z"
+  },
+  "lp-physique-pc-ondes-periodiques": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:09:36.222Z"
+  },
+  "lp-physique-pc-lentilles-et-instruments-optiques": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:10:00.154Z"
+  },
+  "lp-physique-pc-travail-et-puissance": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:10:21.096Z"
+  },
+  "lp-physique-pc-capteurs-et-electronique": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:10:42.171Z"
+  },
+  "lt-chimie-pc-cinetique-chimique": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:11:05.821Z"
+  },
+  "lt-chimie-pc-equilibres-chimiques": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:11:26.952Z"
+  },
+  "lt-chimie-pc-acides-bases-et-ph": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:11:48.020Z"
+  },
+  "lt-chimie-pc-chimie-organique-et-synthese": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:12:09.556Z"
+  },
+  "lt-chimie-pc-piles-electrolyse-et-oxydoreduction": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:12:31.123Z"
+  },
+  "lt-chimie-pc-spectroscopie-rmn-et-ir": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:12:52.412Z"
+  },
+  "lt-chimie-pc-stereochimie": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:13:13.918Z"
+  },
+  "lt-chimie-pc-dosages-et-titrages": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:13:35.116Z"
+  },
+  "lt-chimie-pc-thermodynamique-chimique": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:13:54.350Z"
+  },
+  "lt-chimie-pc-polymeres-et-materiaux": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:14:15.386Z"
+  },
+  "lt-physique-pc-electromagnetisme": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:14:57.729Z"
+  },
+  "lt-physique-pc-physique-nucleaire-et-radioactivite": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:15:18.840Z"
+  },
+  "lt-physique-pc-mouvements-dans-un-champ": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:15:40.029Z"
+  },
+  "lt-physique-pc-lois-de-kepler": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:16:02.252Z"
+  },
+  "lt-physique-pc-circuits-rc-et-rl": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:16:23.552Z"
+  },
+  "lt-physique-pc-effet-doppler": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:16:45.057Z"
+  },
+  "lt-physique-pc-physique-quantique-introduction": {
+    "done": false,
+    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
+    "ts": "2026-06-24T12:17:06.256Z"
   }
 }

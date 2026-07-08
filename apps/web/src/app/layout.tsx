@@ -1,12 +1,23 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import { Toaster } from 'sonner';
 import { PWAInstallBanner } from '@/components/pwa/install-banner';
 import { OfflineSync } from '@/components/pwa/offline-sync';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+// Corps de texte — Inter · Titres — Plus Jakarta Sans
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-heading',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: { default: 'NoorAcademie Djibouti — Plateforme éducative', template: '%s | NoorAcademie Djibouti' },
@@ -34,7 +45,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#2563EB' },
+    { media: '(prefers-color-scheme: light)', color: '#22C55E' },
     { media: '(prefers-color-scheme: dark)', color: '#1e40af' },
   ],
   width: 'device-width',
@@ -55,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="msapplication-TileImage" content="/icon-144.png" />
         <meta name="msapplication-TileColor" content="#2563EB" />
       </head>
-      <body className={`${inter.variable} font-sans min-h-screen bg-background antialiased`}>
+      <body className={`${inter.variable} ${jakarta.variable} font-sans min-h-screen bg-background antialiased`}>
         <Providers>
           {children}
           <Toaster richColors position="top-right" closeButton />
@@ -66,7 +77,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              // Le Service Worker est désactivé en développement local
+              // (il mettait en cache des chunks JS et cassait le rechargement à chaud).
+              var __swAllowed = location.hostname !== 'localhost' && location.hostname !== '127.0.0.1';
               if ('serviceWorker' in navigator) {
+                if (__swAllowed) {
                 // Recharge automatiquement une seule fois quand une nouvelle version prend le contrôle
                 var refreshing = false;
                 navigator.serviceWorker.addEventListener('controllerchange', function() {
@@ -94,6 +109,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       console.warn('[PWA] Enregistrement échoué:', err);
                     });
                 });
+                } else {
+                  // Dev local : désinscrit tout Service Worker et vide les caches
+                  // périmés (sinon la PWA sert des assets cassés → page sans CSS).
+                  navigator.serviceWorker.getRegistrations().then(function(rs) {
+                    var had = rs.length > 0;
+                    rs.forEach(function(r) { r.unregister(); });
+                    if (window.caches && caches.keys) {
+                      caches.keys().then(function(ks) {
+                        ks.forEach(function(k) { caches.delete(k); });
+                        if (had) window.location.reload();
+                      });
+                    } else if (had) {
+                      window.location.reload();
+                    }
+                  });
+                }
               }
             `,
           }}

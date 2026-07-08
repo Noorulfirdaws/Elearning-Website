@@ -16,6 +16,7 @@ import { Navbar } from '@/components/layout/navbar';
 import { toast } from 'sonner';
 import { ChapitreVideo } from '@/components/course/chapitre-video';
 import { cn } from '@/lib/utils';
+import { fichesExtraPourChapitre } from '@/data/fiches-extra';
 import { useOfflineProgress } from '@/hooks/use-offline-progress';
 import { useAcces } from '@/hooks/use-acces';
 import Paywall from '@/components/payment/paywall';
@@ -58,6 +59,7 @@ export default function ChapitreDetailPage() {
   }>();
 
   const [activeTab,    setActiveTab]    = useState<Tab>('cours');
+  const [apercuBlob,   setApercuBlob]   = useState<{ file: string; url: string } | null>(null); // aperçu fiche via blob URL
   const [corrigesVus,  setCorrigesVus]  = useState<Set<number>>(new Set());
   const [accesDebloque, setAccesDebloque] = useState(false);
 
@@ -448,13 +450,13 @@ export default function ChapitreDetailPage() {
               <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
 
                 {/* En-tête du document */}
-                <div className="bg-gradient-to-r from-green-700 to-green-500 px-10 py-5">
+                <div className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-10 py-5">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-green-200 text-xs font-medium uppercase tracking-widest">
+                    <span className="text-green-600 text-xs font-medium uppercase tracking-widest">
                       {chapitre.matiere?.niveau?.nom || niveauId} · {chapitre.matiere?.nom} · Chapitre {chapitre.ordre}
                     </span>
                   </div>
-                  <h2 className="text-xl font-bold text-white leading-snug">{chapitre.titre}</h2>
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white leading-snug">{chapitre.titre}</h2>
                 </div>
 
                 {/* Corps du document */}
@@ -596,9 +598,9 @@ export default function ChapitreDetailPage() {
           {activeTab === 'exercices' && (
             <motion.div key="exercices" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
               <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
-                <div className="bg-gradient-to-r from-green-700 to-green-500 px-10 py-5">
-                  <p className="text-green-100 text-xs font-medium uppercase tracking-widest mb-0.5">{chapitre.matiere?.nom} · Chapitre {chapitre.ordre}</p>
-                  <h2 className="text-xl font-bold text-white">Exercices d'application <span className="text-green-100 text-sm font-normal">· {exercices.length} exercice{exercices.length > 1 ? 's' : ''}</span></h2>
+                <div className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-10 py-5">
+                  <p className="text-green-600 text-xs font-medium uppercase tracking-widest mb-0.5">{chapitre.matiere?.nom} · Chapitre {chapitre.ordre}</p>
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">Exercices d'application <span className="text-gray-500 text-sm font-normal">· {exercices.length} exercice{exercices.length > 1 ? 's' : ''}</span></h2>
                 </div>
                 <div className="px-10 py-10 space-y-8">
                   {exercices.map((ex: any, i: number) => (
@@ -705,17 +707,96 @@ export default function ChapitreDetailPage() {
               <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
 
                 {/* En-tête */}
-                <div className="bg-gradient-to-r from-emerald-700 to-emerald-500 px-10 py-5">
-                  <p className="text-emerald-100 text-xs font-medium uppercase tracking-widest mb-0.5">
+                <div className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-10 py-5">
+                  <p className="text-emerald-600 text-xs font-medium uppercase tracking-widest mb-0.5">
                     {chapitre.matiere?.nom} · Chapitre {chapitre.ordre}
                   </p>
-                  <h2 className="text-xl font-bold text-white">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                     Ressources pédagogiques{' '}
-                    <span className="text-emerald-100 text-sm font-normal">· Fiches & PDF</span>
+                    <span className="text-gray-500 text-sm font-normal">· Fiches & PDF</span>
                   </h2>
                 </div>
 
                 <div className="px-10 py-10 space-y-8">
+
+                  {/* ─── Fiches complémentaires (statiques, ex. Maths 6ème) ── */}
+                  {(() => {
+                    const fichesExtra = fichesExtraPourChapitre({ chapitreId });
+                    if (fichesExtra.length === 0) return null;
+                    const accessibleExtra = estInstructeur || autoriseClasse;
+                    // Le fichier est servi par une route protégée : on transmet
+                    // le token (le <a>/<iframe> n'envoie pas l'en-tête Authorization).
+                    const withToken = (u: string) =>
+                      `${u}?token=${encodeURIComponent(accessToken ?? '')}`;
+                    return (
+                      <div>
+                        <h3 className="text-sm font-bold uppercase tracking-widest text-emerald-600 mb-4">
+                          ✨ Fiches complémentaires ({fichesExtra.length})
+                        </h3>
+                        <div className="space-y-3">
+                          {fichesExtra.map((f) => (
+                            <div key={f.file}>
+                              <div className="flex items-center gap-4 p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                <FileText className="h-5 w-5 text-red-500 flex-shrink-0" />
+                                <div className="flex-1 min-w-0">
+                                  <p className="font-medium text-gray-900 dark:text-white text-sm truncate">{f.titre}</p>
+                                  <div className="flex items-center gap-2 mt-0.5">
+                                    <span className="text-xs text-gray-400">PDF</span>
+                                    <span className="text-xs px-1.5 py-0.5 rounded-full font-semibold bg-amber-100 text-amber-700">Classe · 5 000 DJF</span>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-2 flex-shrink-0">
+                                  {accessibleExtra ? (
+                                    <>
+                                      <button
+                                        onClick={async () => {
+                                          if (apercuBlob?.file === f.file) {
+                                            URL.revokeObjectURL(apercuBlob.url);
+                                            setApercuBlob(null);
+                                            return;
+                                          }
+                                          if (apercuBlob) URL.revokeObjectURL(apercuBlob.url);
+                                          try {
+                                            const res = await fetch(withToken(f.url));
+                                            if (!res.ok) { toast.error('Accès refusé à cette fiche.'); return; }
+                                            const blob = await res.blob();
+                                            setApercuBlob({ file: f.file, url: URL.createObjectURL(blob) });
+                                          } catch {
+                                            toast.error('Impossible de charger le PDF.');
+                                          }
+                                        }}
+                                        className="flex items-center gap-1.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-200 dark:hover:bg-emerald-800 transition-colors"
+                                      >
+                                        <FileText className="h-3.5 w-3.5" /> {apercuBlob?.file === f.file ? 'Masquer' : 'Aperçu'}
+                                      </button>
+                                      <a
+                                        href={withToken(f.url)}
+                                        download={f.file}
+                                        className="flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-emerald-700 transition-colors"
+                                      >
+                                        <Download className="h-3.5 w-3.5" /> Télécharger
+                                      </a>
+                                    </>
+                                  ) : (
+                                    <span className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 text-gray-400 px-3 py-1.5 rounded-lg text-xs font-semibold">
+                                      <Lock className="h-3.5 w-3.5" /> Accès Classe requis
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                              {apercuBlob?.file === f.file && (
+                                <iframe
+                                  src={apercuBlob.url}
+                                  title={f.titre}
+                                  className="mt-3 w-full h-[70vh] rounded-xl border border-gray-200 dark:border-gray-700 bg-white"
+                                />
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })()}
 
                   {/* ─── Téléchargement PDF du cours (accès CLASSE) ── */}
                   <div>
@@ -933,22 +1014,22 @@ export default function ChapitreDetailPage() {
             onClick={e => e.stopPropagation()}
           >
             {/* Barre du modal */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-emerald-600 text-white">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white">
               <div className="flex items-center gap-3 min-w-0">
-                <FileText className="h-5 w-5 flex-shrink-0" />
+                <FileText className="h-5 w-5 flex-shrink-0 text-emerald-600" />
                 <span className="font-semibold truncate">{previewFichier.nom}</span>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
                 <a
                   href={previewFichier.blobUrl}
                   download={previewFichier.nom}
-                  className="flex items-center gap-1.5 bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
+                  className="flex items-center gap-1.5 bg-emerald-100 dark:bg-emerald-900 hover:bg-emerald-200 dark:hover:bg-emerald-800 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
                 >
                   <Download className="h-3.5 w-3.5" /> Télécharger
                 </a>
                 <button
                   onClick={closePreview}
-                  className="p-1.5 hover:bg-white/20 rounded-lg transition-colors text-xl font-bold leading-none"
+                  className="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors text-xl font-bold leading-none"
                   title="Fermer"
                 >
                   ×
