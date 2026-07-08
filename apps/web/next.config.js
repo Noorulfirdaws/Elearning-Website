@@ -114,15 +114,17 @@ const nextConfig = {
   // the app compiles successfully. Tracked as tech debt to clean up.
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
-  // Inclure les fiches PDF privées (hors public/) dans le bundle serveur
-  // pour que la route protégée /api/fiches puisse les lire en production.
-  outputFileTracingIncludes: {
-    '/api/fiches/[...path]': ['./fiches-privees/**/*'],
-  },
   experimental: {
     serverActions: { allowedOrigins: ['localhost:3000', 'nooracademie.vercel.app'] },
     // Allow client pages using useSearchParams to build without explicit Suspense wrappers
     missingSuspenseWithCSRBailout: false,
+    // Inclure les fiches PDF privées (hors public/) dans le bundle serveur
+    // pour que la route protégée /api/fiches puisse les lire en production.
+    // (Next 14: cette option vit sous `experimental`, pas à la racine — stabilisée
+    // top-level seulement à partir de Next 15.)
+    outputFileTracingIncludes: {
+      '/api/fiches/[...path]': ['./fiches-privees/**/*'],
+    },
   },
   images: {
     remotePatterns: [
