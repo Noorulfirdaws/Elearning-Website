@@ -4,8 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from 'next-themes';
-import { GraduationCap, Menu, X, Moon, Sun, Sparkles } from 'lucide-react';
+import { GraduationCap, Menu, X, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button, buttonVariants } from '@/components/ui/button';
 
@@ -15,22 +14,6 @@ const links = [
   { label: 'Tarifs', href: '/pricing' },
   { label: 'À propos', href: '/about' },
 ];
-
-function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
-  const isDark = mounted && resolvedTheme === 'dark';
-  return (
-    <button
-      aria-label="Changer de thème"
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="grid h-10 w-10 place-items-center rounded-xl text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground"
-    >
-      {isDark ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
-    </button>
-  );
-}
 
 export function SiteNav() {
   const pathname = usePathname();
@@ -93,7 +76,6 @@ export function SiteNav() {
 
           {/* Actions (desktop) */}
           <div className="hidden items-center gap-2 md:flex">
-            <ThemeToggle />
             <Link href="/login" className={buttonVariants({ variant: 'ghost', size: 'sm' })}>
               Connexion
             </Link>
@@ -107,7 +89,6 @@ export function SiteNav() {
 
           {/* Mobile */}
           <div className="flex items-center gap-1 md:hidden">
-            <ThemeToggle />
             <button
               aria-label="Menu"
               onClick={() => setOpen((o) => !o)}

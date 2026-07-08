@@ -5,11 +5,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Menu, X, GraduationCap, Sun, Moon, ChevronDown,
+  Menu, X, GraduationCap, ChevronDown,
   LogOut, LayoutDashboard, BookOpen, User, Megaphone,
   School, Building2
 } from 'lucide-react';
-import { useTheme } from 'next-themes';
 import { useAuthStore } from '@/store/auth.store';
 import { cn } from '@/lib/utils';
 
@@ -43,7 +42,6 @@ export function Navbar() {
   const classeRef = useRef<HTMLDivElement>(null);
 
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
   const { user, logout, isAuthenticated } = useAuthStore();
 
   useEffect(() => {
@@ -209,14 +207,6 @@ export function Navbar() {
 
           {/* Actions droite */}
           <div className="flex items-center gap-2 flex-shrink-0">
-
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-600 dark:text-gray-400"
-            >
-              <Sun className="w-4 h-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute w-4 h-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </button>
 
             {isAuthenticated && user ? (
               <div className="relative">
