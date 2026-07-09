@@ -110,7 +110,10 @@ export function useAcces({ chapitreId, niveauId, estPremierChapitre, token }: Us
 
         const res = await fetch(`${API_BASE}/achats/verifier/${chapitreId}`, { headers });
         if (res.ok) {
-          const data = await res.json();
+          const body = await res.json();
+          // Support la réponse enveloppée { success, data: {...}, timestamp } du
+          // TransformInterceptor de l'API, et un éventuel format à plat.
+          const data = body.data ?? body;
           setAutorise(data.autorise);
           setRaison(data.raison);
         }
