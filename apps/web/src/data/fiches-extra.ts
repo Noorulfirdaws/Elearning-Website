@@ -28,6 +28,23 @@ function paire(folder: string, n: number): FicheExtra[] {
   ];
 }
 
+// Annales du Brevet — sujets OFFICIELS uniquement (ministère education.gouv.fr,
+// domaine public administratif). Pas de corrigés tiers : les corrigés sont
+// générés en interne (pipeline Claude) pour éviter toute reprise de contenu
+// protégé par le droit d'auteur d'un site tiers (ex. Groupe Réussite).
+const ANNALES_BREVET_MATHS: FicheExtra[] = [
+  {
+    titre: 'Sujet officiel — DNB 2025, Série générale',
+    file: 'session-2025-generale.pdf',
+    url: '/api/fiches/annales-brevet-maths/session-2025-generale.pdf',
+  },
+  {
+    titre: 'Sujet officiel — DNB 2024, Série générale',
+    file: 'session-2024-generale.pdf',
+    url: '/api/fiches/annales-brevet-maths/session-2024-generale.pdf',
+  },
+];
+
 // ID de chapitre (segment d'URL / champ `id` de l'API) → fiches PDF.
 // Pour ajouter un chapitre : déposer les PDF dans public/fiches/<dossier>/
 // et ajouter une ligne ici avec l'ID réel du chapitre.
@@ -46,6 +63,16 @@ const PAR_CHAPITRE: Record<string, FicheExtra[]> = {
   'c5-maths-triangles': paire('maths-5eme', 3), // Triangles : construction et propriétés
   'c5-maths-symetrie': paire('maths-5eme', 4), // Symétrie axiale et centrale
   'c5-maths-statistiques-graphiques': paire('maths-5eme', 5), // Statistiques et graphiques
+
+  // ── Mathématiques 3ème — annales du Brevet ──
+  // NOTE (2026-07-09) : seul le chapitre Pythagore existe réellement en base
+  // pour Maths 3ème (vérifié via l'API live) — les 4 autres chapitres du
+  // CURRICULUM (equations/fonctions/statistiques/thales) sont marqués "done"
+  // dans generation-progress.json mais n'ont jamais été créés en DB. Cette
+  // entrée est donc volontairement limitée au seul chapitre existant ; ajouter
+  // les autres ID (`c3-maths-equations` etc.) une fois ces chapitres réellement
+  // créés, sinon ce sont des entrées mortes qui ne s'afficheront jamais.
+  C3_math_pythagore: ANNALES_BREVET_MATHS,
 };
 
 /** Renvoie les fiches complémentaires d'un chapitre (par son ID), ou []. */

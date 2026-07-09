@@ -19,6 +19,7 @@ const ROOT = join(process.cwd(), 'fiches-privees');
 const FOLDER_NIVEAU: Record<string, string> = {
   'maths-6eme': 'C6',
   'maths-5eme': 'C5',
+  'annales-brevet-maths': 'C3',
 };
 
 const ROLES_STAFF = ['SUPER_ADMIN', 'ADMIN', 'INSTRUCTOR'];
@@ -56,7 +57,13 @@ export async function GET(
   const niveauId = folder ? FOLDER_NIVEAU[folder] : undefined;
 
   // Validation stricte du nom de fichier (anti path-traversal).
-  if (!niveauId || !file || !/^chapitre\d+-cours\d+\.pdf$/.test(file)) {
+  // - chapitreN-coursM.pdf   : fiches de cours par chapitre
+  // - session-YYYY-generale.pdf : sujets officiels du Brevet (annales)
+  if (
+    !niveauId ||
+    !file ||
+    !/^(chapitre\d+-cours\d+|session-\d{4}-generale)\.pdf$/.test(file)
+  ) {
     return new Response('Not found', { status: 404 });
   }
 
