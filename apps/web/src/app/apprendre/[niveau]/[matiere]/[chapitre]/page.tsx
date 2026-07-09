@@ -511,10 +511,31 @@ export default function ChapitreDetailPage() {
                                   </p>
                                 </div>
                               )}
+                              {point.exemple_rapide && (
+                                <div className="mt-4 flex gap-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/60 px-5 py-3.5">
+                                  <span className="text-xs font-bold text-green-600 flex-shrink-0">💡</span>
+                                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                    {point.exemple_rapide}
+                                  </p>
+                                </div>
+                              )}
                             </div>
                           </motion.div>
                         ))}
                       </div>
+                    </div>
+                  )}
+
+                  {/* Synthèse — à retenir */}
+                  {contenu?.synthese && (
+                    <div className="mb-10 rounded-2xl border-2 border-green-200 dark:border-green-800 bg-green-50/60 dark:bg-green-950/40 px-7 py-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-lg">🎯</span>
+                        <h3 className="text-sm font-bold uppercase tracking-widest text-green-700 dark:text-green-400">À retenir</h3>
+                      </div>
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
+                        {contenu.synthese}
+                      </p>
                     </div>
                   )}
 

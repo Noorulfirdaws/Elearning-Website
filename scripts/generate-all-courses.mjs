@@ -75,6 +75,7 @@ const RESUME     = args.includes('--resume');
 const FORCE      = args.includes('--force');
 const NIVEAU_ARG = args.includes('--niveau')  ? args[args.indexOf('--niveau')  + 1] : null;
 const MAT_ARG    = args.includes('--matiere') ? args[args.indexOf('--matiere') + 1] : null;
+const SLUG_ARG   = args.includes('--slug')    ? args[args.indexOf('--slug')    + 1] : null;
 
 // ─── Curriculum complet ───────────────────────────────────────────────────────
 // 7 niveaux × 5 matières × 5 chapitres = 175 chapitres au total
@@ -649,7 +650,9 @@ CHAPITRE : ${titreChapitre}
 
 CONSIGNES STRICTES :
 ${consignesLangue}
-- Génère exactement 3 points clés dans le cours
+- Génère exactement 4 points clés dans le cours (contenu approfondi, pas superficiel)
+- Pour CHAQUE point clé, ajoute un exemple rapide d'application directement intégré (2-3 phrases, différent des exemples résolus plus bas)
+- Termine le cours par une synthèse ("à retenir") qui résume les 4 points clés en un court paragraphe de révision
 - Génère exactement 3 exemples résolus
 - Génère exactement 3 exercices d'application avec corrigés détaillés pas à pas (difficulté croissante)
 - Génère exactement 5 questions de quiz (4 options chacune, 1 bonne réponse)
@@ -661,20 +664,30 @@ RÉPONDS UNIQUEMENT AVEC CE JSON (PAS de commentaires, PAS de markdown, PAS de t
     "points_cles": [
       {
         "titre": "Titre du point clé 1",
-        "explication": "Explication claire et détaillée (4-6 phrases)",
-        "formule": "Formule ou règle clé si applicable, sinon null"
+        "explication": "Explication claire et détaillée (5-7 phrases, approfondie)",
+        "formule": "Formule ou règle clé si applicable, sinon null",
+        "exemple_rapide": "Courte illustration concrète de ce point clé (2-3 phrases), sinon null"
       },
       {
         "titre": "Titre du point clé 2",
-        "explication": "Explication claire et détaillée (4-6 phrases)",
-        "formule": "Formule ou règle clé si applicable, sinon null"
+        "explication": "Explication claire et détaillée (5-7 phrases, approfondie)",
+        "formule": "Formule ou règle clé si applicable, sinon null",
+        "exemple_rapide": "Courte illustration concrète de ce point clé (2-3 phrases), sinon null"
       },
       {
         "titre": "Titre du point clé 3",
-        "explication": "Explication claire et détaillée (4-6 phrases)",
-        "formule": "Formule ou règle clé si applicable, sinon null"
+        "explication": "Explication claire et détaillée (5-7 phrases, approfondie)",
+        "formule": "Formule ou règle clé si applicable, sinon null",
+        "exemple_rapide": "Courte illustration concrète de ce point clé (2-3 phrases), sinon null"
+      },
+      {
+        "titre": "Titre du point clé 4",
+        "explication": "Explication claire et détaillée (5-7 phrases, approfondie)",
+        "formule": "Formule ou règle clé si applicable, sinon null",
+        "exemple_rapide": "Courte illustration concrète de ce point clé (2-3 phrases), sinon null"
       }
-    ]
+    ],
+    "synthese": "Court paragraphe de révision (3-5 phrases) qui relie les 4 points clés entre eux et rappelle l'essentiel à retenir avant de passer aux exemples."
   },
   "exemples": [
     {
@@ -868,8 +881,11 @@ async function main() {
     log.warn('MODE DRY-RUN — Aucun appel API ne sera effectué\n');
   }
 
-  // Charger la progression
-  const progress = RESUME ? loadProgress() : {};
+  // Charger la progression existante (TOUJOURS — même sans --resume) pour ne
+  // jamais écraser l'historique des chapitres déjà générés hors du filtre actuel.
+  // --resume/--force ne contrôlent que si CE run saute les chapitres déjà faits ;
+  // la persistance sur disque, elle, doit toujours partir de l'état réel.
+  const progress = loadProgress();
 
   // Construire la liste de tout ce qui doit être généré
   const tasks = [];
@@ -883,6 +899,9 @@ async function main() {
       if (MAT_ARG && !matiere.nomMatiere.toLowerCase().includes(MAT_ARG.toLowerCase())) continue;
 
       for (const ch of matiere.chapitres) {
+        // Filtre --slug (cible un seul chapitre, ex: nombres-relatifs)
+        if (SLUG_ARG && ch.slug !== SLUG_ARG) continue;
+
         const chapitreId = makeChapitreId(niveau.niveauId, matiere.nomMatiere, ch.slug);
         tasks.push({
           niveauId:   niveau.niveauId,
@@ -900,8 +919,8 @@ async function main() {
 
   // Stats initiales
   const total    = tasks.length;
-  const deja     = RESUME ? tasks.filter(t => progress[t.chapitreId]?.done).length : 0;
-  const aFaire   = total - (FORCE ? 0 : deja);
+  const deja     = tasks.filter(t => progress[t.chapitreId]?.done).length;
+  const aFaire   = total - (FORCE || !RESUME ? 0 : deja);
 
   console.log(`${c('bold', 'Curriculum')} : ${c('cyan', total)} chapitres au total`);
   console.log(`${c('bold', 'Déjà fait')} : ${c('green', deja)} chapitres`);
@@ -948,8 +967,8 @@ async function main() {
   for (const task of tasks) {
     current++;
 
-    // Sauter si déjà fait (sauf --force)
-    if (!FORCE && progress[task.chapitreId]?.done) {
+    // Sauter si déjà fait (uniquement en mode --resume, sauf --force)
+    if (!FORCE && RESUME && progress[task.chapitreId]?.done) {
       log.skip(`[${current}/${total}] ${task.niveauId} / ${task.nomMatiere} / ${task.titreChapitre}`);
       stats.skipped++;
       continue;
