@@ -546,5 +546,30 @@
     "done": false,
     "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
     "ts": "2026-06-24T12:17:06.256Z"
+  },
+  "c5-maths-nombres-relatifs": {
+    "done": true,
+    "ts": "2026-08-04T22:01:18.118Z",
+    "note": "authored directly by Claude Code, no Anthropic API call"
+  },
+  "c5-maths-fractions-decimaux": {
+    "done": true,
+    "ts": "2026-08-04T22:01:18.118Z",
+    "note": "authored directly by Claude Code, no Anthropic API call"
+  },
+  "c5-maths-triangles": {
+    "done": true,
+    "ts": "2026-08-04T22:01:18.118Z",
+    "note": "authored directly by Claude Code, no Anthropic API call"
+  },
+  "c5-maths-symetrie": {
+    "done": true,
+    "ts": "2026-08-04T22:01:18.118Z",
+    "note": "authored directly by Claude Code, no Anthropic API call"
+  },
+  "c5-maths-statistiques-graphiques": {
+    "done": true,
+    "ts": "2026-08-04T22:01:18.118Z",
+    "note": "authored directly by Claude Code, no Anthropic API call"
   }
 }
