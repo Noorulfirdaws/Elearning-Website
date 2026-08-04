@@ -86,6 +86,30 @@ export class EducationService {
     return sortMatieres(matieres);
   }
 
+  /**
+   * Totaux réels (tous niveaux confondus) par nom de matière — chapitres
+   * publiés et somme des exercices qu'ils contiennent. Sert à afficher des
+   * chiffres honnêtes sur les cartes marketing (au lieu de nombres fixes
+   * inventés), sans exposer le contenu lui-même (route publique).
+   */
+  async getStatsGlobalesParMatiere() {
+    const chapitres = await this.prisma.chapitre.findMany({
+      where: { isPublished: true },
+      select: { exercices: true, matiere: { select: { nom: true } } },
+    });
+
+    const parNom = new Map<string, { chapitres: number; exercices: number }>();
+    for (const c of chapitres) {
+      const nom = c.matiere.nom;
+      const entry = parNom.get(nom) ?? { chapitres: 0, exercices: 0 };
+      entry.chapitres += 1;
+      entry.exercices += Array.isArray(c.exercices) ? c.exercices.length : 0;
+      parNom.set(nom, entry);
+    }
+
+    return Array.from(parNom.entries()).map(([nom, stats]) => ({ nom, ...stats }));
+  }
+
   async getMatiereById(id: string) {
     const matiere = await this.prisma.matiere.findUnique({
       where: { id },

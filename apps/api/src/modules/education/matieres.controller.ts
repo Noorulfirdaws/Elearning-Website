@@ -8,6 +8,15 @@ import { EducationService } from './education.service';
 export class MatieresController {
   constructor(private readonly eduService: EducationService) {}
 
+  // Doit être déclaré avant ':id' — sinon NestJS matcherait 'stats-globales'
+  // comme un identifiant de matière.
+  @Get('stats-globales')
+  @Public()
+  @ApiOperation({ summary: 'Totaux réels (chapitres/exercices) par matière, tous niveaux confondus' })
+  getStatsGlobales() {
+    return this.eduService.getStatsGlobalesParMatiere();
+  }
+
   @Get(':id')
   @Public()
   @ApiOperation({ summary: 'Matière avec ses chapitres' })
