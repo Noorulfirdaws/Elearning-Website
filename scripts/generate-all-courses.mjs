@@ -27,7 +27,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createInterface } from 'readline';
-import { EXPANSION } from './curriculum-expansion.mjs';
+import { PrismaClient } from '@prisma/client';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT      = join(__dirname, '..');
@@ -54,9 +54,11 @@ function loadEnv() {
 loadEnv();
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const API_BASE          = process.env.GEN_API_BASE || 'https://elearning-website-production.up.railway.app/api/v1';
 const CLAUDE_MODEL      = 'claude-sonnet-4-5';
 const ANTHROPIC_URL     = 'https://api.anthropic.com/v1/messages';
+
+// Prisma direct DB (no API needed)
+const prisma = new PrismaClient({ log: [] });
 
 // Fichier de progression (permet --resume)
 const PROGRESS_DIR  = join(ROOT, 'scripts', '.progress');
@@ -752,109 +754,33 @@ RÉPONDS UNIQUEMENT AVEC CE JSON (PAS de commentaires, PAS de markdown, PAS de t
 }`;
 }
 
-// ─── API LearnHub (créer + mettre à jour les chapitres) ───────────────────────
-
-let authToken    = null;
-let lastLoginAt  = 0;
-const TOKEN_TTL  = 12 * 60 * 1000; // re-login toutes les 12 min (JWT expire à 15m)
-
-async function login() {
-  const res = await fetch(`${API_BASE}/auth/login`, {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify({
-      email:    process.env.GEN_EMAIL || 'noorulfirdaws@gmail.com',
-      password: process.env.GEN_PASSWORD,
-    }),
-  });
-
-  if (!res.ok) throw new Error(`Login échoué: HTTP ${res.status}`);
-  const data = await res.json();
-  authToken   = data.data?.accessToken || data.data?.tokens?.accessToken;
-  lastLoginAt = Date.now();
-  if (!authToken) throw new Error('Token JWT non trouvé dans la réponse login');
-  log.success(`Connecté à l'API LearnHub (JWT obtenu)`);
-}
-
-async function ensureFreshToken() {
-  if (Date.now() - lastLoginAt > TOKEN_TTL) {
-    log.info('🔄 Renouvellement du token JWT...');
-    await login();
-  }
-}
-
-function getAuthHeaders() {
-  return {
-    'Content-Type': 'application/json',
-    Authorization:  `Bearer ${authToken}`,
-  };
-}
+// ─── DB directe via Prisma (pas d'API, pas de Redis) ─────────────────────────
 
 async function getMatiereId(niveauId, nomMatiere) {
-  const res = await fetch(`${API_BASE}/matieres/niveau/${niveauId}`);
-  const data = await res.json();
-  const matieres = data.data || [];
-  const mat = matieres.find(m => m.nom === nomMatiere);
+  const mat = await prisma.matiere.findFirst({
+    where: { nom: nomMatiere, niveauId },
+  });
   return mat?.id || null;
 }
 
 async function creerOuMettreAJourChapitre(chapitreId, matiereId, titre, ordre, contenu) {
-  // 1. Essayer de récupérer le chapitre existant
-  const getRes = await fetch(`${API_BASE}/chapitres/${chapitreId}`);
+  const existing = await prisma.chapitre.findUnique({ where: { id: chapitreId } });
 
-  if (getRes.ok) {
-    // Chapitre existe → PATCH pour mettre à jour le contenu
-    const patchRes = await fetch(`${API_BASE}/chapitres/${chapitreId}`, {
-      method:  'PATCH',
-      headers: getAuthHeaders(),
-      body:    JSON.stringify({
-        contenuCours: contenu.contenuCours,
-        exemples:     contenu.exemples,
-        exercices:    contenu.exercices,
-        quiz:         contenu.quiz,
-        isPublished:  true,
-      }),
-    });
-    if (!patchRes.ok) {
-      const err = await patchRes.text();
-      throw new Error(`PATCH chapitre échoué: ${err.slice(0, 200)}`);
-    }
+  const data = {
+    contenuCours: contenu.contenuCours,
+    exemples:     contenu.exemples,
+    exercices:    contenu.exercices,
+    quiz:         contenu.quiz,
+    isPublished:  true,
+  };
+
+  if (existing) {
+    await prisma.chapitre.update({ where: { id: chapitreId }, data });
     return 'updated';
   } else {
-    // Chapitre n'existe pas → POST pour créer
-    const postRes = await fetch(`${API_BASE}/chapitres`, {
-      method:  'POST',
-      headers: getAuthHeaders(),
-      body:    JSON.stringify({
-        id:       chapitreId,
-        matiereId,
-        titre,
-        ordre,
-      }),
+    await prisma.chapitre.create({
+      data: { id: chapitreId, matiereId, titre, ordre, ...data },
     });
-
-    if (!postRes.ok) {
-      const err = await postRes.text();
-      throw new Error(`POST chapitre échoué: ${err.slice(0, 200)}`);
-    }
-
-    // Puis PATCH pour injecter le contenu
-    const patchRes = await fetch(`${API_BASE}/chapitres/${chapitreId}`, {
-      method:  'PATCH',
-      headers: getAuthHeaders(),
-      body:    JSON.stringify({
-        contenuCours: contenu.contenuCours,
-        exemples:     contenu.exemples,
-        exercices:    contenu.exercices,
-        quiz:         contenu.quiz,
-        isPublished:  true,
-      }),
-    });
-
-    if (!patchRes.ok) {
-      const err = await patchRes.text();
-      throw new Error(`PATCH contenu échoué après création: ${err.slice(0, 200)}`);
-    }
     return 'created';
   }
 }
@@ -954,8 +880,7 @@ async function main() {
       });
     }
 
-    // Connexion à l'API
-    await login();
+    log.success('Connexion DB directe via Prisma (pas d\'API, pas de Redis)');
   }
 
   // Compteurs
@@ -986,9 +911,6 @@ async function main() {
     }
 
     try {
-      // 0. S'assurer que le token JWT est encore valide
-      await ensureFreshToken();
-
       // 1. Récupérer l'ID de la matière en DB
       const matiereId = await getMatiereId(task.niveauId, task.nomMatiere);
       if (!matiereId) {
@@ -1070,6 +992,7 @@ async function main() {
   }
 
   console.log('');
+  await prisma.$disconnect();
 }
 
 // ─── Exécution ────────────────────────────────────────────────────────────────

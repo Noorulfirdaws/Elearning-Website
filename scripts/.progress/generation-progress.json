@@ -260,45 +260,55 @@
     "done": true,
     "ts": "2026-06-24T11:16:03.864Z"
   },
-  "c5-physique-x-les-circuits-electriques": {
-    "done": true,
-    "ts": "2026-06-24T11:16:51.275Z"
+  "c3-svt-corps-sante": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:06:05.546Z"
   },
-  "c5-physique-x-les-forces-et-le-mouvement": {
-    "done": true,
-    "ts": "2026-06-24T11:17:35.315Z"
+  "c3-svt-developpement-durable": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:06:12.625Z"
   },
-  "c5-physique-x-l-energie-et-ses-formes": {
-    "done": true,
-    "ts": "2026-06-24T11:18:22.336Z"
+  "c3-francais-autobiographie": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:06:19.738Z"
   },
-  "c4-physique-x-les-circuits-electriques": {
-    "done": true,
-    "ts": "2026-06-24T11:19:10.584Z"
+  "c3-francais-poesie-engagee": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:06:26.844Z"
   },
-  "c4-physique-x-les-forces-et-le-mouvement": {
-    "done": true,
-    "ts": "2026-06-24T11:20:04.854Z"
+  "c3-francais-roman-xxe-siecle": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:06:33.919Z"
   },
-  "c4-physique-x-l-energie-et-ses-formes": {
-    "done": true,
-    "ts": "2026-06-24T11:20:49.914Z"
+  "c3-francais-argumentation-convaincre": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:06:41.013Z"
   },
-  "c3-physique-x-les-circuits-electriques": {
-    "done": true,
-    "ts": "2026-06-24T11:21:32.189Z"
+  "c3-francais-revision-brevet": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:06:48.101Z"
   },
-  "c3-physique-x-les-forces-et-le-mouvement": {
-    "done": true,
-    "ts": "2026-06-24T11:22:25.259Z"
+  "c3-histgeo-premiere-guerre-mondiale": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:06:55.195Z"
   },
-  "c3-physique-x-l-energie-et-ses-formes": {
-    "done": true,
-    "ts": "2026-06-24T11:23:10.944Z"
+  "c3-histgeo-seconde-guerre-mondiale": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:07:02.276Z"
   },
-  "ls-physique-pc-mouvements-et-forces": {
-    "done": true,
-    "ts": "2026-06-24T11:24:07.151Z"
+  "c3-histgeo-decolonisation-djibouti": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:07:09.358Z"
   },
   "ls-physique-pc-la-lumiere-et-les-ondes": {
     "done": true,
@@ -346,8 +356,8 @@
   },
   "lt-physique-pc-energie-et-transferts-thermiques": {
     "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:14:36.329Z"
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:07:16.449Z"
   },
   "c6-physique-x-la-matiere-et-ses-transformations": {
     "done": true,
@@ -364,212 +374,738 @@
   },
   "lp-chimie-pc-structure-de-la-matiere-et-modeles": {
     "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:05:42.947Z"
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:07:23.548Z"
   },
-  "ls-physique-pc-les-lentilles-et-l-optique": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:03:55.176Z"
+  "c6-maths-nombres-entiers": {
+    "done": true,
+    "ts": "2026-06-10T06:35:12.917Z"
   },
-  "ls-physique-pc-la-gravitation": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:04:16.375Z"
+  "c6-maths-fractions-intro": {
+    "done": true,
+    "ts": "2026-06-10T06:37:14.416Z"
   },
-  "ls-physique-pc-energie-cinetique-et-potentielle": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:04:37.791Z"
+  "c6-maths-geometrie-plane": {
+    "done": true,
+    "ts": "2026-06-10T06:38:05.089Z"
   },
-  "ls-physique-pc-les-ondes-sonores": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:04:59.606Z"
+  "c6-maths-perimetres-aires": {
+    "done": true,
+    "ts": "2026-06-10T06:40:30.570Z"
   },
-  "ls-physique-pc-mesures-et-incertitudes": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:05:21.224Z"
+  "c6-maths-proportionnalite": {
+    "done": true,
+    "ts": "2026-06-10T06:41:30.000Z"
   },
-  "lp-chimie-pc-quantite-de-matiere-la-mole": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:06:04.501Z"
+  "c6-physique-etats-matiere": {
+    "done": true,
+    "ts": "2026-06-10T06:43:54.201Z"
   },
-  "lp-chimie-pc-reactions-acide-base": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:06:25.752Z"
+  "c6-physique-melanges-solutions": {
+    "done": true,
+    "ts": "2026-06-10T06:45:01.936Z"
   },
-  "lp-chimie-pc-oxydoreduction": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:06:47.926Z"
+  "c6-physique-air-composition": {
+    "done": true,
+    "ts": "2026-06-10T06:48:31.169Z"
   },
-  "lp-chimie-pc-introduction-a-la-chimie-organique": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:07:09.486Z"
+  "c6-physique-eau-nature": {
+    "done": true,
+    "ts": "2026-06-10T06:49:31.576Z"
   },
-  "lp-chimie-pc-concentration-et-dilution": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:07:30.291Z"
+  "c6-physique-lumiere-sources": {
+    "done": true,
+    "ts": "2026-06-10T06:50:35.977Z"
   },
-  "lp-chimie-pc-spectroscopie-et-analyse": {
+  "c6-svt-cellule-unite": {
     "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:07:51.046Z"
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T08:59:28.601Z"
   },
-  "lp-chimie-pc-les-alcanes-et-alcools": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:08:12.121Z"
+  "c6-svt-nutrition-digestion": {
+    "done": true,
+    "ts": "2026-06-10T06:55:10.411Z"
   },
-  "lp-chimie-pc-energie-des-reactions": {
+  "c6-svt-photosynthese": {
     "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:08:33.279Z"
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T08:59:35.704Z"
   },
-  "lp-chimie-pc-synthese-chimique": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:08:54.194Z"
+  "c6-svt-groupes-vivants": {
+    "done": true,
+    "ts": "2026-06-10T07:03:17.012Z"
   },
-  "lp-physique-pc-champs-et-forces": {
+  "c6-svt-ecosystemes-djibouti": {
     "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:09:14.914Z"
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T08:59:42.796Z"
   },
-  "lp-physique-pc-ondes-periodiques": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:09:36.222Z"
+  "c6-francais-phrase-types": {
+    "done": true,
+    "ts": "2026-06-10T07:13:04.348Z"
   },
-  "lp-physique-pc-lentilles-et-instruments-optiques": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:10:00.154Z"
+  "c6-francais-classes-grammaticales": {
+    "done": true,
+    "ts": "2026-06-10T07:14:11.810Z"
   },
-  "lp-physique-pc-travail-et-puissance": {
+  "c6-francais-recit-narrateur": {
     "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:10:21.096Z"
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T08:59:49.883Z"
   },
-  "lp-physique-pc-capteurs-et-electronique": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:10:42.171Z"
+  "c6-francais-description": {
+    "done": true,
+    "ts": "2026-06-10T07:18:53.535Z"
   },
-  "lt-chimie-pc-cinetique-chimique": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:11:05.821Z"
+  "c6-francais-lettre-correspondance": {
+    "done": true,
+    "ts": "2026-06-10T07:21:15.365Z"
   },
-  "lt-chimie-pc-equilibres-chimiques": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:11:26.952Z"
+  "c6-histgeo-prehistoire": {
+    "done": true,
+    "ts": "2026-06-10T07:22:18.771Z"
   },
-  "lt-chimie-pc-acides-bases-et-ph": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:11:48.020Z"
+  "c6-histgeo-antiquite": {
+    "done": true,
+    "ts": "2026-06-10T07:24:43.021Z"
   },
-  "lt-chimie-pc-chimie-organique-et-synthese": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:12:09.556Z"
+  "c6-histgeo-grece-rome": {
+    "done": true,
+    "ts": "2026-06-10T07:25:54.542Z"
   },
-  "lt-chimie-pc-piles-electrolyse-et-oxydoreduction": {
+  "c6-histgeo-geographie-djibouti": {
     "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:12:31.123Z"
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T08:59:56.971Z"
   },
-  "lt-chimie-pc-spectroscopie-rmn-et-ir": {
+  "c6-histgeo-continents-oceans": {
     "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:12:52.412Z"
-  },
-  "lt-chimie-pc-stereochimie": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:13:13.918Z"
-  },
-  "lt-chimie-pc-dosages-et-titrages": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:13:35.116Z"
-  },
-  "lt-chimie-pc-thermodynamique-chimique": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:13:54.350Z"
-  },
-  "lt-chimie-pc-polymeres-et-materiaux": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:14:15.386Z"
-  },
-  "lt-physique-pc-electromagnetisme": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:14:57.729Z"
-  },
-  "lt-physique-pc-physique-nucleaire-et-radioactivite": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:15:18.840Z"
-  },
-  "lt-physique-pc-mouvements-dans-un-champ": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:15:40.029Z"
-  },
-  "lt-physique-pc-lois-de-kepler": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:16:02.252Z"
-  },
-  "lt-physique-pc-circuits-rc-et-rl": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:16:23.552Z"
-  },
-  "lt-physique-pc-effet-doppler": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:16:45.057Z"
-  },
-  "lt-physique-pc-physique-quantique-introduction": {
-    "done": false,
-    "error": "Claude HTTP 400: {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_i",
-    "ts": "2026-06-24T12:17:06.256Z"
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:00:04.053Z"
   },
   "c5-maths-nombres-relatifs": {
-    "done": true,
-    "ts": "2026-08-04T22:01:18.118Z",
-    "note": "authored directly by Claude Code, no Anthropic API call"
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:00:11.133Z"
   },
   "c5-maths-fractions-decimaux": {
-    "done": true,
-    "ts": "2026-08-04T22:01:18.118Z",
-    "note": "authored directly by Claude Code, no Anthropic API call"
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:00:18.204Z"
   },
   "c5-maths-triangles": {
-    "done": true,
-    "ts": "2026-08-04T22:01:18.118Z",
-    "note": "authored directly by Claude Code, no Anthropic API call"
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:00:25.337Z"
   },
   "c5-maths-symetrie": {
-    "done": true,
-    "ts": "2026-08-04T22:01:18.118Z",
-    "note": "authored directly by Claude Code, no Anthropic API call"
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:00:32.403Z"
   },
   "c5-maths-statistiques-graphiques": {
-    "done": true,
-    "ts": "2026-08-04T22:01:18.118Z",
-    "note": "authored directly by Claude Code, no Anthropic API call"
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:00:39.486Z"
+  },
+  "c5-physique-atomes-molecules": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:00:46.579Z"
+  },
+  "c5-physique-reactions-chimiques": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:00:53.686Z"
+  },
+  "c5-physique-electricite-circuits": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:01:00.769Z"
+  },
+  "c5-physique-proprietes-lumiere": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:01:07.865Z"
+  },
+  "c5-physique-energie-formes": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:01:14.988Z"
+  },
+  "c5-svt-respiration": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:01:22.059Z"
+  },
+  "c5-svt-reproduction": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:01:29.121Z"
+  },
+  "c5-svt-ecosystemes-relations": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:01:36.212Z"
+  },
+  "c5-svt-sol-roches": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:01:43.281Z"
+  },
+  "c5-svt-evolution-classification": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:01:50.388Z"
+  },
+  "c5-francais-roman-jeunesse": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:01:57.463Z"
+  },
+  "c5-francais-poesie-rythme": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:02:04.548Z"
+  },
+  "c5-francais-theatre-texte": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:02:11.620Z"
+  },
+  "c5-francais-argumentation-simple": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:02:18.698Z"
+  },
+  "c5-francais-temps-passe": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:02:25.784Z"
+  },
+  "c5-histgeo-moyen-age": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:02:32.882Z"
+  },
+  "c5-histgeo-islam-naissance": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:02:39.948Z"
+  },
+  "c5-histgeo-afrique-medievale": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:02:47.061Z"
+  },
+  "c5-histgeo-grandes-decouvertes": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:02:54.156Z"
+  },
+  "c5-histgeo-corne-afrique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:03:01.215Z"
+  },
+  "c4-maths-equations-premier-degre": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:03:08.300Z"
+  },
+  "c4-maths-geometrie-espace": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:03:15.418Z"
+  },
+  "c4-maths-puissances-notation": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:03:22.471Z"
+  },
+  "c4-maths-trigonometrie": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:03:29.564Z"
+  },
+  "c4-maths-probabilites": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:03:36.690Z"
+  },
+  "c4-physique-lois-newton": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:03:43.783Z"
+  },
+  "c4-physique-energie-electrique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:03:50.899Z"
+  },
+  "c4-physique-chimie-solutions": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:03:57.981Z"
+  },
+  "c4-physique-optique-geometrique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:04:05.096Z"
+  },
+  "c4-physique-son-propagation": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:04:12.194Z"
+  },
+  "c4-svt-genetique-intro": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:04:19.259Z"
+  },
+  "c4-svt-systeme-nerveux": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:04:26.344Z"
+  },
+  "c4-svt-systeme-immunitaire": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:04:33.440Z"
+  },
+  "c4-svt-reproduction-humaine": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:04:40.525Z"
+  },
+  "c4-svt-tectonique-plaques": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:04:47.608Z"
+  },
+  "c4-francais-roman-realiste": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:04:54.663Z"
+  },
+  "c4-francais-comedie-classique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:05:01.742Z"
+  },
+  "c4-francais-argumentation-ecrite": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:05:08.823Z"
+  },
+  "c4-francais-discours-direct-indirect": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:05:15.930Z"
+  },
+  "c4-francais-ecrire-nouvelle": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:05:23.005Z"
+  },
+  "c4-histgeo-europe-lumieres": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:05:30.097Z"
+  },
+  "c4-histgeo-revolution-francaise": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:05:37.191Z"
+  },
+  "c4-histgeo-napoleon-empire": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:05:44.295Z"
+  },
+  "c4-histgeo-colonisation-afrique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:05:51.370Z"
+  },
+  "c4-histgeo-industrialisation": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:05:58.448Z"
+  },
+  "ls-maths-fonctions-generalites": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:07:30.627Z"
+  },
+  "ls-maths-geometrie-analytique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:07:37.707Z"
+  },
+  "ls-maths-probabilites-stats": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:07:44.802Z"
+  },
+  "ls-maths-arithmetique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:07:51.897Z"
+  },
+  "ls-maths-algebre-equations": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:07:58.957Z"
+  },
+  "ls-svt-cellule-adn": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:08:41.449Z"
+  },
+  "ls-svt-terre-structure": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:08:48.506Z"
+  },
+  "ls-svt-evolution-biodiversite": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:08:55.567Z"
+  },
+  "ls-svt-ecologie-durable": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:09:02.648Z"
+  },
+  "ls-svt-corps-nutrition": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:09:09.741Z"
+  },
+  "ls-francais-roman-reflexion": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:09:16.840Z"
+  },
+  "ls-francais-poesie-romantisme": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:09:23.938Z"
+  },
+  "ls-francais-essai-critique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:09:31.001Z"
+  },
+  "ls-francais-theatre-classique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:09:38.080Z"
+  },
+  "ls-francais-commentaire-texte": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:09:45.188Z"
+  },
+  "ls-histgeo-monde-1945": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:09:52.268Z"
+  },
+  "ls-histgeo-guerre-froide": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:09:59.352Z"
+  },
+  "ls-histgeo-decolonisation": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:10:06.422Z"
+  },
+  "ls-histgeo-mondialisation": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:10:13.494Z"
+  },
+  "ls-histgeo-corne-afrique-geo": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:10:20.586Z"
+  },
+  "lp-maths-derivation": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:10:27.660Z"
+  },
+  "lp-maths-suites-numeriques": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:10:34.747Z"
+  },
+  "lp-maths-vecteurs-plans": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:10:41.851Z"
+  },
+  "lp-maths-probabilites-conditionnelles": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:10:48.947Z"
+  },
+  "lp-maths-trigonometrie-avancee": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:10:56.054Z"
+  },
+  "lp-physique-cinematique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:11:03.141Z"
+  },
+  "lp-physique-dynamique-newton": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:11:10.214Z"
+  },
+  "lp-physique-electrocinetique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:11:17.291Z"
+  },
+  "lp-physique-optique-ondulatoire": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:11:24.376Z"
+  },
+  "lp-physique-chimie-organique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:11:31.465Z"
+  },
+  "lp-svt-neurones-signal": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:11:38.559Z"
+  },
+  "lp-svt-genetique-mendel": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:11:45.648Z"
+  },
+  "lp-svt-immunologie": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:11:52.725Z"
+  },
+  "lp-svt-evolution-mecanismes": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:11:59.809Z"
+  },
+  "lp-svt-geologie-roches": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:12:06.921Z"
+  },
+  "lp-francais-litterature-absurde": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:12:14.034Z"
+  },
+  "lp-francais-dissertation-methode": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:12:21.115Z"
+  },
+  "lp-francais-commentaire-compose": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:12:28.160Z"
+  },
+  "lp-francais-question-homme": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:12:35.257Z"
+  },
+  "lp-francais-oral-bac-prep": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:12:42.333Z"
+  },
+  "lp-histgeo-regimes-totalitaires": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:12:49.395Z"
+  },
+  "lp-histgeo-france-republiques": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:12:56.474Z"
+  },
+  "lp-histgeo-construction-europeenne": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:13:03.561Z"
+  },
+  "lp-histgeo-monde-arabe-islam": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:13:10.662Z"
+  },
+  "lp-histgeo-geopolitique-afrique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:13:17.740Z"
+  },
+  "lt-maths-integrale": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:13:24.842Z"
+  },
+  "lt-maths-limites": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:13:31.921Z"
+  },
+  "lt-maths-probabilites-loi-normale": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:13:39.008Z"
+  },
+  "lt-maths-nombres-complexes": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:13:46.083Z"
+  },
+  "lt-maths-revision-bac-maths": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:13:53.157Z"
+  },
+  "lt-physique-mecanique-energie": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:14:00.265Z"
+  },
+  "lt-physique-thermodynamique-principes": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:14:07.365Z"
+  },
+  "lt-physique-electromagnetisme": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:14:14.451Z"
+  },
+  "lt-physique-chimie-organique-avancee": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:14:21.539Z"
+  },
+  "lt-physique-revision-bac-phys": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:14:28.622Z"
+  },
+  "lt-svt-genetique-moleculaire": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:14:35.683Z"
+  },
+  "lt-svt-systeme-immunitaire-vaccins": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:14:42.769Z"
+  },
+  "lt-svt-neurosciences-memoire": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:14:49.849Z"
+  },
+  "lt-svt-evolution-humaine-lycee": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:14:56.939Z"
+  },
+  "lt-svt-revision-bac-svt": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:15:04.000Z"
+  },
+  "lt-francais-dissertation-philo": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:15:11.121Z"
+  },
+  "lt-francais-analyse-argumentatif": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:15:18.226Z"
+  },
+  "lt-francais-oeuvres-programme-bac": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:15:25.301Z"
+  },
+  "lt-francais-oral-bac-technique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:15:32.378Z"
+  },
+  "lt-francais-revision-bac-francais": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:15:39.490Z"
+  },
+  "lt-histgeo-monde-depuis-1989": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:15:46.597Z"
+  },
+  "lt-histgeo-geopolitique-ressources": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:15:53.678Z"
+  },
+  "lt-histgeo-france-mondialisation": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:16:00.770Z"
+  },
+  "lt-histgeo-enjeux-environnementaux": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:16:07.866Z"
+  },
+  "lt-histgeo-revision-bac-histgeo": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:16:14.982Z"
+  },
+  "ls-physique-mecanique-mouvement": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:08:06.039Z"
+  },
+  "ls-physique-optique-refraction": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:08:13.104Z"
+  },
+  "ls-physique-chimie-equilibres": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:08:20.174Z"
+  },
+  "ls-physique-electricite-continu": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:08:27.272Z"
+  },
+  "ls-physique-thermodynamique": {
+    "done": false,
+    "error": "\nInvalid `prisma.matiere.findFirst()` invocation:\n\n\nCan't reach database server at `localhost:5432`\n\nPlease make sure your database server is running at `localhost:5432`.",
+    "ts": "2026-06-12T09:08:34.357Z"
   }
 }

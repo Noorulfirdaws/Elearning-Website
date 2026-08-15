@@ -39,6 +39,9 @@ export function Navbar() {
   const [classeOpen,   setClasseOpen]   = useState(false);
   const [bannerVisible,setBannerVisible]= useState(true);
   const [scrolled,     setScrolled]     = useState(false);
+  const [mounted,      setMounted]      = useState(false);
+
+  useEffect(() => setMounted(true), []);
   const classeRef = useRef<HTMLDivElement>(null);
 
   const pathname = usePathname();
@@ -207,6 +210,17 @@ export function Navbar() {
 
           {/* Actions droite */}
           <div className="flex items-center gap-2 flex-shrink-0">
+
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-600 dark:text-gray-400"
+              >
+                {theme === 'dark'
+                  ? <Sun className="w-4 h-4" />
+                  : <Moon className="w-4 h-4" />}
+              </button>
+            )}
 
             {isAuthenticated && user ? (
               <div className="relative">
